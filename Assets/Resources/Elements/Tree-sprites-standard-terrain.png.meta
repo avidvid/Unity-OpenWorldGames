@@ -1,0 +1,852 @@
+fileFormatVersion: 2
+guid: 508cac3d482d79c45b7c4d7460ecb031
+timeCreated: 1528592416
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Tree-sprites-standard-terrain_0
+    21300002: Tree-sprites-standard-terrain_1
+    21300004: Tree-sprites-standard-terrain_2
+    21300006: Tree-sprites-standard-terrain_3
+    21300008: Tree-sprites-standard-terrain_4
+    21300010: Tree-sprites-standard-terrain_5
+    21300012: Tree-sprites-standard-terrain_6
+    21300014: Tree-sprites-standard-terrain_7
+    21300016: Tree-sprites-standard-terrain_8
+    21300018: Tree-sprites-standard-terrain_9
+    21300020: Tree-sprites-standard-terrain_10
+    21300022: Tree-sprites-standard-terrain_11
+    21300024: Tree-sprites-standard-terrain_12
+    21300026: Tree-sprites-standard-terrain_13
+    21300028: Tree-sprites-standard-terrain_14
+    21300030: Tree-sprites-standard-terrain_15
+    21300032: Tree-sprites-standard-terrain_16
+    21300034: Tree-sprites-standard-terrain_17
+    21300036: Tree-sprites-standard-terrain_18
+    21300038: Tree-sprites-standard-terrain_19
+    21300040: Tree-sprites-standard-terrain_20
+    21300042: Tree-sprites-standard-terrain_21
+    21300044: Tree-sprites-standard-terrain_22
+    21300046: Tree-sprites-standard-terrain_23
+    21300048: Tree-sprites-standard-terrain_24
+    21300050: Tree-sprites-standard-terrain_25
+    21300052: Tree-sprites-standard-terrain_26
+    21300054: Tree-sprites-standard-terrain_27
+    21300056: Tree-sprites-standard-terrain_28
+    21300058: Tree-sprites-standard-terrain_29
+    21300060: Tree-sprites-standard-terrain_30
+    21300062: Tree-sprites-standard-terrain_31
+    21300064: Tree-sprites-standard-terrain_32
+    21300066: Tree-sprites-standard-terrain_33
+    21300068: Tree-sprites-standard-terrain_34
+    21300070: Tree-sprites-standard-terrain_35
+    21300072: Tree-sprites-standard-terrain_36
+    21300074: Tree-sprites-standard-terrain_37
+    21300076: Tree-sprites-standard-terrain_38
+    21300078: Tree-sprites-standard-terrain_39
+    21300080: Tree-sprites-standard-terrain_40
+    21300082: Tree-sprites-standard-terrain_41
+    21300084: Tree-sprites-standard-terrain_42
+    21300086: Tree-sprites-standard-terrain_43
+    21300088: Tree-sprites-standard-terrain_44
+    21300090: Tree-sprites-standard-terrain_45
+    21300092: Tree-sprites-standard-terrain_46
+    21300094: Tree-sprites-standard-terrain_47
+    21300096: Tree-sprites-standard-terrain_48
+    21300098: Tree-sprites-standard-terrain_49
+    21300100: Tree-sprites-standard-terrain_50
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 80
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_0
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 302
+        width: 75
+        height: 89
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_1
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 338
+        width: 50
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_2
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 324
+        width: 63
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_3
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 324
+        width: 68
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_4
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 338
+        width: 50
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_5
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 324
+        width: 63
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_6
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 232
+        width: 50
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_7
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 249
+        width: 54
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_8
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 240
+        width: 68
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_9
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 236
+        width: 69
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_10
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 249
+        width: 50
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_11
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 235
+        width: 63
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_12
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 232
+        width: 50
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_13
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 249
+        width: 54
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 170
+        width: 68
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_15
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 166
+        width: 69
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_16
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 156
+        width: 78
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_17
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 179
+        width: 51
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_18
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 170
+        width: 68
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_19
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 166
+        width: 69
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_20
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 156
+        width: 78
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_21
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 179
+        width: 50
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_22
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 165
+        width: 63
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_23
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 162
+        width: 50
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_24
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 87
+        width: 67
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_25
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 113
+        width: 37
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_26
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 104
+        width: 44
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_27
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 91
+        width: 57
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_28
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 80
+        width: 66
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_29
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 111
+        width: 22
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_30
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 100
+        width: 27
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_31
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 88
+        width: 34
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_32
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 83
+        width: 37
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_33
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 107
+        width: 44
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_34
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 26
+        width: 52
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_35
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 13
+        width: 63
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_36
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 7
+        width: 70
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_37
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 0
+        width: 81
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_38
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 31
+        width: 27
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_39
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 28
+        width: 29
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_40
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 27
+        width: 30
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_41
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 25
+        width: 29
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_42
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 316
+        width: 66
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 1, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_43
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 320
+        width: 51
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_44
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 235
+        width: 67
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_45
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 235
+        width: 68
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_46
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 11
+        width: 68
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_47
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 26
+        width: 54
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_48
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 31
+        width: 47
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_49
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 329
+        width: 55
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tree-sprites-standard-terrain_50
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 338
+        width: 51
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

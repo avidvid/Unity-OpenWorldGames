@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<CharacterResearching xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>0</Id>
+  <CharResearch>
+    <Id>0</Id>
+    <UserPlayerId>22</UserPlayerId>
+    <ResearchId>1</ResearchId>
+    <Level>1</Level>
+  </CharResearch>
+  <Time>2019-01-08T19:42:48.4336849-06:00</Time>
+</CharacterResearching>

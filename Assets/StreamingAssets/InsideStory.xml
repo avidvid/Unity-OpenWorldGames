@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ArrayOfInsideStory xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <InsideStory>
+    <Id>0</Id>
+    <Name>SailorMoons</Name>
+    <Description>SailorMoons</Description>
+    <Rarity>Legendary</Rarity>
+    <IsEnable>true</IsEnable>
+    <Actors>
+      <Actor>
+        <CharacterId>1</CharacterId>
+        <CharacterCnt>1</CharacterCnt>
+      </Actor>
+    </Actors>
+  </InsideStory>
+  <InsideStory>
+    <Id>1</Id>
+    <Name>DarkCave</Name>
+    <Description>Dark Cave</Description>
+    <Rarity>Common</Rarity>
+    <IsEnable>true</IsEnable>
+    <Actors>
+      <Actor>
+        <CharacterId>2</CharacterId>
+        <CharacterCnt>1</CharacterCnt>
+      </Actor>
+      <Actor>
+        <CharacterId>3</CharacterId>
+        <CharacterCnt>1</CharacterCnt>
+      </Actor>
+      <Actor>
+        <CharacterId>4</CharacterId>
+        <CharacterCnt>1</CharacterCnt>
+      </Actor>
+    </Actors>
+  </InsideStory>
+  <InsideStory>
+    <Id>2</Id>
+    <Name>Ring</Name>
+    <Description>The Ring</Description>
+    <Rarity>Legendary</Rarity>
+    <IsEnable>true</IsEnable>
+    <Actors>
+      <Actor>
+        <CharacterId>5</CharacterId>
+        <CharacterCnt>1</CharacterCnt>
+      </Actor>
+      <Actor>
+        <CharacterId>6</CharacterId>
+        <CharacterCnt>1</CharacterCnt>
+      </Actor>
+    </Actors>
+  </InsideStory>
+</ArrayOfInsideStory>

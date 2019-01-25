@@ -1,0 +1,7064 @@
+fileFormatVersion: 2
+guid: 4f901417f7a8b3846b8fb3ce1ccf14df
+timeCreated: 1525722478
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: 34x34Icons_0
+    21300002: 34x34Icons_1
+    21300004: Apple
+    21300006: 34x34Icons_3
+    21300008: 34x34Icons_4
+    21300010: 34x34Icons_5
+    21300012: 34x34Icons_6
+    21300014: 34x34Icons_7
+    21300016: 34x34Icons_8
+    21300018: 34x34Icons_9
+    21300020: 34x34Icons_10
+    21300022: 34x34Icons_11
+    21300024: 34x34Icons_12
+    21300026: 34x34Icons_13
+    21300028: 34x34Icons_14
+    21300030: 34x34Icons_15
+    21300032: 34x34Icons_16
+    21300034: 34x34Icons_17
+    21300036: 34x34Icons_18
+    21300038: 34x34Icons_19
+    21300040: 34x34Icons_20
+    21300042: 34x34Icons_21
+    21300044: 34x34Icons_22
+    21300046: 34x34Icons_23
+    21300048: 34x34Icons_24
+    21300050: 34x34Icons_25
+    21300052: 34x34Icons_26
+    21300054: 34x34Icons_27
+    21300056: 34x34Icons_28
+    21300058: 34x34Icons_29
+    21300060: 34x34Icons_30
+    21300062: 34x34Icons_31
+    21300064: 34x34Icons_32
+    21300066: 34x34Icons_33
+    21300068: 34x34Icons_34
+    21300070: 34x34Icons_35
+    21300072: 34x34Icons_36
+    21300074: 34x34Icons_37
+    21300076: 34x34Icons_38
+    21300078: 34x34Icons_39
+    21300080: 34x34Icons_40
+    21300082: 34x34Icons_41
+    21300084: 34x34Icons_42
+    21300086: 34x34Icons_43
+    21300088: 34x34Icons_44
+    21300090: 34x34Icons_45
+    21300092: 34x34Icons_46
+    21300094: 34x34Icons_47
+    21300096: 34x34Icons_48
+    21300098: 34x34Icons_49
+    21300100: 34x34Icons_50
+    21300102: 34x34Icons_51
+    21300104: 34x34Icons_52
+    21300106: 34x34Icons_53
+    21300108: 34x34Icons_54
+    21300110: 34x34Icons_55
+    21300112: 34x34Icons_56
+    21300114: 34x34Icons_57
+    21300116: 34x34Icons_58
+    21300118: 34x34Icons_59
+    21300120: 34x34Icons_60
+    21300122: 34x34Icons_61
+    21300124: 34x34Icons_62
+    21300126: 34x34Icons_63
+    21300128: 34x34Icons_64
+    21300130: 34x34Icons_65
+    21300132: 34x34Icons_66
+    21300134: 34x34Icons_67
+    21300136: 34x34Icons_68
+    21300138: 34x34Icons_69
+    21300140: Sowrd
+    21300142: 34x34Icons_71
+    21300144: 34x34Icons_72
+    21300146: 34x34Icons_73
+    21300148: 34x34Icons_74
+    21300150: 34x34Icons_75
+    21300152: 34x34Icons_76
+    21300154: 34x34Icons_77
+    21300156: 34x34Icons_78
+    21300158: 34x34Icons_79
+    21300160: 34x34Icons_80
+    21300162: 34x34Icons_81
+    21300164: 34x34Icons_82
+    21300166: 34x34Icons_83
+    21300168: 34x34Icons_84
+    21300170: 34x34Icons_85
+    21300172: 34x34Icons_86
+    21300174: 34x34Icons_87
+    21300176: 34x34Icons_88
+    21300178: 34x34Icons_89
+    21300180: 34x34Icons_90
+    21300182: 34x34Icons_91
+    21300184: 34x34Icons_92
+    21300186: 34x34Icons_93
+    21300188: 34x34Icons_94
+    21300190: 34x34Icons_95
+    21300192: 34x34Icons_96
+    21300194: 34x34Icons_97
+    21300196: 34x34Icons_98
+    21300198: 34x34Icons_99
+    21300200: 34x34Icons_100
+    21300202: 34x34Icons_101
+    21300204: 34x34Icons_102
+    21300206: 34x34Icons_103
+    21300208: 34x34Icons_104
+    21300210: 34x34Icons_105
+    21300212: 34x34Icons_106
+    21300214: 34x34Icons_107
+    21300216: 34x34Icons_108
+    21300218: 34x34Icons_109
+    21300220: 34x34Icons_110
+    21300222: 34x34Icons_111
+    21300224: 34x34Icons_112
+    21300226: 34x34Icons_113
+    21300228: 34x34Icons_114
+    21300230: 34x34Icons_115
+    21300232: 34x34Icons_116
+    21300234: 34x34Icons_117
+    21300236: 34x34Icons_118
+    21300238: 34x34Icons_119
+    21300240: 34x34Icons_120
+    21300242: 34x34Icons_121
+    21300244: 34x34Icons_122
+    21300246: 34x34Icons_123
+    21300248: 34x34Icons_124
+    21300250: 34x34Icons_125
+    21300252: 34x34Icons_126
+    21300254: 34x34Icons_127
+    21300256: 34x34Icons_128
+    21300258: 34x34Icons_129
+    21300260: 34x34Icons_130
+    21300262: 34x34Icons_131
+    21300264: 34x34Icons_132
+    21300266: 34x34Icons_133
+    21300268: 34x34Icons_134
+    21300270: 34x34Icons_135
+    21300272: 34x34Icons_136
+    21300274: 34x34Icons_137
+    21300276: 34x34Icons_138
+    21300278: 34x34Icons_139
+    21300280: 34x34Icons_140
+    21300282: 34x34Icons_141
+    21300284: 34x34Icons_142
+    21300286: 34x34Icons_143
+    21300288: 34x34Icons_144
+    21300290: 34x34Icons_145
+    21300292: 34x34Icons_146
+    21300294: 34x34Icons_147
+    21300296: 34x34Icons_148
+    21300298: 34x34Icons_149
+    21300300: 34x34Icons_150
+    21300302: 34x34Icons_151
+    21300304: 34x34Icons_152
+    21300306: 34x34Icons_153
+    21300308: 34x34Icons_154
+    21300310: 34x34Icons_155
+    21300312: 34x34Icons_156
+    21300314: 34x34Icons_157
+    21300316: 34x34Icons_158
+    21300318: 34x34Icons_159
+    21300320: 34x34Icons_160
+    21300322: 34x34Icons_161
+    21300324: 34x34Icons_162
+    21300326: 34x34Icons_163
+    21300328: 34x34Icons_164
+    21300330: 34x34Icons_165
+    21300332: 34x34Icons_166
+    21300334: 34x34Icons_167
+    21300336: 34x34Icons_168
+    21300338: 34x34Icons_169
+    21300340: 34x34Icons_170
+    21300342: 34x34Icons_171
+    21300344: 34x34Icons_172
+    21300346: 34x34Icons_173
+    21300348: 34x34Icons_174
+    21300350: 34x34Icons_175
+    21300352: 34x34Icons_176
+    21300354: 34x34Icons_177
+    21300356: 34x34Icons_178
+    21300358: 34x34Icons_179
+    21300360: 34x34Icons_180
+    21300362: 34x34Icons_181
+    21300364: 34x34Icons_182
+    21300366: 34x34Icons_183
+    21300368: 34x34Icons_184
+    21300370: 34x34Icons_185
+    21300372: 34x34Icons_186
+    21300374: 34x34Icons_187
+    21300376: 34x34Icons_188
+    21300378: 34x34Icons_189
+    21300380: 34x34Icons_190
+    21300382: 34x34Icons_191
+    21300384: 34x34Icons_192
+    21300386: 34x34Icons_193
+    21300388: 34x34Icons_194
+    21300390: 34x34Icons_195
+    21300392: 34x34Icons_196
+    21300394: 34x34Icons_197
+    21300396: 34x34Icons_198
+    21300398: 34x34Icons_199
+    21300400: 34x34Icons_200
+    21300402: 34x34Icons_201
+    21300404: 34x34Icons_202
+    21300406: 34x34Icons_203
+    21300408: 34x34Icons_204
+    21300410: 34x34Icons_205
+    21300412: 34x34Icons_206
+    21300414: 34x34Icons_207
+    21300416: 34x34Icons_208
+    21300418: 34x34Icons_209
+    21300420: 34x34Icons_210
+    21300422: 34x34Icons_211
+    21300424: 34x34Icons_212
+    21300426: 34x34Icons_213
+    21300428: 34x34Icons_214
+    21300430: 34x34Icons_215
+    21300432: 34x34Icons_216
+    21300434: 34x34Icons_217
+    21300436: 34x34Icons_218
+    21300438: 34x34Icons_219
+    21300440: 34x34Icons_220
+    21300442: 34x34Icons_221
+    21300444: 34x34Icons_222
+    21300446: 34x34Icons_223
+    21300448: 34x34Icons_224
+    21300450: 34x34Icons_225
+    21300452: 34x34Icons_226
+    21300454: 34x34Icons_227
+    21300456: 34x34Icons_228
+    21300458: 34x34Icons_229
+    21300460: 34x34Icons_230
+    21300462: 34x34Icons_231
+    21300464: 34x34Icons_232
+    21300466: 34x34Icons_233
+    21300468: 34x34Icons_234
+    21300470: 34x34Icons_235
+    21300472: 34x34Icons_236
+    21300474: 34x34Icons_237
+    21300476: 34x34Icons_238
+    21300478: 34x34Icons_239
+    21300480: 34x34Icons_240
+    21300482: 34x34Icons_241
+    21300484: 34x34Icons_242
+    21300486: 34x34Icons_243
+    21300488: 34x34Icons_244
+    21300490: 34x34Icons_245
+    21300492: 34x34Icons_246
+    21300494: 34x34Icons_247
+    21300496: 34x34Icons_248
+    21300498: 34x34Icons_249
+    21300500: 34x34Icons_250
+    21300502: 34x34Icons_251
+    21300504: 34x34Icons_252
+    21300506: 34x34Icons_253
+    21300508: 34x34Icons_254
+    21300510: 34x34Icons_255
+    21300512: 34x34Icons_256
+    21300514: 34x34Icons_257
+    21300516: 34x34Icons_258
+    21300518: 34x34Icons_259
+    21300520: 34x34Icons_260
+    21300522: 34x34Icons_261
+    21300524: 34x34Icons_262
+    21300526: 34x34Icons_263
+    21300528: 34x34Icons_264
+    21300530: 34x34Icons_265
+    21300532: 34x34Icons_266
+    21300534: 34x34Icons_267
+    21300536: 34x34Icons_268
+    21300538: 34x34Icons_269
+    21300540: 34x34Icons_270
+    21300542: 34x34Icons_271
+    21300544: 34x34Icons_272
+    21300546: 34x34Icons_273
+    21300548: 34x34Icons_274
+    21300550: 34x34Icons_275
+    21300552: 34x34Icons_276
+    21300554: 34x34Icons_277
+    21300556: 34x34Icons_278
+    21300558: 34x34Icons_279
+    21300560: 34x34Icons_280
+    21300562: 34x34Icons_281
+    21300564: 34x34Icons_282
+    21300566: 34x34Icons_283
+    21300568: 34x34Icons_284
+    21300570: 34x34Icons_285
+    21300572: 34x34Icons_286
+    21300574: 34x34Icons_287
+    21300576: 34x34Icons_288
+    21300578: 34x34Icons_289
+    21300580: 34x34Icons_290
+    21300582: 34x34Icons_291
+    21300584: 34x34Icons_292
+    21300586: 34x34Icons_293
+    21300588: 34x34Icons_294
+    21300590: 34x34Icons_295
+    21300592: 34x34Icons_296
+    21300594: 34x34Icons_297
+    21300596: 34x34Icons_298
+    21300598: 34x34Icons_299
+    21300600: 34x34Icons_300
+    21300602: 34x34Icons_301
+    21300604: 34x34Icons_302
+    21300606: 34x34Icons_303
+    21300608: 34x34Icons_304
+    21300610: 34x34Icons_305
+    21300612: 34x34Icons_306
+    21300614: 34x34Icons_307
+    21300616: 34x34Icons_308
+    21300618: 34x34Icons_309
+    21300620: 34x34Icons_310
+    21300622: 34x34Icons_311
+    21300624: 34x34Icons_312
+    21300626: 34x34Icons_313
+    21300628: 34x34Icons_314
+    21300630: 34x34Icons_315
+    21300632: 34x34Icons_316
+    21300634: 34x34Icons_317
+    21300636: 34x34Icons_318
+    21300638: 34x34Icons_319
+    21300640: 34x34Icons_320
+    21300642: 34x34Icons_321
+    21300644: 34x34Icons_322
+    21300646: 34x34Icons_323
+    21300648: 34x34Icons_324
+    21300650: 34x34Icons_325
+    21300652: 34x34Icons_326
+    21300654: 34x34Icons_327
+    21300656: 34x34Icons_328
+    21300658: 34x34Icons_329
+    21300660: 34x34Icons_330
+    21300662: 34x34Icons_331
+    21300664: 34x34Icons_332
+    21300666: 34x34Icons_333
+    21300668: 34x34Icons_334
+    21300670: 34x34Icons_335
+    21300672: 34x34Icons_336
+    21300674: 34x34Icons_337
+    21300676: 34x34Icons_338
+    21300678: 34x34Icons_339
+    21300680: 34x34Icons_340
+    21300682: 34x34Icons_341
+    21300684: 34x34Icons_342
+    21300686: 34x34Icons_343
+    21300688: 34x34Icons_344
+    21300690: 34x34Icons_345
+    21300692: 34x34Icons_346
+    21300694: 34x34Icons_347
+    21300696: 34x34Icons_348
+    21300698: 34x34Icons_349
+    21300700: 34x34Icons_350
+    21300702: 34x34Icons_351
+    21300704: 34x34Icons_352
+    21300706: 34x34Icons_353
+    21300708: 34x34Icons_354
+    21300710: 34x34Icons_355
+    21300712: 34x34Icons_356
+    21300714: 34x34Icons_357
+    21300716: 34x34Icons_358
+    21300718: 34x34Icons_359
+    21300720: 34x34Icons_360
+    21300722: 34x34Icons_361
+    21300724: 34x34Icons_362
+    21300726: 34x34Icons_363
+    21300728: 34x34Icons_364
+    21300730: 34x34Icons_365
+    21300732: 34x34Icons_366
+    21300734: 34x34Icons_367
+    21300736: 34x34Icons_368
+    21300738: 34x34Icons_369
+    21300740: 34x34Icons_370
+    21300742: 34x34Icons_371
+    21300744: 34x34Icons_372
+    21300746: 34x34Icons_373
+    21300748: 34x34Icons_374
+    21300750: 34x34Icons_375
+    21300752: 34x34Icons_376
+    21300754: 34x34Icons_377
+    21300756: 34x34Icons_378
+    21300758: 34x34Icons_379
+    21300760: 34x34Icons_380
+    21300762: 34x34Icons_381
+    21300764: 34x34Icons_382
+    21300766: 34x34Icons_383
+    21300768: 34x34Icons_384
+    21300770: 34x34Icons_385
+    21300772: 34x34Icons_386
+    21300774: 34x34Icons_387
+    21300776: 34x34Icons_388
+    21300778: 34x34Icons_389
+    21300780: 34x34Icons_390
+    21300782: 34x34Icons_391
+    21300784: 34x34Icons_392
+    21300786: 34x34Icons_393
+    21300788: 34x34Icons_394
+    21300790: 34x34Icons_395
+    21300792: 34x34Icons_396
+    21300794: 34x34Icons_397
+    21300796: 34x34Icons_398
+    21300798: 34x34Icons_399
+    21300800: 34x34Icons_400
+    21300802: 34x34Icons_401
+    21300804: 34x34Icons_402
+    21300806: 34x34Icons_403
+    21300808: 34x34Icons_404
+    21300810: 34x34Icons_405
+    21300812: 34x34Icons_406
+    21300814: 34x34Icons_407
+    21300816: 34x34Icons_408
+    21300818: 34x34Icons_409
+    21300820: 34x34Icons_410
+    21300822: 34x34Icons_411
+    21300824: 34x34Icons_412
+    21300826: 34x34Icons_413
+    21300828: 34x34Icons_414
+    21300830: 34x34Icons_415
+    21300832: 34x34Icons_416
+    21300834: 34x34Icons_417
+    21300836: 34x34Icons_418
+    21300838: 34x34Icons_419
+    21300840: 34x34Icons_2
+    21300842: 34x34Icons_70
+    21300844: InventorySet1_0
+    21300846: InventorySet1_1
+    21300848: InventorySet1_2
+    21300850: InventorySet1_3
+    21300852: InventorySet1_4
+    21300854: InventorySet1_5
+    21300856: InventorySet1_6
+    21300858: InventorySet1_7
+    21300860: InventorySet1_8
+    21300862: InventorySet1_9
+    21300864: InventorySet1_10
+    21300866: InventorySet1_11
+    21300868: InventorySet1_12
+    21300870: InventorySet1_13
+    21300872: InventorySet1_14
+    21300874: InventorySet1_15
+    21300876: InventorySet1_16
+    21300878: InventorySet1_17
+    21300880: InventorySet1_18
+    21300882: InventorySet1_19
+    21300884: InventorySet1_20
+    21300886: InventorySet1_21
+    21300888: InventorySet1_22
+    21300890: InventorySet1_23
+    21300892: InventorySet1_24
+    21300894: InventorySet1_25
+    21300896: InventorySet1_26
+    21300898: InventorySet1_27
+    21300900: InventorySet1_28
+    21300902: InventorySet1_29
+    21300904: InventorySet1_30
+    21300906: InventorySet1_31
+    21300908: InventorySet1_32
+    21300910: InventorySet1_33
+    21300912: InventorySet1_34
+    21300914: InventorySet1_35
+    21300916: InventorySet1_36
+    21300918: InventorySet1_37
+    21300920: InventorySet1_38
+    21300922: InventorySet1_39
+    21300924: InventorySet1_40
+    21300926: InventorySet1_41
+    21300928: InventorySet1_42
+    21300930: InventorySet1_43
+    21300932: InventorySet1_44
+    21300934: InventorySet1_45
+    21300936: InventorySet1_46
+    21300938: InventorySet1_47
+    21300940: InventorySet1_48
+    21300942: InventorySet1_49
+    21300944: InventorySet1_50
+    21300946: InventorySet1_51
+    21300948: InventorySet1_52
+    21300950: InventorySet1_53
+    21300952: InventorySet1_54
+    21300954: InventorySet1_55
+    21300956: InventorySet1_56
+    21300958: InventorySet1_57
+    21300960: InventorySet1_58
+    21300962: InventorySet1_59
+    21300964: InventorySet1_60
+    21300966: InventorySet1_61
+    21300968: InventorySet1_62
+    21300970: InventorySet1_63
+    21300972: InventorySet1_64
+    21300974: InventorySet1_65
+    21300976: InventorySet1_66
+    21300978: InventorySet1_67
+    21300980: InventorySet1_68
+    21300982: InventorySet1_69
+    21300984: InventorySet1_70
+    21300986: InventorySet1_71
+    21300988: InventorySet1_72
+    21300990: InventorySet1_73
+    21300992: InventorySet1_74
+    21300994: InventorySet1_75
+    21300996: InventorySet1_76
+    21300998: InventorySet1_77
+    21301000: InventorySet1_78
+    21301002: InventorySet1_79
+    21301004: InventorySet1_80
+    21301006: InventorySet1_81
+    21301008: InventorySet1_82
+    21301010: InventorySet1_83
+    21301012: InventorySet1_84
+    21301014: InventorySet1_85
+    21301016: InventorySet1_86
+    21301018: InventorySet1_87
+    21301020: InventorySet1_88
+    21301022: InventorySet1_89
+    21301024: InventorySet1_90
+    21301026: InventorySet1_91
+    21301028: InventorySet1_92
+    21301030: InventorySet1_93
+    21301032: InventorySet1_94
+    21301034: InventorySet1_95
+    21301036: InventorySet1_96
+    21301038: InventorySet1_97
+    21301040: InventorySet1_98
+    21301042: InventorySet1_99
+    21301044: InventorySet1_100
+    21301046: InventorySet1_101
+    21301048: InventorySet1_102
+    21301050: InventorySet1_103
+    21301052: InventorySet1_104
+    21301054: InventorySet1_105
+    21301056: InventorySet1_106
+    21301058: InventorySet1_107
+    21301060: InventorySet1_108
+    21301062: InventorySet1_109
+    21301064: InventorySet1_110
+    21301066: InventorySet1_111
+    21301068: InventorySet1_112
+    21301070: InventorySet1_113
+    21301072: InventorySet1_114
+    21301074: InventorySet1_115
+    21301076: InventorySet1_116
+    21301078: InventorySet1_117
+    21301080: InventorySet1_118
+    21301082: InventorySet1_119
+    21301084: InventorySet1_120
+    21301086: InventorySet1_121
+    21301088: InventorySet1_122
+    21301090: InventorySet1_123
+    21301092: InventorySet1_124
+    21301094: InventorySet1_125
+    21301096: InventorySet1_126
+    21301098: InventorySet1_127
+    21301100: InventorySet1_128
+    21301102: InventorySet1_129
+    21301104: InventorySet1_130
+    21301106: InventorySet1_131
+    21301108: InventorySet1_132
+    21301110: InventorySet1_133
+    21301112: InventorySet1_134
+    21301114: InventorySet1_135
+    21301116: InventorySet1_136
+    21301118: InventorySet1_137
+    21301120: InventorySet1_138
+    21301122: InventorySet1_139
+    21301124: InventorySet1_140
+    21301126: InventorySet1_141
+    21301128: InventorySet1_142
+    21301130: InventorySet1_143
+    21301132: InventorySet1_144
+    21301134: InventorySet1_145
+    21301136: InventorySet1_146
+    21301138: InventorySet1_147
+    21301140: InventorySet1_148
+    21301142: InventorySet1_149
+    21301144: InventorySet1_150
+    21301146: InventorySet1_151
+    21301148: InventorySet1_152
+    21301150: InventorySet1_153
+    21301152: InventorySet1_154
+    21301154: InventorySet1_155
+    21301156: InventorySet1_156
+    21301158: InventorySet1_157
+    21301160: InventorySet1_158
+    21301162: InventorySet1_159
+    21301164: InventorySet1_160
+    21301166: InventorySet1_161
+    21301168: InventorySet1_162
+    21301170: InventorySet1_163
+    21301172: InventorySet1_164
+    21301174: InventorySet1_165
+    21301176: InventorySet1_166
+    21301178: InventorySet1_167
+    21301180: InventorySet1_168
+    21301182: InventorySet1_169
+    21301184: InventorySet1_170
+    21301186: InventorySet1_171
+    21301188: InventorySet1_172
+    21301190: InventorySet1_173
+    21301192: InventorySet1_174
+    21301194: InventorySet1_175
+    21301196: InventorySet1_176
+    21301198: InventorySet1_177
+    21301200: InventorySet1_178
+    21301202: InventorySet1_179
+    21301204: InventorySet1_180
+    21301206: InventorySet1_181
+    21301208: InventorySet1_182
+    21301210: InventorySet1_183
+    21301212: InventorySet1_184
+    21301214: InventorySet1_185
+    21301216: InventorySet1_186
+    21301218: InventorySet1_187
+    21301220: InventorySet1_188
+    21301222: InventorySet1_189
+    21301224: InventorySet1_190
+    21301226: InventorySet1_191
+    21301228: InventorySet1_192
+    21301230: InventorySet1_193
+    21301232: InventorySet1_194
+    21301234: InventorySet1_195
+    21301236: InventorySet1_196
+    21301238: InventorySet1_197
+    21301240: InventorySet1_198
+    21301242: InventorySet1_199
+    21301244: InventorySet1_200
+    21301246: InventorySet1_201
+    21301248: InventorySet1_202
+    21301250: InventorySet1_203
+    21301252: InventorySet1_204
+    21301254: InventorySet1_205
+    21301256: InventorySet1_206
+    21301258: InventorySet1_207
+    21301260: InventorySet1_208
+    21301262: InventorySet1_209
+    21301264: InventorySet1_210
+    21301266: InventorySet1_211
+    21301268: InventorySet1_212
+    21301270: InventorySet1_213
+    21301272: InventorySet1_214
+    21301274: InventorySet1_215
+    21301276: InventorySet1_216
+    21301278: InventorySet1_217
+    21301280: InventorySet1_218
+    21301282: InventorySet1_219
+    21301284: InventorySet1_220
+    21301286: InventorySet1_221
+    21301288: InventorySet1_222
+    21301290: InventorySet1_223
+    21301292: InventorySet1_224
+    21301294: InventorySet1_225
+    21301296: InventorySet1_226
+    21301298: InventorySet1_227
+    21301300: InventorySet1_228
+    21301302: InventorySet1_229
+    21301304: InventorySet1_230
+    21301306: InventorySet1_231
+    21301308: InventorySet1_232
+    21301310: InventorySet1_233
+    21301312: InventorySet1_234
+    21301314: InventorySet1_235
+    21301316: InventorySet1_236
+    21301318: InventorySet1_237
+    21301320: InventorySet1_238
+    21301322: InventorySet1_239
+    21301324: InventorySet1_240
+    21301326: InventorySet1_241
+    21301328: InventorySet1_242
+    21301330: InventorySet1_243
+    21301332: InventorySet1_244
+    21301334: InventorySet1_245
+    21301336: InventorySet1_246
+    21301338: InventorySet1_247
+    21301340: InventorySet1_248
+    21301342: InventorySet1_249
+    21301344: InventorySet1_250
+    21301346: InventorySet1_251
+    21301348: InventorySet1_252
+    21301350: InventorySet1_253
+    21301352: InventorySet1_254
+    21301354: InventorySet1_255
+    21301356: InventorySet1_256
+    21301358: InventorySet1_257
+    21301360: InventorySet1_258
+    21301362: InventorySet1_259
+    21301364: InventorySet1_260
+    21301366: InventorySet1_261
+    21301368: InventorySet1_262
+    21301370: InventorySet1_263
+    21301372: InventorySet1_264
+    21301374: InventorySet1_265
+    21301376: InventorySet1_266
+    21301378: InventorySet1_267
+    21301380: InventorySet1_268
+    21301382: InventorySet1_269
+    21301384: InventorySet1_270
+    21301386: InventorySet1_271
+    21301388: InventorySet1_272
+    21301390: InventorySet1_273
+    21301392: InventorySet1_274
+    21301394: InventorySet1_275
+    21301396: InventorySet1_276
+    21301398: InventorySet1_277
+    21301400: InventorySet1_278
+    21301402: InventorySet1_279
+    21301404: InventorySet1_280
+    21301406: InventorySet1_281
+    21301408: InventorySet1_282
+    21301410: InventorySet1_283
+    21301412: InventorySet1_284
+    21301414: InventorySet1_285
+    21301416: InventorySet1_286
+    21301418: InventorySet1_287
+    21301420: InventorySet1_288
+    21301422: InventorySet1_289
+    21301424: InventorySet1_290
+    21301426: InventorySet1_291
+    21301428: InventorySet1_292
+    21301430: InventorySet1_293
+    21301432: InventorySet1_294
+    21301434: InventorySet1_295
+    21301436: InventorySet1_296
+    21301438: InventorySet1_297
+    21301440: InventorySet1_298
+    21301442: InventorySet1_299
+    21301444: InventorySet1_300
+    21301446: InventorySet1_301
+    21301448: InventorySet1_302
+    21301450: InventorySet1_303
+    21301452: InventorySet1_304
+    21301454: InventorySet1_305
+    21301456: InventorySet1_306
+    21301458: InventorySet1_307
+    21301460: InventorySet1_308
+    21301462: InventorySet1_309
+    21301464: InventorySet1_310
+    21301466: InventorySet1_311
+    21301468: InventorySet1_312
+    21301470: InventorySet1_313
+    21301472: InventorySet1_314
+    21301474: InventorySet1_315
+    21301476: InventorySet1_316
+    21301478: InventorySet1_317
+    21301480: InventorySet1_318
+    21301482: InventorySet1_319
+    21301484: InventorySet1_320
+    21301486: InventorySet1_321
+    21301488: InventorySet1_322
+    21301490: InventorySet1_323
+    21301492: InventorySet1_324
+    21301494: InventorySet1_325
+    21301496: InventorySet1_326
+    21301498: InventorySet1_327
+    21301500: InventorySet1_328
+    21301502: InventorySet1_329
+    21301504: InventorySet1_330
+    21301506: InventorySet1_331
+    21301508: InventorySet1_332
+    21301510: InventorySet1_333
+    21301512: InventorySet1_334
+    21301514: InventorySet1_335
+    21301516: InventorySet1_336
+    21301518: InventorySet1_337
+    21301520: InventorySet1_338
+    21301522: InventorySet1_339
+    21301524: InventorySet1_340
+    21301526: InventorySet1_341
+    21301528: InventorySet1_342
+    21301530: InventorySet1_343
+    21301532: InventorySet1_344
+    21301534: InventorySet1_345
+    21301536: InventorySet1_346
+    21301538: InventorySet1_347
+    21301540: InventorySet1_348
+    21301542: InventorySet1_349
+    21301544: InventorySet1_350
+    21301546: InventorySet1_351
+    21301548: InventorySet1_352
+    21301550: InventorySet1_353
+    21301552: InventorySet1_354
+    21301554: InventorySet1_355
+    21301556: InventorySet1_356
+    21301558: InventorySet1_357
+    21301560: InventorySet1_358
+    21301562: InventorySet1_359
+    21301564: InventorySet1_360
+    21301566: InventorySet1_361
+    21301568: InventorySet1_362
+    21301570: InventorySet1_363
+    21301572: InventorySet1_364
+    21301574: InventorySet1_365
+    21301576: InventorySet1_366
+    21301578: InventorySet1_367
+    21301580: InventorySet1_368
+    21301582: InventorySet1_369
+    21301584: InventorySet1_370
+    21301586: InventorySet1_371
+    21301588: InventorySet1_372
+    21301590: InventorySet1_373
+    21301592: InventorySet1_374
+    21301594: InventorySet1_375
+    21301596: InventorySet1_376
+    21301598: InventorySet1_377
+    21301600: InventorySet1_378
+    21301602: InventorySet1_379
+    21301604: InventorySet1_380
+    21301606: InventorySet1_381
+    21301608: InventorySet1_382
+    21301610: InventorySet1_383
+    21301612: InventorySet1_384
+    21301614: InventorySet1_385
+    21301616: InventorySet1_386
+    21301618: InventorySet1_387
+    21301620: InventorySet1_388
+    21301622: InventorySet1_389
+    21301624: InventorySet1_390
+    21301626: InventorySet1_391
+    21301628: InventorySet1_392
+    21301630: InventorySet1_393
+    21301632: InventorySet1_394
+    21301634: InventorySet1_395
+    21301636: InventorySet1_396
+    21301638: InventorySet1_397
+    21301640: InventorySet1_398
+    21301642: InventorySet1_399
+    21301644: InventorySet1_400
+    21301646: InventorySet1_401
+    21301648: InventorySet1_402
+    21301650: InventorySet1_403
+    21301652: InventorySet1_404
+    21301654: InventorySet1_405
+    21301656: InventorySet1_406
+    21301658: InventorySet1_407
+    21301660: InventorySet1_408
+    21301662: InventorySet1_409
+    21301664: InventorySet1_410
+    21301666: InventorySet1_411
+    21301668: InventorySet1_412
+    21301670: InventorySet1_413
+    21301672: InventorySet1_414
+    21301674: InventorySet1_415
+    21301676: InventorySet1_416
+    21301678: InventorySet1_417
+    21301680: InventorySet1_418
+    21301682: InventorySet1_419
+    21301684: InventorySet1_420
+    21301686: InventorySet1_421
+    21301688: InventorySet1_422
+    21301690: InventorySet1_423
+    21301692: InventorySet1_424
+    21301694: InventorySet1_425
+    21301696: InventorySet1_426
+    21301698: InventorySet1_427
+    21301700: InventorySet1_428
+    21301702: InventorySet1_429
+    21301704: InventorySet1_430
+    21301706: InventorySet1_431
+    21301708: InventorySet1_432
+    21301710: InventorySet1_433
+    21301712: InventorySet1_434
+    21301714: InventorySet1_435
+    21301716: InventorySet1_436
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: InventorySet1_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 989
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_1
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 988
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 991
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_3
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 991
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_4
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 990
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_5
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 987
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_6
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 987
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_7
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 987
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_8
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 989
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_9
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 987
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_10
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 991
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_11
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 987
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_12
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 990
+        width: 30
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_13
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 988
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_14
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 952
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_15
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 954
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_16
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 952
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_17
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 952
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_18
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 952
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_19
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 952
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_20
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 957
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_21
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 957
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_22
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 956
+        width: 31
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_23
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 956
+        width: 30
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_24
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 957
+        width: 33
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_25
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 960
+        width: 31
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_26
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 957
+        width: 33
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_27
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 976
+        width: 4
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_28
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 978
+        width: 5
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_29
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 975
+        width: 5
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_30
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 956
+        width: 31
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_31
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 920
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_32
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 920
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_33
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 920
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_34
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 920
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_35
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 920
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_36
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 920
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_37
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 920
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_38
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 920
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_39
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 920
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_40
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 920
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_41
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 920
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_42
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 920
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_43
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 920
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_44
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 920
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_45
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 889
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_46
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 889
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_47
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 889
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_48
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 889
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_49
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 889
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_50
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 889
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_51
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 889
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_52
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 887
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_53
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 887
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_54
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 887
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_55
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 887
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_56
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 887
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_57
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 887
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_58
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 887
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_59
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 854
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_60
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 852
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_61
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 852
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_62
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 853
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_63
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 853
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_64
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 852
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_65
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 852
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_66
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 852
+        width: 11
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_67
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 852
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_68
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 852
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_69
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 853
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_70
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 852
+        width: 11
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_71
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 856
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_72
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 855
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_73
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 820
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_74
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 817
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_75
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 817
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_76
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 817
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_77
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 817
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_78
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 817
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_79
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 817
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_80
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 817
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_81
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 817
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_82
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 820
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_83
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 817
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_84
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 817
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_85
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 817
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_86
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 818
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_87
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 790
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_88
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 790
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_89
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 786
+        width: 19
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_90
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 786
+        width: 23
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_91
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 785
+        width: 25
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_92
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 787
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_93
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 788
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_94
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 787
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_95
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 783
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_96
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 783
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_97
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 784
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_98
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 783
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_99
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 783
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_100
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 784
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_101
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 751
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_102
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 751
+        width: 29
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_103
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 751
+        width: 31
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_104
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 751
+        width: 29
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_105
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 751
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_106
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 749
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_107
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 749
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_108
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 749
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_109
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 749
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_110
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 749
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_111
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 751
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_112
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 751
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_113
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 749
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_114
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 750
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_115
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 716
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_116
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 716
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_117
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 716
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_118
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 715
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_119
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 715
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_120
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 715
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_121
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 715
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_122
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 715
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_123
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 715
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_124
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 715
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_125
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 715
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_126
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 715
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_127
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 715
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_128
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 715
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_129
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 685
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_130
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 684
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_131
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 682
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_132
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 682
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_133
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 681
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_134
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 682
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_135
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 681
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_136
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 681
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_137
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 681
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_138
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 682
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_139
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 684
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_140
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 681
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_141
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 681
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_142
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 681
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_143
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 648
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_144
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 647
+        width: 33
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_145
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 647
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_146
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 647
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_147
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 649
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_148
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 648
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_149
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 647
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_150
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 646
+        width: 31
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_151
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 646
+        width: 30
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_152
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 646
+        width: 29
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_153
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 647
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_154
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 647
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_155
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 647
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_156
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 647
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_157
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 613
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_158
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 613
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_159
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 613
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_160
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 613
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_161
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 613
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_162
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 613
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_163
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 614
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_164
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 614
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_165
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 613
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_166
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 613
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_167
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 613
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_168
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 613
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_169
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 613
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_170
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 613
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_171
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 580
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_172
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 580
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_173
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 579
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_174
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 579
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_175
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 578
+        width: 25
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_176
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 579
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_177
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 579
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_178
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 580
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_179
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 580
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_180
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 579
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_181
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 579
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_182
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 580
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_183
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 579
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_184
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 579
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_185
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 546
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_186
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 546
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_187
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 547
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_188
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 546
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_189
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 545
+        width: 66
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_190
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 545
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_191
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 549
+        width: 30
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_192
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 546
+        width: 68
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_193
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 551
+        width: 27
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_194
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 549
+        width: 28
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_195
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 545
+        width: 26
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_196
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 545
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_197
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 514
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_198
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 514
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_199
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 514
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_200
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 514
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_201
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 514
+        width: 33
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_202
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 514
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_203
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 514
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_204
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 511
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_205
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 511
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_206
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 511
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_207
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 511
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_208
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 511
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_209
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 511
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_210
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 511
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_211
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 482
+        width: 29
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_212
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 479
+        width: 20
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_213
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 481
+        width: 23
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_214
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 480
+        width: 24
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_215
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 482
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_216
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 481
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_217
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 483
+        width: 27
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_218
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 481
+        width: 28
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_219
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 481
+        width: 28
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_220
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 481
+        width: 28
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_221
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 479
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_222
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 479
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_223
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 479
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_224
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 480
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_225
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 481
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_226
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 443
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_227
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 442
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_228
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 443
+        width: 29
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_229
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 444
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_230
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 442
+        width: 26
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_231
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 442
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_232
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 445
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_233
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 443
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_234
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 442
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_235
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 443
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_236
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 443
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_237
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 444
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_238
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 443
+        width: 15
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_239
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 442
+        width: 32
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_240
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 412
+        width: 27
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_241
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 411
+        width: 29
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_242
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 411
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_243
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 413
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_244
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 411
+        width: 29
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_245
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 411
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_246
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 413
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_247
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 413
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_248
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 411
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_249
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 410
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_250
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 409
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_251
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 374
+        width: 33
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_252
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 410
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_253
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 412
+        width: 33
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_254
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 377
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_255
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 379
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_256
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 380
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_257
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 379
+        width: 31
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_258
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 376
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_259
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 378
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_260
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 375
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_261
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 377
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_262
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 377
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_263
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 377
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_264
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 375
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_265
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 379
+        width: 31
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_266
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 375
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_267
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 344
+        width: 26
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_268
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 345
+        width: 30
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_269
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 344
+        width: 26
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_270
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 345
+        width: 30
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_271
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 344
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_272
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 345
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_273
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 341
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_274
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 341
+        width: 27
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_275
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 341
+        width: 25
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_276
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 340
+        width: 32
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_277
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 341
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_278
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 341
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_279
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 342
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_280
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 342
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_281
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 307
+        width: 29
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_282
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 307
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_283
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 307
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_284
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 307
+        width: 27
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_285
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 306
+        width: 67
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_286
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 307
+        width: 31
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_287
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 318
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_288
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 307
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_289
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 321
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_290
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 307
+        width: 30
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_291
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 307
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_292
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 272
+        width: 29
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_293
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 310
+        width: 33
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_294
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 307
+        width: 38
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_295
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 307
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_296
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 310
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_297
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 272
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_298
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 273
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_299
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 274
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_300
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 273
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_301
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 273
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_302
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 298
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_303
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 273
+        width: 67
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_304
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 273
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_305
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 274
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_306
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 272
+        width: 29
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_307
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 273
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_308
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 273
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_309
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 282
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_310
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 273
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_311
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 242
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_312
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 240
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_313
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 238
+        width: 29
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_314
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 238
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_315
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 239
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_316
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 239
+        width: 30
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_317
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 240
+        width: 34
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_318
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 238
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_319
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 242
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_320
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 210
+        width: 34
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_321
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 241
+        width: 136
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_322
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 206
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_323
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 205
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_324
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 205
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_325
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 205
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_326
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 205
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_327
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 205
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_328
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 205
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_329
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 205
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_330
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 207
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_331
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 207
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_332
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 205
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_333
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 207
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_334
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 205
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_335
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 221
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_336
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 204
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_337
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 208
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_338
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 170
+        width: 31
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_339
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 171
+        width: 32
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_340
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 171
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_341
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 171
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_342
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 171
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_343
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 171
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_344
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 191
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_345
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 192
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_346
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 191
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_347
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 172
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_348
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 171
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_349
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 173
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_350
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 172
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_351
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 170
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_352
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 171
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_353
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 172
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_354
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 183
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_355
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 183
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_356
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 174
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_357
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 171
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_358
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 174
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_359
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 137
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_360
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 137
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_361
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 137
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_362
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 138
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_363
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 137
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_364
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 137
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_365
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 140
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_366
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 154
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_367
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 137
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_368
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 137
+        width: 27
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_369
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 137
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_370
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 141
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_371
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 136
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_372
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 139
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_373
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 137
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_374
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 150
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_375
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 139
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_376
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 145
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_377
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 146
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_378
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 139
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_379
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 103
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_380
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 103
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_381
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 103
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_382
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 103
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_383
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 103
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_384
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 103
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_385
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 103
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_386
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 103
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_387
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 103
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_388
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 103
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_389
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 103
+        width: 34
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_390
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 103
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_391
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 103
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_392
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 103
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_393
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 68
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_394
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 70
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_395
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 68
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_396
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 69
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_397
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 68
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_398
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 68
+        width: 33
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_399
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 69
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_400
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 69
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_401
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 69
+        width: 34
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_402
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 72
+        width: 24
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_403
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 77
+        width: 68
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_404
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 75
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_405
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 69
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_406
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 69
+        width: 33
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_407
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 72
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_408
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 35
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_409
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 35
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_410
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 35
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_411
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 35
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_412
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 35
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_413
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 35
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_414
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 35
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_415
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 39
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_416
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 39
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_417
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 40
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_418
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 39
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_419
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 47
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_420
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 40
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_421
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 40
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_422
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 39
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_423
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 2
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_424
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 2
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_425
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 3
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_426
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 3
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_427
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 3
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_428
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 2
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_429
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 1
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_430
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 1
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_431
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 1
+        width: 33
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_432
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 0
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_433
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 0
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_434
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 0
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_435
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 0
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: InventorySet1_436
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 0
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

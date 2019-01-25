@@ -1,0 +1,223 @@
+﻿Remember 
+Users Want to do what they want, not what you want them to do 
+
+#3.4 Change attack ellemnt 
+	https://www.youtube.com/watch?v=wntKVHVwXnc
+#3.5 Unity RPG Tutorial - Spell effect
+
+
+comite:
+	
+
+At Home: 
+	
+	Profile page style 
+
+At Office: 
+
+	Facebook picture in the inventory page 
+	
+
+	merge new year to master 
+	make the branch private 
+
+	Add fog of war ch.ViewType
+	
+	scene character owned list page and tooltip for each 
+	
+
+	device id or email to be saved in userplayer
+	
+	
+	add recepie by code (hashcode) mix of userid and recepie id 
+	Recepie view in small page 
+	
+	change font for messages
+	skin/msgskin
+
+	inside monster on walk not passing the walls
+	ScriptTextHandler ????
+	
+	
+Before lunch part:
+	Fb phase
+		https://developers.facebook.com/apps/2768586640032497/settings/basic/
+		https://termsfeed.com/blog/privacy-policy-url-facebook-app/
+		valid privacy poilicy 
+		Terms of Service URL
+		Wiki page 
+			
+	Clan phase	
+	
+		Clan page
+		Create Clan
+	
+	Rank phase
+		scene Player rank chart and pictures !!
+		Logic of moving in the ranks
+		Rank calculation 	for each 10 in a row kill equal or higher rank get an ubgrade for each 5 in a row lose decend a rank 
+	
+	
+	second messages inthe shop scene get lost (make it like message board in the main terrain )
+	
+	
+	Character ellemnt phase
+	
+
+	Monster phase
+		monster in the map have diffrent style of attack 
+	
+
+	Mailing/Messaging/Chat phase
+		mail box	
+		messaging system 
+		https://www.youtube.com/watch?v=IRAeJgGkjHk
+		https://www.youtube.com/watch?v=7_BCbzRMi2w
+		
+	
+
+	user agreement phase
+		https://termsfeed.com/blog/sample-eula-template/	
+		https://termsfeed.com/blog/terms-conditions-games/
+	
+	
+
+UI Phase
+Add ellements 
+Make more the animations  for movings
+Make more the animations  for water
+Make more the animations  for lava
+
+	Characters:  http://untamed.wild-refuge.net/rmxpresources.php?characters
+	invironment: http://kenney.nl/assets?q=2d	
+
+
+Resharper Bugs:try clearing the whole %LocalAppData%\JetBrains\Transient 
+C:\Users\anarimani\AppData\Local\JetBrains\Transient 
+ 
+ 
+Courses found:
+ 
+unity 2d optimizing graphics
+    http://www.ghostxx.com/site/14001.html
+ 
+unity 2d combat in an rpg game
+    http://www.ghostxx.com/site/16329.html
+ 
+Lynda - Unity 5 2D Procedural Terrain
+    http://www.ghostxx.com/site/12427.html
+ 
+Unity3D Professional 2D Game Development From A to Z
+    http://www.ghostxx.com/site/12683.html
+ 
+Udemy - Integrate Facebook SDK into Unity
+    http://www.ghostxx.com/site/12972.html
+ 
+Unity Cloud Build
+https://unity3d.com/learn/tutorials/topics/cloud-build/introduction-unity-cloud-build?playlist=17866
+
+Build inventory
+https://www.youtube.com/watch?v=yT0IlWhaLes
+​https://www.youtube.com/watch?v=Ip7Tk5NKkso&feature=youtu.be​
+
+Unity 3D Tutorial – Procedural Map Generation – Beginner Level
+http://naplandgames.com/blog/2016/11/18/unity-3d-tutorial-procedural-map-generation-beginner-level/
+
+Unity-5-build-a-real-time-strategy-game
+https://git.ir/lynda-unity-5-build-a-real-time-strategy-game/
+
+Unity3D 
+http://p30download.com/fa/entry/40106/
+
+Procedural Landmass Generation (Unity 5)
+https://www.youtube.com/watch?v=wbpMiKiSKm8&list=PLFt_AvWsXl0eBW2EiBtl_sxmDtSgZBxB3&index=1
+
+Tile map good vide
+https://www.youtube.com/watch?v=xNqqfABXTNQ
+https://www.youtube.com/watch?v=70sLhuE1sbc&t=1894s
+https://www.youtube.com/watch?v=1WG791jyZ6M
+ 
+Good links:
+http://shop.p30download.com/product/view/5440/
+
+Sprites:
+
+Free sprites
+https://v-play.net/game-resources/16-sites-featuring-free-game-graphics
+ 
+Tiles:
+https://kyle-dove.deviantart.com/art/Biome-Tiles-Public-274422390
+https://opengameart.org/content/cave-tileset-0
+ 
+make sprite from photoshop file:
+https://www.youtube.com/watch?v=cRE2G96591E
+photo shop design character:
+https://www.youtube.com/watch?v=_TRUL8il8e4
+AI shop design character:
+https://www.youtube.com/watch?v=ljGNXTBbCrk
+animation prinicipal for characters:
+https://www.youtube.com/watch?v=uDqjIdI4bF4
+ 
+Slice the trees
+https://www.google.com/search?rlz=1C1CHBD_enUS781US781&ei=U0gdW-__MpLSsAWC_bP4Bw&q=gimp+slice+image+into+layers&oq=gimp+slice+image+into+layers&gs_l=psy-ab.3..0i22i30k1l3.6203.7077.0.7775.6.6.0.0.0.0.143.519.2j3.5.0....0...1c.1.64.psy-ab..1.5.516....0.UsJEBD4Wf3w#kpvalbx=1
+ 
+Used graphics: 
+http://kenney.nl/assets/physics-assets
+Terrains: 
+https://opengameart.org/content/seamless-grass-textures-20-pack
+https://opengameart.org/content/terrain-textures-pack-from-stunt-rally-23
+https://opengameart.org/content/dungeon-crawl-32x32-tiles-supplemental
+https://creativecommons.org/licenses/by/3.0/
+https://opengameart.org/content/dungeon-crawl-32x32-tiles
+https://opengameart.org/content/tilling-texture-pack-27
+https://opengameart.org/content/tilling-texture-pack-20
+https://opengameart.org/content/tilling-texture-pack-25
+https://opengameart.org/content/tilling-texture-pack-19
+https://opengameart.org/content/tilling-texture-pack-23
+https://opengameart.org/content/tilling-texture-pack-21
+https://opengameart.org/content/cc0-texture-resources-2-nature?page=1
+https://opengameart.org/content/unknown-horizons-tileset
+https://opengameart.org/content/30-grass-textures-tilable
+https://opengameart.org/content/117-stone-wall-tilable-textures-in-8-themes
+https://opengameart.org/content/isometric-tile-starter-pack
+https://opengameart.org/content/pk-texturepack
+https://opengameart.org/content/woodland-animals-texture-pack
+https://opengameart.org/content/map-tile
+https://opengameart.org/content/handpainted-stone-tile-textures
+https://opengameart.org/content/redrust-concrete-wall-512px
+https://opengameart.org/content/mossy-concrete-wall-512px
+https://opengameart.org/content/metalstone-textures
+https://opengameart.org/content/wooden-floortile-seamless-with-normalmap
+https://opengameart.org/content/seamless-assorted-textures-2
+https://opengameart.org/content/lpc-terrains
+https://opengameart.org/content/2d-game-tiles
+https://opengameart.org/content/arid-ground-textures
+buy these ?? (terrain)
+https://shop.bitgem3d.com/products/cracked-earth-brown-dirt-floor-hand-painted-texture
+Builidngs
+https://opengameart.org/content/bge-house-tower
+https://opengameart.org/content/western-european-castle-isometric-25d
+https://opengameart.org/content/inn
+https://opengameart.org/content/cave-entrance
+https://opengameart.org/content/medieval-stable-isometric-25d
+https://opengameart.org/content/western-european-medieval-houses-isometric-25d
+https://opengameart.org/content/lowpoly-cave-entrance
+https://opengameart.org/content/seven-kingdoms
+Wall
+https://opengameart.org/content/small-crate
+https://opengameart.org/content/tileable-crates
+https://opengameart.org/content/rpg-terrains
+Icon
+https://opengameart.org/content/rpg-item-set
+https://opengameart.org/content/random-rpg-icons-part-1
+Ellements
+https://opengameart.org/content/lpc-modified-art
+https://opengameart.org/content/glitch-alpine-landscape-svg
+https://opengameart.org/content/mountains-isometric-sprite-3d-render
+https://opengameart.org/content/tool-icons
+https://opengameart.org/content/iron-fist-ingame-item-power-up
+https://opengameart.org/content/seven-kingdoms
+https://opengameart.org/content/colorful-gem-crystals
+https://opengameart.org/content/loyalty-lies-items-misc-objects
+https://opengameart.org/content/32px-rpg-cluttericons-plus-64px-book-stack
+https://opengameart.org/content/32x32-icons-flare-compatible

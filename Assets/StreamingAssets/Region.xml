@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ArrayOfRegion xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Region>
+    <Id>1</Id>
+    <Name>Austin</Name>
+    <Description>Bat City</Description>
+    <Latitude>30.2711286</Latitude>
+    <Longitude>-97.7436995</Longitude>
+    <Key>1</Key>
+    <Elements>0,1</Elements>
+    <Monsters>0,1,2,3,4,5,6</Monsters>
+    <InsideStories>0,1,2</InsideStories>
+    <Terrains>0,1,2</Terrains>
+    <IsEnable>true</IsEnable>
+  </Region>
+</ArrayOfRegion>

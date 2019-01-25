@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ArrayOfResearch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Research>
+    <Id>1</Id>
+    <Name>Heart of Lion</Name>
+    <Description>Increase the Max health</Description>
+    <IconPath>Inventory/InventorySet1</IconPath>
+    <IconId>0</IconId>
+    <Value>1</Value>
+    <Target>Health</Target>
+    <MaxLevel>10</MaxLevel>
+    <DurationMinutes>20</DurationMinutes>
+    <RequiredResearchId1>-1</RequiredResearchId1>
+    <RequiredResearchLevel1>0</RequiredResearchLevel1>
+    <RequiredResearchId2>-1</RequiredResearchId2>
+    <RequiredResearchLevel2>0</RequiredResearchLevel2>
+    <RequiredResearchId3>-1</RequiredResearchId3>
+    <RequiredResearchLevel13>0</RequiredResearchLevel13>
+    <RequiredItem>-1</RequiredItem>
+    <IsEnable>true</IsEnable>
+  </Research>
+  <Research>
+    <Id>2</Id>
+    <Name>Heart of Dragon</Name>
+    <Description>Increase the Max health</Description>
+    <IconPath>Inventory/InventorySet1</IconPath>
+    <IconId>45</IconId>
+    <Value>2</Value>
+    <Target>Health</Target>
+    <MaxLevel>10</MaxLevel>
+    <DurationMinutes>20</DurationMinutes>
+    <RequiredResearchId1>1</RequiredResearchId1>
+    <RequiredResearchLevel1>1</RequiredResearchLevel1>
+    <RequiredResearchId2>-1</RequiredResearchId2>
+    <RequiredResearchLevel2>0</RequiredResearchLevel2>
+    <RequiredResearchId3>-1</RequiredResearchId3>
+    <RequiredResearchLevel13>0</RequiredResearchLevel13>
+    <RequiredItem>-1</RequiredItem>
+    <IsEnable>true</IsEnable>
+  </Research>
+  <Research>
+    <Id>3</Id>
+    <Name>God of War</Name>
+    <Description>Increase the Attack Damage</Description>
+    <IconPath>Inventory/InventorySet1</IconPath>
+    <IconId>25</IconId>
+    <Value>1</Value>
+    <Target>Crafting</Target>
+    <MaxLevel>10</MaxLevel>
+    <DurationMinutes>20</DurationMinutes>
+    <RequiredResearchId1>-1</RequiredResearchId1>
+    <RequiredResearchLevel1>0</RequiredResearchLevel1>
+    <RequiredResearchId2>-1</RequiredResearchId2>
+    <RequiredResearchLevel2>0</RequiredResearchLevel2>
+    <RequiredResearchId3>-1</RequiredResearchId3>
+    <RequiredResearchLevel13>0</RequiredResearchLevel13>
+    <RequiredItem>-1</RequiredItem>
+    <IsEnable>true</IsEnable>
+  </Research>
+</ArrayOfResearch>

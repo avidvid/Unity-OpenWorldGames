@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ArrayOfElementIns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ElementIns>
+    <Id>0</Id>
+    <Name>Inn</Name>
+    <MultipleName></MultipleName>
+    <MultipleId>-1</MultipleId>
+    <Walkable>true</Walkable>
+    <Flyable>true</Flyable>
+    <Swimable>false</Swimable>
+    <Enterable>true</Enterable>
+    <Destroyable>true</Destroyable>
+    <DropItems>1,2,3</DropItems>
+    <DropChance>0.7</DropChance>
+    <Type>Building</Type>
+    <FavoriteTerrainTypes>Land</FavoriteTerrainTypes>
+    <IsEnable>true</IsEnable>
+  </ElementIns>
+  <ElementIns>
+    <Id>1</Id>
+    <Name>BasicTree</Name>
+    <MultipleName>Tree-sprites-standard-terrain</MultipleName>
+    <MultipleId>16</MultipleId>
+    <Walkable>false</Walkable>
+    <Flyable>true</Flyable>
+    <Swimable>false</Swimable>
+    <Enterable>false</Enterable>
+    <Destroyable>true</Destroyable>
+    <DropItems>4,5,6</DropItems>
+    <DropChance>0.7</DropChance>
+    <Type>Tree</Type>
+    <FavoriteTerrainTypes>Land</FavoriteTerrainTypes>
+    <IsEnable>true</IsEnable>
+</ElementIns>
+</ArrayOfElementIns>
