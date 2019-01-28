@@ -44,6 +44,7 @@ public class UserPlayer  {
     public int Id { get; private set; }
     public string UserName { get; set; }
     public string Description { get; set; }
+    public float SoundVolume { get; set; }
     public float Latitude { get; set; }
     public float Longitude { get; set; }
     public DateTime LastLogin { get; set; }
@@ -59,7 +60,7 @@ public class UserPlayer  {
     public bool IsEnable { get; set; }
 
     public UserPlayer(int id = -1, 
-                string userName = null, string description = null, 
+                string userName = null, string description = null, float soundVolume =0,
                 float latitude = 0, float longitude = 0,
                 float baseLatitude = 0, float baseLongitude = 0,
                 DateTime lastLogin = new DateTime(),
@@ -72,6 +73,7 @@ public class UserPlayer  {
         Id = id;
         UserName = userName;
         Description = description;
+        SoundVolume = soundVolume;
         Latitude = latitude;
         Longitude = longitude;
         LastLogin = lastLogin;
@@ -92,6 +94,7 @@ public class UserPlayer  {
         Id = userPlayer.Id;
         UserName = userPlayer.UserName;
         Description = userPlayer.Description;
+        SoundVolume = userPlayer.SoundVolume;
         Latitude = userPlayer.Latitude;
         Longitude = userPlayer.Longitude;
         LastLogin = userPlayer.LastLogin;

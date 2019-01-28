@@ -2,10 +2,11 @@
 <UserPlayer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Id>22</Id>
   <UserName>avid</UserName>
-  <Description>Developer</Description>
+  <Description>Developer Tested</Description>
+  <SoundVolume>0</SoundVolume>
   <Latitude>30.2672</Latitude>
   <Longitude>-97.8431</Longitude>
-  <LastLogin>2019-01-25T09:40:46.0168873-06:00</LastLogin>
+  <LastLogin>2019-01-28T14:14:03.7037619-06:00</LastLogin>
   <LockUntil>2018-11-14T17:14:00.4828601-06:00</LockUntil>
   <Rank>UnRanked</Rank>
   <PRank>0</PRank>

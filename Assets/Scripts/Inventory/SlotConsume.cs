@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using Facebook.Unity;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -6,12 +8,15 @@ using UnityEngine.UI;
 public class SlotConsume: MonoBehaviour, IDropHandler
 {
 
+    private FacebookHandler _facebook;
     private InventoryHandler _inv;
     private static ModalPanel _modalPanel;
     private static GUIManager _GUIManager;
     private CharacterManager _characterManager;
-    private Button[] _buttons;
 
+    private  Button _playerPic;
+    private Button _characterPic;
+    private TextMeshProUGUI _characterName;
 
     // Use this for initialization
     void Awake()
@@ -19,25 +24,28 @@ public class SlotConsume: MonoBehaviour, IDropHandler
         _inv = InventoryHandler.Instance();
         _characterManager = CharacterManager.Instance();
         _GUIManager = GUIManager.Instance();
+        if (_characterManager.UserPlayer.FBLoggedIn)
+            _facebook = FacebookHandler.Instance();
     }
 
     void Start()
     {
-        _buttons = GetComponentsInChildren<Button>();
-        _buttons[0].image.sprite = _characterManager.Character.GetSprite();
-        _buttons[1].image.sprite = _characterManager.Character.GetSprite();
+        _playerPic = GameObject.Find("PlayerPic").GetComponent<Button>();
+        _characterPic = GameObject.Find("CharacterPic").GetComponent<Button>();
+        _characterName = GameObject.Find("CharacterName").GetComponent<TextMeshProUGUI>(); ;
+        _characterPic.image.sprite =  _characterManager.Character.GetSprite();
+        _characterName.text = _characterManager.CharacterSetting.Name;
+        StartCoroutine("LoadProfilePicture");
+    }
 
-        StartCoroutine("LoadImages");
-    }
-    
-    // The source image
-    private IEnumerator LoadImages()
+    private IEnumerator LoadProfilePicture()
     {
-        var directory = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200";
-        WWW www = new WWW(directory);
-        yield return www;
-        _buttons[0].image.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
+        if (_facebook != null)
+            if (FB.IsLoggedIn)
+                _playerPic.image.sprite = _facebook.GetProfilePic();
+        yield return "Done";
     }
+
 
     public void OnDrop(PointerEventData eventData)
     {

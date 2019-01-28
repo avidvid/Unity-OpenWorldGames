@@ -7,30 +7,28 @@ Users Want to do what they want, not what you want them to do
 
 
 comite:
+
+	
 	
 
 At Home: 
 	
-	Profile page style 
 
 At Office: 
 
-	Facebook picture in the inventory page 
+	add recepie by code (hashcode) mix of userid and recepie id 
+	Recepie view in small page 
+
+
+	Aws api server lambda 
 	
-
-	merge new year to master 
-	make the branch private 
-
 	Add fog of war ch.ViewType
 	
 	scene character owned list page and tooltip for each 
-	
-
 	device id or email to be saved in userplayer
 	
 	
-	add recepie by code (hashcode) mix of userid and recepie id 
-	Recepie view in small page 
+
 	
 	change font for messages
 	skin/msgskin

@@ -27,7 +27,17 @@ public class AudioManager : MonoBehaviour
         _audioSource = gameObject.GetComponent<AudioSource>();
         print("Music : Main=" + _bgAudioClips.Length + " Inside=" + _insideAudioClips.Length);
     }
-	
+
+
+    public void UpdateSoundVolume(float value)
+    {
+        if (value == 0)
+            _audioSource.mute = true;
+        else
+            _audioSource.mute = false;
+        _audioSource.volume = value;
+    }
+
     public void PlayBgMusic(Vector3 pos, int key)
     {
         if (_playingBg)
@@ -53,7 +63,7 @@ public class AudioManager : MonoBehaviour
         {
             _audioManager = FindObjectOfType(typeof(AudioManager)) as AudioManager;
             if (!_audioManager)
-                Debug.LogError("There needs to be one active AudioManager script on a GameObject in your scene.");
+                Debug.LogWarning("####There needs to be one active AudioManager script on a GameObject in your scene.");
         }
         return _audioManager;
     }

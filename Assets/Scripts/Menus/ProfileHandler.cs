@@ -25,7 +25,10 @@ public class ProfileHandler : MonoBehaviour {
     private ContainerValueHandler _gem; 
     private Button _profilePic;
     private Button _characterPic;
-    private GameObject _panelStats;
+    private GameObject _profileStats;
+    private TextMeshProUGUI _characterName;
+
+
 
     //private bool _showStats = false;
     //private bool _showTooltip = false;
@@ -61,8 +64,12 @@ public class ProfileHandler : MonoBehaviour {
             _profilePic = GameObject.Find("PlayerPic").GetComponent<Button>();
         if (_characterPic == null)
             _characterPic = GameObject.Find("CharacterPic").GetComponent<Button>();
-        if (_panelStats == null)
-            _panelStats = GameObject.Find("PanelStats");
+        if (_profileStats == null)
+            _profileStats = GameObject.Find("ProfileStats");
+        if (_characterName == null)
+            _characterName = GameObject.Find("CharacterName").GetComponent<TextMeshProUGUI>(); ;
+
+        
 
         //Set big Items in the profile 
         _health.UpdateValues(_settings.Health, _settings.MaxHealth);
@@ -73,67 +80,63 @@ public class ProfileHandler : MonoBehaviour {
         _coin.UpdateValue(_settings.Coin);
         _gem.UpdateValue(_settings.Gem);
 
-        _characterPic.image.sprite = _profilePic.image.sprite = _characterManager.Character.GetSprite();
-        
-
+        _characterPic.image.sprite = _characterManager.Character.GetSprite();
+        StartCoroutine("LoadProfilePicture");
 
         int i = 0;
 
-        var profileTexts = _panelStats.GetComponentsInChildren<TextMeshProUGUI>();
-        profileTexts[i++].text = _character.AttackR + " / " + _character.DefenseR;
-        profileTexts[i++].text = _character.AttackT + " / " + _character.DefenseT;
+        _characterName.text = _settings.Name ;
+        var profileTexts = _profileStats.GetComponentsInChildren<TextMeshProUGUI>();
+        profileTexts[i++].text = "Attack: " + 
+                                 _character.AttackR + " (A " + 
+                                 _settings.AbilityAttack + " /M " +
+                                 _settings.MagicAttack + " /P " +
+                                 _settings.PoisonAttack + ")" ;
+        profileTexts[i++].text = "Defense: " + 
+                                 _character.DefenseR + " (A " +
+                                 _settings.AbilityDefense + " /M " +
+                                 _settings.MagicDefense + " /P " +
+                                 _settings.PoisonDefense + ")" ;
 
-        string[] settingActions = new string[] { "Ability", "Magic", "Poison", "Speed" };
-        foreach (var act in settingActions)
-        {
-            profileTexts[i++].text = act +" "+GetPropertyValue(_settings, act+"Attack" ) +" / " + GetPropertyValue(_settings, act + "Defense");
-        }
+        //Row1
+        profileTexts[i++].text = "Attack Speed: " + " (" +
+                                 _settings.SpeedAttack + ") ";
+        profileTexts[i++].text = "Defense Speed: " + " (" +
+                                 _settings.SpeedDefense + ") ";
 
-        string[] settingChar = new string[] {
-            "Speed","Body",
-            "Carry","Move"};
-        foreach (var chars in settingChar)
-        {
-            profileTexts[i++].text = chars + " :";
-            profileTexts[i++].text = GetPropertyValue(_character, chars).ToString();
-        }
+        //Row2
+        profileTexts[i++].text = "Move: " +
+                                 _character.Move + " (" +
+                                 _settings.Speed + ") ";
+        profileTexts[i++].text = "Carry: " +
+                                 _character.Carry + " (" +
+                                 _settings.CarryCnt + ") ";
 
-        string[] userStats = new string[] {
-            "ClanRank","Rank"
-        };
-        foreach (var stat in userStats)
-        {
-            profileTexts[i++].text = stat + " :";
-            profileTexts[i++].text = GetPropertyValue(_player, stat).ToString();
-        }
-
+        //Row3-6
         string[] settingStats = new string[] {
-            "Speed",
             "Intellect","Agility",
             "Strength","Stamina",
             "Crafting","Researching",
-            "Bravery", "Charming",
-            "Carry","CarryCnt",
+            "Bravery", "Charming"
              };
         foreach (var stat in settingStats)
-        {
-            profileTexts[i++].text = stat + " :";
-            profileTexts[i++].text = GetPropertyValue(_settings, stat).ToString();
-        }
-
-        LoadProfilePicture();
-
+            profileTexts[i++].text = stat + " : "+ GetPropertyValue(_settings, stat) +"    ";
+        //Row7
+        profileTexts[i++].text = "Clan: " +
+                                 (_player.ClanId==-1?"Solo": _player.ClanId.ToString());
+        profileTexts[i++].text = "Rank: " +
+                                 _player.ClanRank;
+        //Last Login
+        profileTexts[i++].text = "Last Login: " +
+                                 (_player.LastLogin > DateTime.Now.AddMinutes(-30) ? "Now" : _player.LastLogin.ToString());
     }
 
-    private void LoadProfilePicture()
+    private IEnumerator LoadProfilePicture()
     {
         if (_facebook != null )
             if (FB.IsLoggedIn)
                 _profilePic.image.sprite = _facebook.GetProfilePic();
-        else
-        {
-            StartCoroutine("LoadImages");
-        }
+        yield return "Done";
     }
 
     public object GetPropertyValue(object obj, string propertyName)
@@ -142,23 +145,13 @@ public class ProfileHandler : MonoBehaviour {
             .Single(pi => pi.Name == propertyName)
             .GetValue(obj, null);
     }
-
-    private IEnumerator LoadImages()
-    {
-        var directory = "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200";
-        WWW www = new WWW(directory);
-        yield return www;
-        _profilePic.image.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
-
-    }
-
+    
     public void GoToMenuSceneSocial()
     {
         ReBuildStarter("Social");
         //switch the scene
         SceneManager.LoadScene(SceneSettings.SceneIdForMenu);
     }
-    
 
     public void BackToMainScene()
     {

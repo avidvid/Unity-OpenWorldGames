@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Facebook.Unity;
 using TMPro;
@@ -9,11 +10,15 @@ using UnityEngine.UI;
 public class MainMenuHandler : MonoBehaviour {
 
     private FacebookHandler _facebook;
+    private CharacterManager _characterManager;
+    private AudioManager _audioManager;
     private GameObject _menuSocial;
     private GameObject _loggedIn;
     private GameObject _loggedOut;
     private TextMeshProUGUI _username;
     private Image _profilePicture;
+    private Slider _sound;
+    private TMP_InputField _desc;
 
     private string _menuSelector ="Main";
 
@@ -28,6 +33,13 @@ public class MainMenuHandler : MonoBehaviour {
         _loggedIn = GameObject.Find("FBLoggedIn");
         _loggedOut = GameObject.Find("FBLoggedOut");
         _menuSocial = GameObject.Find("MenuSocial");
+        _characterManager = CharacterManager.Instance();
+        _audioManager = AudioManager.Instance();
+
+        _desc = GameObject.Find("InputFieldDesc").GetComponent<TMP_InputField>();
+        _desc.text = _characterManager.UserPlayer.Description;
+        _sound = GameObject.Find("SoundSlider").GetComponent<Slider>();
+        _sound.value = _characterManager.UserPlayer.SoundVolume;
 
         switch (_menuSelector)
         {
@@ -48,8 +60,6 @@ public class MainMenuHandler : MonoBehaviour {
                 break;
         }
 
-
-
         _username = GameObject.Find("Username").GetComponent<TextMeshProUGUI>();
         _profilePicture = GameObject.Find("ProfilePicture").GetComponent<Image>();
 
@@ -68,7 +78,6 @@ public class MainMenuHandler : MonoBehaviour {
     private void DealWithFBMenus(bool isLoggedIn)
     {
         _menuSelector = "Social";
-
         if (isLoggedIn )
         {
             _loggedOut.SetActive(false);
@@ -83,6 +92,18 @@ public class MainMenuHandler : MonoBehaviour {
         }
     }
 
+    public void AdjustVolume()
+    {
+        if (_audioManager != null)
+            _audioManager.UpdateSoundVolume(_sound.value);
+    }
+
+    public void SaveSetting()
+    {
+        _characterManager.UserPlayer.Description = _desc.text;
+        _characterManager.UserPlayer.SoundVolume = _sound.value;
+        _characterManager.SaveUserPlayer();
+    }
 
     public void GoToProfileScene()
     {

@@ -212,7 +212,7 @@ public class FacebookHandler : MonoBehaviour
         {
             _facebook = FindObjectOfType(typeof(FacebookHandler)) as FacebookHandler;
             if (!_facebook)
-                Debug.LogError("There needs to be one active FacebookHandler script on a GameObject in your scene.");
+                Debug.LogWarning("#### There needs to be one active FacebookHandler script on a GameObject in your scene.");
         }
         return _facebook;
     }
