@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
@@ -29,12 +30,12 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         if (ItemLocked)
         {
-            Text[] texts = this.transform.parent.GetComponentsInChildren<Text>();
-            texts[1].color = Color.magenta;
+            TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
+            //texts[1].color = Color.magenta;
             texts[1].text = TimeHandler.PrintTime(_time - DateTime.Now);
             if (DateTime.Now > _time)
             {
-                texts[1].color = Color.green;
+                //texts[1].color = Color.green;
                 texts[1].text = "Ready";
                 ItemLocked = false;
                 _inv.PrintMessage(Item.Name + " Is ready", Color.green);
@@ -129,7 +130,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
         if (Item.Id == -1)
         {
-            Text[] texts = this.transform.parent.GetComponentsInChildren<Text>();
+            TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
             texts[0].text = "";
             texts[1].text = "Empty";
         }
@@ -152,7 +153,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         _time = time;
         ItemLocked = true;
 
-        Text[] texts = this.transform.parent.GetComponentsInChildren<Text>();
+        TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
         texts[0].text = item.StackCnt > 1 ? item.StackCnt.ToString() : "";
         texts[1].text = (_time - DateTime.Now).ToString();
     }
@@ -163,7 +164,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         GetComponent<Image>().sprite = DefaultSprite;
         _time = DateTime.MinValue;
         ItemLocked = false;
-        Text[] texts = this.transform.parent.GetComponentsInChildren<Text>();
+        TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
         texts[1].text = "Empty";
     }
 

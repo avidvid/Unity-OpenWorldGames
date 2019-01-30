@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -18,7 +19,7 @@ public class ResearchData : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
             return;
 
         var images = GetComponentsInChildren<Image>();
-        var texts = GetComponentsInChildren<Text>();
+        var texts = GetComponentsInChildren<TextMeshProUGUI>();
         var buttons = GetComponentsInChildren<Button>();
         images[1].sprite = Research.GetSprite();
         int nextLevel = CharacterResearch != null ? CharacterResearch.Level+1 : 1;

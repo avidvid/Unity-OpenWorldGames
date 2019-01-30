@@ -3,11 +3,24 @@
   <UserRecipe>
     <RecipeId>4</RecipeId>
     <UserId>22</UserId>
+    <RecipeCode />
     <Created>2019-01-23T17:21:40.5636313-06:00</Created>
   </UserRecipe>
   <UserRecipe>
     <RecipeId>5</RecipeId>
     <UserId>22</UserId>
+    <RecipeCode />
     <Created>2019-01-23T17:28:44.1057058-06:00</Created>
+  </UserRecipe>
+  <UserRecipe>
+    <RecipeId>3</RecipeId>
+    <UserId>22</UserId>
+    <UserId>123456</UserId>
+    <Created>2019-01-23T17:21:40.5636313-06:00</Created>
+  </UserRecipe>
+  <UserRecipe>
+    <RecipeId>2</RecipeId>
+    <UserId>22</UserId>
+    <Created>2019-01-30T09:15:54.4933909-06:00</Created>
   </UserRecipe>
 </ArrayOfUserRecipe>

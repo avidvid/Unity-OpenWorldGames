@@ -6,6 +6,7 @@ public class UserRecipe
 {
     public int RecipeId { get; set; }
     public int UserId { get; set; }
+    public string RecipeCode { get; set; }
     public DateTime Created { get; set; }
 
 
@@ -13,29 +14,30 @@ public class UserRecipe
     {
         RecipeId = -1;
         UserId = -1;
+        RecipeCode = null;
         Created = DateTime.Now;
     }
 
-    public UserRecipe(int recipeId, int playerId)
+    public UserRecipe(int recipeId, int playerId, string recipeCode = null)
     {
         RecipeId = recipeId;
         UserId = playerId;
+        RecipeCode = recipeCode;
         Created = DateTime.Now;
     }
 
-    public virtual string GetDescription()
+    public void Print()
     {
 
         ItemDatabase itemDatabase= ItemDatabase.Instance();
         try
         {
             var recipe = itemDatabase.FindRecipes(RecipeId);
-            return "You have " + recipe.Print();
+            recipe.Print();
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message);
-            return " Error in User Recipe";
+            Debug.LogError(e.Message);
         }
     }
 }

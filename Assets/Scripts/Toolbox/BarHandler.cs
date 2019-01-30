@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class BarHandler : MonoBehaviour
     private float _lerpSpeed=2;
 
     private Image _content;
-    private Text _text;
+    private TextMeshProUGUI _text;
 
     //todo: make these private 
     public float MaxValue;
@@ -29,7 +30,7 @@ public class BarHandler : MonoBehaviour
         foreach (var conten in contents)
             if (conten.type ==Image.Type.Filled)
                 _content = conten;
-        var texts = GetComponentsInChildren<Text>();
+        var texts = GetComponentsInChildren<TextMeshProUGUI>();
         foreach (var text in texts)
                 _text = text;
         if (LerpColor)

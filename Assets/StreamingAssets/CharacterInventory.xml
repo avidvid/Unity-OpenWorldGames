@@ -20,32 +20,7 @@
       <IsEnable>true</IsEnable>
     </Substance>
   </ItemContainer>
-  <ItemContainer>
-    <Consumable>
-      <Id>10</Id>
-      <Name>Recipe</Name>
-      <Description>Recipe</Description>
-      <IconPath>Inventory/InventorySet1</IconPath>
-      <IconId>250</IconId>
-      <Cost>0</Cost>
-      <Weight>0</Weight>
-      <MaxStackCnt>1</MaxStackCnt>
-      <StackCnt>1</StackCnt>
-      <Type>Consumable</Type>
-      <Rarity>Common</Rarity>
-      <IsUnique>true</IsUnique>
-      <Slug>Recipe</Slug>
-      <DurationDays>365</DurationDays>
-      <ExpirationTime>2019-11-15T16:12:55.2234687-06:00</ExpirationTime>
-      <IsEnable>true</IsEnable>
-      <Health>0</Health>
-      <Mana>0</Mana>
-      <Energy>0</Energy>
-      <Coin>0</Coin>
-      <Gem>1</Gem>
-      <Recipe>1</Recipe>
-    </Consumable>
-  </ItemContainer>
+  <ItemContainer />
   <ItemContainer>
     <Tool>
       <Id>7</Id>

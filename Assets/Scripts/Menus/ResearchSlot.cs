@@ -1,5 +1,6 @@
 ﻿
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -34,13 +35,13 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     {
         if (ItemLocked)
         {
-            Text[] texts = this.transform.parent.GetComponentsInChildren<Text>();
+            TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
             texts[0].text = CharResearch.Level.ToString();
-            texts[1].color = Color.magenta;
+            //texts[1].color = Color.magenta;
             texts[1].text = TimeHandler.PrintTime(_time - DateTime.Now);
             if (DateTime.Now > _time)
             {
-                texts[1].color = Color.green;
+                //texts[1].color = Color.green;
                 texts[1].text = "Ready";
                 ItemLocked = false;
                 _GUIManager.PrintMessage(TargetResearch.Name + " Is ready", Color.green);
@@ -48,7 +49,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         }
         if (_setEmpty)
         {
-            Text[] texts = this.transform.parent.GetComponentsInChildren<Text>();
+            TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
             texts[0].text = "";
             texts[1].text = "Empty";
         }
@@ -138,7 +139,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
         if (CharResearch.Id == -1)
         {
-            Text[] texts = this.transform.parent.GetComponentsInChildren<Text>();
+            TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
             texts[0].text = "Empty";
         }
         GetComponent<CanvasGroup>().blocksRaycasts = true;

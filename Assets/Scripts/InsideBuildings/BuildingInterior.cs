@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -45,8 +46,7 @@ public class BuildingInterior : MonoBehaviour {
 
     void Start()
     {
-        //todo: active the music 
-        //_audioManager = AudioManager.Instance();
+        _audioManager = AudioManager.Instance();
         _terrainDatabase = TerrainDatabase.Instance();
         _characterManager = CharacterManager.Instance();
         _itemDatabase = ItemDatabase.Instance();
@@ -64,7 +64,8 @@ public class BuildingInterior : MonoBehaviour {
         //print("Building Interior _floor: "  +"  " + _floor.name);
         _story  = _terrainDatabase.GetStoryBasedOnRarity(_mapPosition, _key);
         GenerateInterior();
-        //_audioManager.PlayInsideMusic(PreviousPosition, _key);
+        if (_audioManager!=null)
+            _audioManager.PlayInsideMusic(PreviousPosition, _key);
     }
 
     private void GenerateInterior()
@@ -89,7 +90,6 @@ public class BuildingInterior : MonoBehaviour {
                 roomCount++;
                 continue;
             }
-
             for (int x = 0; x < newRoom.width; x++)
             {
                 for (int y = 0; y < newRoom.height; y++)
@@ -112,7 +112,6 @@ public class BuildingInterior : MonoBehaviour {
                         tilePos + Vector3.up + Vector3.right,
                         tilePos + Vector3.down + Vector3.right
                         });
-
                     var tile = new GameObject();
                     tile.transform.position = tilePos;
                     var tileRenderer = tile.AddComponent<SpriteRenderer>();
@@ -134,18 +133,14 @@ public class BuildingInterior : MonoBehaviour {
                 continue;
             //add wall to applied so it get floor sprite 
             applied.Add(wallPos);
-
             var tile = new GameObject();
-
             //Helps the 3D look of the wall look better 
             tile.transform.position = new Vector3(wallPos.x, wallPos.y, wallPos.z + wallOrder);
             wallOrder -= 0.001f;
-
             var wallRenderer = tile.AddComponent<SpriteRenderer>();
             wallRenderer.sprite = Wall;
             tile.transform.parent = transform;
             tile.name = "Wall " + tile.transform.position;
-
             //Add the exit 
             if (wallPos + Vector3.up == lowestFloor)
             {
@@ -213,7 +208,7 @@ public class BuildingInterior : MonoBehaviour {
     {
         GameObject monster = Instantiate(_monsterObj);
         monster.transform.position = location;
-        monster.transform.parent = transform;
+        monster.transform.SetParent(transform);
         monster.name = "Monster " + monster.transform.position;
         var active = monster.GetComponent<ActiveMonsterType>();
         active.Location = location;
@@ -222,7 +217,7 @@ public class BuildingInterior : MonoBehaviour {
         var spriteRenderer = monster.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = monsterCharacter.GetSprite();
         spriteRenderer.sortingOrder = _baseSortIndex + 7;
-        var textLevelRenderer = monster.GetComponentInChildren<TextMesh>();
+        var textLevelRenderer = monster.GetComponentInChildren<TextMeshPro>();
         textLevelRenderer.text = "Level " + _characterManager.CharacterSetting.Level;
         monster.GetComponentInChildren<MeshRenderer>().sortingOrder = spriteRenderer.sortingOrder + 1;
         if (monsterCharacter.IsAnimated)
@@ -248,7 +243,6 @@ public class BuildingInterior : MonoBehaviour {
                     viewLimit = radius;
                 if (Vector2.Distance(pos, bLoc) < viewLimit)
                     yield return monster;
-
             }
         }
     }

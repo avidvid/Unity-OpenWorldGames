@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Runtime.Remoting.Messaging;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -38,13 +39,13 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
             this.transform.name = "Empty";
             this.GetComponent<Image>().sprite = EmptySprite;
             //Update Text
-            this.transform.GetChild(0).GetComponent<Text>().text = "";
+            this.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
             _inv.InvSlots[SlotIndex].transform.name = this.transform.name;
             _inv.UpdateInventory(true);
         }
         else
         {
-            Text stackCntText = this.transform.GetChild(0).GetComponent<Text>();
+            var stackCntText = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             if (Item.StackCnt.ToString() != stackCntText.text)
                 stackCntText.text = Item.StackCnt > 1 ? Item.StackCnt.ToString() : "";
         }
@@ -113,7 +114,7 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
             Item = item; 
             this.transform.name = Item.Name;
             GetComponent<Image>().sprite = Item.GetSprite();
-            this.transform.GetChild(0).GetComponent<Text>().text = Item.StackCnt > 1 ? Item.StackCnt.ToString() : "";
+            this.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Item.StackCnt > 1 ? Item.StackCnt.ToString() : "";
             if (_inv ==null)
                 _inv = InventoryHandler.Instance();
             _inv.InvSlots[SlotIndex].transform.name = Item.Name;

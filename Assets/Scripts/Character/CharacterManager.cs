@@ -272,7 +272,7 @@ public class CharacterManager : MonoBehaviour
             case Item.ItemType.Consumable:
                 if (item.Consumable.Recipe == 1)
                 {
-                    if (_itemDatabase.AddNewUserRecipe(UserPlayer.Id))
+                    if (_itemDatabase.AddNewRandomUserRecipe(UserPlayer.Id))
                         message = "You found a Recipe!!";
                     else return "Recipe you found is not readable!! ";
                 }

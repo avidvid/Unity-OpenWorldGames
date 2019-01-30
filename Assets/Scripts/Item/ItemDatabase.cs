@@ -265,7 +265,6 @@ public class ItemDatabase : MonoBehaviour {
         Debug.Log("UserRecipes.Count = " + _userRecipes.Count);
     }
 
-
     //UserRecipe
     public List<Recipe> UserRecipeList()
     {
@@ -281,9 +280,31 @@ public class ItemDatabase : MonoBehaviour {
             }
             for (int j = 0; j < _userRecipes.Count; j++)
                 if (_recipes[i].Id == _userRecipes[j].RecipeId)
-                    recipes.Add(_recipes[i]);
+                {
+                    if (string.IsNullOrEmpty(_userRecipes[j].RecipeCode))
+                        recipes.Add(_recipes[i]);
+                    else
+                    {
+                        _recipes[i].IsEnable = false;
+                        recipes.Add(_recipes[i]);
+                    }
+                    break;
+                }
         }
         return recipes;
+    }
+
+    internal bool ValidateRecipeCode(string recipeCode)
+    {
+        for (int j = 0; j < _userRecipes.Count; j++)
+            if (_userRecipes[j].RecipeCode != null)
+                if (_userRecipes[j].RecipeCode == recipeCode)
+                {
+                    _userRecipes[j].RecipeCode = "";
+                    SaveUserRecipes();
+                    return true;
+                }
+        return false;
     }
 
     private void LoadUserRecipes()
@@ -296,7 +317,6 @@ public class ItemDatabase : MonoBehaviour {
         _userRecipes = (List<UserRecipe>)serializer.Deserialize(fs);
         fs.Close();
     }
-
     public bool AddUserRecipe(UserRecipe ur)
     {
         try
@@ -307,11 +327,11 @@ public class ItemDatabase : MonoBehaviour {
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Debug.LogError(e.Message);
             return false;
         }
     }
-    internal bool AddNewUserRecipe(int playerId)
+    internal bool AddNewRandomUserRecipe(int playerId)
     {
         List<int> availableRecipe = new List<int>();
         int key = DateTime.Now.DayOfYear;
@@ -335,12 +355,43 @@ public class ItemDatabase : MonoBehaviour {
         {
             UserRecipe ur = new UserRecipe(availableRecipe[RandomHelper.Range(key, availableRecipe.Count)], playerId);
             _userRecipes.Add(ur);
-            Debug.Log(ur.GetDescription() + " _userRecipes.Count ="+ _userRecipes.Count);
+            Debug.Log(" _userRecipes.Count ="+ _userRecipes.Count);
             SaveUserRecipes();
             return true;
         }
         return false;
     }
+    public Recipe FindUserRecipes(int first, int second)
+    {
+        for (int i = 0; i < _recipes.Count; i++)
+        {
+            if (!_recipes[i].IsEnable)
+                continue;
+            Recipe r = _recipes[i];
+            if (_recipes[i].IsPublic)
+            {
+                if (r.IsEnable && first == r.FirstItemId && second == r.SecondItemId)
+                    return r;
+                if (r.IsEnable && first == r.SecondItemId && second == r.FirstItemId)
+                    return Reverse(r);
+                continue;
+            }
+            for (int j = 0; j < _userRecipes.Count; j++)
+                if (_recipes[i].Id == _userRecipes[j].RecipeId)
+                {
+                    if (string.IsNullOrEmpty(_userRecipes[j].RecipeCode))
+                    {
+                        if (r.IsEnable && first == r.FirstItemId && second == r.SecondItemId)
+                            return r;
+                        if (r.IsEnable && first == r.SecondItemId && second == r.FirstItemId)
+                            return Reverse(r);
+                    }
+                    break;
+                }
+        }
+        return null;
+    }
+
     private void SaveUserRecipes()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "UserRecipe.xml");
@@ -349,7 +400,6 @@ public class ItemDatabase : MonoBehaviour {
         serializer.Serialize(fs, _userRecipes);
         fs.Close();
     }
-
     //Recipe
     private List<Recipe> RecipeList()
     {
@@ -371,20 +421,6 @@ public class ItemDatabase : MonoBehaviour {
         fs.Close();
     }
 
-
-    public Recipe FindRecipes(int first, int second)
-    {
-        for (int i = 0; i < _recipes.Count; i++)
-        {
-            Recipe r = _recipes[i];
-            if (r.IsEnable && first == r.FirstItemId && second == r.SecondItemId)
-                return r;
-            if (r.IsEnable && first == r.SecondItemId && second == r.FirstItemId)
-                return Reverse(r);
-        }
-        return null;
-    }
-
     public Recipe FindRecipes(int recipeId)
     {
         for (int i = 0; i < _recipes.Count; i++)
@@ -394,7 +430,6 @@ public class ItemDatabase : MonoBehaviour {
         }
         return null;
     }
-
     private Recipe Reverse(Recipe r)
     {
         int temp = r.FirstItemId;
@@ -481,5 +516,4 @@ public class ItemDatabase : MonoBehaviour {
         }
         return _itemDatabase;
     }
-
 }

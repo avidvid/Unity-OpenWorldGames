@@ -3,7 +3,6 @@ using System.Collections; using System.Collections.Generic; using UnityEngin
     private CharacterManager _characterManager;
     private Cache _cache;
     private GUIManager _GUIManager;
-    private InventoryHandler _inv;
     [SerializeField]
     private BuildingInterior _building;
 
@@ -20,7 +19,6 @@ using System.Collections; using System.Collections.Generic; using UnityEngin
             _terrainManager = TerrainManager.Instance();
         }
         _GUIManager = GUIManager.Instance();
-        _inv = InventoryHandler.Instance();
         _characterManager = CharacterManager.Instance();     } 	     internal void AttackDealing(ActiveMonsterType monster, float dealAtt, string environmentType)
     {
         if (dealAtt <= 0)

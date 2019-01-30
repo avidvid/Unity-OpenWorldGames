@@ -33,7 +33,7 @@ public class MoveManager : MonoBehaviour {
     private Vector3 _movement;
     private Vector3 _destiny;
 
-    private Rigidbody2D _rigidBody2D;
+    //private Rigidbody2D _rigidBody2D;
     private bool _stop;
 
 
@@ -46,7 +46,7 @@ public class MoveManager : MonoBehaviour {
 
         _player = GameObject.FindGameObjectWithTag("Player");
         _renderer = _player.GetComponent<SpriteRenderer>();
-        _rigidBody2D = _player.GetComponent<Rigidbody2D>();
+        //_rigidBody2D = _player.GetComponent<Rigidbody2D>();
 
 
         _animator = _player.GetComponent<Animator>();

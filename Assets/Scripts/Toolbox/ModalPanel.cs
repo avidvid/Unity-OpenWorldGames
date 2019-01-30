@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -21,7 +22,7 @@ public class ModalPanel : MonoBehaviour
     private GameObject _messagePanel;
     private GameObject _warningPanel;
 
-    private Text _question;
+    private TextMeshProUGUI _question;
     private Button _buttonYes;
     private Button _buttonNo;
     private Button _buttonCancel;
@@ -47,7 +48,7 @@ public class ModalPanel : MonoBehaviour
         _messagePanel.SetActive(true);
         _warningPanel.SetActive(false);
 
-        _question = _messagePanel.transform.Find("Question").gameObject.GetComponent<Text>();
+        _question = _messagePanel.transform.Find("Question").gameObject.GetComponent<TextMeshProUGUI>();
         _buttonYes = _messagePanel.transform.GetChild(1).Find("OkButton").gameObject.GetComponent<Button>();
         _buttonNo = _messagePanel.transform.GetChild(1).Find("NoButton").gameObject.GetComponent<Button>();
         _buttonCancel = _messagePanel.transform.GetChild(1).Find("CancelButton").gameObject.GetComponent<Button>();
@@ -101,7 +102,7 @@ public class ModalPanel : MonoBehaviour
         _messagePanel.SetActive(false);
         _warningPanel.SetActive(true);
 
-        _question = _warningPanel.transform.Find("Question").gameObject.GetComponent<Text>();
+        _question = _warningPanel.transform.Find("Question").gameObject.GetComponent<TextMeshProUGUI>();
         _buttonYes = _warningPanel.transform.GetChild(1).Find("OkButton").gameObject.GetComponent<Button>();
         _buttonNo = _warningPanel.transform.GetChild(1).Find("NoButton").gameObject.GetComponent<Button>();
         _buttonCancel = _warningPanel.transform.GetChild(1).Find("CancelButton").gameObject.GetComponent<Button>();

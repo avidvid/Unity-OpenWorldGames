@@ -10,7 +10,6 @@ public class FollowTransform : MonoBehaviour
 
     private Space offsetPositionSpace = Space.Self;
 
-    private bool lookAt = true;
 
     private void Start()
     {

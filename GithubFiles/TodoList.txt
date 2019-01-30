@@ -9,16 +9,13 @@ Users Want to do what they want, not what you want them to do
 comite:
 
 	
-	
 
 At Home: 
 	
 
 At Office: 
 
-	add recepie by code (hashcode) mix of userid and recepie id 
-	Recepie view in small page 
-
+	Bug: coice in modal panel with one button text is not centered 
 
 	Aws api server lambda 
 	

@@ -9,7 +9,6 @@ using UnityEngine.EventSystems;
 using System.Linq;
 
 public class ResearchListHandler : MonoBehaviour {
-    private ItemDatabase _itemDatabase;
 
     private ModalPanel _modalPanel;
     private GameObject _contentPanel;
@@ -22,7 +21,6 @@ public class ResearchListHandler : MonoBehaviour {
 
     void Awake()
     {
-        _itemDatabase = ItemDatabase.Instance();
         _modalPanel = ModalPanel.Instance();
         _characterManager =CharacterManager.Instance();
         _contentPanel = GameObject.Find("ContentPanel");

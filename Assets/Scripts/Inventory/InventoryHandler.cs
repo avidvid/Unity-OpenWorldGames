@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -82,9 +83,9 @@ public class InventoryHandler : MonoBehaviour
             EquiSlots[(int)equiSlots[i].EquType] = equiSlots[i];
         for (int i = 0; i < EquiSlots.Length; i++)
         {
-            //print("index : "+i+"-"+_equiSlots[i].EquType + (int)_equiSlots[i].EquType + " id from in=  "+ _equipments[i]);
+            //print("index : "+i+"-"+ EquiSlots[i].EquType + (int)EquiSlots[i].EquType + " id from in=  "+ _equipments[i]);
             EquiSlots[i].name = "Slot " + EquiSlots[i].EquType;
-            EquiSlots[i].GetComponentInChildren<Text>().text = EquiSlots[i].EquType.ToString();
+            EquiSlots[i].GetComponentInChildren<TextMeshProUGUI>().text = EquiSlots[i].EquType.ToString();
             ItemEquipment equipmentItem = EquiSlots[i].GetComponentInChildren<ItemEquipment>();
             if (_equipments[i].Id == -1)
             {
@@ -137,7 +138,7 @@ public class InventoryHandler : MonoBehaviour
                 if (_invItems[i].Id != -1)
                 {
                     itemObject.GetComponent<Image>().sprite = _invItems[i].GetSprite();
-                    itemObject.transform.GetChild(0).GetComponent<Text>().text = _invItems[i].StackCnt > 1 ? _invItems[i].StackCnt.ToString() :"";
+                    itemObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _invItems[i].StackCnt > 1 ? _invItems[i].StackCnt.ToString() :"";
                 }
             }
             //todo: lets user buy a slot 
@@ -184,12 +185,15 @@ public class InventoryHandler : MonoBehaviour
         {
             for (int i = 0; i < _equipments.Count; i++)
             {
-                ItemContainer tmpItem = EquiSlots[i].transform.GetChild(0).GetComponent<ItemEquipment>().Item;
+                ItemContainer tmpItem = EquiSlots[i].transform.GetComponentInChildren<ItemEquipment>().Item;
                 if (_equipments[i].Id == tmpItem.Id)
+                    //if not tool just ignore the update
                     if (_equipments[i].Type != Item.ItemType.Tool)
                         continue;
+                    //if tool and TimeToUse is the same ignore the update
                     else if (_equipments[i].Tool.TimeToUse == tmpItem.Tool.TimeToUse)
                             continue;
+                //else different item update _equipments[i]
                 _equipments[i] = tmpItem;
             }
             //Save new Equipments 
@@ -338,7 +342,7 @@ public class InventoryHandler : MonoBehaviour
         BuildTrainStarter("InventoryHandler","Option");
         //switch the scene
         SceneManager.LoadScene(SceneSettings.SceneIdForMenu);
-    } 
+    }
 
     public void GoToMenuSceneSocial()
     {
@@ -346,7 +350,6 @@ public class InventoryHandler : MonoBehaviour
         //switch the scene
         SceneManager.LoadScene(SceneSettings.SceneIdForMenu);
     }
-
     public void GoToCreditScene()
     {
         BuildTrainStarter();
@@ -360,7 +363,6 @@ public class InventoryHandler : MonoBehaviour
         //switch the scene
         SceneManager.LoadScene(SceneSettings.SceneIdForStore);
     }
-
     public void GoToSlotShop()
     {
         //OfferListHandler
@@ -368,7 +370,6 @@ public class InventoryHandler : MonoBehaviour
         //switch the scene
         SceneManager.LoadScene(SceneSettings.SceneIdForStore);
     }
-
     private void BuildTrainStarter(string domain = null,string content = null)
     {
         //Preparing to return to terrain
@@ -410,7 +411,7 @@ public class InventoryHandler : MonoBehaviour
 
     public Recipe CheckRecipes(int first, int second)
     {
-        return _itemDatabase.FindRecipes( first,  second);
+        return _itemDatabase.FindUserRecipes( first,  second);
     }
 
     internal void PrintMessage(string message,Color color)
@@ -426,34 +427,28 @@ public class InventoryHandler : MonoBehaviour
     }
     public bool ElementToolUse(ElementIns element=null)
     {
-        ItemEquipment existingEquipment = _inv.EquiSlots[(int)Equipment.PlaceType.Left].GetComponentInChildren<ItemEquipment>();
-        ItemContainer itemEquipment = existingEquipment.Item;
-        ElementIns.ElementType targetType = element != null ? element.Type: ElementIns.ElementType.Hole;
-        if (itemEquipment.Id != -1 && 
-            itemEquipment.Type == Item.ItemType.Tool && 
-            itemEquipment.StackCnt > 0 &&
-            targetType == itemEquipment.Tool.FavouriteElement)
+        ElementIns.ElementType targetType = element != null ? element.Type : ElementIns.ElementType.Hole;
+        //Check Left hand for tool
+        ItemContainer toolEquipment = _inv.EquiSlots[(int)Equipment.PlaceType.Left].GetComponentInChildren<ItemEquipment>().Item;
+        if (toolEquipment.Id == -1 ||
+            toolEquipment.Type != Item.ItemType.Tool ||
+            toolEquipment.StackCnt <= 0 ||
+            targetType != toolEquipment.Tool.FavouriteElement)
+            //Check Right hand for tool
         {
-            existingEquipment.Item.UseItem(1);
-            UpdateEquipments(true);
-            return true;
-        }
-        else
-        { 
-            existingEquipment = _inv.EquiSlots[(int)Equipment.PlaceType.Right].GetComponentInChildren<ItemEquipment>();
-            itemEquipment = existingEquipment.Item;
-            if (itemEquipment.Id != -1 &&
-                itemEquipment.Type == Item.ItemType.Tool &&
-                itemEquipment.StackCnt > 0 &&
-                targetType == itemEquipment.Tool.FavouriteElement)
+            toolEquipment = _inv.EquiSlots[(int)Equipment.PlaceType.Right].GetComponentInChildren<ItemEquipment>().Item;
+            if (toolEquipment.Id == -1 ||
+                toolEquipment.Type != Item.ItemType.Tool ||
+                toolEquipment.StackCnt <= 0 ||
+                targetType != toolEquipment.Tool.FavouriteElement)
             {
-                existingEquipment.Item.UseItem(1);
-                UpdateEquipments(true);
-                return true;
+                PrintMessage("You don't have a right tool to use", Color.yellow);
+                return false;
             }
         }
-        PrintMessage("You don't have a right tool to use", Color.yellow);
-        return false;
+        toolEquipment.UseItem(1);
+        UpdateEquipments(true);
+        return true;
     }
 
     //Middle Man

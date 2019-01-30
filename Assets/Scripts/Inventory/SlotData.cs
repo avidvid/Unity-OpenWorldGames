@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -66,7 +67,7 @@ public class SlotData : MonoBehaviour,IDropHandler{
                     //Set the slot Item
                     existingItem.transform.name = mixedItem.Item.Name;
                     existingItem.GetComponent<Image>().sprite = mixedItem.Item.GetSprite();
-                    Text stackCntText = existingItem.transform.GetChild(0).GetComponent<Text>();
+                    TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
                     stackCntText.text = mixedItem.Item.StackCnt > 1 ? mixedItem.Item.StackCnt.ToString() : "";
                     existingItem.Item = mixedItem.Item;
                     _inv.InvSlots[SlotIndex].name = mixedItem.Item.Name;
@@ -92,7 +93,7 @@ public class SlotData : MonoBehaviour,IDropHandler{
                     //Set the slot Item
                     existingItem.transform.name = equipedItem.Item.Name;
                     existingItem.GetComponent<Image>().sprite = equipedItem.Item.GetSprite();
-                    Text stackCntText = existingItem.transform.GetChild(0).GetComponent<Text>();
+                    TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
                     stackCntText.text = equipedItem.Item.StackCnt > 1 ? equipedItem.Item.StackCnt.ToString() : "";
                     existingItem.Item = equipedItem.Item;
                     _inv.InvSlots[SlotIndex].name = equipedItem.Item.Name;
@@ -105,7 +106,7 @@ public class SlotData : MonoBehaviour,IDropHandler{
                 }
                 return;
             }
-        Debug.Log(draggedItem.SlotIndex+" Dragged to "+ SlotIndex + "-" + existingItem.Item.Name);
+        //Debug.Log(draggedItem.SlotIndex+" Dragged to "+ SlotIndex + "-" + existingItem.Item.Name);
         if (SlotIndex != draggedItem.SlotIndex )
         {
             //#################################### Stacking: Same items Stack them together
@@ -188,14 +189,14 @@ public class SlotData : MonoBehaviour,IDropHandler{
             existingItem.transform.name = "Empty";
             existingItem.GetComponent<Image>().sprite = EmptySprite;
             //Update Text
-            Text stackCntText = existingItem.transform.GetChild(0).GetComponent<Text>();
+            TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             stackCntText.text = "";
             _inv.InvSlots[SlotIndex].name = existingItem.name;
         }
         else
         {
             //Update Text
-            Text stackCntText = existingItem.transform.GetChild(0).GetComponent<Text>();
+            TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             stackCntText.text = existingItem.Item.StackCnt > 1 ? existingItem.Item.StackCnt.ToString() : "";
         }
         if (existingItem.Item.StackCnt == 0)

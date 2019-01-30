@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using TMPro;
 
 public class OfferListHandler : MonoBehaviour {
     private ItemDatabase _itemDatabase;
@@ -53,7 +54,7 @@ public class OfferListHandler : MonoBehaviour {
             offerObject.transform.name = "Offer " + _offers[i].Id;
 
             var images = offerObject.GetComponentsInChildren<Image>();
-            var texts = offerObject.GetComponentsInChildren<Text>();
+            var texts = offerObject.GetComponentsInChildren<TextMeshProUGUI>();
             var buttons = offerObject.GetComponentsInChildren<Button>();
 
             images[1].sprite = GetSprite(_offers[i].SellProd);

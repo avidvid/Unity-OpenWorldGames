@@ -28,8 +28,6 @@ public class Recipe{
     public bool IsPublic { get; set; }
     public bool IsEnable { get; set; }
 
-
-
     public virtual string GetDescription()
     {
         ItemDatabase itemDatabase = ItemDatabase.Instance();
@@ -60,18 +58,22 @@ public class Recipe{
         }
     }
 
-    internal string Print()
+    internal void Print()
     {
         ItemDatabase itemDatabase = ItemDatabase.Instance();
         try
         {
-            return "Recipe: " + itemDatabase.FindItem(FirstItemId).Name +
-                   " with " + itemDatabase.FindItem(SecondItemId).Name;
+
+            Debug.Log("Recipe(" + Id + "): " + itemDatabase.FindItem(FirstItemId).Name +
+                   " with " + itemDatabase.FindItem(SecondItemId).Name +
+                   " to " + itemDatabase.FindItem(FinalItemId).Name +
+                   " Enable " + IsEnable +
+                   " Public " + IsPublic);
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message);
-            return "Print Recipe";
+            Debug.LogError(e.Message);
         }
     }
+
 }
