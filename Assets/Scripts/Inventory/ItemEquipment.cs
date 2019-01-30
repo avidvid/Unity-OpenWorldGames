@@ -46,7 +46,7 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         if (Item.Id == -1)
             return;
-        _tooltip.Dectivate();
+        _tooltip.Deactivate();
     }
 
     public void OnPointerDown(PointerEventData eventData)

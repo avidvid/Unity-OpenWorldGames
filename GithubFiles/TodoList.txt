@@ -7,15 +7,26 @@ Users Want to do what they want, not what you want them to do
 
 
 comite:
-
-	
+	Tooltip Brefab also font fixed
+	Update texts on the buttons in the inventory menu
 
 At Home: 
 	
 
 At Office: 
+	//todo ??? 
+    _characters[i].IsEnable = true;
+	
+	find egg: AddNewRandomUserCharacter and AddUserCharacter like recipe 
 
-	Bug: coice in modal panel with one button text is not centered 
+
+	update texts on the button in the inventorymenu 
+	
+	change back up file for OUP to not go to drive one 
+	http://zikmund.me/blog/changing-default-project-directory-visual-studio-2017/
+	
+	
+	Bug: choice in modal panel with one button text is not centered 
 
 	Aws api server lambda 
 	
@@ -26,12 +37,12 @@ At Office:
 	
 	
 
-	
-	change font for messages
-	skin/msgskin
-
 	inside monster on walk not passing the walls
 	ScriptTextHandler ????
+	
+	
+	Gift phase 
+	Gift recepie and characters 
 	
 	
 Before lunch part:

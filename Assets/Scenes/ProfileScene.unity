@@ -641,17 +641,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.0309278
       objectReference: {fileID: 0}
+    - target: {fileID: 1060914859620073008, guid: 871ea2d19e2699c4898eb1cba41980bf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.41999817
+      objectReference: {fileID: 0}
     - target: {fileID: 114803371791010518, guid: 871ea2d19e2699c4898eb1cba41980bf,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: c2e94467181425f498a688919a656a88,
         type: 3}
-    - target: {fileID: 1060914859620073008, guid: 871ea2d19e2699c4898eb1cba41980bf,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.41999817
-      objectReference: {fileID: 0}
     - target: {fileID: 8566041424348587608, guid: 871ea2d19e2699c4898eb1cba41980bf,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -951,7 +951,7 @@ PrefabInstance:
     - target: {fileID: 224538520692606212, guid: febc9e5fc5d58d34488b2b67f7fbdcb4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224538520692606212, guid: febc9e5fc5d58d34488b2b67f7fbdcb4,
         type: 3}
@@ -1517,15 +1517,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 224942685861226832, guid: 871ea2d19e2699c4898eb1cba41980bf,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.42000198
-      objectReference: {fileID: 0}
     - target: {fileID: 1060914859620073008, guid: 871ea2d19e2699c4898eb1cba41980bf,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.41999817
+      objectReference: {fileID: 0}
+    - target: {fileID: 224942685861226832, guid: 871ea2d19e2699c4898eb1cba41980bf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.42000198
       objectReference: {fileID: 0}
     - target: {fileID: 8566041424348587608, guid: 871ea2d19e2699c4898eb1cba41980bf,
         type: 3}
@@ -2658,7 +2658,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1987202265}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -3397,7 +3397,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289403178}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -3429,7 +3429,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1289403181}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1987202270}
+        m_MethodName: GoToCharacterScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1289403181
@@ -4855,7 +4866,7 @@ PrefabInstance:
     - target: {fileID: 224538520692606212, guid: febc9e5fc5d58d34488b2b67f7fbdcb4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224538520692606212, guid: febc9e5fc5d58d34488b2b67f7fbdcb4,
         type: 3}
@@ -5050,10 +5061,10 @@ RectTransform:
   m_Children:
   - {fileID: 2067777938}
   - {fileID: 1289403179}
+  - {fileID: 1082037096}
   - {fileID: 1893047286}
   - {fileID: 402955092}
   - {fileID: 1996898588}
-  - {fileID: 1082037096}
   - {fileID: 652855821}
   - {fileID: 783439054}
   - {fileID: 4417882}
@@ -5214,7 +5225,7 @@ PrefabInstance:
     - target: {fileID: 224538520692606212, guid: febc9e5fc5d58d34488b2b67f7fbdcb4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224538520692606212, guid: febc9e5fc5d58d34488b2b67f7fbdcb4,
         type: 3}

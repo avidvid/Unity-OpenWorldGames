@@ -41,7 +41,7 @@ public class MoveManager : MonoBehaviour {
     private void Start ()
     {
         _characterManager = CharacterManager.Instance();
-        _playerCharacter = _characterManager.Character;
+        _playerCharacter = _characterManager.MyCharacter;
         _playerCharacterSetting = _characterManager.CharacterSetting;
 
         _player = GameObject.FindGameObjectWithTag("Player");

@@ -40,7 +40,7 @@ public class ProfileHandler : MonoBehaviour {
         _characterManager = CharacterManager.Instance();
         _settings = _characterManager.CharacterSetting;
         _player = _characterManager.UserPlayer;
-        _character = _characterManager.Character;
+        _character = _characterManager.MyCharacter;
 
         if (_characterManager.UserPlayer.FBLoggedIn)
             _facebook = FacebookHandler.Instance();
@@ -80,7 +80,7 @@ public class ProfileHandler : MonoBehaviour {
         _coin.UpdateValue(_settings.Coin);
         _gem.UpdateValue(_settings.Gem);
 
-        _characterPic.image.sprite = _characterManager.Character.GetSprite();
+        _characterPic.image.sprite = _characterManager.MyCharacter.GetSprite();
         StartCoroutine("LoadProfilePicture");
 
         int i = 0;
@@ -156,6 +156,11 @@ public class ProfileHandler : MonoBehaviour {
     public void BackToMainScene()
     {
         SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
+    }
+
+    public void GoToCharacterScene()
+    {
+        SceneManager.LoadScene(SceneSettings.SceneIdForCharacterScene);
     }
 
     private void ReBuildStarter(string content = null)

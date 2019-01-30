@@ -53,7 +53,7 @@ public class MiniMapHandler : MonoBehaviour {
                 images[0].sprite = _markers[i * 9 + j].Terrain.GetSprite();
                 if (i == 6 && j == 4) //"Center" 
                 {
-                    images[1].sprite =_characterManager.Character.GetSprite();
+                    images[1].sprite =_characterManager.MyCharacter.GetSprite();
                 }
             }
         }

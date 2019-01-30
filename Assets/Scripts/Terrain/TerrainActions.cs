@@ -41,7 +41,7 @@ public class TerrainActions : MonoBehaviour {
             var monster = _terrainManager.GetMonster(touchLocation, 0.4f);
             if (monster != null)
             {
-                if (distance < (int) _characterManager.Character.AttackR)
+                if (distance < (int) _characterManager.MyCharacter.AttackR)
                 {
                     _popupAction.GetComponent<ActionHandler>().SetActiveMonster(monster, transform,"Terrain");
                     _popupAction.GetComponent<ActionHandler>().AttackMonster();

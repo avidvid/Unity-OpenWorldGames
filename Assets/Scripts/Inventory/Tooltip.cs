@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Tooltip : MonoBehaviour
 {
@@ -17,6 +15,28 @@ public class Tooltip : MonoBehaviour
         _tooltip = Tooltip.Instance();
     }
 
+
+
+    public void Activate(ItemContainer item)
+    {
+        if (item.Id != -1)
+        {
+            _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = item.GetTooltip();
+            TooltipObject.SetActive(true);
+            TooltipObject.transform.position = Input.mousePosition;
+        }
+    }
+
+    public void Activate(Research research)
+    {
+        _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = research.GetTooltip();
+        TooltipObject.SetActive(true);
+        TooltipObject.transform.position = Input.mousePosition;
+    }
+    public void Deactivate()
+    {
+        TooltipObject.SetActive(false);
+    }
     public static Tooltip Instance()
     {
         if (!_tooltip)
@@ -27,28 +47,4 @@ public class Tooltip : MonoBehaviour
         }
         return _tooltip;
     }
-
-    public void Activate(ItemContainer item)
-    {
-        if (item.Id != -1)
-        {
-            _tooltip.transform.GetChild(0).GetComponent<Text>().text = item.GetTooltip();
-            TooltipObject.SetActive(true);
-            TooltipObject.transform.position = Input.mousePosition;
-        }
-    }
-
-    public void Activate(Research research)
-    {
-        _tooltip.transform.GetChild(0).GetComponent<Text>().text = research.GetTooltip();
-        TooltipObject.SetActive(true);
-        TooltipObject.transform.position = Input.mousePosition;
-    }
-
-
-    public void Dectivate()
-    {
-        TooltipObject.SetActive(false);
-    }
-
 }

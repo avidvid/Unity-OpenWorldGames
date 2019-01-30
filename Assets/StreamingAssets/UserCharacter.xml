@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ArrayOfUserCharacter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UserCharacter>
+    <CharacterId>0</CharacterId>
+    <UserId>22</UserId>
+    <CharacterCode />
+    <Created>2019-01-23T17:21:40.5636313-06:00</Created>
+  </UserCharacter>
+  <UserCharacter>
+    <CharacterId>1</CharacterId>
+    <UserId>22</UserId>
+    <CharacterCode />
+    <Created>2019-01-23T17:21:40.5636313-06:00</Created>
+  </UserCharacter>
+  <UserCharacter>
+    <CharacterId>2</CharacterId>
+    <UserId>22</UserId>
+    <CharacterCode />
+    <Created>2019-01-23T17:21:40.5636313-06:00</Created>
+  </UserCharacter>
+  <UserCharacter>
+    <CharacterId>3</CharacterId>
+    <UserId>22</UserId>
+    <CharacterCode />
+    <Created>2019-01-23T17:21:40.5636313-06:00</Created>
+  </UserCharacter>
+  <UserCharacter>
+    <CharacterId>4</CharacterId>
+    <UserId>22</UserId>
+    <CharacterCode>12345</CharacterCode>
+    <Created>2019-01-23T17:21:40.5636313-06:00</Created>
+  </UserCharacter>
+</ArrayOfUserCharacter>

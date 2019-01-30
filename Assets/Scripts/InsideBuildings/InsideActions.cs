@@ -37,7 +37,7 @@ public class InsideActions : MonoBehaviour {
             var monster = _building.GetMonster(touchLocation,0.3f).FirstOrDefault();
 	        if (monster != null)
 	        {
-	            if (distance < (int) _characterManager.Character.AttackR)
+	            if (distance < (int) _characterManager.MyCharacter.AttackR)
 	            {
                     _popupAction.GetComponent<ActionHandler>().SetActiveMonster(monster, transform, "Inside");
                     _popupAction.GetComponent<ActionHandler>().AttackMonster();

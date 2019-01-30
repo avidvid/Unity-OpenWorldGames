@@ -340,6 +340,8 @@ public class ItemDatabase : MonoBehaviour {
         for (int i = 0; i < _recipes.Count; i++)
             if (_recipes[i].IsEnable && !_recipes[i].IsPublic)
             {
+                if ((int)_recipes[i].Rarity < rarity)
+                    continue;
                 for (int j = 0; j < _userRecipes.Count; j++)
                     if (_recipes[i].Id == _userRecipes[j].RecipeId)
                     {
@@ -347,7 +349,6 @@ public class ItemDatabase : MonoBehaviour {
                         break;
                     }
                 if (!userOwnedRecipe)
-                    if ((int)_recipes[i].Rarity >= rarity)
                         availableRecipe.Add(_recipes[i].Id);
                 userOwnedRecipe = false;
             }
@@ -355,7 +356,6 @@ public class ItemDatabase : MonoBehaviour {
         {
             UserRecipe ur = new UserRecipe(availableRecipe[RandomHelper.Range(key, availableRecipe.Count)], playerId);
             _userRecipes.Add(ur);
-            Debug.Log(" _userRecipes.Count ="+ _userRecipes.Count);
             SaveUserRecipes();
             return true;
         }

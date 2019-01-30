@@ -66,7 +66,6 @@ public class UserPlayer  {
                 DateTime lastLogin = new DateTime(),
                 DateTime lockUntil = new DateTime(),
                 UserPlayer.PlayerRanks rank = 0, int pRank = 0, int clanId = 0, UserPlayer.ClanRanks clanRank = 0,
-                string characterList = "0,1,2,3,4",
                 bool fb = false, string fbId = null,
                 bool g = false, bool isEnable = true)
     {
@@ -82,7 +81,6 @@ public class UserPlayer  {
         PRank = pRank;
         ClanId = clanId;
         ClanRank = clanRank;
-        CharacterList = characterList;
         FBLoggedIn = fb;
         FBid = fbId;
         GLoggedIn = g;
@@ -103,7 +101,6 @@ public class UserPlayer  {
         PRank = userPlayer.PRank;
         ClanId = userPlayer.ClanId;
         ClanRank = userPlayer.ClanRank;
-        CharacterList = userPlayer.CharacterList; 
         FBLoggedIn = userPlayer.FBLoggedIn;
         FBid = userPlayer.FBid;
         GLoggedIn = userPlayer.GLoggedIn;
@@ -116,6 +113,6 @@ public class UserPlayer  {
     internal void Print()
     {
         Debug.Log("UserPlayer = " + Id + "-" + UserName + " " + Rank + " " + LastLogin+": (" + Latitude + ","+ Longitude + ") " 
-                  + CharacterList + LockUntil );
+                  + LockUntil );
     }
 }

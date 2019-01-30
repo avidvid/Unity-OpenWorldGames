@@ -15,12 +15,13 @@
   <UserRecipe>
     <RecipeId>3</RecipeId>
     <UserId>22</UserId>
-    <UserId>123456</UserId>
+    <RecipeCode>123456</RecipeCode>
     <Created>2019-01-23T17:21:40.5636313-06:00</Created>
   </UserRecipe>
   <UserRecipe>
     <RecipeId>2</RecipeId>
     <UserId>22</UserId>
+    <RecipeCode />
     <Created>2019-01-30T09:15:54.4933909-06:00</Created>
   </UserRecipe>
 </ArrayOfUserRecipe>

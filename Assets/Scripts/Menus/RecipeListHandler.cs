@@ -10,6 +10,8 @@ public class RecipeListHandler : MonoBehaviour {
 
     private ItemDatabase _itemDatabase;
     private ModalPanel _modalPanel;
+
+    //Recipe Prefab
     public GameObject RecipeContent;
 
     private List<Recipe> _recipes = new List<Recipe>();

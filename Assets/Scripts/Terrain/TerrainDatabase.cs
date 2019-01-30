@@ -204,15 +204,13 @@ public class TerrainDatabase : MonoBehaviour {
     private void SetMonsterTypes()
     {
         List<int> regionMonsters = Region.Monsters.Split(',').Select(Int32.Parse).ToList();
-        foreach (var monster in _characterDatabase.Characters)
+        foreach (var monster in _characterDatabase.GetCharacters())
         {
             if (regionMonsters.IndexOf(monster.Id) != -1 && monster.IsEnable)
                 Monsters.Add(monster);
             if (InsideMonsterIds.Contains(monster.Id) && monster.IsEnable)
                 InsideMonsters.Add(monster);
         }
-
-
         //Terrain Monster HealthCheck 
         foreach (var terrain in Terrains)
         {
@@ -238,7 +236,7 @@ public class TerrainDatabase : MonoBehaviour {
             {
                 if (InsideMonsters.Any(m => m.Id == actor.CharacterId))
                     continue;
-                throw new Exception("InsideStory with no available monster");
+                throw new Exception("InsideStory with no available monster. Inside Story: "+ insideStory.Name+ insideStory.Id);
             }
         }
 

@@ -43,11 +43,11 @@ public class Move : MonoBehaviour {
         var terrain = _terrainManager.SelectTerrain(mapPos.x, mapPos.y);
         if (
             //Terrain Types and charcter type 
-            (!terrain.Walkable && _characterManager.Character.Move == Character.CharacterType.Walk) ||
-            (!terrain.Flyable && _characterManager.Character.Move == Character.CharacterType.Fly) ||
-            (!terrain.Swimable && _characterManager.Character.Move == Character.CharacterType.Swim) ||
+            (!terrain.Walkable && _characterManager.MyCharacter.Move == Character.CharacterType.Walk) ||
+            (!terrain.Flyable && _characterManager.MyCharacter.Move == Character.CharacterType.Fly) ||
+            (!terrain.Swimable && _characterManager.MyCharacter.Move == Character.CharacterType.Swim) ||
             //element + character
-            (element != null && !element.ElementTypeInUse.Enterable && _characterManager.Character.Move != Character.CharacterType.Fly)
+            (element != null && !element.ElementTypeInUse.Enterable && _characterManager.MyCharacter.Move != Character.CharacterType.Fly)
             )
         {
             return true;

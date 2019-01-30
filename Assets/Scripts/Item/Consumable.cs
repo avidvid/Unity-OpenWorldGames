@@ -15,7 +15,6 @@ public class Consumable : Item {
     public Consumable() : base()
     {
     }
-
     public Consumable(int id, string name, string desc, string iconPath, int iconId, int cost, int weight, int maxStackCnt, int stackCnt, ItemType type, ItemRarity rarity, bool isUnique, int durationDays, DateTime expirationTime, int[] values =null)
         : base(id, name, desc,  iconPath,  iconId, cost, weight, maxStackCnt, stackCnt, type, rarity, isUnique, durationDays, expirationTime)
     {
@@ -34,7 +33,6 @@ public class Consumable : Item {
     public override void Usage()
     {
     }
-
     public override string GetTooltip()
     {
         string tooltip = base.GetTooltip();

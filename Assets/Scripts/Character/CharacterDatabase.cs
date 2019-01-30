@@ -9,10 +9,11 @@ public class CharacterDatabase : MonoBehaviour {
 
 
     private static CharacterDatabase _characterDatabase;
-
-    internal List<Character> Characters = new List<Character>();
+    private List<Character> _characters = new List<Character>();
     private List<ItemContainer> _characterInventory = new List<ItemContainer>();
     private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
+    private List<UserCharacter> _userCharacter = new List<UserCharacter>();
+
     private UserPlayer _userPlayer;
     private CharacterSetting _characterSetting;
     private CharacterMixture _characterMixture;
@@ -24,7 +25,7 @@ public class CharacterDatabase : MonoBehaviour {
 
         LoadCharacters();
         Character tempCharacter = new Character(
-            Characters.Count,
+            _characters.Count,
             "Ring TV",
             "Ring TV",
             Character.CharacterType.Walk,
@@ -43,25 +44,27 @@ public class CharacterDatabase : MonoBehaviour {
             "0",                                //Drop Item
             0.7f                                //Chance
         );
-        if (!tempCharacter.Exist(Characters))
+        if (!tempCharacter.Exist(_characters))
         {
-            Characters.Add(tempCharacter);
+            _characters.Add(tempCharacter);
             SaveCharacters();
         }
+
         LoadUserPlayer();
-
-        LoadCharacterSetting();
-
-        if (_characterSetting != null)
+        if (_userPlayer != null)
         {
-            //If the Character exists 
-            LoadCharacterInventory();
-            LoadCharacterMixture();
-            LoadCharacterResearches();
-            LoadCharacterResearching();
+            LoadUserCharacters();
+            LoadCharacterSetting();
+            if (_characterSetting != null)
+            {
+                //If the Character exists 
+                LoadCharacterInventory();
+                LoadCharacterMixture();
+                LoadCharacterResearches();
+                LoadCharacterResearching();
+            }
         }
     }
-
     //CharacterInventory
     public List<ItemContainer> FindCharacterInventory(int playerId)
     {
@@ -177,25 +180,83 @@ public class CharacterDatabase : MonoBehaviour {
             _characterResearches.Add(charResearch);
         SaveCharacterResearches(); 
     }
+    //UserCharacters
+    public List<Character> GetUserCharacters()
+    {
+        List<Character> characters = new List<Character>();
+        for (int i = 0; i < _characters.Count; i++)
+        {
+            if (!_characters[i].IsEnable)
+                continue;
+            for (int j = 0; j < _userCharacter.Count; j++)
+                if (_characters[i].Id == _userCharacter[j].CharacterId)
+                {
+                    if (string.IsNullOrEmpty(_userCharacter[j].CharacterCode))
+                        characters.Add(_characters[i]);
+                    else
+                    {
+                        _characters[i].IsEnable = false;
+                        characters.Add(_characters[i]);
+                        //todo ??? 
+                        _characters[i].IsEnable = true;
+                    }
+                    break;
+                }
+        }
+        return characters;
+    }
+    internal bool ValidateCharacterCode(string characterCode)
+    {
+        for (int j = 0; j < (_userCharacter).Count; j++)
+            if (_userCharacter[j].CharacterCode != null)
+                if (_userCharacter[j].CharacterCode == characterCode)
+                {
+                    _userCharacter[j].CharacterCode = "";
+                    SaveUserCharacters();
+                    return true;
+                }
+        return false;
+    }
+    private void LoadUserCharacters()
+    {
+        _userCharacter.Clear();
+        string path = Path.Combine(Application.streamingAssetsPath, "UserCharacter.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<UserCharacter>));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        _userCharacter = (List<UserCharacter>)serializer.Deserialize(fs);
+        fs.Close();
+    }
+    private void SaveUserCharacters()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "UserCharacter.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<UserCharacter>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _userCharacter);
+        fs.Close();
+    }
     //Characters
     public Character FindCharacter(int id)
     {
-        for (int i = 0; i < Characters.Count; i++)
+        for (int i = 0; i < _characters.Count; i++)
         {
-            if (Characters[i].Id == id)
-                return Characters[i];
+            if (_characters[i].Id == id)
+                return _characters[i];
         }
         return null;
+    }
+    internal List<Character> GetCharacters()
+    {
+        return _characters;
     }
     private void LoadCharacters()
     {
         //Empty the Characters DB
-        Characters.Clear();
+        _characters.Clear();
         string path = Path.Combine(Application.streamingAssetsPath, "Character.xml");
         //Read the Characters from Character.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(List<Character>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        Characters = (List<Character>)serializer.Deserialize(fs);
+        _characters = (List<Character>)serializer.Deserialize(fs);
         fs.Close();
     }
     private void SaveCharacters()
@@ -203,7 +264,7 @@ public class CharacterDatabase : MonoBehaviour {
         string path = Path.Combine(Application.streamingAssetsPath, "Character.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<Character>));
         FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, Characters);
+        serializer.Serialize(fs, _characters);
         fs.Close();
     }
     //MonsterIns

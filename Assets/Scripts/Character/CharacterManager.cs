@@ -12,7 +12,7 @@ public class CharacterManager : MonoBehaviour
     private CharacterDatabase _characterDatabase;
     private TerrainDatabase _terrainDatabase;
 
-    public Character Character;
+    public Character MyCharacter;
     public UserPlayer UserPlayer;
 
     private Sprite _spellSprite;
@@ -21,6 +21,7 @@ public class CharacterManager : MonoBehaviour
     public CharacterResearching CharacterResearching=new CharacterResearching();
     public List<ItemContainer> CharacterInventory = new List<ItemContainer>();
     public List<CharacterResearch> CharacterResearches = new List<CharacterResearch>();
+    public List<Character> UserCharacters = new List<Character>();
     public List<Research> Researches = new List<Research>();
 
     private float _nextActionTime = 100;
@@ -45,6 +46,7 @@ public class CharacterManager : MonoBehaviour
         }
         UserPlayer.LastLogin = DateTime.Now;
         SaveUserPlayer();
+        UserCharacters= _characterDatabase.GetUserCharacters();
         //CharacterSetting
         CharacterSetting = _characterDatabase.FindCharacterSetting(UserPlayer.Id);
         if (CharacterSetting.Id == -1)
@@ -59,8 +61,8 @@ public class CharacterManager : MonoBehaviour
             GoToWaitScene();
             return;
         }
-        Character = _characterDatabase.FindCharacter(CharacterSetting.CharacterId);
-        Character.Print();
+        MyCharacter = _characterDatabase.FindCharacter(CharacterSetting.CharacterId);
+        MyCharacter.Print();
         CharacterMixture = _characterDatabase.FindCharacterMixture(CharacterSetting.Id);
         CharacterMixture.Print();
         CharacterInventory = _characterDatabase.FindCharacterInventory(CharacterSetting.Id);
@@ -83,6 +85,9 @@ public class CharacterManager : MonoBehaviour
             return;
         LoginCalculations();
     }
+
+
+
     void Update()
     {
         if (SettingBasicChecks())
@@ -357,16 +362,6 @@ public class CharacterManager : MonoBehaviour
         if (save)
             SaveCharacterSetting();
     }
-    internal List<Character> BuildCharacterList(string characterList=null)
-    {
-        if (characterList == null)
-            characterList = UserPlayer.CharacterList;
-        List<int> characterIds = characterList.Split(',').Select(Int32.Parse).ToList();
-        List<Character> characters = new List<Character>();
-        for (int i = 0; i < characterIds.Count; i++)
-            characters.Add(_characterDatabase.FindCharacter(characterIds[i]));
-        return characters;
-    }
     //Calculations
     private void LoginCalculations()
     {
@@ -387,14 +382,14 @@ public class CharacterManager : MonoBehaviour
     }
     internal void LevelCalculations()
     {
-        if (Character.Id == -1)
-            Character = _characterDatabase.FindCharacter(CharacterSetting.CharacterId);
+        if (MyCharacter.Id == -1)
+            MyCharacter = _characterDatabase.FindCharacter(CharacterSetting.CharacterId);
         //Logic Should be align with MonsterIns: MonsterIns()
         var level = CharacterSetting.Level;
         CharacterSetting.MaxExperience = CalculateXp(level);
         //#Health/Mana/Energy
         float lastPercentage = (float)CharacterSetting.Health / CharacterSetting.MaxHealth;
-        CharacterSetting.MaxHealth = ((int)Character.Body + level) * 100;
+        CharacterSetting.MaxHealth = ((int)MyCharacter.Body + level) * 100;
         CharacterSetting.Health = (int)lastPercentage * CharacterSetting.MaxHealth;
         lastPercentage = (float)CharacterSetting.Mana / CharacterSetting.MaxMana;
         CharacterSetting.MaxMana = CharacterSetting.MaxHealth / 2;
@@ -409,25 +404,25 @@ public class CharacterManager : MonoBehaviour
             CharacterSetting.Energy = CharacterSetting.MaxEnergy;
         }
         //#Speed
-        CharacterSetting.Speed = (int)Character.Speed + level / 10;
+        CharacterSetting.Speed = (int)MyCharacter.Speed + level / 10;
         CharacterSetting.SpeedAttack = CharacterSetting.Speed;
         CharacterSetting.SpeedDefense = CharacterSetting.Speed;
         //#Attack/Defense
-        CharacterSetting.AbilityAttack = Character.CheckAttackType(Character.AttackT, "Strength") ? Character.BasicAttack + level / 5f : 0;
-        CharacterSetting.AbilityDefense = Character.CheckAttackType(Character.DefenseT, "Strength") ? Character.BasicDefense + level / 5f : 0;
-        CharacterSetting.MagicAttack = Character.CheckAttackType(Character.AttackT, "Magic") ? Character.BasicAttack + level / 5f : 0;
-        CharacterSetting.MagicDefense = Character.CheckAttackType(Character.DefenseT, "Magic") ? Character.BasicDefense + level / 5f : 0;
-        CharacterSetting.PoisonAttack = Character.CheckAttackType(Character.AttackT, "Poison") ? Character.BasicAttack + level / 5f : 0;
-        CharacterSetting.PoisonDefense = Character.CheckAttackType(Character.DefenseT, "Poison") ? Character.BasicDefense + level / 5f : 0;
+        CharacterSetting.AbilityAttack = MyCharacter.CheckAttackType(MyCharacter.AttackT, "Strength") ? MyCharacter.BasicAttack + level / 5f : 0;
+        CharacterSetting.AbilityDefense = MyCharacter.CheckAttackType(MyCharacter.DefenseT, "Strength") ? MyCharacter.BasicDefense + level / 5f : 0;
+        CharacterSetting.MagicAttack = MyCharacter.CheckAttackType(MyCharacter.AttackT, "Magic") ? MyCharacter.BasicAttack + level / 5f : 0;
+        CharacterSetting.MagicDefense = MyCharacter.CheckAttackType(MyCharacter.DefenseT, "Magic") ? MyCharacter.BasicDefense + level / 5f : 0;
+        CharacterSetting.PoisonAttack = MyCharacter.CheckAttackType(MyCharacter.AttackT, "Poison") ? MyCharacter.BasicAttack + level / 5f : 0;
+        CharacterSetting.PoisonDefense = MyCharacter.CheckAttackType(MyCharacter.DefenseT, "Poison") ? MyCharacter.BasicDefense + level / 5f : 0;
         //#Element
         CharacterSetting.Element = Character.Elements.None;
         //#Carry
-        var newCarryCnt = (int)Character.Carry + level / 10;
+        var newCarryCnt = (int)MyCharacter.Carry + level / 10;
         //considering Slot sells which was pre acquisition  
         if (newCarryCnt > CharacterSetting.CarryCnt)
             CharacterSetting.CarryCnt = newCarryCnt;
         //Weight to carry
-        CharacterSetting.Carry = CharacterSetting.CarryCnt * (int)Character.Carry;
+        CharacterSetting.Carry = CharacterSetting.CarryCnt * (int)MyCharacter.Carry;
         //#Equipment setting
         //Reset all to get value from equipments  
         CharacterSetting.Agility = CharacterSetting.Bravery =
@@ -552,7 +547,10 @@ public class CharacterManager : MonoBehaviour
         }
         return null;
     }
-
+    internal bool ValidateCharacterCode(string characterCode)
+    {
+        return _characterDatabase.ValidateCharacterCode(characterCode);
+    }
     internal void SetLockTill(DateTime time )
     {
         UserPlayer.LockUntil = time;

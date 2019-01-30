@@ -45,7 +45,7 @@ public class ResearchData : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _tooltip.Dectivate();
+        _tooltip.Deactivate();
     }
 
 }

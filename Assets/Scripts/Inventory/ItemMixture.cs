@@ -52,7 +52,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         if (Item.Id == -1)
             return;
-        _tooltip.Dectivate();
+        _tooltip.Deactivate();
     }
 
     internal bool ReadyToUse()

@@ -33,7 +33,7 @@ public class SlotConsume: MonoBehaviour, IDropHandler
         _playerPic = GameObject.Find("PlayerPic").GetComponent<Button>();
         _characterPic = GameObject.Find("CharacterPic").GetComponent<Button>();
         _characterName = GameObject.Find("CharacterName").GetComponent<TextMeshProUGUI>(); ;
-        _characterPic.image.sprite =  _characterManager.Character.GetSprite();
+        _characterPic.image.sprite =  _characterManager.MyCharacter.GetSprite();
         _characterName.text = _characterManager.CharacterSetting.Name;
         StartCoroutine("LoadProfilePicture");
     }

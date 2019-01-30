@@ -62,7 +62,7 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
     {
         if (Item.Id == -1)
             return;
-        _tooltip.Dectivate();
+        _tooltip.Deactivate();
     }
 
     public void OnPointerDown(PointerEventData eventData)

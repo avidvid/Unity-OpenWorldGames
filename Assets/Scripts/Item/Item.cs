@@ -87,14 +87,14 @@ public abstract class Item
         switch (this.Type)
         {
             case Item.ItemType.Consumable:
-                color = "Green";
+                color = "green";
                 break;
             case Item.ItemType.Weapon:
             case Item.ItemType.Equipment:
-                color = "Blue";
+                color = "blue";
                 break;
             default:
-                color = "White";
+                color = "white";
                 break;
         }
         var tooltip = "<color=" + color + ">  "+ this.Id+ "  -" + this.Name + "</color>\n\n" + this.Description + "\n<color=yellow>Cost:" + this.Cost + "</color>\n <color=green>Available:"+ this.StackCnt +" </color> ";
