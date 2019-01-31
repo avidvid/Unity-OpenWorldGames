@@ -421,7 +421,7 @@ public class ItemDatabase : MonoBehaviour {
         fs.Close();
     }
 
-    public Recipe FindRecipes(int recipeId)
+    public Recipe FindRecipe(int recipeId)
     {
         for (int i = 0; i < _recipes.Count; i++)
         {

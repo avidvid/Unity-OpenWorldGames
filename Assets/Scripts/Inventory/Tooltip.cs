@@ -14,9 +14,6 @@ public class Tooltip : MonoBehaviour
     {
         _tooltip = Tooltip.Instance();
     }
-
-
-
     public void Activate(ItemContainer item)
     {
         if (item.Id != -1)
@@ -26,13 +23,19 @@ public class Tooltip : MonoBehaviour
             TooltipObject.transform.position = Input.mousePosition;
         }
     }
-
     public void Activate(Research research)
     {
         _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = research.GetTooltip();
         TooltipObject.SetActive(true);
         TooltipObject.transform.position = Input.mousePosition;
     }
+    public void Activate(Character character)
+    {
+        _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = character.GetTooltip();
+        TooltipObject.SetActive(true);
+        TooltipObject.transform.position = Input.mousePosition;
+    }
+
     public void Deactivate()
     {
         TooltipObject.SetActive(false);

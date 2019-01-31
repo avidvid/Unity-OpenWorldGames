@@ -21,12 +21,6 @@
   <UserCharacter>
     <CharacterId>3</CharacterId>
     <UserId>22</UserId>
-    <CharacterCode />
-    <Created>2019-01-23T17:21:40.5636313-06:00</Created>
-  </UserCharacter>
-  <UserCharacter>
-    <CharacterId>4</CharacterId>
-    <UserId>22</UserId>
     <CharacterCode>12345</CharacterCode>
     <Created>2019-01-23T17:21:40.5636313-06:00</Created>
   </UserCharacter>

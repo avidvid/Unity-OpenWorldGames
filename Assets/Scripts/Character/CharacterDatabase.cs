@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
+using System.Collections.Generic;
 using System.Xml.Serialization;
+using UnityEngine;
 
 public class CharacterDatabase : MonoBehaviour {
 
@@ -12,7 +11,7 @@ public class CharacterDatabase : MonoBehaviour {
     private List<Character> _characters = new List<Character>();
     private List<ItemContainer> _characterInventory = new List<ItemContainer>();
     private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
-    private List<UserCharacter> _userCharacter = new List<UserCharacter>();
+    private List<UserCharacter> _userCharacters = new List<UserCharacter>();
 
     private UserPlayer _userPlayer;
     private CharacterSetting _characterSetting;
@@ -81,7 +80,6 @@ public class CharacterDatabase : MonoBehaviour {
         _characterInventory = (List<ItemContainer>)serializer.Deserialize(fs);
         fs.Close();
     }
-
     public void SaveCharacterInventory()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterInventory.xml");
@@ -108,7 +106,6 @@ public class CharacterDatabase : MonoBehaviour {
         fs.Close();
         return researches;
     }
-
     internal CharacterResearching FindCharacterResearching(int playerId)
     {
         return _characterResearching;
@@ -188,18 +185,14 @@ public class CharacterDatabase : MonoBehaviour {
         {
             if (!_characters[i].IsEnable)
                 continue;
-            for (int j = 0; j < _userCharacter.Count; j++)
-                if (_characters[i].Id == _userCharacter[j].CharacterId)
+            for (int j = 0; j < _userCharacters.Count; j++)
+                if (_characters[i].Id == _userCharacters[j].CharacterId)
                 {
-                    if (string.IsNullOrEmpty(_userCharacter[j].CharacterCode))
+                    if (string.IsNullOrEmpty(_userCharacters[j].CharacterCode))
                         characters.Add(_characters[i]);
                     else
-                    {
-                        _characters[i].IsEnable = false;
-                        characters.Add(_characters[i]);
-                        //todo ??? 
-                        _characters[i].IsEnable = true;
-                    }
+                        //if not purchased yet :This might cause problem later because all of the other items are by reference and this  one is by value 
+                        characters.Add(new Character(_characters[i],false));
                     break;
                 }
         }
@@ -207,11 +200,11 @@ public class CharacterDatabase : MonoBehaviour {
     }
     internal bool ValidateCharacterCode(string characterCode)
     {
-        for (int j = 0; j < (_userCharacter).Count; j++)
-            if (_userCharacter[j].CharacterCode != null)
-                if (_userCharacter[j].CharacterCode == characterCode)
+        for (int j = 0; j < (_userCharacters).Count; j++)
+            if (_userCharacters[j].CharacterCode != null)
+                if (_userCharacters[j].CharacterCode == characterCode)
                 {
-                    _userCharacter[j].CharacterCode = "";
+                    _userCharacters[j].CharacterCode = "";
                     SaveUserCharacters();
                     return true;
                 }
@@ -219,11 +212,11 @@ public class CharacterDatabase : MonoBehaviour {
     }
     private void LoadUserCharacters()
     {
-        _userCharacter.Clear();
+        _userCharacters.Clear();
         string path = Path.Combine(Application.streamingAssetsPath, "UserCharacter.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<UserCharacter>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _userCharacter = (List<UserCharacter>)serializer.Deserialize(fs);
+        _userCharacters = (List<UserCharacter>)serializer.Deserialize(fs);
         fs.Close();
     }
     private void SaveUserCharacters()
@@ -231,7 +224,7 @@ public class CharacterDatabase : MonoBehaviour {
         string path = Path.Combine(Application.streamingAssetsPath, "UserCharacter.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<UserCharacter>));
         FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _userCharacter);
+        serializer.Serialize(fs, _userCharacters);
         fs.Close();
     }
     //Characters
@@ -365,6 +358,4 @@ public class CharacterDatabase : MonoBehaviour {
         }
         return _characterDatabase;
     }
-
-
 }

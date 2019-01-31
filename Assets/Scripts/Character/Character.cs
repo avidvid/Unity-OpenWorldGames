@@ -5,7 +5,6 @@ using UnityEngine;
 
 [Serializable]
 public class Character {
-
     public enum CharacterType
     {
         Walk,
@@ -34,7 +33,6 @@ public class Character {
         MagicPoison,
         StrengthMagicPoison,
     }
-
     public enum SpeedType
     {
         None = 0,
@@ -44,7 +42,6 @@ public class Character {
         Fast = 7,
         Rapid = 10
     }
-
     public enum BodyType
     {
         Tiny = 1,
@@ -53,7 +50,6 @@ public class Character {
         Muscle,
         Tank
     }
-
     public enum CarryType
     {
         Slight = 3,
@@ -62,7 +58,6 @@ public class Character {
         Heavy,
         Hefty
     }
-
     public enum Elements
     {
         None,
@@ -72,8 +67,6 @@ public class Character {
         Earth,
         Metal
     }
-
-
     public enum ViewType
     {
         None,
@@ -150,20 +143,43 @@ public class Character {
         IsEnable = true;
         Slug = name.Replace(" ", "");
     }
-
     public Character()
     {
         Id = -1;
     }
-
+    public Character(Character character,bool enable = true)
+    {
+        Id = character.Id;
+        Name = character.Name;
+        Description = character.Description;
+        IconPath = character.IconPath;
+        IconId = character.IconId;
+        IsAnimated = character.IsAnimated;
+        HasFightMode = character.HasFightMode;
+        Move = character.Move;
+        AttackR = character.AttackR;
+        DefenseR = character.DefenseR;
+        AttackT = character.AttackT;
+        DefenseT = character.DefenseT;
+        BasicAttack = character.BasicAttack;
+        BasicDefense = character.BasicDefense;
+        Speed = character.Speed;
+        Body = character.Body;
+        Carry = character.Carry;
+        View = character.View;
+        Rarity = character.Rarity;
+        DropItems = character.DropItems;
+        DropChance = character.DropChance;
+        FavoriteTerrainTypes = character.FavoriteTerrainTypes;
+        IsEnable = enable;
+        Slug = character.Slug;
+    }
     public Sprite GetSprite()
     {
         Sprite[] characterSprites = Resources.LoadAll<Sprite>("Characters/" + Slug);
         // Get specific sprite
         return characterSprites.Single(s => s.name == "down_3");
     }
-
-
     public List<Sprite> GetSprites()
     {
         List<Sprite> moveSprites = new List<Sprite>();
@@ -176,17 +192,12 @@ public class Character {
         moveSprites.Add(abilityIconsAtlas.Single(s => s.name == "down_3"));
         return moveSprites;
     }
-
-
-
     public RuntimeAnimatorController GetAnimator()
     {
         // Load Animation Controllers
         string animationPath = "Characters/Animations/";
         return (RuntimeAnimatorController)Resources.Load(animationPath + Slug + "Controller");
     }
-
-
     public bool Exist(List<Character> characters)
     {
         foreach (var character in characters)
@@ -194,7 +205,6 @@ public class Character {
                 return true;
         return false;
     }
-
     internal bool CheckAttackType(AttackType attackT, string checkSum)
     {
         switch (checkSum)
@@ -222,6 +232,11 @@ public class Character {
                 break;
         }
         return false;
+    }
+    internal string GetTooltip()
+    {
+        var tooltip = "<color=green>  " + Id + "  -" + Name + "</color>\n\n" + Description;
+        return tooltip;
     }
     internal void Print()
     {

@@ -7,32 +7,23 @@ Users Want to do what they want, not what you want them to do
 
 
 comite:
-	Tooltip Brefab also font fixed
-	Update texts on the buttons in the inventory menu
 
-At Home: 
 	
+At Home: 
 
 At Office: 
-	//todo ??? 
-    _characters[i].IsEnable = true;
 	
-	find egg: AddNewRandomUserCharacter and AddUserCharacter like recipe 
-
-
-	update texts on the button in the inventorymenu 
+	find egg: Need to think but in the meanwhile you can make the functions below 
+		AddNewRandomUserCharacter and AddUserCharacter like recipe 
+	Add fog of war ch.ViewType
 	
 	change back up file for OUP to not go to drive one 
 	http://zikmund.me/blog/changing-default-project-directory-visual-studio-2017/
 	
 	
-	Bug: choice in modal panel with one button text is not centered 
 
 	Aws api server lambda 
 	
-	Add fog of war ch.ViewType
-	
-	scene character owned list page and tooltip for each 
 	device id or email to be saved in userplayer
 	
 	

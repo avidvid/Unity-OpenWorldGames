@@ -22,6 +22,7 @@ public class CharacterManager : MonoBehaviour
     public List<ItemContainer> CharacterInventory = new List<ItemContainer>();
     public List<CharacterResearch> CharacterResearches = new List<CharacterResearch>();
     public List<Character> UserCharacters = new List<Character>();
+
     public List<Research> Researches = new List<Research>();
 
     private float _nextActionTime = 100;
@@ -85,9 +86,6 @@ public class CharacterManager : MonoBehaviour
             return;
         LoginCalculations();
     }
-
-
-
     void Update()
     {
         if (SettingBasicChecks())

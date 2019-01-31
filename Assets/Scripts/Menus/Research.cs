@@ -24,7 +24,7 @@ public class Research
 
     public string GetTooltip()
     {
-        var tooltip = "<color=Green>  " + this.Id + "  -" + this.Name + "</color>\n\n" + this.Description ;
+        var tooltip = "<color=green>  " + this.Id + "  -" + this.Name + "</color>\n\n" + this.Description ;
         return tooltip;
     }
 

@@ -32,7 +32,7 @@ public class UserRecipe
         ItemDatabase itemDatabase= ItemDatabase.Instance();
         try
         {
-            var recipe = itemDatabase.FindRecipes(RecipeId);
+            var recipe = itemDatabase.FindRecipe(RecipeId);
             recipe.Print();
         }
         catch (Exception e)

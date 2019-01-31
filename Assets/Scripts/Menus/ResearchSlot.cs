@@ -60,7 +60,6 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
             return true;
         return false;
     }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (CharResearch.Id == -1)

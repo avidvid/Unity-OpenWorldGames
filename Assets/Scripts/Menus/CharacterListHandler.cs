@@ -39,9 +39,9 @@ public class CharacterListHandler : MonoBehaviour
             }
             GameObject characterObject = Instantiate(CharacterContent);
             characterObject.transform.SetParent(contentPanel.transform);
-
             characterObject.transform.name = "Character " + _characters[i].Name + _characters[i].Id;
             characterObject.transform.localScale = Vector3.one;
+            characterObject.GetComponentInChildren<CharacterData>().SlotCharacter = _characters[i];
             characterObject.GetComponentsInChildren<Image>()[1].sprite = _characters[i].GetSprite();
             characterObject.GetComponentInChildren<TextMeshProUGUI>().text = _characters[i].Name;
         }
