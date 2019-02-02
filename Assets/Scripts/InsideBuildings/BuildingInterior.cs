@@ -173,11 +173,10 @@ public class BuildingInterior : MonoBehaviour {
                 if (storyActor.CharacterCnt < actorIndex)
                     continue;
                 actorCount++;
-                Character actor = _terrainDatabase.GetMonsterById(storyActor.CharacterId);
 
                 var actorLocation = _floors[Random.Range(0, _floors.Count)];
                 _floors.Remove(actorLocation);
-                CreateMonsters(actorLocation, actor);
+                CreateMonsters(actorLocation, storyActor);
             }
         }
     }
@@ -204,9 +203,10 @@ public class BuildingInterior : MonoBehaviour {
         return RandomHelper.Range(_mapPosition, _key + _randomIndex++, max);
     }
     //Monster
-    private void CreateMonsters(Vector3 location, Character monsterCharacter)
+    private void CreateMonsters(Vector3 location, InsideStory.Actor storyActor)
     {
         GameObject monster = Instantiate(_monsterObj);
+        Character monsterCharacter = _terrainDatabase.GetMonsterById(storyActor.CharacterId);
         monster.transform.position = location;
         monster.transform.SetParent(transform);
         monster.name = "Monster " + monster.transform.position;
@@ -226,7 +226,7 @@ public class BuildingInterior : MonoBehaviour {
             animator.runtimeAnimatorController = monsterCharacter.GetAnimator();
             animator.speed = monsterCharacter.Move == Character.CharacterType.Fly ? 1 : 0;
         }
-        active.MonsterType = new MonsterIns(monsterCharacter, _characterManager.CharacterSetting.Level);
+        active.MonsterType = new MonsterIns(monsterCharacter, storyActor.MinLevel+ _characterManager.CharacterSetting.Level);
         _monsters.Add(active); 
     }
     public IEnumerable<ActiveMonsterType> GetMonster(Vector3 pos, float radius)

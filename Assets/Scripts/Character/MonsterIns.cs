@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class MonsterIns
@@ -51,7 +52,7 @@ public class MonsterIns
         CharacterSettingId = -1;
         if (level<3)
             level += 2;
-        Level = Random.Range(level - 2, level + 3);
+        Level = RandomHelper.RangeMinMax(level - 2, level + 3);
         //#Health/Mana/Energy
         MaxHealth = ((int)monsterCharacter.Body + Level ) * 100;
         Health = MaxHealth;
@@ -96,5 +97,18 @@ public class MonsterIns
         if (AbilityAttack > PoisonAttack && AbilityAttack > MagicAttack)
             return spells[0];
         return spells[3];
+    }
+
+    internal string GetInfo(string field)
+    {
+        switch (field)
+        {
+            case "Defense":
+                return "(" + AbilityDefense + "/" + MagicDefense + "/" + PoisonDefense + ")";
+            case "Attack":
+                return "(" + AbilityAttack + "/" + MagicAttack + "/" + PoisonAttack + ")";
+            default:
+                return "Undefined field in characterSetting GetInfo";
+        }
     }
 }

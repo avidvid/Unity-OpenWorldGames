@@ -36,7 +36,7 @@ public class OfferListHandler : MonoBehaviour {
 
     void Start()
     {
-        List<Offer> offers = _itemDatabase.LoadOffers();
+        List<Offer> offers = _itemDatabase.LoadOffersJson();
         var offerCnt = 0;
         if (offers.Count == 0)
             throw new Exception("Offers count is ZERO");
@@ -51,7 +51,7 @@ public class OfferListHandler : MonoBehaviour {
                 continue;
             GameObject offerObject = Instantiate(OfferContent);
             offerObject.transform.SetParent(_contentPanel.transform);
-            offerObject.transform.name = "Offer " + _offers[i].Id;
+            offerObject.transform.name = _offers[i].NameGenerator();
 
             var images = offerObject.GetComponentsInChildren<Image>();
             var texts = offerObject.GetComponentsInChildren<TextMeshProUGUI>();

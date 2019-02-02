@@ -10,7 +10,7 @@ public class Consumable : Item {
     public int Coin { get; set; }
     public int Gem { get; set; }
     public int Recipe { get; set; }
-
+    public int Egg { get; set; }
 
     public Consumable() : base()
     {
@@ -29,6 +29,7 @@ public class Consumable : Item {
         Coin = values[3];
         Gem = values[4];
         Recipe = values[5];
+        Egg = values[6];
     }
     public override void Usage()
     {

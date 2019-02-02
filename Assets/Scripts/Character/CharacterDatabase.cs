@@ -227,6 +227,52 @@ public class CharacterDatabase : MonoBehaviour {
         serializer.Serialize(fs, _userCharacters);
         fs.Close();
     }
+    public bool AddUserCharacters(UserCharacter uc)
+    {
+        try
+        {
+            var owned = _userCharacters.Find(c => c.CharacterId == uc.CharacterId && c.UserId == uc.UserId && !string.IsNullOrEmpty(c.CharacterCode));
+            if (owned == null)
+                _userCharacters.Add(uc);
+            else
+                owned.CharacterCode = "";
+            SaveUserCharacters();
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+            return false;
+        }
+    }
+    internal bool AddNewRandomUserCharacters(int playerId)
+    {
+        List<int> availableCharacters = new List<int>();
+        int key = DateTime.Now.DayOfYear;
+        var rarity = RandomHelper.Range(key, (int)Item.ItemRarity.Common);
+        bool userOwnedRecipe = false;
+        for (int i = 0; i < _characters.Count; i++)
+            if (_characters[i].IsEnable)
+            {
+                if ((int)_characters[i].Rarity < rarity)
+                    continue;
+                for (int j = 0; j < _userCharacters.Count; j++)
+                    if (_characters[i].Id == _userCharacters[j].CharacterId && string.IsNullOrEmpty(_userCharacters[j].CharacterCode) )
+                    {
+                        userOwnedRecipe = true;
+                        break;
+                    }
+                if (!userOwnedRecipe)
+                    availableCharacters.Add(_characters[i].Id);
+                userOwnedRecipe = false;
+            }
+        if (availableCharacters.Count > 0)
+        {
+            UserCharacter uc = new UserCharacter(availableCharacters[RandomHelper.Range(key, availableCharacters.Count)], playerId);
+            return AddUserCharacters(uc);
+        }
+        return false;
+    }
     //Characters
     public Character FindCharacter(int id)
     {

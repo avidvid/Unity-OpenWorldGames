@@ -9,7 +9,9 @@
     <Actors>
       <Actor>
         <CharacterId>1</CharacterId>
-        <CharacterCnt>1</CharacterCnt>
+        <CharacterCnt>3</CharacterCnt>
+        <MinLevel>5</MinLevel>
+        <LocationIndex>0</LocationIndex>
       </Actor>
     </Actors>
   </InsideStory>
@@ -23,14 +25,20 @@
       <Actor>
         <CharacterId>2</CharacterId>
         <CharacterCnt>1</CharacterCnt>
+        <MinLevel>5</MinLevel>
+        <LocationIndex>0</LocationIndex>
       </Actor>
       <Actor>
         <CharacterId>3</CharacterId>
         <CharacterCnt>1</CharacterCnt>
+        <MinLevel>5</MinLevel>
+        <LocationIndex>0</LocationIndex>
       </Actor>
       <Actor>
         <CharacterId>4</CharacterId>
         <CharacterCnt>1</CharacterCnt>
+        <MinLevel>5</MinLevel>
+        <LocationIndex>0</LocationIndex>
       </Actor>
     </Actors>
   </InsideStory>
@@ -44,10 +52,14 @@
       <Actor>
         <CharacterId>5</CharacterId>
         <CharacterCnt>1</CharacterCnt>
+        <MinLevel>5</MinLevel>
+        <LocationIndex>0</LocationIndex>
       </Actor>
       <Actor>
         <CharacterId>6</CharacterId>
         <CharacterCnt>1</CharacterCnt>
+        <MinLevel>5</MinLevel>
+        <LocationIndex>0</LocationIndex>
       </Actor>
     </Actors>
   </InsideStory>

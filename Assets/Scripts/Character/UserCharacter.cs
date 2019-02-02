@@ -9,7 +9,6 @@ public class UserCharacter
     public int Count { get; set; }
     public string CharacterCode { get; set; }
     public DateTime Created { get; set; }
-
     public UserCharacter()
     {
         CharacterId = -1;
@@ -18,7 +17,6 @@ public class UserCharacter
         CharacterCode = null;
         Created = DateTime.Now;
     }
-
     public UserCharacter(int characterId, int playerId, int count=1, string characterCode = null)
     {
         CharacterId = characterId;
@@ -27,7 +25,6 @@ public class UserCharacter
         CharacterCode = characterCode;
         Created = DateTime.Now;
     }
-
     public void Print()
     {
         CharacterDatabase characterDatabase = CharacterDatabase.Instance();
@@ -41,5 +38,4 @@ public class UserCharacter
             Debug.LogError(e.Message);
         }
     }
-
 }

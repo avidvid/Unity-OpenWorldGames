@@ -6,15 +6,23 @@ Users Want to do what they want, not what you want them to do
 #3.5 Unity RPG Tutorial - Spell effect
 
 
-comite:
+###############
+####comite#####
+###############
+
+
+###############
+#### Home #####
+###############	
+
+
+###############
+####Office#####
+###############		
+	bug: Egg shape in store is ugly 
+	
 
 	
-At Home: 
-
-At Office: 
-	
-	find egg: Need to think but in the meanwhile you can make the functions below 
-		AddNewRandomUserCharacter and AddUserCharacter like recipe 
 	Add fog of war ch.ViewType
 	
 	change back up file for OUP to not go to drive one 
@@ -23,6 +31,7 @@ At Office:
 	
 
 	Aws api server lambda 
+	use jason file to save data 
 	
 	device id or email to be saved in userplayer
 	

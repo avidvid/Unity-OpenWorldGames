@@ -24,6 +24,7 @@
       <Coin>0</Coin>
       <Gem>0</Gem>
       <Recipe>0</Recipe>
+      <Egg>0</Egg>
     </Consumable>
   </ItemContainer>
   <ItemContainer>
@@ -50,6 +51,7 @@
       <Coin>0</Coin>
       <Gem>0</Gem>
       <Recipe>0</Recipe>
+      <Egg>0</Egg>
     </Consumable>
   </ItemContainer>
   <ItemContainer>
@@ -233,6 +235,7 @@
       <Coin>1</Coin>
       <Gem>0</Gem>
       <Recipe>0</Recipe>
+      <Egg>0</Egg>
     </Consumable>
   </ItemContainer>
   <ItemContainer>
@@ -259,6 +262,7 @@
       <Coin>0</Coin>
       <Gem>1</Gem>
       <Recipe>0</Recipe>
+      <Egg>0</Egg>
     </Consumable>
   </ItemContainer>
   <ItemContainer>
@@ -283,8 +287,36 @@
       <Mana>0</Mana>
       <Energy>0</Energy>
       <Coin>0</Coin>
-      <Gem>1</Gem>
+      <Gem>0</Gem>
       <Recipe>1</Recipe>
+      <Egg>0</Egg>
+    </Consumable>
+  </ItemContainer>
+  <ItemContainer>
+    <Consumable>
+      <Id>11</Id>
+      <Name>UltimateEgg</Name>
+      <Description>Ultimate Egg</Description>
+      <IconPath>Inventory/UltimateEgg</IconPath>
+      <IconId>0</IconId>
+      <Cost>0</Cost>
+      <Weight>0</Weight>
+      <MaxStackCnt>1</MaxStackCnt>
+      <StackCnt>1</StackCnt>
+      <Type>Consumable</Type>
+      <Rarity>Common</Rarity>
+      <IsUnique>true</IsUnique>
+      <Slug>Recipe</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-11-15T16:12:55.2234687-06:00</ExpirationTime>
+      <IsEnable>true</IsEnable>
+      <Health>0</Health>
+      <Mana>0</Mana>
+      <Energy>0</Energy>
+      <Coin>0</Coin>
+      <Gem>0</Gem>
+      <Recipe>1</Recipe>
+      <Egg>0</Egg>
     </Consumable>
   </ItemContainer>
 </ArrayOfItemContainer>

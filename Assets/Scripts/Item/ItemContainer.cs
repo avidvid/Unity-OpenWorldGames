@@ -310,10 +310,10 @@ public class ItemContainer {
         get
         {
             if (Consumable != null)
-                return new int[6]
+                return new int[7]
                 {
                     Consumable.Health, Consumable.Mana, Consumable.Energy,
-                    Consumable.Coin, Consumable.Gem, Consumable.Recipe
+                    Consumable.Coin, Consumable.Gem, Consumable.Recipe, Consumable.Egg
                 };
             if (Weapon != null)
                 return new int[9] {

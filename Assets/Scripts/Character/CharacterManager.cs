@@ -273,11 +273,17 @@ public class CharacterManager : MonoBehaviour
         switch (item.Type)
         {
             case Item.ItemType.Consumable:
-                if (item.Consumable.Recipe == 1)
+                if (item.Consumable.Recipe > 0)
                 {
                     if (_itemDatabase.AddNewRandomUserRecipe(UserPlayer.Id))
                         message = "You found a Recipe!!";
                     else return "Recipe you found is not readable!! ";
+                }
+                if (item.Consumable.Egg > 0)
+                {
+                    if (_characterDatabase.AddNewRandomUserCharacters(UserPlayer.Id))
+                        message = "You Hatched a New Character!!";
+                    else return "The Egg you found is already rotten !! ";
                 }
                 CharacterSetting.Health += item.Consumable.Health* item.StackCnt;
                 CharacterSetting.Mana += item.Consumable.Mana * item.StackCnt;

@@ -220,8 +220,9 @@ public class ActionHandler : MonoBehaviour
                             - _monster.MonsterType.PoisonDefense;
         //3-A calculate dealAtt
         var dealAtt = RandomHelper.AttackRange(attAmount);
-        print("Player -> Monster" + _monster.MonsterType.Level +
-              " Health (" + _monster.MonsterType.Health + ")" +
+        print("Player " + _characterManager.CharacterSetting.GetInfo("Attack") +
+              "-> Monster Lv" + _monster.MonsterType.Level +  _monster.MonsterType.GetInfo("Defense") +
+              " MonsterHealth (" + _monster.MonsterType.Health + ")" +
               " = " + dealAtt + "/" + attAmount
               + " Critical =" + (dealAtt > attAmount));
         //4-A Use Energy
@@ -235,7 +236,6 @@ public class ActionHandler : MonoBehaviour
         //6- Show Ray cast
         Debug.DrawRay(_player.position, direction, Color.blue);
     }
- 
     // CastSpell Logic
     private void CastSpell(Vector3 source, ActiveMonsterType monster, float attackDealt)
     {
@@ -243,12 +243,10 @@ public class ActionHandler : MonoBehaviour
         spell.transform.position = new Vector3(source.x, source.y, -1);
         spell.transform.parent = _player.parent.parent;
         spell.name = "Player Spell";
-
         var spellRenderer = spell.AddComponent<SpriteRenderer>();
         spellRenderer.sortingOrder = _player.GetComponent<SpriteRenderer>().sortingOrder + 1;
         spellRenderer.sprite = _characterManager.GetSpellSprite(); 
         spell.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-
         var spellManager = spell.AddComponent<SpellManager>();
         spellManager.Target = monster;
         spellManager.AttackValue = attackDealt;

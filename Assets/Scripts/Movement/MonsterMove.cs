@@ -116,7 +116,10 @@ public class MonsterMove : MonoBehaviour {
         //3-A calculate dealAtt
         var dealAtt = RandomHelper.AttackRange(attAmount);
 
-        print("Monster -> Player = " + dealAtt + "/" + attAmount 
+        print("MonsterLv" + monsterType.Level  + monsterType.GetInfo("Attack") + 
+              "-> Player" + _characterManager.CharacterSetting.GetInfo("Defense") +
+              " PlayerHealth (" + _characterManager.CharacterSetting.Health + ")" +
+              " = " + dealAtt + "/" + attAmount 
               +" Critical =" + (dealAtt > attAmount));
         //5-A Cast Spell (Lunch spell-Drop dealAtt hit- AttackDealing)
         CastSpell(dealAtt);

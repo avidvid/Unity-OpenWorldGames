@@ -8,13 +8,11 @@ using System.Xml.Serialization;
 
 public class ItemDatabase : MonoBehaviour {
 
+    public int _defaultDurationDays = 365;
     private static ItemDatabase _itemDatabase;
-
     private List<ItemContainer> _items = new List<ItemContainer>();
     private List<Recipe> _recipes = new List<Recipe>();
     private List<UserRecipe> _userRecipes = new List<UserRecipe>();
-
-
 
     public int Id;
     public string Name ;
@@ -30,10 +28,6 @@ public class ItemDatabase : MonoBehaviour {
     public bool IsUnique;
     public int DurationDays;
     public int[] Values;
-
-
-    public int _defaultDurationDays = 365;
-
 
     void Awake()
     {
@@ -75,13 +69,14 @@ public class ItemDatabase : MonoBehaviour {
             //ExpirationTime
             ExpirationTime,
             //###Extras
-            new int[6] {                    
+            new int[7] {                    
                 1,  //Health
                 0,  //Mana
                 0,   //Energy
                 0,   //coin
                 0,   //gem
-                0   //Recipe 
+                0,   //Recipe 
+                0   //Egg 
             }
         );
         if (!tempItem.Exist(_items))
@@ -263,6 +258,7 @@ public class ItemDatabase : MonoBehaviour {
         //PrintRecipes();
         LoadUserRecipes();
         Debug.Log("UserRecipes.Count = " + _userRecipes.Count);
+
     }
 
     //UserRecipe
@@ -321,7 +317,11 @@ public class ItemDatabase : MonoBehaviour {
     {
         try
         {
-            _userRecipes.Add(ur);
+            var owned = _userRecipes.Find(c => c.RecipeId == ur.RecipeId && c.UserId == ur.UserId && !string.IsNullOrEmpty(c.RecipeCode));
+            if (owned == null)
+                _userRecipes.Add(ur);
+            else
+                owned.RecipeCode = "";
             SaveUserRecipes();
             return true;
         }
@@ -343,7 +343,7 @@ public class ItemDatabase : MonoBehaviour {
                 if ((int)_recipes[i].Rarity < rarity)
                     continue;
                 for (int j = 0; j < _userRecipes.Count; j++)
-                    if (_recipes[i].Id == _userRecipes[j].RecipeId)
+                    if (_recipes[i].Id == _userRecipes[j].RecipeId && string.IsNullOrEmpty(_userRecipes[j].RecipeCode))
                     {
                         userOwnedRecipe = true;
                         break;
@@ -355,9 +355,7 @@ public class ItemDatabase : MonoBehaviour {
         if (availableRecipe.Count > 0)
         {
             UserRecipe ur = new UserRecipe(availableRecipe[RandomHelper.Range(key, availableRecipe.Count)], playerId);
-            _userRecipes.Add(ur);
-            SaveUserRecipes();
-            return true;
+            return AddUserRecipe(ur);
         }
         return false;
     }
@@ -498,12 +496,44 @@ public class ItemDatabase : MonoBehaviour {
     public List<Offer> LoadOffers()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "Offer.xml");
-        //Read the Recipes from Recipe.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(List<Offer>));
         FileStream fs = new FileStream(path, FileMode.Open);
         List<Offer> offers = (List<Offer>)serializer.Deserialize(fs);
         fs.Close();
         return offers;
+    }
+    private void SaveOffersJson()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
+        Offers offers = new Offers(LoadOffers());
+        using (StreamWriter stream = new StreamWriter(path))
+        {
+            string jsonData = JsonUtility.ToJson(offers);
+            print(offers.OfferList.Count + jsonData);
+            stream.Write(jsonData);
+        }
+    }
+
+    public List<Offer> LoadOffersJson()
+    {
+        Offers offers = new Offers();
+        string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
+        try
+        {
+            if (File.Exists(path))
+            {
+                string jsonData = File.ReadAllText(path);
+                offers = JsonUtility.FromJson<Offers>(jsonData);
+            }
+            else
+                Debug.LogError("Error in Load Data");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+            throw;
+        }
+        return offers.OfferList;
     }
     //Instance
     public static ItemDatabase Instance()

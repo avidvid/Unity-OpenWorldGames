@@ -81,5 +81,9 @@ public class RandomHelper
         return false;
     }
 
+    internal static int RangeMinMax(int v1, int v2)
+    {
+        return UnityEngine.Random.Range(v1, v2);
+    }
 }
 

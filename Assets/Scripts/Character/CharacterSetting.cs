@@ -117,7 +117,9 @@ public class CharacterSetting {
         else
             Equipments = equipments;
     }
-    
+
+
+
     public CharacterSetting()
     {
         Id = -1;
@@ -210,6 +212,19 @@ public class CharacterSetting {
                 return Crafting.ToString();
             default :
                 return "Undefined field in characterSetting";
+        }
+    }
+
+    internal string GetInfo(string field)
+    {
+        switch (field)
+        {
+            case "Defense":
+                return "(" + AbilityDefense + "/"+ MagicDefense + "/"+ PoisonDefense + ")";
+            case "Attack":
+                return "(" + AbilityAttack + "/" + MagicAttack + "/" + PoisonAttack + ")";
+            default:
+                return "Undefined field in characterSetting GetInfo";
         }
     }
 }
