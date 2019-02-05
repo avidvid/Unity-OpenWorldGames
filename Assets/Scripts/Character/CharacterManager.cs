@@ -238,9 +238,10 @@ public class CharacterManager : MonoBehaviour
                 CharacterSetting.Updated = true;
                 break;
             case "Gem":
-                CharacterSetting.Gem += (int)value;
+                UserPlayer.Gem += (int)value;
                 CharacterSetting.Updated = true;
-                break;
+                SaveUserPlayer();
+                return;
             case "Coin":
                 CharacterSetting.Coin += (int)value;
                 CharacterSetting.Updated = true;
@@ -289,13 +290,15 @@ public class CharacterManager : MonoBehaviour
                 CharacterSetting.Mana += item.Consumable.Mana * item.StackCnt;
                 CharacterSetting.Energy += item.Consumable.Energy * item.StackCnt;
                 CharacterSetting.Coin += item.Consumable.Coin * item.StackCnt;
-                CharacterSetting.Gem += item.Consumable.Gem * item.StackCnt;
+                UserPlayer.Gem += item.Consumable.Gem * item.StackCnt;
                 if (CharacterSetting.Health > CharacterSetting.MaxHealth)
                     CharacterSetting.Health = CharacterSetting.MaxHealth;
                 if (CharacterSetting.Mana > CharacterSetting.MaxMana)
                     CharacterSetting.Mana = CharacterSetting.MaxMana;
                 if (CharacterSetting.Energy > CharacterSetting.MaxEnergy)
                     CharacterSetting.Energy = CharacterSetting.MaxEnergy;
+                if (save)
+                    SaveUserPlayer();
                 break;
             case Item.ItemType.Equipment:
                 CharacterSetting.Agility += item.Equipment.Agility;

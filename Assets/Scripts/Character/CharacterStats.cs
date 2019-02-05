@@ -8,6 +8,7 @@ public class CharacterStats : MonoBehaviour {
     private CharacterManager _characterManager;
 
     private CharacterSetting _settings;
+    private UserPlayer _player;
 
     private BarHandler _health;
     private BarHandler _mana;
@@ -21,6 +22,7 @@ public class CharacterStats : MonoBehaviour {
     {
         _characterManager = CharacterManager.Instance();
         _settings = _characterManager.CharacterSetting;
+        _player = _characterManager.UserPlayer;
     }
 
     void Start ()
@@ -43,7 +45,7 @@ public class CharacterStats : MonoBehaviour {
         _energy.UpdateValues(_settings.Energy, _settings.MaxEnergy);
         _experience.UpdateValues(_settings.Experience, _settings.MaxExperience, _settings.Level);
         _coin.UpdateValue(_settings.Coin);
-        _gem.UpdateValue(_settings.Gem);
+        _gem.UpdateValue(_player.Gem);
     }
 	
 	// Update is called once per frame
@@ -56,7 +58,7 @@ public class CharacterStats : MonoBehaviour {
             _energy.UpdateValues(_settings.Energy, _settings.MaxEnergy);
             _experience.UpdateValues(_settings.Experience, _settings.MaxExperience, _settings.Level);
             _coin.UpdateValue(_settings.Coin);
-            _gem.UpdateValue(_settings.Gem);
+            _gem.UpdateValue(_player.Gem);
             _settings.Updated = false;
         }
     }

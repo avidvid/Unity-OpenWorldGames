@@ -19,22 +19,30 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####Office#####
 ###############		
-	bug: Egg shape in store is ugly 
 	
-
+	
+	Add RandomGRenerator hashcode 
+	think about how to prevent user from manipulating the data 
+	a function that increase the hash code and compare the value with the resault in theserver 
+	+1 gem  +1 hash code 
+	send to server 
+	Gem increased  has hhsould be +1 
+	something else increased should be + 1 it is not then allert
+	key should be name value % 20 * property value * amount 
+	
+	
+	
+	
 	
 	Add fog of war ch.ViewType
 	
 	change back up file for OUP to not go to drive one 
 	http://zikmund.me/blog/changing-default-project-directory-visual-studio-2017/
-	
-	
 
 	Aws api server lambda 
 	use jason file to save data 
 	
 	device id or email to be saved in userplayer
-	
 	
 
 	inside monster on walk not passing the walls

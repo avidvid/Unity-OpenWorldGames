@@ -260,7 +260,6 @@ public class ItemDatabase : MonoBehaviour {
         Debug.Log("UserRecipes.Count = " + _userRecipes.Count);
 
     }
-
     //UserRecipe
     public List<Recipe> UserRecipeList()
     {
@@ -289,7 +288,6 @@ public class ItemDatabase : MonoBehaviour {
         }
         return recipes;
     }
-
     internal bool ValidateRecipeCode(string recipeCode)
     {
         for (int j = 0; j < _userRecipes.Count; j++)
@@ -302,7 +300,6 @@ public class ItemDatabase : MonoBehaviour {
                 }
         return false;
     }
-
     private void LoadUserRecipes()
     {
         //Empty the Recipes DB
@@ -389,7 +386,6 @@ public class ItemDatabase : MonoBehaviour {
         }
         return null;
     }
-
     private void SaveUserRecipes()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "UserRecipe.xml");
@@ -513,7 +509,6 @@ public class ItemDatabase : MonoBehaviour {
             stream.Write(jsonData);
         }
     }
-
     public List<Offer> LoadOffersJson()
     {
         Offers offers = new Offers();

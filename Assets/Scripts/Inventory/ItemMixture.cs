@@ -98,7 +98,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         var timer = _time - DateTime.Now;
         var gem = TimeHandler.GemTimeValue(timer);
-        if (_characterManager.CharacterSetting.Gem > gem)
+        if (_characterManager.UserPlayer.Gem > gem)
             _characterManager.AddCharacterSetting("Gem", -gem);
         else
         {

@@ -106,7 +106,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     private void SpendGem()
     {
         var gem = TimeHandler.GemTimeValue(_time - DateTime.Now);
-        if (_characterManager.CharacterSetting.Gem > gem)
+        if (_characterManager.UserPlayer.Gem > gem)
             _characterManager.AddCharacterSetting("Gem", -gem);
         else
         {

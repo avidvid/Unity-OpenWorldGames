@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 using UnityEngine;
 
 public class RandomHelper
@@ -62,28 +64,34 @@ public class RandomHelper
     }
 
 
-    public static float AttackRange(float max)
+    public static float CriticalRange(float max)
     {
         if (max<=1)
             return 0;
         //x7 times 20% of the times
-        var criticalAtt = UnityEngine.Random.Range(0, 10) > 8 ? 7 : 1; 
-        var attack = UnityEngine.Random.Range(1, max) * criticalAtt;
-        Debug.Log("criticalAtt =" + criticalAtt + " attack =" + attack);
-        return attack;
+        var criticalValue = UnityEngine.Random.Range(0, 10) > 8 ? 7 : 1; 
+        var result = UnityEngine.Random.Range(1, max) * criticalValue;
+        return result;
     }
 
-    public static bool MyChance(Vector3 pos, float chance)
+    public static bool GetLucky(Vector3 pos, float chance)
     {
         //Debug.Log("chance = " + chance + " YourChance= " + RandomHelper.Percent(pos, 1) + pos);
         if (chance >= 1f || chance > RandomHelper.Percent(pos, 1))
             return true;
         return false;
     }
-
     internal static int RangeMinMax(int v1, int v2)
     {
         return UnityEngine.Random.Range(v1, v2);
     }
+    internal static int StringToRandomNumber(string myString, int range=20)
+    {
+        MD5 md5Hasher = MD5.Create();
+        var hashed = md5Hasher.ComputeHash(Encoding.UTF8.GetBytes(myString));
+        var iValue = BitConverter.ToInt32(hashed, 0)% range;
+        return iValue;
+    }
+
 }
 

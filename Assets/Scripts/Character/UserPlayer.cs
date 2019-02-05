@@ -47,6 +47,8 @@ public class UserPlayer  {
     public float SoundVolume { get; set; }
     public float Latitude { get; set; }
     public float Longitude { get; set; }
+    public int Gem { get; set; }
+    public int HealthCheck { get; set; }
     public DateTime LastLogin { get; set; }
     public DateTime LockUntil { get; set; }
     public UserPlayer.PlayerRanks Rank { get; set; }
@@ -62,7 +64,8 @@ public class UserPlayer  {
     public UserPlayer(int id = -1, 
                 string userName = null, string description = null, float soundVolume =0,
                 float latitude = 0, float longitude = 0,
-                float baseLatitude = 0, float baseLongitude = 0,
+                float baseLatitude = 0, float baseLongitude = 0, 
+                int gem = 0, int healthCheck = 0,
                 DateTime lastLogin = new DateTime(),
                 DateTime lockUntil = new DateTime(),
                 UserPlayer.PlayerRanks rank = 0, int pRank = 0, int clanId = 0, UserPlayer.ClanRanks clanRank = 0,
@@ -75,6 +78,8 @@ public class UserPlayer  {
         SoundVolume = soundVolume;
         Latitude = latitude;
         Longitude = longitude;
+        Gem = gem;
+        HealthCheck = healthCheck;
         LastLogin = lastLogin;
         LockUntil = lockUntil;
         Rank = rank;
@@ -95,6 +100,8 @@ public class UserPlayer  {
         SoundVolume = userPlayer.SoundVolume;
         Latitude = userPlayer.Latitude;
         Longitude = userPlayer.Longitude;
+        Gem = userPlayer.Gem;
+        HealthCheck = userPlayer.HealthCheck;
         LastLogin = userPlayer.LastLogin;
         LockUntil = userPlayer.LockUntil;
         Rank = userPlayer.Rank;
@@ -115,4 +122,20 @@ public class UserPlayer  {
         Debug.Log("UserPlayer = " + Id + "-" + UserName + " " + Rank + " " + LastLogin+": (" + Latitude + ","+ Longitude + ") " 
                   + LockUntil );
     }
+
+    internal int CalculateHealthCheck(int value, string field)
+    {
+        int fieldCode;
+        switch (field)
+        {
+            case "Gem":
+                fieldCode = 1;
+                break;
+            default:
+                fieldCode = 0;
+                break;
+        }
+        return value * fieldCode * RandomHelper.StringToRandomNumber(UserName);
+    }
+
 }

@@ -6,13 +6,12 @@
   <Name>Silor dady</Name>
   <Level>5</Level>
   <Updated>true</Updated>
-  <LastUpdated>2019-02-01T14:30:51.5158446-06:00</LastUpdated>
+  <LastUpdated>2019-02-05T10:39:48.6360886-06:00</LastUpdated>
   <IsEnable>true</IsEnable>
   <FightMode>false</FightMode>
   <Alive>true</Alive>
   <Life>1</Life>
   <Coin>8716</Coin>
-  <Gem>1540</Gem>
   <Experience>6309</Experience>
   <MaxExperience>6500</MaxExperience>
   <HandsCnt>2</HandsCnt>
@@ -21,7 +20,7 @@
   <MaxMana>350</MaxMana>
   <Mana>350</Mana>
   <MaxEnergy>1400</MaxEnergy>
-  <Energy>1063</Energy>
+  <Energy>922</Energy>
   <SpeedAttack>10</SpeedAttack>
   <SpeedDefense>5</SpeedDefense>
   <AbilityAttack>50</AbilityAttack>
@@ -132,7 +131,7 @@
         <DurationDays>365</DurationDays>
         <ExpirationTime>2019-08-09T11:51:45.0731418-05:00</ExpirationTime>
         <IsEnable>true</IsEnable>
-        <TimeToUse>925</TimeToUse>
+        <TimeToUse>903</TimeToUse>
         <FavouriteElement>Hole</FavouriteElement>
       </Tool>
     </ItemContainer>

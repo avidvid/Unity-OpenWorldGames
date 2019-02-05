@@ -78,7 +78,7 @@ public class ProfileHandler : MonoBehaviour {
         _experience.UpdateValues(_settings.Experience, _settings.MaxExperience, _settings.Level);
 
         _coin.UpdateValue(_settings.Coin);
-        _gem.UpdateValue(_settings.Gem);
+        _gem.UpdateValue(_player.Gem);
 
         _characterPic.image.sprite = _characterManager.MyCharacter.GetSprite();
         StartCoroutine("LoadProfilePicture");
@@ -139,7 +139,7 @@ public class ProfileHandler : MonoBehaviour {
         yield return "Done";
     }
 
-    public object GetPropertyValue(object obj, string propertyName)
+    private object GetPropertyValue(object obj, string propertyName)
     {
         return obj.GetType().GetProperties()
             .Single(pi => pi.Name == propertyName)

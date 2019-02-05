@@ -62,8 +62,8 @@ public class WaitHandler : MonoBehaviour {
     {
         var timer = _characterManager.UserPlayer.LockUntil - DateTime.Now;
         var gem = TimeHandler.GemTimeValue(timer);
-        print("Process GEM " + gem   + " of  " + _characterManager.CharacterSetting.Gem);
-        if (_characterManager.CharacterSetting.Gem > gem)
+        print("Process GEM " + gem   + " of  " + _characterManager.UserPlayer.Gem);
+        if (_characterManager.UserPlayer.Gem > gem)
             _characterManager.AddCharacterSetting("Gem", -gem);
         else
         {

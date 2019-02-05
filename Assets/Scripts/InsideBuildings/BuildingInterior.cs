@@ -256,7 +256,7 @@ public class BuildingInterior : MonoBehaviour {
     public void BuildingDropItem(Vector3 pos, float chance, string dropItems)
     {
         int itemId;
-        if (RandomHelper.MyChance(pos, chance))
+        if (RandomHelper.GetLucky(pos, chance))
             itemId = _itemDatabase.GetItemBasedOnRarity(pos, dropItems);
         else //Drop coin/Gem
             itemId = _itemDatabase.GetItemBasedOnRarity(pos, "8,9");

@@ -15,13 +15,13 @@ public class CharacterSetting {
     public string Name { get; set; }
     public int Level { get; set; }
     public bool Updated { get; set; }
+    public int HealthCheck { get; set; }
     public DateTime LastUpdated { get; set; }
     public bool IsEnable { get; set; }
     public bool FightMode { get; set; }
     public bool Alive { get; set; }
     public int Life { get; set; }
     public int Coin { get; set; }
-    public int Gem { get; set; }
     public int Experience { get; set; }
     public int MaxExperience { get; set; }
     public int HandsCnt { get; set; }
@@ -55,9 +55,9 @@ public class CharacterSetting {
     //Todo: add the hashcode
 
     public CharacterSetting(int id = -1, int userPlayerId = -1, int characterId = -1, string name = null,
-        int level = 0,  bool updated = true, bool isEnable = true, 
+        int level = 0,  bool updated = true, int healthCheck = 0, bool isEnable = true, 
         bool fightMode = false, bool alive = true,
-        int life = 0, int coin = 100, int gem = 0,
+        int life = 0, int coin = 100,
         int experience = 0, int maxExperience = 0, int handsCnt = 2, 
         int maxHealth = 0,  int health = 0, int maxMana = 0, int mana = 0, int maxEnergy = 0,int energy = 0, 
         float attackSpeed = 0, float defenseSpeed = 0, float abilityAttack = 0, float abilityDefense = 0,
@@ -73,12 +73,12 @@ public class CharacterSetting {
         Level = level;
         Life = life;
         Updated = updated;
+        HealthCheck = healthCheck;
         LastUpdated = DateTime.Now;
         IsEnable = isEnable;
         FightMode = fightMode;
         Alive = alive;
         Coin = coin;
-        Gem = gem;
         Experience = experience;
         MaxExperience = maxExperience;
         HandsCnt = handsCnt;
@@ -134,12 +134,12 @@ public class CharacterSetting {
         Level = characterSetting.Level;
         Life = characterSetting.Life;
         Updated = characterSetting.Updated;
+        HealthCheck = characterSetting.HealthCheck;
         LastUpdated = DateTime.Now;
         IsEnable = characterSetting.IsEnable;
         FightMode = characterSetting.FightMode;
         Alive = characterSetting.Alive;
         Coin = characterSetting.Coin;
-        Gem = characterSetting.Gem;
         Experience = characterSetting.Experience;
         MaxExperience = characterSetting.MaxExperience;
         HandsCnt = characterSetting.HandsCnt;
@@ -196,8 +196,6 @@ public class CharacterSetting {
                 return Energy.ToString();
             case "Experience":
                 return Experience.ToString();
-            case "Gem":
-                return Gem.ToString();
             case "Coin":
                 return Coin.ToString();
             case "CarryCnt":
@@ -211,7 +209,7 @@ public class CharacterSetting {
             case "Crafting":
                 return Crafting.ToString();
             default :
-                return "Undefined field in characterSetting";
+                return field +" Is Undefined in characterSetting";
         }
     }
 
@@ -226,5 +224,47 @@ public class CharacterSetting {
             default:
                 return "Undefined field in characterSetting GetInfo";
         }
+    }
+
+    internal int CalculateHealthCheck(int value, string field)
+    {
+        int fieldCode;
+        switch (field)
+        {
+            case "Health":
+                fieldCode = 1;
+                break;
+            case "Mana":
+                fieldCode = 2;
+                break;
+            case "Energy":
+                fieldCode = 3;
+                break;
+            case "Experience":
+                fieldCode = 4;
+                break;
+            case "Coin":
+                fieldCode = 5;
+                break;
+            case "CarryCnt":
+                fieldCode = 6;
+                break;
+            case "Life":
+                fieldCode = 7;
+                break;
+            case "Alive":
+                fieldCode = 8;
+                break;
+            case "Agility":
+                fieldCode = 9;
+                break;
+            case "Crafting":
+                fieldCode = 10;
+                break;
+            default:
+                fieldCode = 0;
+                break;
+        }
+        return value * fieldCode * RandomHelper.StringToRandomNumber(Name);
     }
 }

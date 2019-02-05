@@ -196,8 +196,8 @@ public class OfferListHandler : MonoBehaviour {
                 _modalPanel.Choice("You don't have enough Coin ! ", ModalPanel.ModalPanelType.Ok);
                 return false;
             case "Gem":
-                print("process GEM" + _characterManager.CharacterSetting.Gem + " " + payAmount);
-                if (_characterManager.CharacterSetting.Gem > payAmount)
+                print("process GEM" + _characterManager.UserPlayer.Gem + " " + payAmount);
+                if (_characterManager.UserPlayer.Gem > payAmount)
                 {
                     _characterManager.AddCharacterSetting(payProd, -payAmount);
                     return true;

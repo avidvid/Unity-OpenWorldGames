@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
 
@@ -49,11 +50,11 @@ public class CharacterDatabase : MonoBehaviour {
             SaveCharacters();
         }
 
-        LoadUserPlayer();
+        _userPlayer = LoadUserPlayer();
         if (_userPlayer != null)
         {
             LoadUserCharacters();
-            LoadCharacterSetting();
+            _characterSetting = LoadCharacterSetting();
             if (_characterSetting != null)
             {
                 //If the Character exists 
@@ -321,22 +322,34 @@ public class CharacterDatabase : MonoBehaviour {
         _characterSetting = new CharacterSetting(characterSetting);
         SaveCharacterSetting();
     }
-    private void LoadCharacterSetting()
+    private CharacterSetting LoadCharacterSetting()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterSetting.xml");
         //Read the CharacterSetting from CharacterSetting.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(CharacterSetting));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _characterSetting = (CharacterSetting)serializer.Deserialize(fs);
+        var characterSetting = (CharacterSetting)serializer.Deserialize(fs);
         fs.Close();
+        return characterSetting;
     }
     public void SaveCharacterSetting()
     {
+        HealthCheckCharacterSetting();
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterSetting.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(CharacterSetting));
         FileStream fs = new FileStream(path, FileMode.Create);
         serializer.Serialize(fs, _characterSetting);
         fs.Close();
+    }
+    private void HealthCheckCharacterSetting()
+    {
+        var oldCharacterSetting = LoadCharacterSetting();
+        int healthCheck = 0;
+        healthCheck +=
+            oldCharacterSetting.CalculateHealthCheck(oldCharacterSetting.Coin - _characterSetting.Coin, "Coin");
+
+        if (oldCharacterSetting.HealthCheck + healthCheck != _characterSetting.HealthCheck)
+            throw new Exception("Health Check CharacterSetting Failed. It is off by "+ (healthCheck - _characterSetting.HealthCheck) );
     }
     //UserPlayer
     public UserPlayer FindUserPlayer(int id)
@@ -349,22 +362,33 @@ public class CharacterDatabase : MonoBehaviour {
         _userPlayer = new UserPlayer(userPlayer);
         SaveUserPlayer();
     }
-    private void LoadUserPlayer()
+    private UserPlayer LoadUserPlayer()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "UserPlayer.xml");
         //Read the UserPlayer from UserPlayer.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(UserPlayer));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _userPlayer = (UserPlayer)serializer.Deserialize(fs);
+        var userPlayer = (UserPlayer)serializer.Deserialize(fs);
         fs.Close();
+        return userPlayer;
     }
     public void SaveUserPlayer()
     {
+        HealthCheckUserPlayer();
         string path = Path.Combine(Application.streamingAssetsPath, "UserPlayer.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(UserPlayer));
         FileStream fs = new FileStream(path, FileMode.Create);
         serializer.Serialize(fs, _userPlayer);
         fs.Close();
+    }
+    private void HealthCheckUserPlayer()
+    {
+        var oldUserPlayer = LoadUserPlayer();
+        int healthCheck = 0;
+        healthCheck +=
+            oldUserPlayer.CalculateHealthCheck(oldUserPlayer.Gem - _userPlayer.Gem, "Gem");
+        if (oldUserPlayer.HealthCheck + healthCheck != _userPlayer.HealthCheck)
+            throw new Exception("Health Check User Player Failed. It is off by " + (healthCheck - _userPlayer.HealthCheck));
     }
     //CharacterMixture
     internal CharacterMixture FindCharacterMixture(int id)

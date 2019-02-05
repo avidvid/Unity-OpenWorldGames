@@ -6,11 +6,7 @@ using System.Text.RegularExpressions;
 public class Offers
 {
     public List<Offer> OfferList;
-
-    public Offers()
-    {
-    }
-
+    public Offers() {}
     public Offers(List<Offer> list)
     {
         OfferList = list;

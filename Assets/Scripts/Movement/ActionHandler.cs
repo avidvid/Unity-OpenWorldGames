@@ -219,7 +219,7 @@ public class ActionHandler : MonoBehaviour
                             + _characterManager.CharacterSetting.PoisonAttack
                             - _monster.MonsterType.PoisonDefense;
         //3-A calculate dealAtt
-        var dealAtt = RandomHelper.AttackRange(attAmount);
+        var dealAtt = RandomHelper.CriticalRange(attAmount);
         print("Player " + _characterManager.CharacterSetting.GetInfo("Attack") +
               "-> Monster Lv" + _monster.MonsterType.Level +  _monster.MonsterType.GetInfo("Defense") +
               " MonsterHealth (" + _monster.MonsterType.Health + ")" +

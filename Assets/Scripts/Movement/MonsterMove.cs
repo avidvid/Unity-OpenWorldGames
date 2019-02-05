@@ -114,7 +114,7 @@ public class MonsterMove : MonoBehaviour {
                         + monsterType.PoisonAttack
                         - _characterManager.CharacterSetting.PoisonDefense;
         //3-A calculate dealAtt
-        var dealAtt = RandomHelper.AttackRange(attAmount);
+        var dealAtt = RandomHelper.CriticalRange(attAmount);
 
         print("MonsterLv" + monsterType.Level  + monsterType.GetInfo("Attack") + 
               "-> Player" + _characterManager.CharacterSetting.GetInfo("Defense") +
