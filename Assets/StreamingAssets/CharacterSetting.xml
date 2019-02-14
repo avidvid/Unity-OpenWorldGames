@@ -4,33 +4,34 @@
   <UserPlayerId>22</UserPlayerId>
   <CharacterId>1</CharacterId>
   <Name>Silor dady</Name>
-  <Level>5</Level>
+  <Level>6</Level>
   <Updated>true</Updated>
-  <LastUpdated>2019-02-05T10:39:48.6360886-06:00</LastUpdated>
+  <HealthCheck>0</HealthCheck>
+  <LastUpdated>2019-02-08T11:12:23.0337765-06:00</LastUpdated>
   <IsEnable>true</IsEnable>
   <FightMode>false</FightMode>
   <Alive>true</Alive>
   <Life>1</Life>
   <Coin>8716</Coin>
-  <Experience>6309</Experience>
-  <MaxExperience>6500</MaxExperience>
+  <Experience>209</Experience>
+  <MaxExperience>10500</MaxExperience>
   <HandsCnt>2</HandsCnt>
-  <MaxHealth>700</MaxHealth>
-  <Health>700</Health>
-  <MaxMana>350</MaxMana>
-  <Mana>350</Mana>
-  <MaxEnergy>1400</MaxEnergy>
-  <Energy>922</Energy>
-  <SpeedAttack>10</SpeedAttack>
+  <MaxHealth>800</MaxHealth>
+  <Health>800</Health>
+  <MaxMana>400</MaxMana>
+  <Mana>400</Mana>
+  <MaxEnergy>1600</MaxEnergy>
+  <Energy>0</Energy>
+  <SpeedAttack>6</SpeedAttack>
   <SpeedDefense>5</SpeedDefense>
-  <AbilityAttack>50</AbilityAttack>
+  <AbilityAttack>10</AbilityAttack>
   <AbilityDefense>0</AbilityDefense>
-  <MagicAttack>2</MagicAttack>
-  <MagicDefense>4</MagicDefense>
+  <MagicAttack>2.2</MagicAttack>
+  <MagicDefense>4.2</MagicDefense>
   <PoisonAttack>0</PoisonAttack>
   <PoisonDefense>0</PoisonDefense>
   <Element>None</Element>
-  <Carry>24</Carry>
+  <Carry>28</Carry>
   <CarryCnt>7</CarryCnt>
   <Speed>5</Speed>
   <Intellect>0</Intellect>

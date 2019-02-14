@@ -8,25 +8,26 @@ using UnityEngine;
 public class CharacterResearching 
 {
     public int Id { get; set; }
-    public CharacterResearch CharResearch { get; set; }
-    public DateTime Time { get; set; }
+    public int UserId { get; set; }
+    public int ResearchId { get; set; }
+    public int Level { get; set; }
+    public DateTime ResearchTime { get; set; }
 
-    public CharacterResearching(CharacterResearch charResearch,  DateTime time)
+    public CharacterResearching(int userId, int researchId, int level, DateTime time)
     {
         Id = 0;
-        CharResearch = charResearch;
-        Time = time;
+        UserId = userId;
+        ResearchId = researchId;
+        Level = level;
+        ResearchTime = time;
     }
     public CharacterResearching()
     {
-        Id = -1;
     }
 
     internal void Print()
     {
-        if (Id == -1)
-            Debug.Log("CharacterResearching = " + Id + "-Empty "+ Time);
-        else
-            Debug.Log("CharacterResearching = " + Id + "-" + CharResearch.ResearchId + " (Level: " + CharResearch.Level + ")"+ Time);
+        var characterManager = CharacterManager.Instance();
+        Debug.Log("CharacterResearching = " + Id + "-" + characterManager.GetResearchById(ResearchId).Name + " (" + Level + ") in " + ResearchTime);
     }
 }

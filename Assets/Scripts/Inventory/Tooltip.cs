@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class Tooltip : MonoBehaviour
@@ -14,11 +15,21 @@ public class Tooltip : MonoBehaviour
     {
         _tooltip = Tooltip.Instance();
     }
-    public void Activate(ItemContainer item)
+    internal void Activate(OupItem item)
     {
         if (item.Id != -1)
         {
             _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = item.GetTooltip();
+            TooltipObject.SetActive(true);
+            TooltipObject.transform.position = Input.mousePosition;
+        }
+    }
+
+    public void Activate(ItemIns itemIns)
+    {
+        if (itemIns.Item.Id != -1)
+        {
+            _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = itemIns.Item.GetTooltip();
             TooltipObject.SetActive(true);
             TooltipObject.transform.position = Input.mousePosition;
         }
@@ -50,4 +61,6 @@ public class Tooltip : MonoBehaviour
         }
         return _tooltip;
     }
+
+
 }

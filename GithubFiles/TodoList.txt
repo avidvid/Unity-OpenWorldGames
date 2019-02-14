@@ -19,19 +19,12 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####Office#####
 ###############		
+	new user database
+	ChangeItemcontainer To suppport webservice format 
 	
-	
-	Add RandomGRenerator hashcode 
-	think about how to prevent user from manipulating the data 
-	a function that increase the hash code and compare the value with the resault in theserver 
-	+1 gem  +1 hash code 
-	send to server 
-	Gem increased  has hhsould be +1 
-	something else increased should be + 1 it is not then allert
-	key should be name value % 20 * property value * amount 
-	
-	
-	
+	OupItem
+	CharacterInventory class
+	CharacterEquipment class
 	
 	
 	Add fog of war ch.ViewType
@@ -41,6 +34,109 @@ Users Want to do what they want, not what you want them to do
 
 	Aws api server lambda 
 	use jason file to save data 
+	
+	https://www.youtube.com/watch?v=DSrg7hG-jV4
+	
+	
+	Getting started with AWS Lambda, part 1
+	https://www.youtube.com/watch?v=fSUEk6iMW88
+	
+	
+	https://www.youtube.com/watch?v=u7spDymJqmc
+	
+	
+	Lambda + Gateway 
+	https://www.youtube.com/channel/UCRthRrv06q1iOl86-tTKJhg/videos
+	
+	
+	
+	DynamoDB:
+	Reading data from DynamoDB tables (Getting started with AWS Lambda, part 8)
+	https://www.youtube.com/watch?v=P8okmPWIAcQ
+	
+{
+  "Coin": 0,
+  "Cost": 0,
+  "Description": "Black Berry",
+  "DurationDays": 365,
+  "Egg": 0,
+  "Energy": 0,
+  "ExpirationTime": "2019-06-14T14:08:24.5968313-05:00",
+  "Gem": 0,
+  "Health": 1,
+  "IconId": 0,
+  "IconPath": "Inventory/InventorySet1",
+  "ID": 1,
+  "IsEnable": true,
+  "IsUnique": false,
+  "Mana": 0,
+  "MaxStackCnt": 20,
+  "Name": "Black Berry",
+  "Rarity": "Common",
+  "Recipe": 0,
+  "Slug": "Black_Berry",
+  "StackCnt": 1,
+  "Type": "Consumable",
+  "Weight": 0
+}
+{
+  "Coin": 0,
+  "Cost": 0,
+  "Description": "One Cherry",
+  "DurationDays": 365,
+  "Egg": 0,
+  "Energy": 0,
+  "ExpirationTime": "2019-06-14T14:08:24.5968313-05:00",
+  "Gem": 0,
+  "Health": 1,
+  "IconId": 1,
+  "IconPath": "Inventory/InventorySet1",
+  "ID": 2,
+  "IsEnable": true,
+  "IsUnique": false,
+  "Mana": 0,
+  "MaxStackCnt": 20,
+  "Name": "Cherry",
+  "Rarity": "Common",
+  "Recipe": 0,
+  "Slug": "Cherry",
+  "StackCnt": 1,
+  "Type": "Consumable",
+  "Weight": 0
+}
+{
+  "AbilityAttack": 10,
+  "AbilityDefense": 0,
+  "CarryType": "OneHand",
+  "Cost": 10,
+  "Description": "Small Sword",
+  "DurationDays": 365,
+  "ExpirationTime": "2019-06-14T14:08:24.5968313-05:00",
+  "IconId": 73,
+  "IconPath": "Inventory/InventorySet1",
+  "ID": 3,
+  "IsEnable": true,
+  "IsUnique": true,
+  "MagicAttack": 0,
+  "MagicDefense": 0,
+  "MaxStackCnt": 1,
+  "Name": "Small Sword",
+  "PoisonAttack": 0,
+  "PoisonDefense": 0,
+  "Rarity": "Uncommon",
+  "Slug": "Small_Sword",
+  "SpeedAttack": 1,
+  "SpeedDefense": 0,
+  "Type": "Weapon",
+  "Weight": 3
+}
+
+
+	
+	
+	http://www.cronmaker.com/
+	Crown generator 
+	
 	
 	device id or email to be saved in userplayer
 	

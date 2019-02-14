@@ -69,18 +69,18 @@ public class SlotConsume: MonoBehaviour, IDropHandler
 
     private void ConsumeItem(ItemData draggedItem)
     {
-        if (draggedItem.Item.Id == -1)
+        if (draggedItem.ItemInstance == null)
             return;
         ItemEquipment existingEquipment;
         ItemContainer itemEquipment;
-        switch (draggedItem.Item.Type)
+        switch (draggedItem.ItemInstance.Item.Type)
         {
-            case Item.ItemType.Consumable:
+            case OupItem.ItemType.Consumable:
                 //Use all the stack
                 if (_inv.UseItem(draggedItem.Item))
-                    draggedItem.Item.setStackCnt(0);
+                    draggedItem.ItemInstance.Item.setStackCnt(0);
                 break;
-            case Item.ItemType.Equipment:
+            case OupItem.ItemType.Equipment:
                 if (draggedItem.Item.StackCnt == draggedItem.Item.MaxStackCnt)
                 {
                     existingEquipment = _inv.EquiSlots[(int)draggedItem.Item.Equipment.PlaceHolder]
@@ -107,7 +107,7 @@ public class SlotConsume: MonoBehaviour, IDropHandler
                         "You need " + (draggedItem.Item.MaxStackCnt - draggedItem.Item.StackCnt) + " of this item to equip",
                         Color.yellow);
                 break;
-            case Item.ItemType.Weapon:
+            case OupItem.ItemType.Weapon:
                 //Todo: Add the logic of two hand item 
                 existingEquipment = _inv.EquiSlots[(int) Equipment.PlaceType.Left].GetComponentInChildren<ItemEquipment>();
                 itemEquipment = existingEquipment.Item;

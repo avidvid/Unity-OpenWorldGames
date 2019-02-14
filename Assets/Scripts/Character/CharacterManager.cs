@@ -10,7 +10,7 @@ public class CharacterManager : MonoBehaviour
     private static CharacterManager _characterManager;
     private ItemDatabase _itemDatabase;
     private CharacterDatabase _characterDatabase;
-    private TerrainDatabase _terrainDatabase;
+    private UserDatabase _userDatabase;
 
     public Character MyCharacter;
     public UserPlayer UserPlayer;
@@ -19,7 +19,9 @@ public class CharacterManager : MonoBehaviour
     public CharacterSetting CharacterSetting;
     public CharacterMixture CharacterMixture;
     public CharacterResearching CharacterResearching=new CharacterResearching();
-    public List<ItemContainer> CharacterInventory = new List<ItemContainer>();
+    public List<ItemIns> CharacterInventory = new List<ItemIns>();
+
+
     public List<CharacterResearch> CharacterResearches = new List<CharacterResearch>();
     public List<Character> UserCharacters = new List<Character>();
 
@@ -31,13 +33,14 @@ public class CharacterManager : MonoBehaviour
 
     void Awake()
     {
+        _characterManager = Instance();
         _characterDatabase = CharacterDatabase.Instance();
-        _characterManager = CharacterManager.Instance();
         _itemDatabase = ItemDatabase.Instance();
+        _userDatabase = UserDatabase.Instance();
         _levelUp = GameObject.Find("LevelUp");
         _gameOver = GameObject.Find("GameOver");
         //UserPlayer
-        UserPlayer = _characterDatabase.FindUserPlayer(0);
+        UserPlayer = _userDatabase.FindUserPlayer(0);
         UserPlayer.Print();
         if (UserPlayer.Id == -1)
         {
@@ -47,9 +50,9 @@ public class CharacterManager : MonoBehaviour
         }
         UserPlayer.LastLogin = DateTime.Now;
         SaveUserPlayer();
-        UserCharacters= _characterDatabase.GetUserCharacters();
+        UserCharacters= _userDatabase.GetUserCharacters();
         //CharacterSetting
-        CharacterSetting = _characterDatabase.FindCharacterSetting(UserPlayer.Id);
+        CharacterSetting = _userDatabase.GetCharacterSetting(UserPlayer.Id);
         if (CharacterSetting.Id == -1)
         {
             print("CharacterSetting is empty");
@@ -64,23 +67,21 @@ public class CharacterManager : MonoBehaviour
         }
         MyCharacter = _characterDatabase.FindCharacter(CharacterSetting.CharacterId);
         MyCharacter.Print();
-        CharacterMixture = _characterDatabase.FindCharacterMixture(CharacterSetting.Id);
+        CharacterMixture = _userDatabase.GetCharacterMixture(CharacterSetting.Id);
         CharacterMixture.Print();
-        CharacterInventory = _characterDatabase.FindCharacterInventory(CharacterSetting.Id);
-        if (CharacterInventory.Count == 0)
-            throw new Exception("CharacterInventory count is ZERO");
+        GenerateUserInventory();
+        Debug.Log("CharacterInventory.Count = " + CharacterInventory.Count);
     }
-
     void Start()
     {
         
         //CharacterResearch
-        Researches = _characterDatabase.LoadResearches();
+        Researches = _characterDatabase.GetResearches();
         if (Researches.Count == 0)
             throw new Exception("Researches count is ZERO");
-        CharacterResearches = _characterDatabase.LoadCharacterResearches(UserPlayer.Id);
+        CharacterResearches = _userDatabase.LoadCharacterResearches(UserPlayer.Id);
         print("CharacterResearches count == "+ CharacterResearches.Count);
-        CharacterResearching = _characterDatabase.FindCharacterResearching(UserPlayer.Id);
+        CharacterResearching = _userDatabase.FindCharacterResearching(UserPlayer.Id);
         CharacterResearching.Print();
         if (SettingBasicChecks()) 
             return;
@@ -123,55 +124,203 @@ public class CharacterManager : MonoBehaviour
             }
         }
     }
+    #region MonsterIns
+    internal MonsterIns GenerateMonster(Character monsterCharacter, int level)
+    {
+        return new MonsterIns(monsterCharacter, level);
+    }
+    #endregion
     internal Vector2 GetMapLocation(int key)
     {
         //Latitudes range from 0 to 90. Longitudes range from 0 to 180
-        _terrainDatabase = TerrainDatabase.Instance();
-        Vector2 regionLocation = _terrainDatabase.GetRegionLocation(key);
+        var terrainDatabase = TerrainDatabase.Instance();
+        Vector2 regionLocation = terrainDatabase.GetRegionLocation(key);
         int x =(int) (UserPlayer.Latitude * 1000 - regionLocation.x) ;
         int y =(int) (UserPlayer.Longitude * 1000 - regionLocation.y) ;
         var mapLocation = new Vector2(x,y);
         return mapLocation;
     }
+    internal Research GetResearchById(int id)
+    {
+        for (int i = 0; i < Researches.Count; i++)
+            if (Researches[i].Id == id)
+                return Researches[i];
+        return null;
+    }
+    #region Inventory
+    private void GenerateUserInventory()
+    {
+        List<UserItem> userInventory = _userDatabase.GetUserInventory();
+        foreach (var userItem in userInventory)
+        {
+            var item = _itemDatabase.GetItemById(userItem.ItemId);
+            CharacterInventory.Add(new ItemIns(item, userItem));
+        }
+    }
+    public ItemIns ItemInInventory(OupItem item)
+    {
+        foreach (var itemIns in CharacterInventory)
+        {
+            if (itemIns.Item.Id == item.Id)
+                return itemIns;
+        }
+        return null;
+    }
+    public bool ItemIsInInventory(int itemId)
+    {
+        foreach (var itemIns in CharacterInventory)
+        {
+            if (itemIns.Item.Id == itemId)
+                return true;
+        }
+        return false;
+    }
+    internal bool AddItemToInventory(OupItem item,int stcCnt=1)
+    {
+        //Todo: make sure about the carry count of user 
+        //Should match with the AddItemToInventory in InventoryHandler
+        //CheckUniqueness
+        var existingItem = ItemInInventory(item);
+        if (existingItem!=null)
+        {
+            if (item.MaxStackCnt == 1)
+                return false;
+            if (existingItem.UserItem.StackCnt + stcCnt <= item.MaxStackCnt)
+            {
+                existingItem.UserItem.StackCnt++;
+                _userDatabase.UpdateUserInventory(CharacterInventory);
+                return true;
+            }
+        }
+        var userItem = new UserItem(item);
+        var newItem = new ItemIns(item, userItem);
+        newItem.UserItem.StackCnt = stcCnt;
+        newItem.Print();
+        CharacterInventory.Add(newItem);
+        _userDatabase.UpdateUserInventory(CharacterInventory);
+        return true;
+    }
+    #endregion
+    #region ItemUse
+    internal void CharacterSettingUnuseItem(ItemIns itemIns, bool save)
+    {
+        if (itemIns == null)
+            return;
+        var item = itemIns.Item;
+        var userItem = itemIns.UserItem;
+        switch (itemIns.Item.Type)
+        {
+            case OupItem.ItemType.Consumable:
+                return;
+            case OupItem.ItemType.Equipment:
+                CharacterSetting.Agility -= item.Agility;
+                CharacterSetting.Bravery -= item.Bravery;
+                CharacterSetting.Carry -= item.Carry;
+                CharacterSetting.CarryCnt -= item.CarryCnt;
+                CharacterSetting.Charming -= item.Charming;
+                CharacterSetting.Intellect -= item.Intellect;
+                CharacterSetting.Crafting -= item.Crafting;
+                CharacterSetting.Researching -= item.Researching;
+                CharacterSetting.Speed -= item.Speed;
+                CharacterSetting.Stamina -= item.Stamina;
+                CharacterSetting.Strength -= item.Strength;
+                break;
+            case OupItem.ItemType.Weapon:
+                CharacterSetting.SpeedAttack -= item.SpeedAttack;
+                CharacterSetting.SpeedDefense -= item.SpeedDefense;
+                CharacterSetting.AbilityAttack -= item.AbilityAttack;
+                CharacterSetting.AbilityDefense -= item.AbilityDefense;
+                CharacterSetting.MagicAttack -= item.MagicAttack;
+                CharacterSetting.MagicDefense -= item.MagicDefense;
+                CharacterSetting.PoisonAttack -= item.PoisonAttack;
+                CharacterSetting.PoisonDefense -= item.PoisonDefense;
+                break;
+            case OupItem.ItemType.Tool:
+                return;
+        }
+        CharacterSetting.Updated = true;
+        if (save)
+            SaveCharacterSetting();
+    }
+    public string CharacterSettingUseItem(ItemIns itemIns, bool save)
+    {
+        string message = "";
+        if (itemIns == null)
+            return message;
+        itemIns.Print();
+        var item = itemIns.Item;
+        var userItem = itemIns.UserItem;
+        switch (itemIns.Item.Type)
+        {
+            case OupItem.ItemType.Consumable:
+                if (item.Recipe > 0)
+                {
+                    if (_userDatabase.AddNewRandomUserRecipe(UserPlayer.Id))
+                        message = "You found a Recipe!!";
+                    else return "Recipe you found is not readable!! ";
+                }
+                if (itemIns.Item.Egg > 0)
+                {
+                    if (_userDatabase.AddNewRandomUserCharacters(UserPlayer.Id))
+                        message = "You Hatched a New Character!!";
+                    else return "The Egg you found is already rotten !! ";
+                }
+                CharacterSetting.Health += item.Health * userItem.StackCnt;
+                CharacterSetting.Mana += item.Mana * userItem.StackCnt;
+                CharacterSetting.Energy += item.Energy * userItem.StackCnt;
+                CharacterSetting.Coin += item.Coin * userItem.StackCnt;
+                UserPlayer.Gem += item.Gem * userItem.StackCnt;
+                if (CharacterSetting.Health > CharacterSetting.MaxHealth)
+                    CharacterSetting.Health = CharacterSetting.MaxHealth;
+                if (CharacterSetting.Mana > CharacterSetting.MaxMana)
+                    CharacterSetting.Mana = CharacterSetting.MaxMana;
+                if (CharacterSetting.Energy > CharacterSetting.MaxEnergy)
+                    CharacterSetting.Energy = CharacterSetting.MaxEnergy;
+                if (save)
+                    SaveUserPlayer();
+                break;
+            case OupItem.ItemType.Equipment:
+                CharacterSetting.Agility += item.Agility;
+                CharacterSetting.Bravery += item.Bravery;
+                CharacterSetting.Carry += item.Carry;
+                CharacterSetting.CarryCnt += item.CarryCnt;
+                CharacterSetting.Charming += item.Charming;
+                CharacterSetting.Intellect += item.Intellect;
+                CharacterSetting.Crafting += item.Crafting;
+                CharacterSetting.Researching += item.Researching;
+                CharacterSetting.Speed += item.Speed;
+                CharacterSetting.Stamina += item.Stamina;
+                CharacterSetting.Strength += item.Strength;
+                break;
+            case OupItem.ItemType.Weapon:
+                CharacterSetting.SpeedAttack += item.SpeedAttack;
+                CharacterSetting.SpeedDefense += item.SpeedDefense;
+                CharacterSetting.AbilityAttack += item.AbilityAttack;
+                CharacterSetting.AbilityDefense += item.AbilityDefense;
+                CharacterSetting.MagicAttack += item.MagicAttack;
+                CharacterSetting.MagicDefense += item.MagicDefense;
+                CharacterSetting.PoisonAttack += item.PoisonAttack;
+                CharacterSetting.PoisonDefense += item.PoisonDefense;
+                break;
+            case OupItem.ItemType.Tool:
+                return message;
+        }
+        CharacterSetting.Updated = true;
+        if (save)
+            SaveCharacterSetting();
+        return message;
+    }
+    #endregion
+    //############################# OLD CODE
 
     public void SaveCharacterInventory()
     {
-        _characterDatabase.SaveCharacterInventory();
+        _userDatabase.SaveUserInventory();
     }
     internal bool HaveAvailableSlot()
     {
-        for (int i = 0; i < CharacterSetting.CarryCnt; i++)
-            if (CharacterInventory[i].Id == -1)
-                return true;
         return false;
-    }
-    internal bool AddItemToInventory(ItemContainer item)
-    {
-        //Should match with the AddItemToInventory in InventoryHandler
-        //CheckUniqueness
-        if (item.IsUnique)
-            if (_characterManager.InventoryExists(item.Id))
-                return false;
-        for (int i = 0; i < CharacterSetting.CarryCnt; i++)
-        {
-            if (CharacterInventory[i].Id == item.Id)
-            {
-                if (CharacterInventory[i].StackCnt + item.StackCnt <= CharacterInventory[i].MaxStackCnt)
-                {
-                    CharacterInventory[i].setStackCnt(CharacterInventory[i].StackCnt + item.StackCnt);
-                    break;
-                }
-            }
-
-            if (CharacterInventory[i].Id != -1)
-                continue;
-            CharacterInventory[i] = item;
-            CharacterInventory[i].Print();
-            break;
-        }
-
-        _characterDatabase.SaveCharacterInventory();
-        return true;
+        //todo need to move to somewhere else probabaly inventor handler 
     }
 
     internal void CharacterSettingApplyResearch(CharacterResearch charResearch, Research research)
@@ -179,34 +328,11 @@ public class CharacterManager : MonoBehaviour
         if (charResearch == null || research == null)
             return;
         float value = research.CalculateValue(charResearch.Level);
-        _characterDatabase.AddCharacterResearch(charResearch);
-        _characterDatabase.EmptyCharacterResearching();
+        _userDatabase.AddCharacterResearch(charResearch);
+        _userDatabase.EmptyCharacterResearching();
         AddCharacterSetting(research.Target, value);
     }
 
-    public bool InventoryExists(int id)
-    {
-        //checkInventory for the item
-        if (_characterManager.InventoryIndexOf(id) > -1)
-            return true;
-        if (_characterManager.EquipmentIndexOf(id) > -1)
-            return true;
-        return false;
-    }
-    private int EquipmentIndexOf(int id)
-    {
-        for (int i = 0; i < CharacterSetting.Equipments.Count; i++)
-            if (CharacterSetting.Equipments[i].Id == id)
-                return i;
-        return -1;
-    }
-    private int InventoryIndexOf(int id)
-    {
-        for (int i = 0; i < CharacterSetting.CarryCnt; i++)
-            if (CharacterInventory[i].Id == id)
-                return i;
-        return -1;
-    }
     internal bool UseEnergy(int amount)
     {
         if (amount <= 0)
@@ -264,111 +390,7 @@ public class CharacterManager : MonoBehaviour
         }
         SaveCharacterSetting();
     }
-    public string CharacterSettingUseItem(ItemContainer item,bool save)
-    {
-        string message = "";
-        if (item == null)
-            return message;
-        item.Print();
 
-        switch (item.Type)
-        {
-            case Item.ItemType.Consumable:
-                if (item.Consumable.Recipe > 0)
-                {
-                    if (_itemDatabase.AddNewRandomUserRecipe(UserPlayer.Id))
-                        message = "You found a Recipe!!";
-                    else return "Recipe you found is not readable!! ";
-                }
-                if (item.Consumable.Egg > 0)
-                {
-                    if (_characterDatabase.AddNewRandomUserCharacters(UserPlayer.Id))
-                        message = "You Hatched a New Character!!";
-                    else return "The Egg you found is already rotten !! ";
-                }
-                CharacterSetting.Health += item.Consumable.Health* item.StackCnt;
-                CharacterSetting.Mana += item.Consumable.Mana * item.StackCnt;
-                CharacterSetting.Energy += item.Consumable.Energy * item.StackCnt;
-                CharacterSetting.Coin += item.Consumable.Coin * item.StackCnt;
-                UserPlayer.Gem += item.Consumable.Gem * item.StackCnt;
-                if (CharacterSetting.Health > CharacterSetting.MaxHealth)
-                    CharacterSetting.Health = CharacterSetting.MaxHealth;
-                if (CharacterSetting.Mana > CharacterSetting.MaxMana)
-                    CharacterSetting.Mana = CharacterSetting.MaxMana;
-                if (CharacterSetting.Energy > CharacterSetting.MaxEnergy)
-                    CharacterSetting.Energy = CharacterSetting.MaxEnergy;
-                if (save)
-                    SaveUserPlayer();
-                break;
-            case Item.ItemType.Equipment:
-                CharacterSetting.Agility += item.Equipment.Agility;
-                CharacterSetting.Bravery += item.Equipment.Bravery;
-                CharacterSetting.Carry += item.Equipment.Carry;
-                CharacterSetting.CarryCnt += item.Equipment.CarryCnt;
-                CharacterSetting.Charming += item.Equipment.Charming;
-                CharacterSetting.Intellect += item.Equipment.Intellect;
-                CharacterSetting.Crafting += item.Equipment.Crafting;
-                CharacterSetting.Researching += item.Equipment.Researching;
-                CharacterSetting.Speed += item.Equipment.Speed;
-                CharacterSetting.Stamina += item.Equipment.Stamina;
-                CharacterSetting.Strength += item.Equipment.Strength;
-                break;
-            case Item.ItemType.Weapon:
-                CharacterSetting.SpeedAttack += item.Weapon.SpeedAttack;
-                CharacterSetting.SpeedDefense += item.Weapon.SpeedDefense;
-                CharacterSetting.AbilityAttack += item.Weapon.AbilityAttack;
-                CharacterSetting.AbilityDefense += item.Weapon.AbilityDefense;
-                CharacterSetting.MagicAttack += item.Weapon.MagicAttack;
-                CharacterSetting.MagicDefense += item.Weapon.MagicDefense;
-                CharacterSetting.PoisonAttack += item.Weapon.PoisonAttack;
-                CharacterSetting.PoisonDefense += item.Weapon.PoisonDefense;
-                break;
-            case Item.ItemType.Tool:
-                return message;
-        }
-        CharacterSetting.Updated = true;
-        if (save)
-            SaveCharacterSetting();
-        return message;
-    }
-    internal void CharacterSettingUnuseItem(ItemContainer item, bool save)
-    {
-        if (item == null)
-            return;
-        switch (item.Type)
-        {
-            case Item.ItemType.Consumable:
-                return;
-            case Item.ItemType.Equipment:
-                CharacterSetting.Agility -= item.Equipment.Agility;
-                CharacterSetting.Bravery -= item.Equipment.Bravery;
-                CharacterSetting.Carry -= item.Equipment.Carry;
-                CharacterSetting.CarryCnt -= item.Equipment.CarryCnt;
-                CharacterSetting.Charming -= item.Equipment.Charming;
-                CharacterSetting.Intellect -= item.Equipment.Intellect;
-                CharacterSetting.Crafting -= item.Equipment.Crafting;
-                CharacterSetting.Researching -= item.Equipment.Researching;
-                CharacterSetting.Speed -= item.Equipment.Speed;
-                CharacterSetting.Stamina -= item.Equipment.Stamina;
-                CharacterSetting.Strength -= item.Equipment.Strength;
-                break;
-            case Item.ItemType.Weapon:
-                CharacterSetting.SpeedAttack -= item.Weapon.SpeedAttack;
-                CharacterSetting.SpeedDefense -= item.Weapon.SpeedDefense;
-                CharacterSetting.AbilityAttack -= item.Weapon.AbilityAttack;
-                CharacterSetting.AbilityDefense -= item.Weapon.AbilityDefense;
-                CharacterSetting.MagicAttack -= item.Weapon.MagicAttack;
-                CharacterSetting.MagicDefense -= item.Weapon.MagicDefense;
-                CharacterSetting.PoisonAttack -= item.Weapon.PoisonAttack;
-                CharacterSetting.PoisonDefense -= item.Weapon.PoisonDefense;
-                break;
-            case Item.ItemType.Tool:
-                return;
-        }
-        CharacterSetting.Updated = true;
-        if (save)
-            SaveCharacterSetting();
-    }
     //Calculations
     private void LoginCalculations()
     {
@@ -437,13 +459,11 @@ public class CharacterManager : MonoBehaviour
                     CharacterSetting.Crafting = CharacterSetting.Researching =
                         CharacterSetting.Stamina = CharacterSetting.Strength = 0;
         //todo: Get values from research too
-        if (CharacterSetting.Equipments != null)
-            foreach (var item in CharacterSetting.Equipments)
-            {
-                if (item.Id == -1)
-                    continue;
-                CharacterSettingUseItem(item, false);
-            }
+        foreach (var itemIns in CharacterInventory)
+        {
+            if (itemIns.UserItem.Equipped)
+                CharacterSettingUseItem(itemIns, false);
+        }
         CharacterSetting.Updated = true;
         SaveCharacterSetting();
     }
@@ -556,7 +576,7 @@ public class CharacterManager : MonoBehaviour
     }
     internal bool ValidateCharacterCode(string characterCode)
     {
-        return _characterDatabase.ValidateCharacterCode(characterCode);
+        return _userDatabase.ValidateCharacterCode(characterCode);
     }
     internal void SetLockTill(DateTime time )
     {
@@ -570,42 +590,35 @@ public class CharacterManager : MonoBehaviour
             UserPlayer.FBid = id;
         SaveUserPlayer();
     }
-    public void SaveCharacterMixture(ItemContainer item, DateTime time)
+    public void SaveCharacterMixture(int itemId, int stackCnt, DateTime time)
     {
-        _characterDatabase.SaveCharacterMixture(item, time);
+        _userDatabase.SaveCharacterMixture(itemId, stackCnt, time);
     }
     internal void SetCharacterMixtureTime(DateTime time)
     {
         CharacterMixture.Time = time;
-        _characterDatabase.SaveCharacterMixture(CharacterMixture.Item, time);
+        _userDatabase.SaveCharacterMixture(CharacterMixture.Item, time);
     }
     public void SaveCharacterSetting()
     {
-        _characterDatabase.SaveCharacterSetting(CharacterSetting);
+        _userDatabase.SaveCharacterSetting(CharacterSetting);
     }
-    internal void InitInventory()
-    {
-        _characterDatabase.InitInventory(CharacterSetting);
-    }
+    //internal void InitInventory()
+    //{
+    //    _characterDatabase.InitInventory(CharacterSetting);
+    //}
     public void SaveUserPlayer()
     {
-        _characterDatabase.SaveUserPlayer(UserPlayer);
-    }
-    public void SaveCharacterEquipments(List<ItemContainer> equipments)
-    {
-        CharacterSetting.Equipments = equipments.ToList();
-        //Todo: or this one = > _characterSetting.Equipments = new List<Int32>(equipments);
-        CharacterSetting.Updated = true;
-        SaveCharacterSetting();
+        _userDatabase.SaveUserPlayer(UserPlayer);
     }
     public void SaveCharacterResearching(CharacterResearch charResearch, DateTime durationMinutes)
     {
-        _characterDatabase.SaveCharacterResearching(charResearch, durationMinutes);
+        _userDatabase.SaveCharacterResearching(charResearch, durationMinutes);
     }
     internal void SetCharacterResearchingTime(DateTime time)
     {
         CharacterResearching.Time = time;
-        _characterDatabase.SaveCharacterResearching(CharacterResearching.CharResearch, time);
+        _userDatabase.SaveCharacterResearching(CharacterResearching.CharResearch, time);
     }
     //Instance
     public static CharacterManager Instance()

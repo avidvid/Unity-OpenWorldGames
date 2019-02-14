@@ -12,11 +12,14 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     private InventoryHandler _inv;
     private Vector2 _offset;
     private Tooltip _tooltip;
-    private DateTime _time;
     private Transform _parent;
     public Sprite DefaultSprite;
-    public ItemContainer Item;
     public bool ItemLocked;
+
+
+    private DateTime _time;
+    private OupItem _item;
+    private int _stackCnt;
     void Awake()
     {
         _itemMixture = ItemMixture.Instance();
@@ -38,19 +41,19 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 //texts[1].color = Color.green;
                 texts[1].text = "Ready";
                 ItemLocked = false;
-                _inv.PrintMessage(Item.Name + " Is ready", Color.green);
+                _inv.PrintMessage(_item.Name + " Is ready", Color.green);
             }
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (_item == null)
             return;
-        _tooltip.Activate(Item);
+        _tooltip.Activate(_item);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (_item == null)
             return;
         _tooltip.Deactivate();
     }
@@ -66,7 +69,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         if (ItemLocked)
             return;
-        if (Item.Id == -1)
+        if (_item == null)
             return;
         _offset = eventData.position - (Vector2)this.transform.position;
         this.transform.position = eventData.position - _offset;
@@ -75,7 +78,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         if (ItemLocked)
             return;
-        if (Item.Id == -1)
+        if (_item == null)
             return;
         _parent = transform.parent;
         this.transform.SetParent(this.transform.parent.parent.parent);
@@ -83,7 +86,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (_item == null)
             return;
         if (_time < DateTime.Now)
             SceneSettings.GoToRecipeScene();
@@ -115,7 +118,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         if (ItemLocked)
             return;
-        if (Item.Id == -1)
+        if (_item == null)
             return;
         this.transform.position = eventData.position - _offset;
     }
@@ -128,7 +131,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         this.transform.SetParent(_parent);
         this.transform.SetSiblingIndex(0);
 
-        if (Item.Id == -1)
+        if (_item == null)
         {
             TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
             texts[0].text = "";
@@ -137,30 +140,38 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
-
-    internal void LoadItem(ItemContainer item, int durationMinutes)
+    internal void LoadItem(CharacterMixture playerMixture)
+    {
+        LoadItem(playerMixture.ItemId, playerMixture.StackCnt, playerMixture.MixTime);
+    }
+    internal void LoadItem(int itemId, int stackCnt, int durationMinutes)
     {
         float speed = _inv.GetCrafting();
         _time = DateTime.Now.AddMinutes(durationMinutes * (1-speed));
-        _inv.SaveCharacterMixture(item, _time);
-        LoadItem(item, _time);
+        _inv.SaveCharacterMixture(itemId, stackCnt, _time);
+        LoadItem(itemId,stackCnt, _time);
     }
 
-    internal void LoadItem(ItemContainer item, DateTime time)
+    internal void LoadItem(int itemId,int stackCnt, DateTime time)
     {
-        Item = item;
-        GetComponent<Image>().sprite = Item.GetSprite();
+        var itemDatabase = ItemDatabase.Instance();
+        _item = itemDatabase.GetItemById(itemId);
+        _stackCnt = stackCnt;
+        GetComponent<Image>().sprite = _item.GetSprite();
         _time = time;
         ItemLocked = true;
 
         TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
-        texts[0].text = item.StackCnt > 1 ? item.StackCnt.ToString() : "";
+        texts[0].text = _stackCnt > 1 ? _stackCnt.ToString() : "";
         texts[1].text = (_time - DateTime.Now).ToString();
     }
 
+
+
+
     public void LoadEmpty()
     {
-        Item = new ItemContainer();
+        _item = null;
         GetComponent<Image>().sprite = DefaultSprite;
         _time = DateTime.MinValue;
         ItemLocked = false;
@@ -180,5 +191,10 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         return _itemMixture;
     }
 
-
+    internal bool IsEmpty()
+    {
+        if (_item == null)
+            return true;
+        return false;
+    }
 }

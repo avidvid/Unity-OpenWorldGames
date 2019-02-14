@@ -165,7 +165,7 @@ public class ResearchListHandler : MonoBehaviour {
         if (research.RequiredItem == -1)
             item = true;
         else
-        if (_characterManager.InventoryExists(research.RequiredItem))
+        if (_characterManager.ItemIsInInventory(research.RequiredItem))
             item = true;
         return research1 && research2 && research3 && item;
     }

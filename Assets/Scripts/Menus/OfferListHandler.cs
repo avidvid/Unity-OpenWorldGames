@@ -142,14 +142,13 @@ public class OfferListHandler : MonoBehaviour {
             //Items SellProd is an number (ID)
             if (Regex.IsMatch(offer.SellProd, @"\d"))
             {
-                ItemContainer item = _itemDatabase.FindItem(Int32.Parse(offer.SellProd));
-                item.setStackCnt(offer.SellAmount);
+                var item = _itemDatabase.GetItemById(Int32.Parse(offer.SellProd));
                 item.Print();
                 if (!_characterManager.AddItemToInventory(item))
                 {
                     //Refund the value 
                     ProcessThePay(offer.PayProd, -offer.PayAmount);
-                    if (item.IsUnique)
+                    if (item.MaxStackCnt == 1)
                         _modalPanel.Choice("You Can not Carry more than one of this item!", ModalPanel.ModalPanelType.Ok);
                 }
             }
@@ -237,7 +236,7 @@ public class OfferListHandler : MonoBehaviour {
             default:
                 if (Regex.IsMatch(spriteName, @"\d"))
                 {
-                    ItemContainer item = _itemDatabase.FindItem(Int32.Parse(spriteName));
+                    var item = _itemDatabase.GetItemById(Int32.Parse(spriteName));
                     return item.GetSprite();
                 }
                 return null;

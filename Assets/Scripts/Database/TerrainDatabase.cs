@@ -29,6 +29,19 @@ public class TerrainDatabase : MonoBehaviour {
 
     public List<Character> Monsters = new List<Character>();
 
+    #region TerrainDatabase Instance
+    public static TerrainDatabase Instance()
+    {
+        if (!_terrainDatabase)
+        {
+            _terrainDatabase = FindObjectOfType(typeof(TerrainDatabase)) as TerrainDatabase;
+            if (!_terrainDatabase)
+                Debug.LogError("There needs to be one active TerrainDatabase script on a GameObject in your scene.");
+        }
+        return _terrainDatabase;
+    }
+    #endregion
+
     void Awake()
     {
         _terrainDatabase = TerrainDatabase.Instance();
@@ -71,14 +84,7 @@ public class TerrainDatabase : MonoBehaviour {
             throw new Exception("InsideMonsters count is ZERO");
         Debug.Log("Terrain Database Success!");
     }
-    //Regions
-    public Region GetRegion(float latitude, float longitude)
-    {
-        for (int i = 0; i < _regions.Count; i++)
-            if (Mathf.Abs(_regions[i].Latitude - latitude) < 10 && Mathf.Abs(_regions[i].Longitude - longitude) < 10)
-                return _regions[i];
-        return _regions[0];
-    }
+    #region Regions
     private void LoadRegions()
     {
         //Empty the Characters DB
@@ -90,13 +96,12 @@ public class TerrainDatabase : MonoBehaviour {
         _regions = (List<Region>)serializer.Deserialize(fs);
         fs.Close();
     }
-    private void SaveRegions()
+    public Region GetRegion(float latitude, float longitude)
     {
-        string path = Path.Combine(Application.streamingAssetsPath, "Region.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Region>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _regions);
-        fs.Close();
+        for (int i = 0; i < _regions.Count; i++)
+            if (Mathf.Abs(_regions[i].Latitude - latitude) < 10 && Mathf.Abs(_regions[i].Longitude - longitude) < 10)
+                return _regions[i];
+        return _regions[0];
     }
     internal Vector2 GetRegionLocation(int key)
     {
@@ -106,10 +111,8 @@ public class TerrainDatabase : MonoBehaviour {
                 // Vector2 only accept 2 decimal points
         return Vector2.zero;
     }
-
-
-
-    //Terrains
+    #endregion
+    #region Terrains
     private void LoadTerrains()
     {
         _terrains.Clear();
@@ -127,7 +130,8 @@ public class TerrainDatabase : MonoBehaviour {
             if (regionTerrains.IndexOf(terrain.Id) != -1  && terrain.IsEnable)
                 Terrains.Add(terrain);
     }
-    //Elements
+    #endregion
+    #region Elements
     private void LoadElements()
     {
         _elements.Clear();
@@ -160,7 +164,8 @@ public class TerrainDatabase : MonoBehaviour {
                 throw new Exception("Terrain with no available element");
         }
     }
-    //InsideStories
+    #endregion
+    #region InsideStories
     private void LoadInsideStories()
     {
         //Empty the InsideStory DB
@@ -200,7 +205,8 @@ public class TerrainDatabase : MonoBehaviour {
         print("Rarity=" + rarity + " CNT=" + insideStories.Count + " InsideStory =" + insideStories[RandomHelper.Range(position, key, insideStories.Count)].Name);
         return insideStories[RandomHelper.Range(position, key, insideStories.Count)];
     }
-    //Monsters
+    #endregion
+    #region Monsters
     private void SetMonsterTypes()
     {
         List<int> regionMonsters = Region.Monsters.Split(',').Select(Int32.Parse).ToList();
@@ -251,14 +257,5 @@ public class TerrainDatabase : MonoBehaviour {
                 storyActors.Add(monster);
         return storyActors;
     }
-    public static TerrainDatabase Instance()
-    {
-        if (!_terrainDatabase)
-        {
-            _terrainDatabase = FindObjectOfType(typeof(TerrainDatabase)) as TerrainDatabase;
-            if (!_terrainDatabase)
-                Debug.LogError("There needs to be one active TerrainDatabase script on a GameObject in your scene.");
-        }
-        return _terrainDatabase;
-    }
+    #endregion
 }
