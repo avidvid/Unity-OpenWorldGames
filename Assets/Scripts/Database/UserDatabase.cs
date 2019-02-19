@@ -14,10 +14,12 @@ public class UserDatabase : MonoBehaviour
     private UserPlayer _userPlayer;
     private List<UserItem> _userInventory = new List<UserItem>();
     private List<UserCharacter> _userCharacters = new List<UserCharacter>();
+    private List<Character> _myCharacters = new List<Character>();
     private CharacterMixture _characterMixture;
     private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
     private CharacterResearching _characterResearching;
     private CharacterSetting _characterSetting;
+    private List<Recipe> _myRecipes;
     private List<UserRecipe> _userRecipes = new List<UserRecipe>();
 
     #region UserDatabase Instance
@@ -35,9 +37,7 @@ public class UserDatabase : MonoBehaviour
     void Awake()
     {
         _userDatabase = Instance();
-    }
-    void Start()
-    {
+        Debug.Log("***UDB*** Start!");
         //UserPlayer
         _userPlayer = LoadUserPlayer();
         if (_userPlayer == null)
@@ -73,6 +73,8 @@ public class UserDatabase : MonoBehaviour
             //UserCharacters
             _userCharacters = LoadUserCharacters();
             Debug.Log("UDB-UserCharacters.Count = " + _userCharacters.Count);
+            _myCharacters =  BuildUserCharacters();
+            Debug.Log("UDB-BuiltUserCharacters.Count = " + _myCharacters.Count);
             //CharacterMixture
             _characterMixture = LoadCharacterMixture();
             Debug.Log("UDB-CharacterMixture = " +  (_characterMixture == null ? "Empty" : _characterMixture.MyInfo()) );
@@ -84,6 +86,8 @@ public class UserDatabase : MonoBehaviour
             //UserRecipe
             _userRecipes =LoadUserRecipes();
             Debug.Log("UDB-UserRecipes.Count = " + _userRecipes.Count);
+            _myRecipes = BuildUserRecipes();
+            Debug.Log("UDB-BuiltUserRecipes.Count = " + _myRecipes.Count);
         }
         Debug.Log("***UDB*** Success!");
     }
@@ -148,13 +152,14 @@ public class UserDatabase : MonoBehaviour
         serializer.Serialize(fs, _userInventory);
         fs.Close();
     }
-    internal void UpdateUserInventory(List<ItemIns> characterInventory)
+    internal void UpdateUserInventory(List<ItemIns> invCarry, List<ItemIns> invEquipment = null)
     {
         _userInventory.Clear();
-        foreach (var userItem in characterInventory)
-        {
+        foreach (var userItem in invCarry)
             _userInventory.Add(userItem.UserItem);
-        }
+        if (invEquipment!=null)
+            foreach (var userItem in invEquipment)
+                _userInventory.Add(userItem.UserItem);
         SaveUserInventory();
     }
     internal List<UserItem> GetUserInventory()
@@ -163,25 +168,9 @@ public class UserDatabase : MonoBehaviour
     }
     #endregion
     #region UserCharacters
-    public List<Character> GetUserCharacters(List<Character> characters)
+    public List<Character> GetUserCharacters()
     {
-        List<Character> MyCharacters = new List<Character>();
-        for (int i = 0; i < characters.Count; i++)
-        {
-            if (!characters[i].IsEnable)
-                continue;
-            for (int j = 0; j < _userCharacters.Count; j++)
-                if (characters[i].Id == _userCharacters[j].CharacterId)
-                {
-                    if (string.IsNullOrEmpty(_userCharacters[j].CharacterCode))
-                        MyCharacters.Add(characters[i]);
-                    else
-                        //if not purchased yet :This might cause problem later because all of the other items are by reference and this  one is by value 
-                        MyCharacters.Add(new Character(characters[i], false));
-                    break;
-                }
-        }
-        return MyCharacters;
+        return _myCharacters;
     }
     internal bool ValidateCharacterCode(string characterCode)
     {
@@ -211,6 +200,28 @@ public class UserDatabase : MonoBehaviour
         FileStream fs = new FileStream(path, FileMode.Create);
         serializer.Serialize(fs, _userCharacters);
         fs.Close();
+    }
+    private List<Character> BuildUserCharacters()
+    {
+        var characterDatabase = CharacterDatabase.Instance();
+        var characters = characterDatabase.GetCharacters();
+        List<Character> myCharacters = new List<Character>();
+        for (int i = 0; i < characters.Count; i++)
+        {
+            if (!characters[i].IsEnable)
+                continue;
+            for (int j = 0; j < _userCharacters.Count; j++)
+                if (characters[i].Id == _userCharacters[j].CharacterId)
+                {
+                    if (string.IsNullOrEmpty(_userCharacters[j].CharacterCode))
+                        myCharacters.Add(characters[i]);
+                    else
+                        //if not purchased yet :This might cause problem later because all of the other items are by reference and this  one is by value 
+                        myCharacters.Add(new Character(characters[i], false));
+                    break;
+                }
+        }
+        return myCharacters;
     }
     public bool AddUserCharacters(UserCharacter uc)
     {
@@ -417,8 +428,10 @@ public class UserDatabase : MonoBehaviour
     {
         return _userRecipes;
     }
-    public List<Recipe> GetUserRecipes(List<Recipe> recipes)
+    private List<Recipe> BuildUserRecipes()
     {
+        var itemDatabase = ItemDatabase.Instance();
+        var recipes = itemDatabase.GetRecipes();
         List<Recipe> myRecipes = new List<Recipe>();
         for (int i = 0; i < recipes.Count; i++)
         {
@@ -443,6 +456,10 @@ public class UserDatabase : MonoBehaviour
                 }
         }
         return myRecipes;
+    }
+    public List<Recipe> GetMyRecipes()
+    {
+        return _myRecipes;
     }
     public bool AddUserRecipe(UserRecipe ur)
     {
@@ -509,7 +526,18 @@ public class UserDatabase : MonoBehaviour
         serializer.Serialize(fs, _userRecipes);
         fs.Close();
     }
-
+    internal bool ValidateRecipeCode(string recipeCode)
+    {
+        for (int j = 0; j < _userRecipes.Count; j++)
+            if (_userRecipes[j].RecipeCode != null)
+                if (_userRecipes[j].RecipeCode == recipeCode)
+                {
+                    _userRecipes[j].RecipeCode = "";
+                    _userDatabase.SaveUserRecipes();
+                    return true;
+                }
+        return false;
+    }
 
     #endregion
     private void GoToStartScene()

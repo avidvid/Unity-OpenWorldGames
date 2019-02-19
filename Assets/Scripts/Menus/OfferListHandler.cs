@@ -22,6 +22,7 @@ public class OfferListHandler : MonoBehaviour {
     private GameObject _contentPanel;
     private GameObject _clickedButton;
     private CharacterManager _characterManager;
+    private InventoryManager _inventoryManager;
     private List<Offer> _offers = new List<Offer>();
 
     private string _backScene;
@@ -31,6 +32,7 @@ public class OfferListHandler : MonoBehaviour {
         _itemDatabase = ItemDatabase.Instance();
         _modalPanel = ModalPanel.Instance();
         _characterManager =CharacterManager.Instance();
+        _inventoryManager = InventoryManager.Instance();
         _contentPanel = GameObject.Find("ContentPanel");
     }
 
@@ -131,7 +133,7 @@ public class OfferListHandler : MonoBehaviour {
         if (Regex.IsMatch(offer.SellProd, @"\d"))
         {
             //checked for available spot in inv
-            if (!_characterManager.HaveAvailableSlot())
+            if (!_inventoryManager.HaveAvailableSlot())
             {
                 _modalPanel.Choice("Not enough room in inventory! ", ModalPanel.ModalPanelType.Ok);
                 return;

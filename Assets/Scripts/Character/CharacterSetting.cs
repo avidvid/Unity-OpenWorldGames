@@ -162,7 +162,11 @@ public class CharacterSetting {
     }
     internal void Print()
     {
-        Debug.Log("CharacterSetting = " + Id+"-"+Name+" ("+ Level+")");
+        Debug.Log("CharacterSetting = " + MyInfo());
+    }
+    internal string MyInfo()
+    {
+        return Id + "-" + Name + " (" + Level + ")";
     }
     internal Sprite GetSpellSprite()
     {

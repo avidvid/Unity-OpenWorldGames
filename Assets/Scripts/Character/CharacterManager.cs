@@ -10,27 +10,24 @@ public class CharacterManager : MonoBehaviour
     //Database
     private static CharacterManager _characterManager;
     private ItemDatabase _itemDatabase;
-    private CharacterDatabase _characterDatabase;
     private UserDatabase _userDatabase;
+    private CharacterDatabase _characterDatabase;
     //UserPlayer
-    public UserPlayer UserPlayer;
+    internal UserPlayer UserPlayer;
     //CharacterSetting
-    public CharacterSetting CharacterSetting;
+    internal CharacterSetting CharacterSetting;
     //Character
-    public Character MyCharacter;
-    private List<Character> _characters ;
-    public List<Character> UserCharacters ;
+    internal Character MyCharacter;
+    internal List<Character> UserCharacters ;
     //Research
-    public List<Research> Researches;
-    public List<CharacterResearch> CharacterResearches = new List<CharacterResearch>();
-    public CharacterResearching CharacterResearching;
+    internal List<Research> Researches;
+    internal List<CharacterResearch> CharacterResearches = new List<CharacterResearch>();
+    internal CharacterResearching CharacterResearching;
     //Recipes
-    private List<Recipe> _recipes;
-    private List<UserRecipe> _userRecipes; 
-    public List<Recipe> UserRecipes;
+    internal List<Recipe> UserRecipes;
     //Inventory
-    public List<ItemIns> CharacterInventory;
-    public CharacterMixture CharacterMixture;
+    internal List<ItemIns> CharacterInventory = new List<ItemIns>();
+    internal CharacterMixture CharacterMixture;
 
     private float _nextActionTime = 100;
     private Sprite _spellSprite;
@@ -70,42 +67,33 @@ public class CharacterManager : MonoBehaviour
     {
         //UserPlayer
         UserPlayer = _userDatabase.GetUserPlayer();
+        Debug.Log("CM-UserPlayer = " + UserPlayer.MyInfo());
         //CharacterSetting
         CharacterSetting = _userDatabase.GetCharacterSetting(UserPlayer.Id);
+        Debug.Log("CM-CharacterSetting = " + CharacterSetting.MyInfo());
         //Character
         MyCharacter = _characterDatabase.GetCharacterById(CharacterSetting.CharacterId);
-        MyCharacter.Print();
-        _characters = _characterDatabase.GetCharacters();
-        UserCharacters = _userDatabase.GetUserCharacters(_characters);
+        Debug.Log("CM-MyCharacter = " + MyCharacter.MyInfo());
+        UserCharacters = _userDatabase.GetUserCharacters();
         Debug.Log("CM-UserCharacters.Count = " + UserCharacters.Count);
         //Research
         Researches = _characterDatabase.GetResearches();
         CharacterResearches = _userDatabase.GetCharacterResearches();
         CharacterResearching = _userDatabase.GetCharacterResearching();
         //Recipes
-        _recipes =_itemDatabase.GetRecipes();
-        _userRecipes = _userDatabase.GetUserRecipes();
-        UserRecipes = _userDatabase.GetUserRecipes(_recipes);
+        UserRecipes = _userDatabase.GetMyRecipes();
         Debug.Log("CM-UserRecipes.Count = " + UserRecipes.Count);
         //Inventory
         InitUserInventory();
-        CharacterMixture = _userDatabase.GetCharacterMixture();
         Debug.Log("CharacterInventory.Count = " + CharacterInventory.Count);
+        CharacterMixture = _userDatabase.GetCharacterMixture();
         LoginCalculations();
     }
 
 
     internal bool ValidateRecipeCode(string recipeCode)
     {
-        for (int j = 0; j < _userRecipes.Count; j++)
-            if (_userRecipes[j].RecipeCode != null)
-                if (_userRecipes[j].RecipeCode == recipeCode)
-                {
-                    _userRecipes[j].RecipeCode = "";
-                    _userDatabase.SaveUserRecipes();
-                    return true;
-                }
-        return false;
+        return _userDatabase.ValidateRecipeCode(recipeCode);
     }
 
     void Update()
@@ -186,13 +174,6 @@ public class CharacterManager : MonoBehaviour
         int y =(int) (UserPlayer.Longitude * 1000 - regionLocation.y) ;
         var mapLocation = new Vector2(x,y);
         return mapLocation;
-    }
-    internal Research GetResearchById(int id)
-    {
-        for (int i = 0; i < Researches.Count; i++)
-            if (Researches[i].Id == id)
-                return Researches[i];
-        return null;
     }
     #region Inventory
     private void InitUserInventory()
@@ -352,17 +333,6 @@ public class CharacterManager : MonoBehaviour
     }
     #endregion
     //############################# OLD CODE
-
-    public void SaveCharacterInventory()
-    {
-        _userDatabase.SaveUserInventory();
-    }
-    internal bool HaveAvailableSlot()
-    {
-        return false;
-        //todo need to move to somewhere else probabaly inventor handler 
-    }
-
     internal void CharacterSettingApplyResearch(Research research, int level)
     {
         if (research == null)
@@ -573,15 +543,6 @@ public class CharacterManager : MonoBehaviour
     }
 
     //Middle man to CharacterDatabase
-    internal Research FindResearch(int id)
-    {
-        for (int i = 0; i < Researches.Count; i++)
-        {
-            if (Researches[i].Id == id)
-                return Researches[i];
-        }
-        return null;
-    }
     internal bool ValidateCharacterCode(string characterCode)
     {
         return _userDatabase.ValidateCharacterCode(characterCode);
@@ -611,10 +572,6 @@ public class CharacterManager : MonoBehaviour
     {
         _userDatabase.SaveCharacterSetting(CharacterSetting);
     }
-    //internal void InitInventory()
-    //{
-    //    _characterDatabase.InitInventory(CharacterSetting);
-    //}
     public void SaveUserPlayer()
     {
         _userDatabase.SaveUserPlayer(UserPlayer);

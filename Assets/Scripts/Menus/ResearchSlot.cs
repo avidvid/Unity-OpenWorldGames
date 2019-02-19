@@ -159,7 +159,8 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     }
     internal void LoadResearch(int researchId,int level, DateTime time)
     {
-        TargetResearch = _characterManager.GetResearchById(researchId);
+        var characterDatabase = CharacterDatabase.Instance();
+        TargetResearch = characterDatabase.GetResearchById(researchId);
         Level = level;
         GetComponent<Image>().sprite = TargetResearch.GetSprite();
         _time = time;

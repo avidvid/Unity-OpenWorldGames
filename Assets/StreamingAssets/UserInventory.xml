@@ -55,4 +55,37 @@
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
   </UserItem>
+  <UserItem>
+    <UserId>22</UserId>
+    <ItemId>5</ItemId>
+    <StackCnt>2</StackCnt>
+    <Equipped>true</Equipped>
+    <Stored>false</Stored>
+    <Order>10</Order>
+    <TimeToUse>1</TimeToUse>
+    <Deleted>false</Deleted>
+    <Created>2019-06-14T17:06:57.5051813-05:00</Created>
+  </UserItem>
+  <UserItem>
+    <UserId>22</UserId>
+    <ItemId>2</ItemId>
+    <StackCnt>1</StackCnt>
+    <Equipped>true</Equipped>
+    <Stored>false</Stored>
+    <Order>0</Order>
+    <TimeToUse>1</TimeToUse>
+    <Deleted>false</Deleted>
+    <Created>2019-06-14T17:06:57.5051813-05:00</Created>
+  </UserItem>
+  <UserItem>
+    <UserId>22</UserId>
+    <ItemId>6</ItemId>
+    <StackCnt>1</StackCnt>
+    <Equipped>true</Equipped>
+    <Stored>false</Stored>
+    <Order>0</Order>
+    <TimeToUse>903</TimeToUse>
+    <Deleted>false</Deleted>
+    <Created>2019-06-14T17:06:57.5051813-05:00</Created>
+  </UserItem>
 </ArrayOfUserItem>

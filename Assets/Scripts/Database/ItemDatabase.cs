@@ -27,9 +27,7 @@ public class ItemDatabase : MonoBehaviour {
     void Awake()
     {
         _itemDatabase = ItemDatabase.Instance();
-    }
-    void Start()
-    {
+        Debug.Log("***IDB*** Start!");
         _items = LoadItems();
         Debug.Log("IDB-Items.Count = " + _items.Count);
         _recipes = LoadRecipes();

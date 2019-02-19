@@ -14,9 +14,7 @@ public class CharacterDatabase : MonoBehaviour {
     void Awake()
     {
         _characterDatabase = CharacterDatabase.Instance();
-    }
-    void Start()
-    {
+        Debug.Log("***CDB*** Start!");
         _characters = LoadCharacters();
         Debug.Log("CDB-Characters.Count = " + _characters.Count);
         _researches = LoadResearches();
@@ -74,6 +72,13 @@ public class CharacterDatabase : MonoBehaviour {
     internal List<Research> GetResearches()
     {
         return _researches;
+    }
+    internal Research GetResearchById(int id)
+    {
+        for (int i = 0; i < _researches.Count; i++)
+            if (_researches[i].Id == id)
+                return _researches[i];
+        return null;
     }
     #endregion
     #region CharacterDatabase Instance

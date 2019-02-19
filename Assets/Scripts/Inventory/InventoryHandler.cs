@@ -8,11 +8,12 @@ using UnityEngine.UI;
 public class InventoryHandler : MonoBehaviour
 {
     private static InventoryHandler _inv;
+    private CharacterManager _characterManager;
+    private InventoryManager _inventoryManager;
     private int _playerSlots;
     private GUIManager _GUIManager;
 
     private ItemDatabase _itemDatabase;
-    private CharacterManager _characterManager;
     //private ModalPanel _modalPanel; 
 
     private bool _updateInventory;
@@ -30,8 +31,8 @@ public class InventoryHandler : MonoBehaviour
 
     public Sprite LockSprite;
 
-    private List<ItemIns> _invItems = new List<ItemIns>();
-    private List<ItemIns> _equipments = new List<ItemIns>();
+    private List<ItemIns> _invCarry = new List<ItemIns>();
+    private List<ItemIns> _invEquipment = new List<ItemIns>();
     internal List<GameObject> InvSlots = new List<GameObject>();
     internal SlotEquipment[] EquiSlots = new SlotEquipment[14];
 
@@ -45,6 +46,7 @@ public class InventoryHandler : MonoBehaviour
         _inv = InventoryHandler.Instance();
         _itemDatabase = ItemDatabase.Instance();
         _characterManager = CharacterManager.Instance();
+        _inventoryManager = InventoryManager.Instance();
         _itemMixture = ItemMixture.Instance();
         _researchingSlot = ResearchSlot.Instance();
         _GUIManager = GUIManager.Instance();
@@ -76,14 +78,8 @@ public class InventoryHandler : MonoBehaviour
             GameObject.Find("CharacterPic").GetComponent<Button>().interactable = false;
         }
         _playerSlots = _characterManager.CharacterSetting.CarryCnt;
-        var userInvItems = _characterManager.CharacterInventory;
-        foreach (var itemIns in userInvItems)
-        {
-            if (itemIns.UserItem.Equipped)
-                _equipments.Add(itemIns);
-            else
-                _invItems.Add(itemIns);
-        }
+        _invCarry = _inventoryManager.InvCarry;
+        _invEquipment = _inventoryManager.InvEquipment;
         //Equipment
         EquiSlots = _inventoryPanel.GetComponentsInChildren<SlotEquipment>();
         for (int i = 0; i < EquiSlots.Length; i++)
@@ -93,7 +89,7 @@ public class InventoryHandler : MonoBehaviour
             ItemEquipment equipmentItem = EquiSlots[i].GetComponentInChildren<ItemEquipment>();
             equipmentItem.ItemIns = null;
             equipmentItem.name = "Empty";
-            foreach (var equipmentIns in _equipments)
+            foreach (var equipmentIns in _invEquipment)
             {
                 if (equipmentIns.Item.PlaceHolder == EquiSlots[i].EquType)
                 {
@@ -101,7 +97,7 @@ public class InventoryHandler : MonoBehaviour
                     equipmentItem.ItemIns = equipmentIns;
                     equipmentItem.name = equipmentIns.Item.Name;
                     equipmentIns.UserItem.Order = (int) EquiSlots[i].EquType;
-                    equipmentItem.GetComponent<Image>().sprite = _equipments[i].Item.GetSprite();
+                    equipmentItem.GetComponent<Image>().sprite = _invEquipment[i].Item.GetSprite();
                     break;
                 }
             }
@@ -127,16 +123,16 @@ public class InventoryHandler : MonoBehaviour
             {
                 GameObject itemObject = Instantiate(_inventoryItem);
                 ItemData data = itemObject.GetComponent<ItemData>();
-                data.ItemIns = _invItems[i];
+                data.ItemIns = _invCarry[i];
                 data.SlotIndex = i;
                 //print(_invItems[i].Id + "-" + i);
                 itemObject.transform.SetParent(InvSlots[i].transform);
                 itemObject.transform.position = Vector2.zero;
-                InvSlots[i].name = itemObject.name = _invItems[i].Item.Name;
-                if (_invItems[i].Item.Id != -1)
+                InvSlots[i].name = itemObject.name = _invCarry[i].Item.Name;
+                if (_invCarry[i].Item.Id != -1)
                 {
-                    itemObject.GetComponent<Image>().sprite = _invItems[i].Item.GetSprite();
-                    itemObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _invItems[i].UserItem.StackCnt > 1 ? _invItems[i].UserItem.ToString() :"";
+                    itemObject.GetComponent<Image>().sprite = _invCarry[i].Item.GetSprite();
+                    itemObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _invCarry[i].UserItem.StackCnt > 1 ? _invCarry[i].UserItem.ToString() :"";
                 }
             }
             //todo: lets user buy a slot 
@@ -168,27 +164,27 @@ public class InventoryHandler : MonoBehaviour
             //Save new inventory 
             if (_updateInventory)
             {
-                _invItems.Clear();
+                _invCarry.Clear();
                 for (int i = 0; i < _playerSlots; i++)
                 {
                     var tmpItem = InvSlots[i].transform.GetChild(0).GetComponent<ItemData>().ItemIns;
-                    _invItems.Add(tmpItem);
+                    _invCarry.Add(tmpItem);
                 }
                 _updateInventory = false;
             }
             //Save new Equipments 
             if (_updateEquipments)
             {
-                _equipments.Clear();
+                _invEquipment.Clear();
                 foreach (var equipmentSlot in EquiSlots)
                 {
                     var tmpItem = equipmentSlot.transform.GetComponentInChildren<ItemEquipment>().ItemIns;
-                    _invItems.Add(tmpItem);
+                    _invCarry.Add(tmpItem);
                 }
                 _updateEquipments = false;
             }
-            _characterManager.SaveCharacterInventory();
         }
+        _inventoryManager.UpdateInventory = true;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -225,7 +221,7 @@ public class InventoryHandler : MonoBehaviour
 
     internal bool HaveAvailableSlot()
     {
-        if (_invItems.Count< _playerSlots)
+        if (_invCarry.Count< _playerSlots)
             return true;
         return false;
     }
@@ -392,22 +388,18 @@ public class InventoryHandler : MonoBehaviour
         else
             _itemMixture.LoadItem(playerMixture);
     }
-
     public void SaveCharacterMixture(int itemId, int stackCnt, DateTime time)
     {
         _characterManager.SaveCharacterMixture(itemId,  stackCnt, time);
     }
-
     public Recipe CheckRecipes(int first, int second)
     {
         return _characterManager.FindUserRecipes( first,  second);
     }
-
     internal void PrintMessage(string message,Color color)
     {
         _GUIManager.PrintMessage(message, color);
     }
-
     public OupItem BuildItemFromDatabase(int id)
     {
         return _itemDatabase.GetItemById(id);

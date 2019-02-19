@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class UserItem
@@ -27,5 +24,8 @@ public class UserItem
         TimeToUse = 1;
         Deleted = false;
         Created = DateTime.Now;
+    }
+    public UserItem()
+    {
     }
 }

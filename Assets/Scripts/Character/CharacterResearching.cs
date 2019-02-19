@@ -27,8 +27,8 @@ public class CharacterResearching
 
     internal string MyInfo()
     {
-        var characterManager = CharacterManager.Instance();
-        return Id + "-" + characterManager.GetResearchById(ResearchId).Name + " (" + Level + ") in " + ResearchTime;
+        var characterDatabase = CharacterDatabase.Instance();
+        return Id + "-" + characterDatabase.GetResearchById(ResearchId).Name + " (" + Level + ") in " + ResearchTime;
     }
     internal void Print()
     {

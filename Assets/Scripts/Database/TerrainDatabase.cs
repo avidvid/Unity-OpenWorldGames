@@ -46,10 +46,7 @@ public class TerrainDatabase : MonoBehaviour {
         _terrainDatabase = TerrainDatabase.Instance(); 
          _characterDatabase = CharacterDatabase.Instance();
         _userDatabase = UserDatabase.Instance();
-    }
-
-    void Start()
-    {
+        Debug.Log("***TDB*** Start!");
         //Load Regions from database 
         LoadRegions();
         //Set Region based on the user
