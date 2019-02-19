@@ -6,13 +6,10 @@ using System.Collections; using System.Collections.Generic; using UnityEngin
     [SerializeField]
     private BuildingInterior _building;
 
-
     private bool _monsterWarned;
 
-    //private float nextActionTime = 0.0f;
-
-    // Use this for initialization
     void Start ()     {
+        _building = GameObject.Find("Building Interior").GetComponent<BuildingInterior>();
         if (_building == null)
         {
             _cache = Cache.Instance();

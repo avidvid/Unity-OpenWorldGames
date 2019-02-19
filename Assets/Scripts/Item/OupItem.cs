@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
-using System.Runtime.InteropServices;
-using Random = UnityEngine.Random;
+using UnityEngine;
 
 [Serializable]
-public abstract class OupItem
+public class OupItem
 {
     public enum ItemType
     {
@@ -79,12 +75,14 @@ public abstract class OupItem
     public PlaceType PlaceHolder { get; set; }
     public int Agility { get; set; }
     public int Bravery { get; set; }
+    //todo: remove Carry 
     public int Carry { get; set; }
     public int CarryCnt { get; set; }
     public int Charming { get; set; }
     public int Intellect { get; set; }
     public int Crafting { get; set; }
     public int Researching { get; set; }
+    //todo: remove Speed 
     public int Speed { get; set; }
     public int Stamina { get; set; }
     public int Strength { get; set; }
@@ -146,7 +144,6 @@ public abstract class OupItem
     }
     protected OupItem()
     {
-        Id = -1;
     }
     public virtual string GetTooltip()
     {
@@ -181,19 +178,5 @@ public abstract class OupItem
         }
         Sprite Sprite = this.GetSprite();
         Debug.Log("Id:" + Id + " Name:" + Name + " Sprite:" + Sprite.name + " Type:" + Type + " Rarity:" + Rarity);
-    }
-    internal void UseItem(int value)
-    {
-        throw new Exception("Todo: Move to equipment");
-        switch (Type)
-        {
-            case ItemType.Tool:
-                MaxTimeToUse -= value;
-                if (MaxTimeToUse == 0)
-                {
-                    Id = 0;
-                }
-                break;
-        }
     }
 }

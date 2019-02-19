@@ -12,7 +12,6 @@ public class InventoryHandler : MonoBehaviour
     private GUIManager _GUIManager;
 
     private ItemDatabase _itemDatabase;
-    private UserDatabase _userDatabase;
     private CharacterManager _characterManager;
     //private ModalPanel _modalPanel; 
 
@@ -24,20 +23,17 @@ public class InventoryHandler : MonoBehaviour
     private GameObject _inventoryPanel;
     private GameObject _popupAction; 
     private GameObject _slotPanel;
+    
+    private GameObject _inventorySlot;
+    private GameObject _inventorySlotBroken;
+    private GameObject _inventoryItem;
 
-    [SerializeField]
-    private GameObject InventorySlot;
-    [SerializeField]
-    private GameObject InventorySlotBroken;
-    [SerializeField]
-    private GameObject InventoryItem;
-    [SerializeField]
-    private Sprite _lockSprite;
+    public Sprite LockSprite;
 
     private List<ItemIns> _invItems = new List<ItemIns>();
     private List<ItemIns> _equipments = new List<ItemIns>();
-    public List<GameObject> InvSlots = new List<GameObject>();
-    public SlotEquipment[] EquiSlots = new SlotEquipment[14];
+    internal List<GameObject> InvSlots = new List<GameObject>();
+    internal SlotEquipment[] EquiSlots = new SlotEquipment[14];
 
     private int _slotAmount =30;
     public bool ShowInventory;
@@ -45,9 +41,9 @@ public class InventoryHandler : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        _inv = Instance();
+        //Instance
+        _inv = InventoryHandler.Instance();
         _itemDatabase = ItemDatabase.Instance();
-        _userDatabase = UserDatabase.Instance();
         _characterManager = CharacterManager.Instance();
         _itemMixture = ItemMixture.Instance();
         _researchingSlot = ResearchSlot.Instance();
@@ -57,11 +53,20 @@ public class InventoryHandler : MonoBehaviour
         _inventoryPanel = GameObject.Find("Inventory Panel");
         _slotPanel = _inventoryPanel.transform.Find("Slot Panel").gameObject;
 
+
+        _inventorySlotBroken = Resources.Load<GameObject>("Prefabs/SlotInventoryBroken");
+        _inventorySlot = Resources.Load<GameObject>("Prefabs/SlotInventory");
+        _inventoryItem = Resources.Load<GameObject>("Prefabs/Item");
+
+    }
+
+    void Start()
+    {        
         //Disable All buttons inside building 
         var insideBuilding = GameObject.Find("Building Interior");
-        if (insideBuilding!=null)
+        if (insideBuilding != null)
         {
-            _inTerrain= false;
+            _inTerrain = false;
             GameObject.Find("ButtonShop").GetComponent<Button>().interactable = false;
             GameObject.Find("ButtonSetting").GetComponent<Button>().interactable = false;
             GameObject.Find("ButtonAbout").GetComponent<Button>().interactable = false;
@@ -70,10 +75,6 @@ public class InventoryHandler : MonoBehaviour
             GameObject.Find("PlayerPic").GetComponent<Button>().interactable = false;
             GameObject.Find("CharacterPic").GetComponent<Button>().interactable = false;
         }
-    }
-
-    void Start()
-    {
         _playerSlots = _characterManager.CharacterSetting.CarryCnt;
         var userInvItems = _characterManager.CharacterInventory;
         foreach (var itemIns in userInvItems)
@@ -114,17 +115,17 @@ public class InventoryHandler : MonoBehaviour
         {
             if (i < _playerSlots)
             {
-                InvSlots.Add(Instantiate(InventorySlot));
+                InvSlots.Add(Instantiate(_inventorySlot));
                 InvSlots[i].GetComponent<SlotData>().SlotIndex = i;
                 //print(i + "-" +InvSlots[i].GetComponent<SlotData>().SlotIndex );
             }
             else
-                InvSlots.Add(Instantiate(InventorySlotBroken));
+                InvSlots.Add(Instantiate(_inventorySlotBroken));
 
             InvSlots[i].transform.SetParent(_slotPanel.transform);
             if (i < _playerSlots)
             {
-                GameObject itemObject = Instantiate(InventoryItem);
+                GameObject itemObject = Instantiate(_inventoryItem);
                 ItemData data = itemObject.GetComponent<ItemData>();
                 data.ItemIns = _invItems[i];
                 data.SlotIndex = i;
@@ -144,7 +145,7 @@ public class InventoryHandler : MonoBehaviour
                 if (i == _playerSlots)
                 {
                     Button button = InvSlots[i].GetComponentInChildren<Button>();
-                    button.GetComponent<Image>().sprite = _lockSprite;
+                    button.GetComponent<Image>().sprite = LockSprite;
                     InvSlots[i].name = button.name = "Lock";
                     if (_inTerrain)
                         button.interactable = true;
@@ -182,6 +183,7 @@ public class InventoryHandler : MonoBehaviour
                 foreach (var equipmentSlot in EquiSlots)
                 {
                     var tmpItem = equipmentSlot.transform.GetComponentInChildren<ItemEquipment>().ItemIns;
+                    _invItems.Add(tmpItem);
                 }
                 _updateEquipments = false;
             }
@@ -280,9 +282,9 @@ public class InventoryHandler : MonoBehaviour
                 if (tmpItem.ItemIns == null)
                 {
                     tmpItem.LoadItem(new ItemIns(item,new UserItem(item,stackCnt)));
+                    UpdateInventory(true);
+                    return true;
                 }
-                UpdateInventory(true);
-                return true;
             }
         }
         PrintMessage("Not Enough room in inventory",Color.red);
@@ -398,7 +400,7 @@ public class InventoryHandler : MonoBehaviour
 
     public Recipe CheckRecipes(int first, int second)
     {
-        return _userDatabase.FindUserRecipes( first,  second);
+        return _characterManager.FindUserRecipes( first,  second);
     }
 
     internal void PrintMessage(string message,Color color)

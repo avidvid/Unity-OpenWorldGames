@@ -8,17 +8,18 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 {
     private static ItemMixture _itemMixture;
     private CharacterManager _characterManager;
-    private ModalPanel _modalPanel;
     private InventoryHandler _inv;
+    private ModalPanel _modalPanel;
+
     private Vector2 _offset;
     private Tooltip _tooltip;
     private Transform _parent;
     public Sprite DefaultSprite;
     public bool ItemLocked;
 
-
     private DateTime _time;
-    private OupItem _item;
+
+    public ItemIns ItemIns;
     private int _stackCnt;
     void Awake()
     {
@@ -41,19 +42,19 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 //texts[1].color = Color.green;
                 texts[1].text = "Ready";
                 ItemLocked = false;
-                _inv.PrintMessage(_item.Name + " Is ready", Color.green);
+                _inv.PrintMessage(ItemIns.Item.Name + " Is ready", Color.green);
             }
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (_item == null)
+        if (ItemIns == null)
             return;
-        _tooltip.Activate(_item);
+        _tooltip.Activate(ItemIns);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_item == null)
+        if (ItemIns == null)
             return;
         _tooltip.Deactivate();
     }
@@ -69,7 +70,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         if (ItemLocked)
             return;
-        if (_item == null)
+        if (ItemIns == null)
             return;
         _offset = eventData.position - (Vector2)this.transform.position;
         this.transform.position = eventData.position - _offset;
@@ -78,7 +79,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         if (ItemLocked)
             return;
-        if (_item == null)
+        if (ItemIns == null)
             return;
         _parent = transform.parent;
         this.transform.SetParent(this.transform.parent.parent.parent);
@@ -86,7 +87,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (_item == null)
+        if (ItemIns == null)
             return;
         if (_time < DateTime.Now)
             SceneSettings.GoToRecipeScene();
@@ -118,7 +119,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         if (ItemLocked)
             return;
-        if (_item == null)
+        if (ItemIns == null)
             return;
         this.transform.position = eventData.position - _offset;
     }
@@ -131,7 +132,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         this.transform.SetParent(_parent);
         this.transform.SetSiblingIndex(0);
 
-        if (_item == null)
+        if (ItemIns == null)
         {
             TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
             texts[0].text = "";
@@ -155,9 +156,10 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     internal void LoadItem(int itemId,int stackCnt, DateTime time)
     {
         var itemDatabase = ItemDatabase.Instance();
-        _item = itemDatabase.GetItemById(itemId);
+        var item = itemDatabase.GetItemById(itemId);
+        ItemIns = new ItemIns(item,new UserItem(item, stackCnt));
         _stackCnt = stackCnt;
-        GetComponent<Image>().sprite = _item.GetSprite();
+        GetComponent<Image>().sprite = item.GetSprite();
         _time = time;
         ItemLocked = true;
 
@@ -171,12 +173,14 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void LoadEmpty()
     {
-        _item = null;
+        ItemIns = null;
         GetComponent<Image>().sprite = DefaultSprite;
         _time = DateTime.MinValue;
         ItemLocked = false;
         TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
         texts[1].text = "Empty";
+        //Save empty item in mixture
+        _inv.SaveCharacterMixture(0,0, DateTime.Now);
     }
 
 
@@ -193,7 +197,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     internal bool IsEmpty()
     {
-        if (_item == null)
+        if (ItemIns == null)
             return true;
         return false;
     }

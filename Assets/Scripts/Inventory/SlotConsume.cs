@@ -69,32 +69,32 @@ public class SlotConsume: MonoBehaviour, IDropHandler
 
     private void ConsumeItem(ItemData draggedItem)
     {
-        if (draggedItem.ItemInstance == null)
+        if (draggedItem.ItemIns == null)
             return;
         ItemEquipment existingEquipment;
-        ItemContainer itemEquipment;
-        switch (draggedItem.ItemInstance.Item.Type)
+        ItemIns itemEquipment;
+        switch (draggedItem.ItemIns.Item.Type)
         {
             case OupItem.ItemType.Consumable:
                 //Use all the stack
-                if (_inv.UseItem(draggedItem.Item))
-                    draggedItem.ItemInstance.Item.setStackCnt(0);
+                if (_inv.UseItem(draggedItem.ItemIns))
+                    draggedItem.ItemIns.UserItem.StackCnt = 0;
                 break;
             case OupItem.ItemType.Equipment:
-                if (draggedItem.Item.StackCnt == draggedItem.Item.MaxStackCnt)
+                if (draggedItem.ItemIns.UserItem.StackCnt == draggedItem.ItemIns.Item.MaxStackCnt)
                 {
-                    existingEquipment = _inv.EquiSlots[(int)draggedItem.Item.Equipment.PlaceHolder]
+                    existingEquipment = _inv.EquiSlots[(int)draggedItem.ItemIns.Item.PlaceHolder]
                         .GetComponentInChildren<ItemEquipment>();
-                    itemEquipment = existingEquipment.Item;
-                    if (itemEquipment.Id == draggedItem.Item.Id)
+                    itemEquipment = existingEquipment.ItemIns;
+                    if (itemEquipment.Item.Id == draggedItem.ItemIns.Item.Id)
                     {
                         _inv.PrintMessage("You are equipped with the same Equipment" ,Color.yellow);
                         break;
                     }
-                    if (_inv.UseItem(draggedItem.Item))
+                    if (_inv.UseItem(draggedItem.ItemIns))
                     {
                         //load new Item to equipments
-                        existingEquipment.LoadItem(draggedItem.Item);
+                        existingEquipment.LoadItem(draggedItem.ItemIns);
                         //unload new Item to equipments
                         draggedItem.LoadItem(itemEquipment);
                         _inv.UnUseItem(itemEquipment);
@@ -104,25 +104,25 @@ public class SlotConsume: MonoBehaviour, IDropHandler
                 }
                 else
                     _inv.PrintMessage(
-                        "You need " + (draggedItem.Item.MaxStackCnt - draggedItem.Item.StackCnt) + " of this item to equip",
+                        "You need " + (draggedItem.ItemIns.Item.MaxStackCnt - draggedItem.ItemIns.UserItem.StackCnt) + " of this item to equip",
                         Color.yellow);
                 break;
             case OupItem.ItemType.Weapon:
                 //Todo: Add the logic of two hand item 
-                existingEquipment = _inv.EquiSlots[(int) Equipment.PlaceType.Left].GetComponentInChildren<ItemEquipment>();
-                itemEquipment = existingEquipment.Item;
-                if (itemEquipment.Id != -1)
+                existingEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Left].GetComponentInChildren<ItemEquipment>();
+                itemEquipment = existingEquipment.ItemIns;
+                if (itemEquipment!= null)
                 {
-                    existingEquipment = _inv.EquiSlots[(int) Equipment.PlaceType.Right]
+                    existingEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Right]
                         .GetComponentInChildren<ItemEquipment>();
-                    itemEquipment = existingEquipment.Item;
+                    itemEquipment = existingEquipment.ItemIns;
                 }
-                if (draggedItem.Item.CarryType == Weapon.Hands.OneHand)
+                if (draggedItem.ItemIns.Item.CarryType == OupItem.Hands.OneHand)
                 {
-                    if (_inv.UseItem(draggedItem.Item))
+                    if (_inv.UseItem(draggedItem.ItemIns))
                     {
                         //load new Item to equipments
-                        existingEquipment.LoadItem(draggedItem.Item);
+                        existingEquipment.LoadItem(draggedItem.ItemIns);
                         //unload new Item to equipments
                         draggedItem.LoadItem(itemEquipment);
                         _inv.UnUseItem(itemEquipment);
@@ -133,29 +133,29 @@ public class SlotConsume: MonoBehaviour, IDropHandler
                 else
                     _inv.PrintMessage("It is not possible to carry this weapon yet", Color.yellow);
                 break;
-            case Item.ItemType.Tool:
-                existingEquipment = _inv.EquiSlots[(int) Equipment.PlaceType.Left].GetComponentInChildren<ItemEquipment>();
-                itemEquipment = existingEquipment.Item;
-                if (itemEquipment.Id != -1)
+            case OupItem.ItemType.Tool:
+                existingEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Left].GetComponentInChildren<ItemEquipment>();
+                itemEquipment = existingEquipment.ItemIns;
+                if (itemEquipment != null)
                 {
-                    existingEquipment = _inv.EquiSlots[(int) Equipment.PlaceType.Right]
+                    existingEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Right]
                         .GetComponentInChildren<ItemEquipment>();
-                    itemEquipment = existingEquipment.Item;
+                    itemEquipment = existingEquipment.ItemIns;
                 }
-                existingEquipment.LoadItem(draggedItem.Item);
+                existingEquipment.LoadItem(draggedItem.ItemIns);
                 draggedItem.LoadItem(itemEquipment);
                 _inv.UpdateInventory(true);
                 _inv.UpdateEquipments(true);
                 break;
             default:
-                _GUIManager.PrintMessage(draggedItem.Item.Name + " can not be used", Color.yellow);
+                _GUIManager.PrintMessage(draggedItem.ItemIns.Item.Name + " can not be used", Color.yellow);
                 break;
         }
     }
     private void ConsumeResearch(ResearchSlot draggedResearch)
     {
-        if (draggedResearch.CharResearch.Id == -1)
+        if (draggedResearch.TargetResearch == null)
             return;
-        _characterManager.CharacterSettingApplyResearch(draggedResearch.CharResearch, draggedResearch.TargetResearch);
+        _characterManager.CharacterSettingApplyResearch(draggedResearch.TargetResearch, draggedResearch.Level);
     }
 }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ItemIns
 {
     public OupItem Item;
     public UserItem UserItem;
-
+    
     public ItemIns(OupItem item,UserItem userItem)
     {
         Item = item;

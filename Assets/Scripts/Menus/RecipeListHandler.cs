@@ -7,21 +7,20 @@ using UnityEngine.UI;
 
 public class RecipeListHandler : MonoBehaviour {
 
-
+    private CharacterManager _characterManager;
     private ItemDatabase _itemDatabase;
-    private UserDatabase _userDatabase;
     private ModalPanel _modalPanel;
 
     //Recipe Prefab
     public GameObject RecipeContent;
 
-    private List<Recipe> _recipes = new List<Recipe>();
+    private List<Recipe> _recipes ;
     private GameObject _addRecipePanel;
 
     void Awake()
     {
         _itemDatabase = ItemDatabase.Instance();
-        _userDatabase = UserDatabase.Instance();
+        _characterManager = CharacterManager.Instance();
         _modalPanel = ModalPanel.Instance();
         _addRecipePanel = GameObject.Find("AddRecipePanel");
     }
@@ -31,7 +30,7 @@ public class RecipeListHandler : MonoBehaviour {
         var contentPanel = GameObject.Find("ContentPanel");
         var recipeInfo = GameObject.Find("RecipeInfo").GetComponent<TextMeshProUGUI>();
         _addRecipePanel.SetActive(false);
-        _recipes = _userDatabase.UserRecipeList();
+        _recipes = _characterManager.UserRecipes;
         recipeInfo.text = "Your recipes: " + _recipes.Count(p => p.IsEnable);
         for (int i = 0; i < _recipes.Count; i++)
         {
@@ -68,7 +67,7 @@ public class RecipeListHandler : MonoBehaviour {
     {
         var recipeCode = _addRecipePanel.GetComponentInChildren<TMP_InputField>().text;
         if (!string.IsNullOrEmpty(recipeCode))
-            if (_userDatabase.ValidateRecipeCode(recipeCode))
+            if (_characterManager.ValidateRecipeCode(recipeCode))
                 _modalPanel.Choice("Your New Recipe is ready! ", ModalPanel.ModalPanelType.Ok, RefreshTheScene);
             else
                 _modalPanel.Choice("The Recipe Code is Wrong! ", ModalPanel.ModalPanelType.Ok);

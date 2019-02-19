@@ -1,12 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SocialPlatforms.Impl;
 using System;
 
 public class ProfileHandler : MonoBehaviour {

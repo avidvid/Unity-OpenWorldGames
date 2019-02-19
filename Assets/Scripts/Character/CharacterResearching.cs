@@ -25,9 +25,14 @@ public class CharacterResearching
     {
     }
 
-    internal void Print()
+    internal string MyInfo()
     {
         var characterManager = CharacterManager.Instance();
-        Debug.Log("CharacterResearching = " + Id + "-" + characterManager.GetResearchById(ResearchId).Name + " (" + Level + ") in " + ResearchTime);
+        return Id + "-" + characterManager.GetResearchById(ResearchId).Name + " (" + Level + ") in " + ResearchTime;
     }
+    internal void Print()
+    {
+        Debug.Log("CharacterResearching = " + MyInfo());
+    }
+
 }

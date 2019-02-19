@@ -9,25 +9,24 @@ using System.Xml.Serialization;
 public class TerrainDatabase : MonoBehaviour {
 
     private static TerrainDatabase _terrainDatabase;
-    private CharacterManager _characterManager;
     private CharacterDatabase _characterDatabase;
+    private UserDatabase _userDatabase;
 
-    internal List<Region> _regions = new List<Region>();
-    public Region Region;
+    private List<Region> _regions = new List<Region>();
+    private Region _region;
 
     private List<TerrainIns> _terrains = new List<TerrainIns>();
-    public List<TerrainIns> Terrains = new List<TerrainIns>();
+    private List<TerrainIns> _myTerrains = new List<TerrainIns>();
 
     private List<ElementIns> _elements = new List<ElementIns>();
-    public List<ElementIns> Elements = new List<ElementIns>();
+    private List<ElementIns> _myElements = new List<ElementIns>();
 
+    private List<InsideStory> _insideStories = new List<InsideStory>();
+    private List<InsideStory> _myInsideStories = new List<InsideStory>();
 
-    internal List<InsideStory> _insideStories = new List<InsideStory>();
-    public List<InsideStory> InsideStories = new List<InsideStory>();
-    public HashSet<int> InsideMonsterIds = new HashSet<int>();
-    public List<Character> InsideMonsters = new List<Character>();
+    private List<Character> _monsters = new List<Character>();
+    private List<Character> _insideMonsters = new List<Character>();
 
-    public List<Character> Monsters = new List<Character>();
 
     #region TerrainDatabase Instance
     public static TerrainDatabase Instance()
@@ -44,45 +43,42 @@ public class TerrainDatabase : MonoBehaviour {
 
     void Awake()
     {
-        _terrainDatabase = TerrainDatabase.Instance();
-        _characterDatabase = CharacterDatabase.Instance();
-        _characterManager = CharacterManager.Instance();
+        _terrainDatabase = TerrainDatabase.Instance(); 
+         _characterDatabase = CharacterDatabase.Instance();
+        _userDatabase = UserDatabase.Instance();
+    }
 
+    void Start()
+    {
         //Load Regions from database 
         LoadRegions();
         //Set Region based on the user
-        Region = GetRegion(_characterManager.UserPlayer.Latitude, _characterManager.UserPlayer.Longitude);
-
-        Region.Print();
+        _region = GetRegion(_userDatabase.GetUserPlayer().Latitude, _userDatabase.GetUserPlayer().Longitude);
+        _region.Print();
 
         //Load Terrains from database 
-        LoadTerrains();
+        _terrains=LoadTerrains();
+        Debug.Log("TDB-Terrains.Count = " + _terrains.Count);
         //Set Terrains based on the user region
-        SetTerrainTypes();
-        if (Terrains.Count == 0)
-            throw new Exception("Terrains count is ZERO");
-
+        SetRegionTerrainTypes();
+        Debug.Log("TDB-RegionTerrains.Count = " + _myTerrains.Count);
         //Load Elements from database 
-        LoadElements();
+        _elements = LoadElements();
+        Debug.Log("TDB-Elements.Count = " + _elements.Count);
         //Set Elements based on the user region
-        SetElementTypes();
-        if (Elements.Count == 0)
-            throw new Exception("Elements count is ZERO");
-
+        SetRegionElementTypes();
+        Debug.Log("TDB-RegionElements.Count = " + _myElements.Count);
         //Load InsideStories from database 
-        LoadInsideStories();
+        _insideStories = LoadInsideStories();
+        Debug.Log("TDB-InsideStories.Count = " + _insideStories.Count);
         //Set InsideStories based on the user region
-        SetInsideStoryTypes();
-        if (InsideStories.Count == 0)
-            throw new Exception("InsideStories count is ZERO");
-
+        SetRegionInsideStoryTypes();
+        Debug.Log("TDB-RegionInsideStories.Count = " + _myInsideStories.Count);
+        Debug.Log("TDB-RegionInsideMonsters.Count = " + _insideMonsters.Count);
         //Set Monsters based on the user region
-        SetMonsterTypes();
-        if (Monsters.Count == 0)
-            throw new Exception("Monsters count is ZERO");
-        if (InsideMonsters.Count == 0)
-            throw new Exception("InsideMonsters count is ZERO");
-        Debug.Log("Terrain Database Success!");
+        SetRegionMonsterTypes();
+        Debug.Log("TDB-RegionMonsters.Count = " + _monsters.Count);
+        Debug.Log("***TDB*** Success!");
     }
     #region Regions
     private void LoadRegions()
@@ -95,6 +91,10 @@ public class TerrainDatabase : MonoBehaviour {
         FileStream fs = new FileStream(path, FileMode.Open);
         _regions = (List<Region>)serializer.Deserialize(fs);
         fs.Close();
+    }
+    internal int GetRegionKey()
+    {
+        return _region.Key;
     }
     public Region GetRegion(float latitude, float longitude)
     {
@@ -113,149 +113,147 @@ public class TerrainDatabase : MonoBehaviour {
     }
     #endregion
     #region Terrains
-    private void LoadTerrains()
+    private List<TerrainIns> LoadTerrains()
     {
-        _terrains.Clear();
         string path = Path.Combine(Application.streamingAssetsPath, "Terrain.xml");
         //Read the Recipes from Terrain.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(List<TerrainIns>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _terrains = (List<TerrainIns>)serializer.Deserialize(fs);
+        var terrains = (List<TerrainIns>)serializer.Deserialize(fs);
         fs.Close();
+        return terrains;
     }
-    private void SetTerrainTypes()
+    private void SetRegionTerrainTypes()
     {
-        List<int> regionTerrains = Region.Terrains.Split(',').Select(Int32.Parse).ToList();
+        List<int> regionTerrains = _region.Terrains.Split(',').Select(Int32.Parse).ToList();
         foreach (var terrain in _terrains)
             if (regionTerrains.IndexOf(terrain.Id) != -1  && terrain.IsEnable)
-                Terrains.Add(terrain);
+                _myTerrains.Add(terrain);
+    }
+    internal List<TerrainIns> GetTerrains()
+    {
+        return _myTerrains;
     }
     #endregion
     #region Elements
-    private void LoadElements()
+    private List<ElementIns> LoadElements()
     {
-        _elements.Clear();
         string path = Path.Combine(Application.streamingAssetsPath, "Element.xml");
         //Read the Recipes from Element.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(List<ElementIns>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _elements = (List<ElementIns>)serializer.Deserialize(fs);
+        var elements = (List<ElementIns>)serializer.Deserialize(fs);
         fs.Close();
+        return elements;
     }
-    private void SetElementTypes()
+    private void SetRegionElementTypes()
     {
-        List<int> regionElements = Region.Elements.Split(',').Select(Int32.Parse).ToList();
+        List<int> regionElements = _region.Elements.Split(',').Select(Int32.Parse).ToList();
         foreach (var element in _elements)
             if (regionElements.IndexOf(element.Id) != -1 && element.IsEnable)
-                Elements.Add(element);
-        //Terrain Element HealthCheck 
-        foreach (var terrain in Terrains)
-        {
-            var healthCheck = false;
-            if (!terrain.HasElement)
-                continue;
-            foreach (var element in Elements)
-                if (terrain.Type == element.FavoriteTerrainTypes)
+            {
+                //Terrain Element HealthCheck 
+                var healthCheck = false;
+                foreach (var terrain in _terrains)
                 {
-                    healthCheck = true;
-                    break;
+                    if (!terrain.HasElement)
+                        continue;
+                    if (terrain.Type == element.FavoriteTerrainTypes)
+                    {
+                        healthCheck = true;
+                        break;
+                    }
                 }
-            if (!healthCheck)
-                throw new Exception("Terrain with no available element");
-        }
+                if (!healthCheck)
+                    throw new Exception("Terrain with no available element");
+                _myElements.Add(element);
+            }
+    }
+    internal List<ElementIns> GetElements()
+    {
+        return _myElements;
     }
     #endregion
     #region InsideStories
-    private void LoadInsideStories()
+    private List<InsideStory> LoadInsideStories()
     {
         //Empty the InsideStory DB
-        _insideStories.Clear();
         string path = Path.Combine(Application.streamingAssetsPath, "InsideStory.xml");
         //Read the InsideStories from InsideStory.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(List<InsideStory>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _insideStories = (List<InsideStory>)serializer.Deserialize(fs);
+        var insideStories = (List<InsideStory>)serializer.Deserialize(fs);
         fs.Close();
+        return insideStories;
     }
-    private void SetInsideStoryTypes()
+    private void SetRegionInsideStoryTypes()
     {
-        List<int> regionInsideStories = Region.InsideStories.Split(',').Select(Int32.Parse).ToList();
-        foreach (var insideStory in _insideStories)
-            if (regionInsideStories.IndexOf(insideStory.Id) != -1 && insideStory.IsEnable)
+        List<int> regionInsideStories = _region.InsideStories.Split(',').Select(Int32.Parse).ToList();
+        foreach (var inStory in _insideStories)
+            if (regionInsideStories.IndexOf(inStory.Id) != -1 && inStory.IsEnable)
             {
-                InsideStories.Add(insideStory);
-                foreach (var actor in insideStory.Actors)
-                    InsideMonsterIds.Add(actor.CharacterId);
+                _myInsideStories.Add(inStory);
+                foreach (var actor in inStory.Actors)
+                    _insideMonsters.Add(_characterDatabase.GetCharacterById(actor.CharacterId));
             }
-    }
-    internal Character GetMonsterById(int id)
-    {
-        for (int i = 0; i < InsideMonsters.Count; i++)
-            if (InsideMonsters[i].Id == id)
-                return InsideMonsters[i];
-        return null;
     }
     internal InsideStory GetStoryBasedOnRarity(Vector2 position, int key)
     {
         var rarity = RandomHelper.Range(position, DateTime.Now.DayOfYear, (int)InsideStory.InsideStoryRarity.Common);
         List<InsideStory> insideStories = new List<InsideStory>();
-        for (int i = 0; i < InsideStories.Count; i++)
-            if ((int)InsideStories[i].Rarity >= rarity)
-                insideStories.Add(InsideStories[i]);
+        foreach (var inStory in _myInsideStories)
+        {
+            if ((int)inStory.Rarity >= rarity)
+                insideStories.Add(inStory);
+        }
         print("Rarity=" + rarity + " CNT=" + insideStories.Count + " InsideStory =" + insideStories[RandomHelper.Range(position, key, insideStories.Count)].Name);
         return insideStories[RandomHelper.Range(position, key, insideStories.Count)];
     }
-    #endregion
-    #region Monsters
-    private void SetMonsterTypes()
+    internal Character GetMonsterById(int id)
     {
-        List<int> regionMonsters = Region.Monsters.Split(',').Select(Int32.Parse).ToList();
+        foreach (var inMonster in _insideMonsters)
+            if (inMonster.Id == id)
+                return inMonster;
+        return null;
+    }
+    #endregion
+    #region Monsters    
+    internal List<Character> GetMonsters()
+    {
+        return _monsters;
+    }
+    private void SetRegionMonsterTypes()
+    {
+        List<int> regionMonsters = _region.Monsters.Split(',').Select(Int32.Parse).ToList();
         foreach (var monster in _characterDatabase.GetCharacters())
-        {
             if (regionMonsters.IndexOf(monster.Id) != -1 && monster.IsEnable)
-                Monsters.Add(monster);
-            if (InsideMonsterIds.Contains(monster.Id) && monster.IsEnable)
-                InsideMonsters.Add(monster);
-        }
-        //Terrain Monster HealthCheck 
-        foreach (var terrain in Terrains)
-        {
-            var healthCheck = false;
-            if (!terrain.HasMonster)
-                continue;
-            foreach (var monster in Monsters)
-                if (terrain.Type == monster.FavoriteTerrainTypes)
-                {
-                    healthCheck = true;
-                    break;
-                }
-            if (!healthCheck)
-                throw new Exception("Terrain with no available monster");
-        }
-
-        //InsideStory Monster HealthCheck 
-        foreach (var insideStory in InsideStories)
-        {
-            if (insideStory.Actors.Count <= 0)
-                continue;
-            foreach (var actor in insideStory.Actors)
             {
-                if (InsideMonsters.Any(m => m.Id == actor.CharacterId))
-                    continue;
-                throw new Exception("InsideStory with no available monster. Inside Story: "+ insideStory.Name+ insideStory.Id);
+                //Terrain Monster HealthCheck 
+                var healthCheck = false;
+                foreach (var terrain in _terrains)
+                {
+                    if (!terrain.HasMonster)
+                        continue;
+                    if (terrain.Type == monster.FavoriteTerrainTypes)
+                    {
+                        healthCheck = true;
+                        break;
+                    }
+                }
+                if (!healthCheck)
+                    throw new Exception("Terrain with no available monster");
+                _monsters.Add(monster);
             }
-        }
-
     }
     //Being called by building Interior
-    internal List<Character> GetMonstersByStoryId(InsideStory story)
-    {
-        List<Character> storyActors = new List<Character>();
-        foreach (var monster in Monsters)
-        foreach (var actor in story.Actors)
-            if (actor.CharacterId == monster.Id)
-                storyActors.Add(monster);
-        return storyActors;
-    }
+    //internal List<Character> GetMonstersByStoryId(InsideStory story)
+    //{
+    //    List<Character> storyActors = new List<Character>();
+    //    foreach (var monster in Monsters)
+    //    foreach (var actor in story.Actors)
+    //        if (actor.CharacterId == monster.Id)
+    //            storyActors.Add(monster);
+    //    return storyActors;
+    //}
     #endregion
 }

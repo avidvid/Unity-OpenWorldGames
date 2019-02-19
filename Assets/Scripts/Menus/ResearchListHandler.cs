@@ -134,8 +134,7 @@ public class ResearchListHandler : MonoBehaviour {
         float speed = _characterManager.GetCharacterAttribute("Researching");
         int durationMinutes = research.CalculateTime(nextLevel);
         DateTime time = DateTime.Now.AddMinutes(durationMinutes * (1 - speed));
-        CharacterResearch characterResearch = new CharacterResearch(research.Id, _characterManager.UserPlayer.Id, nextLevel);
-        _characterManager.SaveCharacterResearching(characterResearch,time);
+        _characterManager.SaveCharacterResearching(research.Id, nextLevel, time);
     }
     private bool ResearchUpgradeIsValid(Research research)
     {

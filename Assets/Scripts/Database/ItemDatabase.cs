@@ -27,13 +27,14 @@ public class ItemDatabase : MonoBehaviour {
     void Awake()
     {
         _itemDatabase = ItemDatabase.Instance();
-
-        LoadItems();
-        Debug.Log("items.Count = " + _items.Count);
-        //PrintItems();
-        LoadRecipes();
-        Debug.Log("Recipes.Count = " + _recipes.Count);
-        //PrintRecipes();
+    }
+    void Start()
+    {
+        _items = LoadItems();
+        Debug.Log("IDB-Items.Count = " + _items.Count);
+        _recipes = LoadRecipes();
+        Debug.Log("IDB-Recipes.Count = " + _recipes.Count);
+        Debug.Log("***IDB*** Success!");
     }
     #region Recipe
     internal List<Recipe> GetRecipes()
@@ -44,16 +45,15 @@ public class ItemDatabase : MonoBehaviour {
     {
         return new List<OupItem> { GetItemById(r.FirstItemId), GetItemById(r.SecondItemId), GetItemById(r.FinalItemId) };
     }
-    private void LoadRecipes()
+    private List<Recipe> LoadRecipes()
     {
-        //Empty the Recipes DB
-        _recipes.Clear();
         string path = Path.Combine(Application.streamingAssetsPath, "Recipe.xml");
         //Read the Recipes from Recipe.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(List<Recipe>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _recipes = (List<Recipe>)serializer.Deserialize(fs);
+        var recipes = (List<Recipe>)serializer.Deserialize(fs);
         fs.Close();
+        return recipes;
     }
     public Recipe FindRecipe(int recipeId)
     {
@@ -73,10 +73,6 @@ public class ItemDatabase : MonoBehaviour {
                 return _items[i];
         return null;
     }
-    public ItemContainer FindItem(int id)
-    { 
-        return null;
-    }
     private void SaveItems()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
@@ -85,22 +81,21 @@ public class ItemDatabase : MonoBehaviour {
         serializer.Serialize(fs, _items);
         fs.Close();
     }
-    private void LoadItems()
+    private List<OupItem> LoadItems()
     {
-        //Empty the Items DB
-        _items.Clear();
         string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
         //Read the items from Item.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(List<OupItem>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _items = (List<OupItem>)serializer.Deserialize(fs);
+        var items = (List<OupItem>)serializer.Deserialize(fs);
         fs.Close();
+        return items;
     }
     internal int GetItemIdBasedOnRarity(Vector3 position, string dropItems)
     {
         List<int> items = dropItems.Split(',').Select(Int32.Parse).ToList();
         List<int> availableItems = new List<int>();
-        var rarity = RandomHelper.Range(position, DateTime.Now.DayOfYear, (int)Item.ItemRarity.Common);
+        var rarity = RandomHelper.Range(position, DateTime.Now.DayOfYear, (int)OupItem.ItemRarity.Common);
         for (int i = 0; i < items.Count; i++)
             if ((int)GetItemById(items[i]).Rarity >= rarity)
                 availableItems.Add(items[i]);

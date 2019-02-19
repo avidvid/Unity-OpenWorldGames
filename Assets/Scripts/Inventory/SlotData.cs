@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -38,131 +36,127 @@ public class SlotData : MonoBehaviour,IDropHandler{
             return;
         if (mixedItem != null)
         {
-            if (mixedItem.Item.Id == -1)
+            if (mixedItem.ItemIns == null)
                 return;
             if (!mixedItem.ReadyToUse())
                 return;
         }
         if (draggedItem != null)
-            if (draggedItem.Item.Id == -1)
+            if (draggedItem.ItemIns == null)
                 return;
         if (equipedItem != null)
-            if (equipedItem.Item.Id == -1)
+            if (equipedItem.ItemIns == null)
                 return;
-        ItemData[] existingItems = this.transform.GetComponentsInChildren<ItemData>();
-        if (existingItems.Length <= 0)
+        ItemData existingItem = this.transform.GetComponentInChildren<ItemData>();
+        if (existingItem == null)
             return;
-        ItemData existingItem = existingItems[0];
 
         //Item from Mixture Area
         if (mixedItem != null)
-            if (mixedItem.Item.Id != -1)
+            if (mixedItem.ItemIns != null)
             {
                 //#################################### not empty slot
-                if (existingItem.Item.Id != -1)
+                if (existingItem.ItemIns != null)
                     _inv.PrintMessage("New item should be placed in an empty inventory slot", Color.yellow);
                 //#################################### empty slot
                 else
                 {
                     //Set the slot Item
-                    existingItem.transform.name = mixedItem.Item.Name;
-                    existingItem.GetComponent<Image>().sprite = mixedItem.Item.GetSprite();
+                    existingItem.transform.name = mixedItem.ItemIns.Item.Name;
+                    existingItem.GetComponent<Image>().sprite = mixedItem.ItemIns.Item.GetSprite();
                     TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-                    stackCntText.text = mixedItem.Item.StackCnt > 1 ? mixedItem.Item.StackCnt.ToString() : "";
-                    existingItem.Item = mixedItem.Item;
-                    _inv.InvSlots[SlotIndex].name = mixedItem.Item.Name;
-                    //Delete mixure Item
+                    stackCntText.text = mixedItem.ItemIns.UserItem.StackCnt > 1 ? mixedItem.ItemIns.UserItem.StackCnt.ToString() : "";
+                    existingItem.ItemIns = new ItemIns( mixedItem.ItemIns.Item, mixedItem.ItemIns.UserItem);
+                    _inv.InvSlots[SlotIndex].name = mixedItem.ItemIns.Item.Name;
+                    //Delete mixedItem Item
                     mixedItem.LoadEmpty();
-                    //Save empty item in mixture
-                    _inv.SaveCharacterMixture(mixedItem.Item, DateTime.Now);
                     _inv.UpdateInventory(true);
                 }
                 return;
             }
-
         //Item from equipments Area
         if (equipedItem != null)
-            if (equipedItem.Item.Id != -1)
+            if (equipedItem.ItemIns != null)
             {
                 //#################################### not empty slot
-                if (existingItem.Item.Id != -1)
+                if (existingItem.ItemIns != null)
                     _inv.PrintMessage("New item should be placed in an empty inventory slot", Color.yellow);
                 //#################################### empty slot
                 else
                 {
                     //Set the slot Item
-                    existingItem.transform.name = equipedItem.Item.Name;
-                    existingItem.GetComponent<Image>().sprite = equipedItem.Item.GetSprite();
+                    existingItem.transform.name = equipedItem.ItemIns.Item.Name;
+                    existingItem.GetComponent<Image>().sprite = equipedItem.ItemIns.Item.GetSprite();
                     TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-                    stackCntText.text = equipedItem.Item.StackCnt > 1 ? equipedItem.Item.StackCnt.ToString() : "";
-                    existingItem.Item = equipedItem.Item;
-                    _inv.InvSlots[SlotIndex].name = equipedItem.Item.Name;
+                    stackCntText.text = equipedItem.ItemIns.UserItem.StackCnt > 1 ? equipedItem.ItemIns.UserItem.StackCnt.ToString() : "";
+                    existingItem.ItemIns = new ItemIns(equipedItem.ItemIns.Item, equipedItem.ItemIns.UserItem);
+                    _inv.InvSlots[SlotIndex].name = equipedItem.ItemIns.Item.Name;
                     //unload new Item to equipments
                     equipedItem.LoadItem();
-                    _inv.UnUseItem(existingItem.Item);
 
                     _inv.UpdateInventory(true);
                     _inv.UpdateEquipments(true);
                 }
                 return;
             }
-        //Debug.Log(draggedItem.SlotIndex+" Dragged to "+ SlotIndex + "-" + existingItem.Item.Name);
-        if (SlotIndex != draggedItem.SlotIndex )
-        {
-            //#################################### Stacking: Same items Stack them together
-            if (existingItem.Item.Id == draggedItem.Item.Id )
+        if (draggedItem != null)
+            if (SlotIndex != draggedItem.SlotIndex )
             {
-                if (existingItem.Item.StackCnt + draggedItem.Item.StackCnt > existingItem.Item.MaxStackCnt)
+                //#################################### Stacking: Same items Stack them together
+                if (existingItem.ItemIns.Item.Id == draggedItem.ItemIns.Item.Id )
                 {
-                    draggedItem.Item.setStackCnt(draggedItem.Item.StackCnt - (existingItem.Item.MaxStackCnt - existingItem.Item.StackCnt));
-                    existingItem.Item.setStackCnt(existingItem.Item.MaxStackCnt);
-                }
-                else
-                {
-                    existingItem.Item.setStackCnt(existingItem.Item.StackCnt + draggedItem.Item.StackCnt);
-                    draggedItem.Item.setStackCnt(0);
-                }
-                Text stackCntText = existingItem.transform.GetChild(0).GetComponent<Text>();
-                if (existingItem.Item.StackCnt > 1)
-                    stackCntText.text = existingItem.Item.StackCnt.ToString();
-                _inv.UpdateInventory(true);
-            }
-            else
-            {
-                Recipe newRecipe = _inv.CheckRecipes(existingItem.Item.Id, draggedItem.Item.Id);
-                //#################################### Mixing
-                if (newRecipe != null)
-                {
-                    if (newRecipe.FirstItemCnt <= existingItem.Item.StackCnt)
-                        if (newRecipe.SecondItemCnt <= draggedItem.Item.StackCnt)
-                        {
-                            //todo: check for Energy in recepie to make it
-                            if (_itemMixture.Item.Id != -1)
-                                _inv.PrintMessage("You are already making an Item", Color.yellow);
-                            else
-                                //Mixing items Logic (Lambda) can also be 2 func in it :  () => { InstantiateObject(thingToSpawn); InstantiateObject(thingToSpawn, thingToSpawn); }
-                                _modalPanel.Choice(newRecipe.GetDescription(), ModalPanel.ModalPanelType.YesCancel, () => { MixItemData(ref existingItem, ref draggedItem, newRecipe);});
-                        }
-                        else //Not enough materials 
-                            _inv.PrintMessage("Not enough " + draggedItem.Item.Name +
-                                              " in the inventory, You need " +
-                                              (newRecipe.SecondItemCnt - draggedItem.Item.StackCnt) + " more", Color.yellow);
-                    else //Not enough materials 
-                        _inv.PrintMessage("Not enough " + existingItem.Item.Name + " in the inventory, You need " +
-                                          (newRecipe.FirstItemCnt - existingItem.Item.StackCnt) + " more", Color.yellow);
-                }
-                //#################################### Swaping: Unmixable items Stack them together
-                else
-                {
-                    existingItem.transform.SetParent(_inv.InvSlots[draggedItem.SlotIndex].transform);
-                    _inv.InvSlots[draggedItem.SlotIndex].name = existingItem.name;
-                    existingItem.transform.position = _inv.InvSlots[draggedItem.SlotIndex].transform.position;
-                    existingItem.SlotIndex = draggedItem.SlotIndex;
-                    draggedItem.SlotIndex = SlotIndex;
+                    if (existingItem.ItemIns.UserItem.StackCnt + draggedItem.ItemIns.UserItem.StackCnt > existingItem.ItemIns.Item.MaxStackCnt)
+                    {
+                        draggedItem.ItemIns.UserItem.StackCnt = draggedItem.ItemIns.UserItem.StackCnt - (existingItem.ItemIns.Item.MaxStackCnt - existingItem.ItemIns.UserItem.StackCnt);
+                        existingItem.ItemIns.UserItem.StackCnt = existingItem.ItemIns.Item.MaxStackCnt;
+                    }
+                    else
+                    {
+
+                        draggedItem.ItemIns.UserItem.StackCnt = 0;
+                        //todo: load empty
+                        existingItem.ItemIns.UserItem.StackCnt = draggedItem.ItemIns.UserItem.StackCnt + existingItem.ItemIns.UserItem.StackCnt;  
+                    }
+                    Text stackCntText = existingItem.transform.GetChild(0).GetComponent<Text>();
+                    if (existingItem.ItemIns.UserItem.StackCnt > 1)
+                        stackCntText.text = existingItem.ItemIns.UserItem.StackCnt.ToString();
                     _inv.UpdateInventory(true);
                 }
+                else
+                {
+                    Recipe newRecipe = _inv.CheckRecipes(existingItem.ItemIns.Item.Id, draggedItem.ItemIns.Item.Id);
+                    //#################################### Mixing
+                    if (newRecipe != null)
+                    {
+                        if (newRecipe.FirstItemCnt <= existingItem.ItemIns.UserItem.StackCnt)
+                            if (newRecipe.SecondItemCnt <= draggedItem.ItemIns.UserItem.StackCnt)
+                            {
+                                if (_itemMixture.ItemIns != null)
+                                    _inv.PrintMessage("You are already making an Item", Color.yellow);
+                                else
+                                    //Mixing items Logic (Lambda) can also be 2 func in it :  () => { InstantiateObject(thingToSpawn); InstantiateObject(thingToSpawn, thingToSpawn); }
+                                    _modalPanel.Choice(newRecipe.GetDescription(), ModalPanel.ModalPanelType.YesCancel, () => { MixItemData(ref existingItem, ref draggedItem, newRecipe);});
+                            }
+                            else //Not enough materials 
+                                _inv.PrintMessage("Not enough " + draggedItem.ItemIns.Item.Name +
+                                                  " in the inventory, You need " +
+                                                  (newRecipe.SecondItemCnt - draggedItem.ItemIns.UserItem.StackCnt) + " more", Color.yellow);
+                        else //Not enough materials 
+                            _inv.PrintMessage("Not enough " + existingItem.ItemIns.Item.Name + " in the inventory, You need " +
+                                              (newRecipe.FirstItemCnt - existingItem.ItemIns.UserItem.StackCnt) + " more", Color.yellow);
+                    }
+                    //#################################### Swaping: Unmixable items Stack them together
+                    else
+                    {
+                        existingItem.transform.SetParent(_inv.InvSlots[draggedItem.SlotIndex].transform);
+                        _inv.InvSlots[draggedItem.SlotIndex].name = existingItem.name;
+                        existingItem.transform.position = _inv.InvSlots[draggedItem.SlotIndex].transform.position;
+                        existingItem.SlotIndex = draggedItem.SlotIndex;
+                        draggedItem.SlotIndex = SlotIndex;
+                        _inv.UpdateInventory(true);
+                    }
+                }
             }
-        }
     }
 
     private void MixItemData(ref ItemData existingItem, ref ItemData draggedItem,Recipe newRecipe)
@@ -172,20 +166,19 @@ public class SlotData : MonoBehaviour,IDropHandler{
             _inv.PrintMessage("Not enough energy to mix these items", Color.yellow);
             return;
         }
-        existingItem.Item.setStackCnt(existingItem.Item.StackCnt - newRecipe.FirstItemCnt);
-        draggedItem.Item.setStackCnt(draggedItem.Item.StackCnt - newRecipe.SecondItemCnt);
+        existingItem.ItemIns.UserItem.StackCnt = existingItem.ItemIns.UserItem.StackCnt - newRecipe.FirstItemCnt;
+        draggedItem.ItemIns.UserItem.StackCnt = draggedItem.ItemIns.UserItem.StackCnt - newRecipe.SecondItemCnt;
 
-        ItemContainer item = _inv.BuildItemFromDatabase(newRecipe.FinalItemId);
-        item.setStackCnt(Math.Min(newRecipe.FinalItemCnt, item.MaxStackCnt));
-
-        _itemMixture.LoadItem(item, newRecipe.DurationMinutes);
+        var item = _inv.BuildItemFromDatabase(newRecipe.FinalItemId);
+        int stackCnt = Math.Min(newRecipe.FinalItemCnt, item.MaxStackCnt);
+        _itemMixture.LoadItem(item.Id, stackCnt, newRecipe.DurationMinutes);
         _inv.PrintMessage("Making " + item.Name + " starts",Color.green);
         _inv.AddCharacterSetting("Experience", newRecipe.Energy);
 
-        if (existingItem.Item.StackCnt == 0)
+        if (existingItem.ItemIns.UserItem.StackCnt == 0)
         {
             //Logic of adding empty Item to Slot 
-            existingItem.Item = new ItemContainer();
+            existingItem.ItemIns = null;
             existingItem.transform.name = "Empty";
             existingItem.GetComponent<Image>().sprite = EmptySprite;
             //Update Text
@@ -197,15 +190,15 @@ public class SlotData : MonoBehaviour,IDropHandler{
         {
             //Update Text
             TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            stackCntText.text = existingItem.Item.StackCnt > 1 ? existingItem.Item.StackCnt.ToString() : "";
+            stackCntText.text = existingItem.ItemIns.UserItem.StackCnt > 1 ? existingItem.ItemIns.UserItem.StackCnt.ToString() : "";
         }
-        if (existingItem.Item.StackCnt == 0)
+        if (draggedItem.ItemIns.UserItem.StackCnt == 0)
         {
             //Logic of adding empty Item to Slot 
-            existingItem.Item = new ItemContainer();
-            existingItem.transform.name = "Empty";
-            existingItem.GetComponent<Image>().sprite = EmptySprite;
-            _inv.InvSlots[SlotIndex].name = existingItem.name;
+            draggedItem.ItemIns = null;
+            draggedItem.transform.name = "Empty";
+            draggedItem.GetComponent<Image>().sprite = EmptySprite;
+            _inv.InvSlots[SlotIndex].name = draggedItem.name;
         }
         _inv.UpdateInventory(true);
     }

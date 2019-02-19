@@ -27,9 +27,9 @@ public class BarHandler : MonoBehaviour
     void Start ()
     {
         var contents = GetComponentsInChildren<Image>();
-        foreach (var conten in contents)
-            if (conten.type ==Image.Type.Filled)
-                _content = conten;
+        foreach (var content in contents)
+            if (content.type ==Image.Type.Filled)
+                _content = content;
         var texts = GetComponentsInChildren<TextMeshProUGUI>();
         foreach (var text in texts)
                 _text = text;
@@ -62,7 +62,7 @@ public class BarHandler : MonoBehaviour
 
     private void ChangeFillAmount(float amount)
     {
-        if (amount != 0)
+        if (amount > 0)
         {
             FillAmount += amount;
             ShowBarStat();

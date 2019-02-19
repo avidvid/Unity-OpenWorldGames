@@ -4,23 +4,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UserDatabase : MonoBehaviour
 {
 
     private static UserDatabase _userDatabase;
-    private CharacterDatabase _characterDatabase;
-    private ItemDatabase _itemDatabase;
 
     private UserPlayer _userPlayer;
     private List<UserItem> _userInventory = new List<UserItem>();
-    private List<Character> _characters = new List<Character>();
     private List<UserCharacter> _userCharacters = new List<UserCharacter>();
     private CharacterMixture _characterMixture;
     private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
     private CharacterResearching _characterResearching;
     private CharacterSetting _characterSetting;
-    private List<Recipe> _recipes = new List<Recipe>();
     private List<UserRecipe> _userRecipes = new List<UserRecipe>();
 
     #region UserDatabase Instance
@@ -35,52 +32,68 @@ public class UserDatabase : MonoBehaviour
         return _userDatabase;
     }
     #endregion
-
     void Awake()
     {
         _userDatabase = Instance();
-        _characterDatabase=CharacterDatabase.Instance();
-        _itemDatabase = ItemDatabase.Instance();
     }
-
     void Start()
     {
         //UserPlayer
         _userPlayer = LoadUserPlayer();
         if (_userPlayer == null)
-            throw new Exception("User Player doesn't Exists!!!");
-
+        {
+            print("UserPlayer is empty");
+            GoToStartScene();
+            return;
+            //throw new Exception("UDB-User Player doesn't Exists!!!");
+        }
+        _userPlayer.Print();
+        _userPlayer.LastLogin = DateTime.Now;
+        SaveUserPlayer();
+        if (DateTime.Now < _userPlayer.LockUntil)
+        {
+            GoToWaitScene();
+            return;
+        }
+        //CharacterSetting
         _characterSetting = LoadCharacterSetting();
+        if (_characterSetting == null)
+        {
+            print("CharacterSetting is empty");
+            GoToStartScene();
+            return;
+            //throw new Exception("UDB-Character Setting doesn't Exists!!!");
+        }
+        _characterSetting.Print();
         if (_characterSetting != null)
         {        
             //UserInventory
             _userInventory = LoadUserInventory();
-            Debug.Log("UserInventory.Count = " + _userInventory.Count);
+            Debug.Log("UDB-UserInventory.Count = " + _userInventory.Count);
             //UserCharacters
-            _characters = _characterDatabase.GetCharacters();
-            _userCharacters = _userCharacters = LoadUserCharacters();
-            Debug.Log("UserInventory.Count = " + _userInventory.Count);
+            _userCharacters = LoadUserCharacters();
+            Debug.Log("UDB-UserCharacters.Count = " + _userCharacters.Count);
             //CharacterMixture
-            LoadCharacterMixture();
+            _characterMixture = LoadCharacterMixture();
+            Debug.Log("UDB-CharacterMixture = " +  (_characterMixture == null ? "Empty" : _characterMixture.MyInfo()) );
             //CharacterResearch
-            LoadCharacterResearches();
-            LoadCharacterResearching();
+            _characterResearches=LoadCharacterResearches();
+            Debug.Log("UDB-CharacterResearch.Count = " + _characterResearches.Count);
+            _characterResearching = LoadCharacterResearching();
+            Debug.Log("UDB-CharacterResearch = " + (_characterResearching == null ? "Empty" : _characterResearching.MyInfo()));
             //UserRecipe
-            _recipes = _itemDatabase.GetRecipes();
-            LoadUserRecipes();
-            Debug.Log("UserRecipes.Count = " + _userRecipes.Count);
+            _userRecipes =LoadUserRecipes();
+            Debug.Log("UDB-UserRecipes.Count = " + _userRecipes.Count);
         }
+        Debug.Log("***UDB*** Success!");
     }
-
     // Update is called once per frame
     void Update()
     {
-        
     }
     #region UserPlayer
-    public UserPlayer FindUserPlayer(int id)
+    public UserPlayer GetUserPlayer()
     {
-        //todo: update on login : long lat last login 
         return _userPlayer;
     }
     public void SaveUserPlayer(UserPlayer userPlayer)
@@ -123,9 +136,9 @@ public class UserDatabase : MonoBehaviour
         string path = Path.Combine(Application.streamingAssetsPath, "UserInventory.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<UserItem>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        var userRecipes = (List<UserItem>)serializer.Deserialize(fs);
+        var userInv = (List<UserItem>)serializer.Deserialize(fs);
         fs.Close();
-        return userRecipes;
+        return userInv;
     }
     public void SaveUserInventory()
     {
@@ -150,25 +163,25 @@ public class UserDatabase : MonoBehaviour
     }
     #endregion
     #region UserCharacters
-    public List<Character> GetUserCharacters()
+    public List<Character> GetUserCharacters(List<Character> characters)
     {
-        List<Character> characters = new List<Character>();
-        for (int i = 0; i < _characters.Count; i++)
+        List<Character> MyCharacters = new List<Character>();
+        for (int i = 0; i < characters.Count; i++)
         {
-            if (!_characters[i].IsEnable)
+            if (!characters[i].IsEnable)
                 continue;
             for (int j = 0; j < _userCharacters.Count; j++)
-                if (_characters[i].Id == _userCharacters[j].CharacterId)
+                if (characters[i].Id == _userCharacters[j].CharacterId)
                 {
                     if (string.IsNullOrEmpty(_userCharacters[j].CharacterCode))
-                        characters.Add(_characters[i]);
+                        MyCharacters.Add(characters[i]);
                     else
                         //if not purchased yet :This might cause problem later because all of the other items are by reference and this  one is by value 
-                        characters.Add(new Character(_characters[i], false));
+                        MyCharacters.Add(new Character(characters[i], false));
                     break;
                 }
         }
-        return characters;
+        return MyCharacters;
     }
     internal bool ValidateCharacterCode(string characterCode)
     {
@@ -217,53 +230,59 @@ public class UserDatabase : MonoBehaviour
             return false;
         }
     }
-    internal bool AddNewRandomUserCharacters(int playerId)
+    internal bool AddNewRandomUserCharacters()
     {
+        var characterDatabase = CharacterDatabase.Instance();
+        var characters = characterDatabase.GetCharacters();
         List<int> availableCharacters = new List<int>();
         int key = DateTime.Now.DayOfYear;
-        var rarity = RandomHelper.Range(key, (int)Item.ItemRarity.Common);
+        var rarity = RandomHelper.Range(key, (int)OupItem.ItemRarity.Common);
         bool userOwnedRecipe = false;
-        for (int i = 0; i < _characters.Count; i++)
-            if (_characters[i].IsEnable)
+        for (int i = 0; i < characters.Count; i++)
+            if (characters[i].IsEnable)
             {
-                if ((int)_characters[i].Rarity < rarity)
+                if ((int)characters[i].Rarity < rarity)
                     continue;
                 for (int j = 0; j < _userCharacters.Count; j++)
-                    if (_characters[i].Id == _userCharacters[j].CharacterId && string.IsNullOrEmpty(_userCharacters[j].CharacterCode))
+                    if (characters[i].Id == _userCharacters[j].CharacterId && string.IsNullOrEmpty(_userCharacters[j].CharacterCode))
                     {
                         userOwnedRecipe = true;
                         break;
                     }
                 if (!userOwnedRecipe)
-                    availableCharacters.Add(_characters[i].Id);
+                    availableCharacters.Add(characters[i].Id);
                 userOwnedRecipe = false;
             }
         if (availableCharacters.Count > 0)
         {
-            UserCharacter uc = new UserCharacter(availableCharacters[RandomHelper.Range(key, availableCharacters.Count)], playerId);
+            UserCharacter uc = new UserCharacter(availableCharacters[RandomHelper.Range(key, availableCharacters.Count)], _userPlayer.Id);
             return AddUserCharacters(uc);
         }
         return false;
     }
     #endregion
     #region CharacterMixture
-    internal CharacterMixture GetCharacterMixture(int id)
+    internal CharacterMixture GetCharacterMixture()
     {
         return _characterMixture;
     }
     public void SaveCharacterMixture(int itemId, int stackCnt, DateTime durationMinutes)
     {
-        _characterMixture = new CharacterMixture(_userPlayer.Id, itemId, stackCnt, durationMinutes);
+        if (stackCnt == 0)
+            _characterMixture = null;
+        else
+            _characterMixture = new CharacterMixture(_userPlayer.Id, itemId, stackCnt, durationMinutes);
         SaveCharacterMixture();
     }
-    private void LoadCharacterMixture()
+    private CharacterMixture LoadCharacterMixture()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterMixture.xml");
         //Read the CharacterMixture from CharacterMixture.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(CharacterMixture));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _characterMixture = (CharacterMixture)serializer.Deserialize(fs);
+        var characterMixture = (CharacterMixture)serializer.Deserialize(fs);
         fs.Close();
+        return characterMixture;
     }
     public void SaveCharacterMixture()
     {
@@ -275,21 +294,25 @@ public class UserDatabase : MonoBehaviour
     }
     #endregion
     #region CharacterResearch
-    internal CharacterResearching FindCharacterResearching(int playerId)
+    internal CharacterResearching GetCharacterResearching()
     {
         return _characterResearching;
     }
-    public void SaveCharacterResearching(CharacterResearch charResearch, DateTime durationMinutes)
+    internal void SaveCharacterResearching(int researchId, int level, DateTime durationMinutes)
     {
-        _characterResearching = new CharacterResearching(charResearch, durationMinutes);
+        _characterResearching = new CharacterResearching(_userPlayer.Id,researchId, level, durationMinutes);
         SaveCharacterResearching();
+    }
+    internal void SaveCharacterResearching(CharacterResearching characterResearching)
+    {
+        SaveCharacterResearching( characterResearching.ResearchId,characterResearching.Level, characterResearching.ResearchTime);
     }
     public void EmptyCharacterResearching()
     {
         _characterResearching = new CharacterResearching();
         SaveCharacterResearching();
     }
-    public void SaveCharacterResearching()
+    private void SaveCharacterResearching()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearching.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(CharacterResearching));
@@ -297,19 +320,20 @@ public class UserDatabase : MonoBehaviour
         serializer.Serialize(fs, _characterResearching);
         fs.Close();
     }
-    private void LoadCharacterResearching()
+    private CharacterResearching LoadCharacterResearching()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearching.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(CharacterResearching));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _characterResearching = (CharacterResearching)serializer.Deserialize(fs);
+        var characterResearching = (CharacterResearching)serializer.Deserialize(fs);
         fs.Close();
+        return characterResearching;
     }
-    internal List<CharacterResearch> LoadCharacterResearches(int playerId)
+    internal List<CharacterResearch> GetCharacterResearches()
     {
         return _characterResearches;
     }
-    private void LoadCharacterResearches()
+    private List<CharacterResearch> LoadCharacterResearches()
     {
         //Empty the Items DB
         _characterResearches.Clear();
@@ -317,8 +341,9 @@ public class UserDatabase : MonoBehaviour
         //Read the CharacterResearch from CharacterResearch.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(List<CharacterResearch>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _characterResearches = (List<CharacterResearch>)serializer.Deserialize(fs);
+        var characterResearches = (List<CharacterResearch>)serializer.Deserialize(fs);
         fs.Close();
+        return characterResearches;
     }
     public void SaveCharacterResearches()
     {
@@ -328,22 +353,22 @@ public class UserDatabase : MonoBehaviour
         serializer.Serialize(fs, _characterResearches);
         fs.Close();
     }
-    internal void AddCharacterResearch(CharacterResearch charResearch)
+    internal void AddCharacterResearch(Research research, int level)
     {
         bool updated = false;
         foreach (var chResearch in _characterResearches)
-            if (chResearch.ResearchId == charResearch.ResearchId)
+            if (chResearch.ResearchId == research.Id)
             {
-                if (charResearch.Level <= chResearch.Level)
+                if (level <= chResearch.Level)
                     throw new Exception("CharacterResearch Invalid <= ");
-                if (chResearch.Level + 1 != charResearch.Level)
+                if (chResearch.Level + 1 != level)
                     throw new Exception("CharacterResearch Invalid != ");
-                chResearch.Level = charResearch.Level;
+                chResearch.Level = level;
                 updated = true;
                 break;
             }
         if (!updated)
-            _characterResearches.Add(charResearch);
+            _characterResearches.Add(new CharacterResearch(research.Id,_userPlayer.Id ,level));
         SaveCharacterResearches();
     }
     #endregion
@@ -388,54 +413,36 @@ public class UserDatabase : MonoBehaviour
     }
     #endregion
     #region UserRecipe
-    public List<Recipe> UserRecipeList()
+    public List<UserRecipe> GetUserRecipes()
     {
-        List<Recipe> recipes = new List<Recipe>();
-        for (int i = 0; i < _recipes.Count; i++)
+        return _userRecipes;
+    }
+    public List<Recipe> GetUserRecipes(List<Recipe> recipes)
+    {
+        List<Recipe> myRecipes = new List<Recipe>();
+        for (int i = 0; i < recipes.Count; i++)
         {
-            if (!_recipes[i].IsEnable)
+            if (!recipes[i].IsEnable)
                 continue;
-            if (_recipes[i].IsPublic)
+            if (recipes[i].IsPublic)
             {
-                recipes.Add(_recipes[i]);
+                myRecipes.Add(recipes[i]);
                 continue;
             }
             for (int j = 0; j < _userRecipes.Count; j++)
-                if (_recipes[i].Id == _userRecipes[j].RecipeId)
+                if (recipes[i].Id == _userRecipes[j].RecipeId)
                 {
                     if (string.IsNullOrEmpty(_userRecipes[j].RecipeCode))
-                        recipes.Add(_recipes[i]);
+                        myRecipes.Add(recipes[i]);
                     else
                     {
-                        _recipes[i].IsEnable = false;
-                        recipes.Add(_recipes[i]);
+                        recipes[i].IsEnable = false;
+                        myRecipes.Add(recipes[i]);
                     }
                     break;
                 }
         }
-        return recipes;
-    }
-    internal bool ValidateRecipeCode(string recipeCode)
-    {
-        for (int j = 0; j < _userRecipes.Count; j++)
-            if (_userRecipes[j].RecipeCode != null)
-                if (_userRecipes[j].RecipeCode == recipeCode)
-                {
-                    _userRecipes[j].RecipeCode = "";
-                    SaveUserRecipes();
-                    return true;
-                }
-        return false;
-    }
-    private void LoadUserRecipes()
-    {
-        //Empty the Recipes DB
-        _userRecipes.Clear();
-        string path = Path.Combine(Application.streamingAssetsPath, "UserRecipe.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<UserRecipe>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        _userRecipes = (List<UserRecipe>)serializer.Deserialize(fs);
-        fs.Close();
+        return myRecipes;
     }
     public bool AddUserRecipe(UserRecipe ur)
     {
@@ -457,23 +464,25 @@ public class UserDatabase : MonoBehaviour
     }
     internal bool AddNewRandomUserRecipe(int playerId)
     {
+        var itemDatabase = ItemDatabase.Instance();
+        var recipes = itemDatabase.GetRecipes();
         List<int> availableRecipe = new List<int>();
         int key = DateTime.Now.DayOfYear;
-        var rarity = RandomHelper.Range(key, (int)Item.ItemRarity.Common);
+        var rarity = RandomHelper.Range(key, (int)OupItem.ItemRarity.Common);
         bool userOwnedRecipe = false;
-        for (int i = 0; i < _recipes.Count; i++)
-            if (_recipes[i].IsEnable && !_recipes[i].IsPublic)
+        for (int i = 0; i < recipes.Count; i++)
+            if (recipes[i].IsEnable && !recipes[i].IsPublic)
             {
-                if ((int)_recipes[i].Rarity < rarity)
+                if ((int)recipes[i].Rarity < rarity)
                     continue;
                 for (int j = 0; j < _userRecipes.Count; j++)
-                    if (_recipes[i].Id == _userRecipes[j].RecipeId && string.IsNullOrEmpty(_userRecipes[j].RecipeCode))
+                    if (recipes[i].Id == _userRecipes[j].RecipeId && string.IsNullOrEmpty(_userRecipes[j].RecipeCode))
                     {
                         userOwnedRecipe = true;
                         break;
                     }
                 if (!userOwnedRecipe)
-                    availableRecipe.Add(_recipes[i].Id);
+                    availableRecipe.Add(recipes[i].Id);
                 userOwnedRecipe = false;
             }
         if (availableRecipe.Count > 0)
@@ -483,37 +492,16 @@ public class UserDatabase : MonoBehaviour
         }
         return false;
     }
-    public Recipe FindUserRecipes(int first, int second)
+    private List<UserRecipe> LoadUserRecipes()
     {
-        for (int i = 0; i < _recipes.Count; i++)
-        {
-            if (!_recipes[i].IsEnable)
-                continue;
-            Recipe r = _recipes[i];
-            if (_recipes[i].IsPublic)
-            {
-                if (r.IsEnable && first == r.FirstItemId && second == r.SecondItemId)
-                    return r;
-                if (r.IsEnable && first == r.SecondItemId && second == r.FirstItemId)
-                    return r.Reverse();
-                continue;
-            }
-            for (int j = 0; j < _userRecipes.Count; j++)
-                if (_recipes[i].Id == _userRecipes[j].RecipeId)
-                {
-                    if (string.IsNullOrEmpty(_userRecipes[j].RecipeCode))
-                    {
-                        if (r.IsEnable && first == r.FirstItemId && second == r.SecondItemId)
-                            return r;
-                        if (r.IsEnable && first == r.SecondItemId && second == r.FirstItemId)
-                            return r.Reverse();
-                    }
-                    break;
-                }
-        }
-        return null;
+        string path = Path.Combine(Application.streamingAssetsPath, "UserRecipe.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<UserRecipe>));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        var userRecipes = (List<UserRecipe>)serializer.Deserialize(fs);
+        fs.Close();
+        return userRecipes;
     }
-    private void SaveUserRecipes()
+    public void SaveUserRecipes()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "UserRecipe.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<UserRecipe>));
@@ -521,5 +509,23 @@ public class UserDatabase : MonoBehaviour
         serializer.Serialize(fs, _userRecipes);
         fs.Close();
     }
+
+
     #endregion
+    private void GoToStartScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.buildIndex == SceneSettings.SceneIdForStart)
+            return;
+        SceneManager.LoadScene(SceneSettings.SceneIdForStart);
+    }
+    private void GoToWaitScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.buildIndex == SceneSettings.SceneIdForWait)
+            return;
+        if (scene.buildIndex == SceneSettings.SceneIdForStore)
+            return;
+        SceneManager.LoadScene(SceneSettings.SceneIdForWait);
+    }
 }

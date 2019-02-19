@@ -40,7 +40,6 @@ public class BuildingInterior : MonoBehaviour {
     List<Vector3> _floors = new List<Vector3>();
 
 
-    [SerializeField]
     private GameObject _monsterObj;
 
 
@@ -51,7 +50,8 @@ public class BuildingInterior : MonoBehaviour {
         _characterManager = CharacterManager.Instance();
         _itemDatabase = ItemDatabase.Instance();
 
-        _key = _terrainDatabase.Region.Key;
+        _key = _terrainDatabase.GetRegionKey();
+        _monsterObj = Resources.Load<GameObject>("Prefabs/Monster");
 
         var starter = GameObject.FindObjectOfType<SceneStarter>();
         if (starter != null)

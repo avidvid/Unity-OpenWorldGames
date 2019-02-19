@@ -14,39 +14,18 @@ public class CharacterDatabase : MonoBehaviour {
     void Awake()
     {
         _characterDatabase = CharacterDatabase.Instance();
-        LoadCharacters();
-        Character tempCharacter = new Character(
-            _characters.Count,
-            "Ring TV",
-            "Ring TV",
-            Character.CharacterType.Walk,
-            Character.AttackRange.Short,
-            Character.DefenseRange.Short,
-            Character.AttackType.Magic,
-            Character.AttackType.Magic,
-            20, //Att
-            20, //def
-            Character.SpeedType.None,
-            Character.BodyType.Tank,
-            Character.CarryType.Normal,
-            Character.ViewType.Medium,
-            Character.CharRarity.Common,
-            TerrainIns.TerrainType.Land,
-            "0",                                //Drop Item
-            0.7f                                //Chance
-        );
-        if (!tempCharacter.Exist(_characters))
-        {
-            _characters.Add(tempCharacter);
-            SaveCharacters();
-        }
-
-        _researches = _characterDatabase.LoadResearches();
+    }
+    void Start()
+    {
+        _characters = LoadCharacters();
+        Debug.Log("CDB-Characters.Count = " + _characters.Count);
+        _researches = LoadResearches();
+        Debug.Log("CDB-Researches.Count = " + _researches.Count);
+        Debug.Log("***CDB*** Success!");
     }
 
-
     #region Characters
-    public Character FindCharacter(int id)
+    public Character GetCharacterById(int id)
     {
         for (int i = 0; i < _characters.Count; i++)
         {
@@ -59,7 +38,7 @@ public class CharacterDatabase : MonoBehaviour {
     {
         return _characters;
     }
-    private void LoadCharacters()
+    private List<Character> LoadCharacters()
     {
         //Empty the Characters DB
         _characters.Clear();
@@ -67,8 +46,9 @@ public class CharacterDatabase : MonoBehaviour {
         //Read the Characters from Character.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(List<Character>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        _characters = (List<Character>)serializer.Deserialize(fs);
+        var characters = (List<Character>)serializer.Deserialize(fs);
         fs.Close();
+        return characters;
     }
     private void SaveCharacters()
     {

@@ -7,29 +7,55 @@ using UnityEngine.SceneManagement;
 
 public class CharacterManager : MonoBehaviour
 {
+    //Database
     private static CharacterManager _characterManager;
     private ItemDatabase _itemDatabase;
     private CharacterDatabase _characterDatabase;
     private UserDatabase _userDatabase;
-
-    public Character MyCharacter;
+    //UserPlayer
     public UserPlayer UserPlayer;
-
-    private Sprite _spellSprite;
+    //CharacterSetting
     public CharacterSetting CharacterSetting;
-    public CharacterMixture CharacterMixture;
-    public CharacterResearching CharacterResearching=new CharacterResearching();
-    public List<ItemIns> CharacterInventory = new List<ItemIns>();
-
-
+    //Character
+    public Character MyCharacter;
+    private List<Character> _characters ;
+    public List<Character> UserCharacters ;
+    //Research
+    public List<Research> Researches;
     public List<CharacterResearch> CharacterResearches = new List<CharacterResearch>();
-    public List<Character> UserCharacters = new List<Character>();
-
-    public List<Research> Researches = new List<Research>();
+    public CharacterResearching CharacterResearching;
+    //Recipes
+    private List<Recipe> _recipes;
+    private List<UserRecipe> _userRecipes; 
+    public List<Recipe> UserRecipes;
+    //Inventory
+    public List<ItemIns> CharacterInventory;
+    public CharacterMixture CharacterMixture;
 
     private float _nextActionTime = 100;
+    private Sprite _spellSprite;
     private GameObject _levelUp;
     private GameObject _gameOver;
+
+    #region CharacterManager Instance
+    public static CharacterManager Instance()
+    {
+        if (!_characterManager)
+        {
+            _characterManager = FindObjectOfType(typeof(CharacterManager)) as CharacterManager;
+            if (!_characterManager)
+                Debug.LogError("There needs to be one active ItemDatabase script on a GameObject in your scene.");
+        }
+        //CheckDBAvailability
+        var database = GameObject.FindGameObjectWithTag("Database");
+        if (database == null)
+        {
+            database = Resources.Load<GameObject>("Prefabs/Database");
+            Instantiate(database);
+        }
+        return _characterManager;
+    }
+    #endregion
 
     void Awake()
     {
@@ -39,64 +65,57 @@ public class CharacterManager : MonoBehaviour
         _userDatabase = UserDatabase.Instance();
         _levelUp = GameObject.Find("LevelUp");
         _gameOver = GameObject.Find("GameOver");
-        //UserPlayer
-        UserPlayer = _userDatabase.FindUserPlayer(0);
-        UserPlayer.Print();
-        if (UserPlayer.Id == -1)
-        {
-            print("UserPlayer is empty");
-            GoToStartScene();
-            return;
-        }
-        UserPlayer.LastLogin = DateTime.Now;
-        SaveUserPlayer();
-        UserCharacters= _userDatabase.GetUserCharacters();
-        //CharacterSetting
-        CharacterSetting = _userDatabase.GetCharacterSetting(UserPlayer.Id);
-        if (CharacterSetting.Id == -1)
-        {
-            print("CharacterSetting is empty");
-            GoToStartScene();
-            return;
-        }
-        CharacterSetting.Print();
-        if (DateTime.Now < UserPlayer.LockUntil)
-        {
-            GoToWaitScene();
-            return;
-        }
-        MyCharacter = _characterDatabase.FindCharacter(CharacterSetting.CharacterId);
-        MyCharacter.Print();
-        CharacterMixture = _userDatabase.GetCharacterMixture(CharacterSetting.Id);
-        CharacterMixture.Print();
-        GenerateUserInventory();
-        Debug.Log("CharacterInventory.Count = " + CharacterInventory.Count);
     }
     void Start()
     {
-        
-        //CharacterResearch
+        //UserPlayer
+        UserPlayer = _userDatabase.GetUserPlayer();
+        //CharacterSetting
+        CharacterSetting = _userDatabase.GetCharacterSetting(UserPlayer.Id);
+        //Character
+        MyCharacter = _characterDatabase.GetCharacterById(CharacterSetting.CharacterId);
+        MyCharacter.Print();
+        _characters = _characterDatabase.GetCharacters();
+        UserCharacters = _userDatabase.GetUserCharacters(_characters);
+        Debug.Log("CM-UserCharacters.Count = " + UserCharacters.Count);
+        //Research
         Researches = _characterDatabase.GetResearches();
-        if (Researches.Count == 0)
-            throw new Exception("Researches count is ZERO");
-        CharacterResearches = _userDatabase.LoadCharacterResearches(UserPlayer.Id);
-        print("CharacterResearches count == "+ CharacterResearches.Count);
-        CharacterResearching = _userDatabase.FindCharacterResearching(UserPlayer.Id);
-        CharacterResearching.Print();
-        if (SettingBasicChecks()) 
-            return;
+        CharacterResearches = _userDatabase.GetCharacterResearches();
+        CharacterResearching = _userDatabase.GetCharacterResearching();
+        //Recipes
+        _recipes =_itemDatabase.GetRecipes();
+        _userRecipes = _userDatabase.GetUserRecipes();
+        UserRecipes = _userDatabase.GetUserRecipes(_recipes);
+        Debug.Log("CM-UserRecipes.Count = " + UserRecipes.Count);
+        //Inventory
+        InitUserInventory();
+        CharacterMixture = _userDatabase.GetCharacterMixture();
+        Debug.Log("CharacterInventory.Count = " + CharacterInventory.Count);
         LoginCalculations();
     }
+
+
+    internal bool ValidateRecipeCode(string recipeCode)
+    {
+        for (int j = 0; j < _userRecipes.Count; j++)
+            if (_userRecipes[j].RecipeCode != null)
+                if (_userRecipes[j].RecipeCode == recipeCode)
+                {
+                    _userRecipes[j].RecipeCode = "";
+                    _userDatabase.SaveUserRecipes();
+                    return true;
+                }
+        return false;
+    }
+
     void Update()
     {
-        if (SettingBasicChecks())
-            return;
-
         //Refresh User stats Health Mana Energy Level
-        float period = 100 - CharacterSetting.Level;
-
         if (Time.time > _nextActionTime)
         {
+            if (CharacterSettingHealthCheck())
+                throw new Exception("CM-Character Setting Health Check Failed!!!");
+            float period = 100 - CharacterSetting.Level;
             _nextActionTime += period;
             print("Executed Increase Health Mana Energy next time =" + _nextActionTime);
             if (CharacterSetting.Energy < CharacterSetting.MaxEnergy)
@@ -124,6 +143,34 @@ public class CharacterManager : MonoBehaviour
             }
         }
     }
+    private bool CharacterSettingHealthCheck()
+    {
+        if (CharacterSetting.Id == -1)
+            return true;
+        if (CharacterSetting.Health < 0 && CharacterSetting.Alive)
+            AddCharacterSetting("Alive", 0);
+        if (!CharacterSetting.Alive)
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            if (scene.buildIndex == SceneSettings.SceneIdForStore ||
+                scene.buildIndex == SceneSettings.SceneIdForGameOver)
+                return true;
+            OpenGameOver();
+            return true;
+        }
+        return false;
+    }
+    public Recipe FindUserRecipes(int first, int second)
+    {
+        foreach (var r in UserRecipes)
+        {
+            if (first == r.FirstItemId && second == r.SecondItemId)
+                return r;
+            if (first == r.SecondItemId && second == r.FirstItemId)
+                return r.Reverse();
+        }
+        return null;
+    }
     #region MonsterIns
     internal MonsterIns GenerateMonster(Character monsterCharacter, int level)
     {
@@ -148,7 +195,7 @@ public class CharacterManager : MonoBehaviour
         return null;
     }
     #region Inventory
-    private void GenerateUserInventory()
+    private void InitUserInventory()
     {
         List<UserItem> userInventory = _userDatabase.GetUserInventory();
         foreach (var userItem in userInventory)
@@ -157,30 +204,24 @@ public class CharacterManager : MonoBehaviour
             CharacterInventory.Add(new ItemIns(item, userItem));
         }
     }
-    public ItemIns ItemInInventory(OupItem item)
+    public ItemIns ItemInInventory(int itemId)
     {
         foreach (var itemIns in CharacterInventory)
-        {
-            if (itemIns.Item.Id == item.Id)
+            if (itemIns.Item.Id == itemId)
                 return itemIns;
-        }
         return null;
     }
     public bool ItemIsInInventory(int itemId)
     {
-        foreach (var itemIns in CharacterInventory)
-        {
-            if (itemIns.Item.Id == itemId)
-                return true;
-        }
-        return false;
+        var item = ItemInInventory(itemId);
+        return item!=null ;
     }
     internal bool AddItemToInventory(OupItem item,int stcCnt=1)
     {
         //Todo: make sure about the carry count of user 
         //Should match with the AddItemToInventory in InventoryHandler
         //CheckUniqueness
-        var existingItem = ItemInInventory(item);
+        var existingItem = ItemInInventory(item.Id);
         if (existingItem!=null)
         {
             if (item.MaxStackCnt == 1)
@@ -207,7 +248,6 @@ public class CharacterManager : MonoBehaviour
         if (itemIns == null)
             return;
         var item = itemIns.Item;
-        var userItem = itemIns.UserItem;
         switch (itemIns.Item.Type)
         {
             case OupItem.ItemType.Consumable:
@@ -261,7 +301,7 @@ public class CharacterManager : MonoBehaviour
                 }
                 if (itemIns.Item.Egg > 0)
                 {
-                    if (_userDatabase.AddNewRandomUserCharacters(UserPlayer.Id))
+                    if (_userDatabase.AddNewRandomUserCharacters())
                         message = "You Hatched a New Character!!";
                     else return "The Egg you found is already rotten !! ";
                 }
@@ -323,12 +363,12 @@ public class CharacterManager : MonoBehaviour
         //todo need to move to somewhere else probabaly inventor handler 
     }
 
-    internal void CharacterSettingApplyResearch(CharacterResearch charResearch, Research research)
+    internal void CharacterSettingApplyResearch(Research research, int level)
     {
-        if (charResearch == null || research == null)
+        if (research == null)
             return;
-        float value = research.CalculateValue(charResearch.Level);
-        _userDatabase.AddCharacterResearch(charResearch);
+        float value = research.CalculateValue(level);
+        _userDatabase.AddCharacterResearch(research, level);
         _userDatabase.EmptyCharacterResearching();
         AddCharacterSetting(research.Target, value);
     }
@@ -412,7 +452,7 @@ public class CharacterManager : MonoBehaviour
     internal void LevelCalculations()
     {
         if (MyCharacter.Id == -1)
-            MyCharacter = _characterDatabase.FindCharacter(CharacterSetting.CharacterId);
+            MyCharacter = _characterDatabase.GetCharacterById(CharacterSetting.CharacterId);
         //Logic Should be align with MonsterIns: MonsterIns()
         var level = CharacterSetting.Level;
         CharacterSetting.MaxExperience = CalculateXp(level);
@@ -508,23 +548,6 @@ public class CharacterManager : MonoBehaviour
         SetLockTill(DateTime.Now.AddMinutes(Mathf.Pow(CharacterSetting.Level, 3) + 3) );
         SaveCharacterSetting();
     }
-    private bool SettingBasicChecks()
-    {
-        if (CharacterSetting.Id == -1)
-            return true;
-        if (CharacterSetting.Health < 0 && CharacterSetting.Alive)
-            AddCharacterSetting("Alive", 0);
-        if (!CharacterSetting.Alive)
-        {
-            Scene scene = SceneManager.GetActiveScene();
-            if (scene.buildIndex == SceneSettings.SceneIdForStore ||
-                scene.buildIndex == SceneSettings.SceneIdForGameOver)
-                return true;
-            OpenGameOver();
-            return true;
-        }
-        return false;
-    }
     IEnumerator LevelUpFadeInOut()
     {
         _levelUp.SetActive(true);
@@ -548,22 +571,7 @@ public class CharacterManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
     }
-    private void GoToStartScene()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        if (scene.buildIndex == SceneSettings.SceneIdForStart)
-            return;
-        SceneManager.LoadScene(SceneSettings.SceneIdForStart);
-    }
-    private void GoToWaitScene()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        if (scene.buildIndex == SceneSettings.SceneIdForWait)
-            return;
-        if (scene.buildIndex == SceneSettings.SceneIdForStore)
-            return;
-        SceneManager.LoadScene(SceneSettings.SceneIdForWait);
-    }
+
     //Middle man to CharacterDatabase
     internal Research FindResearch(int id)
     {
@@ -596,8 +604,8 @@ public class CharacterManager : MonoBehaviour
     }
     internal void SetCharacterMixtureTime(DateTime time)
     {
-        CharacterMixture.Time = time;
-        _userDatabase.SaveCharacterMixture(CharacterMixture.Item, time);
+        CharacterMixture.MixTime = time;
+        _userDatabase.SaveCharacterMixture(CharacterMixture.ItemId, CharacterMixture.StackCnt, time);
     }
     public void SaveCharacterSetting()
     {
@@ -611,24 +619,14 @@ public class CharacterManager : MonoBehaviour
     {
         _userDatabase.SaveUserPlayer(UserPlayer);
     }
-    public void SaveCharacterResearching(CharacterResearch charResearch, DateTime durationMinutes)
+    public void SaveCharacterResearching(int researchId, int level, DateTime durationMinutes)
     {
-        _userDatabase.SaveCharacterResearching(charResearch, durationMinutes);
+        _userDatabase.SaveCharacterResearching( researchId,  level , durationMinutes);
     }
     internal void SetCharacterResearchingTime(DateTime time)
     {
-        CharacterResearching.Time = time;
-        _userDatabase.SaveCharacterResearching(CharacterResearching.CharResearch, time);
+        CharacterResearching.ResearchTime = time;
+        _userDatabase.SaveCharacterResearching(CharacterResearching);
     }
-    //Instance
-    public static CharacterManager Instance()
-    {
-        if (!_characterManager)
-        {
-            _characterManager = FindObjectOfType(typeof(CharacterManager)) as CharacterManager;
-            if (!_characterManager)
-                Debug.LogError("There needs to be one active ItemDatabase script on a GameObject in your scene.");
-        }
-        return _characterManager;
-    }
+
 }

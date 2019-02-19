@@ -85,6 +85,7 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     }
     internal void LoadItem()
     {
+        _inv.UnUseItem(ItemIns);
         ItemIns = null;
         GetComponent<Image>().sprite = EmptySprite;
         this.transform.name = "Empty";

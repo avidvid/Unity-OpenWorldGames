@@ -24,9 +24,15 @@ public class CharacterMixture
     {
     }
 
-    internal void Print()
+
+    internal string MyInfo()
     {
         var itemDatabase = ItemDatabase.Instance();
-        Debug.Log("CharacterMixture = " + Id + "-" + itemDatabase.GetItemById(ItemId).Name + " (" + StackCnt + ") in " + MixTime);
+        return Id + "-" + itemDatabase.GetItemById(ItemId).Name + " (" + StackCnt + ") in " + MixTime;
     }
+    internal void Print()
+    {
+        Debug.Log("CharacterMixture = " + MyInfo());
+    }
+
 }
