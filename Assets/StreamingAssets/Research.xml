@@ -5,8 +5,8 @@
     <Name>Heart of Lion</Name>
     <Description>Increase the Max health</Description>
     <IconPath>Inventory/InventorySet1</IconPath>
-    <IconId>0</IconId>
-    <Value>1</Value>
+    <IconId>33</IconId>
+    <Value>100</Value>
     <Target>Health</Target>
     <MaxLevel>10</MaxLevel>
     <DurationMinutes>20</DurationMinutes>
@@ -25,7 +25,7 @@
     <Description>Increase the Max health</Description>
     <IconPath>Inventory/InventorySet1</IconPath>
     <IconId>45</IconId>
-    <Value>2</Value>
+    <Value>200</Value>
     <Target>Health</Target>
     <MaxLevel>10</MaxLevel>
     <DurationMinutes>20</DurationMinutes>
@@ -44,7 +44,7 @@
     <Description>Increase the Attack Damage</Description>
     <IconPath>Inventory/InventorySet1</IconPath>
     <IconId>25</IconId>
-    <Value>1</Value>
+    <Value>500</Value>
     <Target>Crafting</Target>
     <MaxLevel>10</MaxLevel>
     <DurationMinutes>20</DurationMinutes>

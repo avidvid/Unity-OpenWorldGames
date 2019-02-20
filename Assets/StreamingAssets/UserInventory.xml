@@ -6,7 +6,7 @@
     <StackCnt>4</StackCnt>
     <Equipped>false</Equipped>
     <Stored>false</Stored>
-    <Order>100</Order>
+    <Order>5</Order>
     <TimeToUse>1</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
@@ -17,7 +17,7 @@
     <StackCnt>1</StackCnt>
     <Equipped>false</Equipped>
     <Stored>false</Stored>
-    <Order>100</Order>
+    <Order>1</Order>
     <TimeToUse>1</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
@@ -28,7 +28,7 @@
     <StackCnt>1</StackCnt>
     <Equipped>false</Equipped>
     <Stored>false</Stored>
-    <Order>100</Order>
+    <Order>2</Order>
     <TimeToUse>1</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
@@ -39,7 +39,7 @@
     <StackCnt>9</StackCnt>
     <Equipped>false</Equipped>
     <Stored>false</Stored>
-    <Order>100</Order>
+    <Order>3</Order>
     <TimeToUse>1</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
@@ -50,7 +50,7 @@
     <StackCnt>11</StackCnt>
     <Equipped>false</Equipped>
     <Stored>false</Stored>
-    <Order>100</Order>
+    <Order>4</Order>
     <TimeToUse>1</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
@@ -72,7 +72,7 @@
     <StackCnt>1</StackCnt>
     <Equipped>true</Equipped>
     <Stored>false</Stored>
-    <Order>0</Order>
+    <Order>1</Order>
     <TimeToUse>1</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
@@ -83,7 +83,7 @@
     <StackCnt>1</StackCnt>
     <Equipped>true</Equipped>
     <Stored>false</Stored>
-    <Order>0</Order>
+    <Order>2</Order>
     <TimeToUse>903</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>

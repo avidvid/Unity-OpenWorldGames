@@ -24,12 +24,12 @@ public class SlotConsume: MonoBehaviour, IDropHandler
         _inv = InventoryHandler.Instance();
         _characterManager = CharacterManager.Instance();
         _GUIManager = GUIManager.Instance();
-        if (_characterManager.UserPlayer.FBLoggedIn)
-            _facebook = FacebookHandler.Instance();
     }
 
     void Start()
     {
+        if (_characterManager.UserPlayer.FBLoggedIn)
+            _facebook = FacebookHandler.Instance();
         _playerPic = GameObject.Find("PlayerPic").GetComponent<Button>();
         _characterPic = GameObject.Find("CharacterPic").GetComponent<Button>();
         _characterName = GameObject.Find("CharacterName").GetComponent<TextMeshProUGUI>(); ;

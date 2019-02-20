@@ -44,10 +44,11 @@ public class ResearchListHandler : MonoBehaviour {
                     continue;
                 //_researches[i].Id == uiId
                 uiResearch.Research = _researches[i];
+                uiResearch.Level = 1;
                 foreach (var chResearch in _characterResearches)
                     if (chResearch.ResearchId == uiId)
                     {
-                        uiResearch.CharacterResearch = chResearch;
+                        uiResearch.Level = chResearch.Level+1;
                         break;
                     }
                 //Coloring the lines
@@ -62,7 +63,7 @@ public class ResearchListHandler : MonoBehaviour {
                 var buttons = uiResearch.GetComponentsInChildren<Button>();
                 buttons[0].name = _researches[i].Id.ToString();
                 //There is another active research progressing 
-                if (_characterManager.CharacterResearching.Id != -1)
+                if (_characterManager.CharacterResearching!= null)
                 {
                     buttons[0].interactable = false;
                     continue;

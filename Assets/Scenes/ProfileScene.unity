@@ -2366,7 +2366,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &955793812
 GameObject:
@@ -2620,7 +2620,7 @@ RectTransform:
   m_Children:
   - {fileID: 1987202265}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3480,47 +3480,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289403178}
   m_CullTransparentMesh: 0
---- !u!1001 &1315919354
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4409007085404458, guid: 3f5c37224fa6e3b4cb16a7699d0e0934, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.986827
-      objectReference: {fileID: 0}
-    - target: {fileID: 4409007085404458, guid: 3f5c37224fa6e3b4cb16a7699d0e0934, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.9817551
-      objectReference: {fileID: 0}
-    - target: {fileID: 4409007085404458, guid: 3f5c37224fa6e3b4cb16a7699d0e0934, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.55217034
-      objectReference: {fileID: 0}
-    - target: {fileID: 4409007085404458, guid: 3f5c37224fa6e3b4cb16a7699d0e0934, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4409007085404458, guid: 3f5c37224fa6e3b4cb16a7699d0e0934, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4409007085404458, guid: 3f5c37224fa6e3b4cb16a7699d0e0934, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4409007085404458, guid: 3f5c37224fa6e3b4cb16a7699d0e0934, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4409007085404458, guid: 3f5c37224fa6e3b4cb16a7699d0e0934, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3f5c37224fa6e3b4cb16a7699d0e0934, type: 3}
 --- !u!1 &1380064220
 GameObject:
   m_ObjectHideFlags: 0

@@ -48,9 +48,31 @@ public class InventoryManager : MonoBehaviour
             else
                 InvCarry.Add(itemIns);
         }
+
+        ValidateInventory();
         Debug.Log("IM-InvCarry.Count = " + InvCarry.Count);
         Debug.Log("IM-InvEquipment.Count = " + InvEquipment.Count);
         Debug.Log("IM-InvBank.Count = " + InvBank.Count);
+    }
+
+    private void ValidateInventory()
+    {
+        for (int i = 0; i < InvCarry.Count; i++)
+            for (int j = 0; j < InvCarry.Count; j++)
+                if (i != j && InvCarry[i].UserItem.Order == InvCarry[j].UserItem.Order)
+                    throw new Exception("IM-InvCarry Invalid!!!");
+        for (int i = 0; i < InvEquipment.Count; i++)
+        {
+            for (int j = 0; j < InvEquipment.Count; j++)
+                if (i != j && InvEquipment[i].UserItem.Order == InvEquipment[j].UserItem.Order)
+                    throw new Exception("IM-InvEquipment Invalid!!!");
+            if (InvEquipment[i].Item.Type == OupItem.ItemType.Equipment)
+                if ((int) InvEquipment[i].Item.PlaceHolder != InvEquipment[i].UserItem.Order)
+                    throw new Exception("IM-InvEquipment Invalid Equipment Order!!!");
+            if (InvEquipment[i].Item.Type == OupItem.ItemType.Tool || InvEquipment[i].Item.Type == OupItem.ItemType.Weapon)
+                if (InvEquipment[i].UserItem.Order != 1 && InvEquipment[i].UserItem.Order != 2)
+                    throw new Exception("IM-InvEquipment Invalid Weapon/Tool Order!!!");
+        }
     }
     // Update is called once per frame
     void Update()
@@ -64,5 +86,16 @@ public class InventoryManager : MonoBehaviour
     internal bool HaveAvailableSlot()
     {
         return _characterManager.CharacterSetting.CarryCnt > InvCarry.Count;
+    }
+
+    internal void PrintInventory()
+    {
+        var carry = "";
+        var equipment = "";
+        foreach (var itemIns in InvCarry)
+            carry += itemIns.UserItem.Order + "-" + itemIns.Item.Name + "(" + itemIns.UserItem.StackCnt + ")#";
+        foreach (var itemIns in InvEquipment)
+            equipment += itemIns.UserItem.Order + "-" + itemIns.Item.Name + "(" + itemIns.UserItem.StackCnt + ")#";
+        Debug.Log("IM-PrintInventory InvCarry=" + InvCarry.Count +":"+ carry+ " InvEquipment= " + InvEquipment.Count + ":" + equipment);
     }
 }

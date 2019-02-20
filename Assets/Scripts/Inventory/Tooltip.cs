@@ -9,15 +9,13 @@ public class Tooltip : MonoBehaviour
 
     public GameObject TooltipObject;
 
-
-    // Use this for initialization
-    void Start ()
+    void Awake()
     {
         _tooltip = Tooltip.Instance();
     }
     internal void Activate(OupItem item)
     {
-        if (item.Id != -1)
+        if (item != null)
         {
             _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = item.GetTooltip();
             TooltipObject.SetActive(true);
@@ -27,7 +25,7 @@ public class Tooltip : MonoBehaviour
 
     public void Activate(ItemIns itemIns)
     {
-        if (itemIns.Item.Id != -1)
+        if (itemIns != null)
         {
             _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = itemIns.Item.GetTooltip();
             TooltipObject.SetActive(true);

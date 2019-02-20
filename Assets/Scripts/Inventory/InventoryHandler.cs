@@ -91,13 +91,17 @@ public class InventoryHandler : MonoBehaviour
             equipmentItem.name = "Empty";
             foreach (var equipmentIns in _invEquipment)
             {
-                if (equipmentIns.Item.PlaceHolder == EquiSlots[i].EquType)
+                if ( ( (equipmentIns.Item.Type == OupItem.ItemType.Weapon || equipmentIns.Item.Type == OupItem.ItemType.Tool)
+                      &&
+                       ( (EquiSlots[i].EquType == OupItem.PlaceType.Right && equipmentIns.UserItem.Order == 1) || 
+                         (EquiSlots[i].EquType == OupItem.PlaceType.Left  && equipmentIns.UserItem.Order == 2) ))
+                    ||
+                     (equipmentIns.Item.PlaceHolder == EquiSlots[i].EquType && equipmentIns.Item.Type == OupItem.ItemType.Equipment)
+                    )
                 {
-
                     equipmentItem.ItemIns = equipmentIns;
                     equipmentItem.name = equipmentIns.Item.Name;
-                    equipmentIns.UserItem.Order = (int) EquiSlots[i].EquType;
-                    equipmentItem.GetComponent<Image>().sprite = _invEquipment[i].Item.GetSprite();
+                    equipmentItem.GetComponent<Image>().sprite = equipmentIns.Item.GetSprite();
                     break;
                 }
             }
@@ -113,27 +117,27 @@ public class InventoryHandler : MonoBehaviour
             {
                 InvSlots.Add(Instantiate(_inventorySlot));
                 InvSlots[i].GetComponent<SlotData>().SlotIndex = i;
-                //print(i + "-" +InvSlots[i].GetComponent<SlotData>().SlotIndex );
             }
             else
                 InvSlots.Add(Instantiate(_inventorySlotBroken));
-
             InvSlots[i].transform.SetParent(_slotPanel.transform);
             if (i < _playerSlots)
             {
                 GameObject itemObject = Instantiate(_inventoryItem);
                 ItemData data = itemObject.GetComponent<ItemData>();
-                data.ItemIns = _invCarry[i];
-                data.SlotIndex = i;
-                //print(_invItems[i].Id + "-" + i);
                 itemObject.transform.SetParent(InvSlots[i].transform);
-                itemObject.transform.position = Vector2.zero;
-                InvSlots[i].name = itemObject.name = _invCarry[i].Item.Name;
-                if (_invCarry[i].Item.Id != -1)
-                {
-                    itemObject.GetComponent<Image>().sprite = _invCarry[i].Item.GetSprite();
-                    itemObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _invCarry[i].UserItem.StackCnt > 1 ? _invCarry[i].UserItem.ToString() :"";
-                }
+                data.SlotIndex = i;
+
+                foreach (var itemIns in _invCarry)
+                    if (itemIns.UserItem.Order == i)
+                    {
+                        data.ItemIns = itemIns;
+                        itemObject.transform.position = Vector2.zero;
+                        InvSlots[i].name = itemObject.name = itemIns.Item.Name;
+                        itemObject.GetComponent<Image>().sprite = itemIns.Item.GetSprite();
+                        itemObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = itemIns.UserItem.StackCnt > 1 ? itemIns.UserItem.ToString() : "";
+                        break;
+                    }
             }
             //todo: lets user buy a slot 
             else
@@ -149,6 +153,7 @@ public class InventoryHandler : MonoBehaviour
             }
             InvSlots[i].transform.localScale = Vector3.one;
         }
+        _inventoryManager.PrintInventory();
     }
 
     void Update()
@@ -159,8 +164,10 @@ public class InventoryHandler : MonoBehaviour
             ShowInventory = false;
         }
 
+
         if (_updateInventory || _updateEquipments)
         {
+            _inventoryManager.PrintInventory();
             //Save new inventory 
             if (_updateInventory)
             {
