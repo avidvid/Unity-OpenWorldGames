@@ -320,7 +320,7 @@ public class UserDatabase : MonoBehaviour
     }
     public void EmptyCharacterResearching()
     {
-        _characterResearching = new CharacterResearching();
+        _characterResearching = null;
         SaveCharacterResearching();
     }
     private void SaveCharacterResearching()

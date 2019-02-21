@@ -359,6 +359,10 @@ public class CharacterManager : MonoBehaviour
         print(field + "= CharacterSetting." + CharacterSetting.FieldValue(field) + " " + value);
         switch (field)
         {
+            case "MaxHealth":
+                CharacterSetting.MaxHealth += (int)value;
+                CharacterSetting.Updated = true;
+                break;
             case "Health":
                 CharacterSetting.Health += (int)value;
                 if (CharacterSetting.Health < 0)

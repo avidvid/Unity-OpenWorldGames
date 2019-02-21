@@ -56,7 +56,7 @@ public class ResearchListHandler : MonoBehaviour {
                     foreach (var urLink in uiLinks)
                         if (urLink.name == "Link" + uiResearch.Research.RequiredResearchId1 + "-" + uiResearch.Research.Id)
                             if (ResearchLinkValid(uiResearch.Research.RequiredResearchId1, uiResearch.Research.RequiredResearchLevel1))
-                                urLink.GetComponent<Image>().color = Color.yellow;
+                                urLink.GetComponent<Image>().color = Color.green;
                             else
                                 urLink.GetComponent<Image>().color = Color.red;
                 //Purging the buttons
@@ -65,6 +65,9 @@ public class ResearchListHandler : MonoBehaviour {
                 //There is another active research progressing 
                 if (_characterManager.CharacterResearching!= null)
                 {
+                    //blink the active building Research 
+                    if (_characterManager.CharacterResearching.ResearchId == _researches[i].Id)
+                        uiResearch.gameObject.AddComponent<BlinkMe>();
                     buttons[0].interactable = false;
                     continue;
                 }
@@ -76,6 +79,10 @@ public class ResearchListHandler : MonoBehaviour {
                 buttons[0].onClick.AddListener(DoResearch);
             }
         }
+    }
+    void Update()
+    {
+
     }
     private void DoResearch()
     {
@@ -172,7 +179,7 @@ public class ResearchListHandler : MonoBehaviour {
     private bool ResearchLinkValid(int requiredResearchId, int requiredResearchLevel)
     {  
         foreach (var chResearch in _characterResearches)
-            if (requiredResearchId == chResearch.ResearchId && requiredResearchLevel >= chResearch.Level)
+            if (requiredResearchId == chResearch.ResearchId && requiredResearchLevel <= chResearch.Level)
                 return true ;
         return false;
     }

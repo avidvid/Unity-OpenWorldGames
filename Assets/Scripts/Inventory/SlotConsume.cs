@@ -53,18 +53,19 @@ public class SlotConsume: MonoBehaviour, IDropHandler
         ResearchSlot draggedResearch = eventData.pointerDrag.GetComponent<ResearchSlot>();
         if (draggedItem == null && draggedResearch == null)
             return;
-        if (draggedItem != null)
-            ConsumeItem(draggedItem);
 
         if (draggedResearch != null)
         {
-            ResearchSlot researchingSlot = ResearchSlot.Instance();
-            if (researchingSlot.ReadyToUse())
+            if (draggedResearch.ReadyToUse())
             {
+                ResearchSlot researchingSlot = ResearchSlot.Instance();
                 ConsumeResearch(draggedResearch);
                 researchingSlot.LoadEmpty();
             }
+            return;
         }
+        if (draggedItem != null)
+            ConsumeItem(draggedItem);
     }
 
     private void ConsumeItem(ItemData draggedItem)

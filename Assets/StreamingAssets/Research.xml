@@ -7,7 +7,7 @@
     <IconPath>Inventory/InventorySet1</IconPath>
     <IconId>33</IconId>
     <Value>100</Value>
-    <Target>Health</Target>
+    <Target>MaxHealth</Target>
     <MaxLevel>10</MaxLevel>
     <DurationMinutes>20</DurationMinutes>
     <RequiredResearchId1>-1</RequiredResearchId1>
@@ -26,7 +26,7 @@
     <IconPath>Inventory/InventorySet1</IconPath>
     <IconId>45</IconId>
     <Value>200</Value>
-    <Target>Health</Target>
+    <Target>MaxHealth</Target>
     <MaxLevel>10</MaxLevel>
     <DurationMinutes>20</DurationMinutes>
     <RequiredResearchId1>1</RequiredResearchId1>

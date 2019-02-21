@@ -79,8 +79,10 @@ public class InventoryManager : MonoBehaviour
     {
         if (UpdateInventory)
         {
+            PrintInventory();
             _userDatabase.UpdateUserInventory(InvCarry, InvEquipment);
             UpdateInventory = false;
+            PrintInventory();
         }
     }
     internal bool HaveAvailableSlot()

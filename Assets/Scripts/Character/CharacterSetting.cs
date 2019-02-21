@@ -184,6 +184,8 @@ public class CharacterSetting {
     {
         switch (field)
         {
+            case "MaxHealth":
+                return MaxHealth.ToString();
             case "Health":
                 return Health.ToString();
             case "Energy":

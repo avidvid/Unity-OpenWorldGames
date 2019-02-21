@@ -190,8 +190,8 @@ public class InventoryHandler : MonoBehaviour
                 }
                 _updateEquipments = false;
             }
+            _inventoryManager.UpdateInventory = true;
         }
-        _inventoryManager.UpdateInventory = true;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
