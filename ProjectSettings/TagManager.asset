@@ -15,6 +15,7 @@ TagManager:
   - Gem
   - Line
   - Item
+  - Database
   layers:
   - Default
   - TransparentFX

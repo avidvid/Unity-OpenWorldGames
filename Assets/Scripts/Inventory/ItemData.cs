@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Runtime.Remoting.Messaging;
@@ -11,7 +12,7 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
 {
 
 	// Use this for initialization
-    public ItemContainer Item;
+    public ItemIns ItemIns;
     public int SlotIndex;
 
 
@@ -30,12 +31,12 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
 
     void Update()
     {
-        if (Item.Id == -1)
+        if (ItemIns == null)
             return;
-        if (Item.StackCnt == 0)
+        if (ItemIns.UserItem.StackCnt == 0)
         {
             //Logic of adding empty Item to Slot 
-            Item = new ItemContainer();
+            ItemIns = null;
             this.transform.name = "Empty";
             this.GetComponent<Image>().sprite = EmptySprite;
             //Update Text
@@ -46,29 +47,30 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
         else
         {
             var stackCntText = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            if (Item.StackCnt.ToString() != stackCntText.text)
-                stackCntText.text = Item.StackCnt > 1 ? Item.StackCnt.ToString() : "";
+            if (ItemIns.UserItem.StackCnt.ToString() != stackCntText.text)
+                stackCntText.text = ItemIns.UserItem.StackCnt > 1 ? ItemIns.UserItem.StackCnt.ToString() : "";
         }
     }
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (ItemIns == null)
             return;
-        _tooltip.Activate(Item);
+        _tooltip.Activate(ItemIns);
     }
+
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (ItemIns == null)
             return;
         _tooltip.Deactivate();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        //Todo: you can move the sprite by cliclking cpouple time fix it 
-        if (Item.Id == -1)
+        //Todo: you can move the sprite by clicking couple time fix it 
+        if (ItemIns == null)
             return;
         _offset = eventData.position - (Vector2) this.transform.position;
         this.transform.position = eventData.position - _offset;
@@ -76,7 +78,7 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (ItemIns == null)
             return;
         this.transform.SetParent(this.transform.parent.parent.parent);
         GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -84,7 +86,7 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (ItemIns == null)
             return;
         this.transform.position = eventData.position - _offset;
     }
@@ -98,12 +100,15 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
-    public void LoadItem(ItemContainer item)
+    internal void LoadItem(ItemIns itemIns)
     {
-        //print("#######Inside loadItem Itemdata: "+ item.Id);
-        if (item.Id == -1)
+        LoadItem(itemIns.Item, itemIns.UserItem);
+    }
+    public void LoadItem(OupItem item,UserItem userItem)
+    {
+        if (ItemIns == null)
         {
-            this.Item = new ItemContainer();
+            this.ItemIns = null;
             GetComponent<Image>().sprite = EmptySprite;
             Text stackCntText = this.transform.GetChild(0).GetComponent<Text>();
             stackCntText.text = "";
@@ -111,13 +116,14 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
         }
         else
         {
-            Item = item; 
-            this.transform.name = Item.Name;
-            GetComponent<Image>().sprite = Item.GetSprite();
-            this.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Item.StackCnt > 1 ? Item.StackCnt.ToString() : "";
+            ItemIns.Item = item;
+            ItemIns.UserItem = userItem;
+            this.transform.name = item.Name;
+            GetComponent<Image>().sprite = item.GetSprite();
+            this.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = userItem.StackCnt > 1 ? userItem.StackCnt.ToString() : "";
             if (_inv ==null)
                 _inv = InventoryHandler.Instance();
-            _inv.InvSlots[SlotIndex].transform.name = Item.Name;
+            _inv.InvSlots[SlotIndex].transform.name = item.Name;
             _inv.UpdateInventory(true);
         }
     }

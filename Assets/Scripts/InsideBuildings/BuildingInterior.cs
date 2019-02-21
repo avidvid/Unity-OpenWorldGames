@@ -40,7 +40,6 @@ public class BuildingInterior : MonoBehaviour {
     List<Vector3> _floors = new List<Vector3>();
 
 
-    [SerializeField]
     private GameObject _monsterObj;
 
 
@@ -51,7 +50,8 @@ public class BuildingInterior : MonoBehaviour {
         _characterManager = CharacterManager.Instance();
         _itemDatabase = ItemDatabase.Instance();
 
-        _key = _terrainDatabase.Region.Key;
+        _key = _terrainDatabase.GetRegionKey();
+        _monsterObj = Resources.Load<GameObject>("Prefabs/Monster");
 
         var starter = GameObject.FindObjectOfType<SceneStarter>();
         if (starter != null)
@@ -257,9 +257,9 @@ public class BuildingInterior : MonoBehaviour {
     {
         int itemId;
         if (RandomHelper.GetLucky(pos, chance))
-            itemId = _itemDatabase.GetItemBasedOnRarity(pos, dropItems);
+            itemId = _itemDatabase.GetItemIdBasedOnRarity(pos, dropItems);
         else //Drop coin/Gem
-            itemId = _itemDatabase.GetItemBasedOnRarity(pos, "8,9");
+            itemId = _itemDatabase.GetItemIdBasedOnRarity(pos, "8,9");
         if (itemId != -1)
             CreateItem(pos, itemId);
     }
@@ -267,7 +267,7 @@ public class BuildingInterior : MonoBehaviour {
     {
         GameObject item = new GameObject();
         var active = item.AddComponent<ActiveItemType>();
-        active.ItemTypeInUse = _itemDatabase.FindItem(itemId);
+        active.ItemTypeInUse = _itemDatabase.GetItemById(itemId);
         location.z -= 0.001f;
         active.Location = location;
         item.transform.position = location;

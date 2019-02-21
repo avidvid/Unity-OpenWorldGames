@@ -1,12 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SocialPlatforms.Impl;
 using System;
 
 public class ProfileHandler : MonoBehaviour {
@@ -38,16 +36,6 @@ public class ProfileHandler : MonoBehaviour {
     void Awake()
     {
         _characterManager = CharacterManager.Instance();
-        _settings = _characterManager.CharacterSetting;
-        _player = _characterManager.UserPlayer;
-        _character = _characterManager.MyCharacter;
-
-        if (_characterManager.UserPlayer.FBLoggedIn)
-            _facebook = FacebookHandler.Instance();
-    }
-
-    void Start()
-    {
         if (_health == null)
             _health = GameObject.FindGameObjectWithTag("Health").GetComponent<BarHandler>();
         if (_mana == null)
@@ -67,7 +55,16 @@ public class ProfileHandler : MonoBehaviour {
         if (_profileStats == null)
             _profileStats = GameObject.Find("ProfileStats");
         if (_characterName == null)
-            _characterName = GameObject.Find("CharacterName").GetComponent<TextMeshProUGUI>(); ;
+            _characterName = GameObject.Find("CharacterName").GetComponent<TextMeshProUGUI>();
+    }
+
+    void Start()
+    {
+        _settings = _characterManager.CharacterSetting;
+        _player = _characterManager.UserPlayer;
+        _character = _characterManager.MyCharacter;
+        if (_characterManager.UserPlayer.FBLoggedIn)
+            _facebook = FacebookHandler.Instance();
 
         
 

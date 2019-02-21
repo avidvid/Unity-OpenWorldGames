@@ -105,7 +105,7 @@ public class StartGameHandler : MonoBehaviour {
                     _selectedCharacter.Id, 
                     _name.text);
         _characterManager.LevelCalculations();
-        _characterManager.InitInventory();
+        //_characterManager.InitInventory();
         SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
     }
 

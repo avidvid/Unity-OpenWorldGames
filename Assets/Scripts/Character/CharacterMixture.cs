@@ -6,25 +6,33 @@ using UnityEngine;
 [Serializable]
 public class CharacterMixture
 {
-
     public int Id { get; set; }
-    public ItemContainer Item { get; set; }
-    public DateTime Time { get; set; }
+    public int UserId { get; set; }
+    public int ItemId { get; set; }
+    public int StackCnt { get; set; }
+    public DateTime MixTime { get; set; }
 
-
-    public CharacterMixture(ItemContainer item, DateTime time)
+    public CharacterMixture(int userId, int itemId, int stackCnt, DateTime time)
     {
         Id = 0;
-        Item = item;
-        Time = time;
+        UserId = userId;
+        ItemId = itemId;
+        StackCnt = stackCnt;
+        MixTime = time;
     }
     public CharacterMixture()
     {
-        Id = -1;
     }
 
+
+    internal string MyInfo()
+    {
+        var itemDatabase = ItemDatabase.Instance();
+        return Id + "-" + itemDatabase.GetItemById(ItemId).Name + " (" + StackCnt + ") in " + MixTime;
+    }
     internal void Print()
     {
-        Debug.Log("CharacterMixture = " + Id + "-" + Item.Name + " (" + Time + ")");
+        Debug.Log("CharacterMixture = " + MyInfo());
     }
+
 }

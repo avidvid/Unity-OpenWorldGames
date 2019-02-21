@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private static ResearchSlot _researchingSlot;
-    public CharacterResearch CharResearch;
-    public Research TargetResearch;
     public Sprite DefaultSprite;
 
     private CharacterManager _characterManager;
@@ -17,10 +15,14 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     private GUIManager _GUIManager;
     private Vector2 _offset;
     private Tooltip _tooltip;
-    private DateTime _time;
     private Transform _parent;
     public bool ItemLocked;
     private bool _setEmpty;
+
+    public Research TargetResearch;
+    public int Level;
+    private DateTime _time;
+
 
     void Awake()
     {
@@ -36,7 +38,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         if (ItemLocked)
         {
             TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
-            texts[0].text = CharResearch.Level.ToString();
+            texts[0].text = Level.ToString();
             //texts[1].color = Color.magenta;
             texts[1].text = TimeHandler.PrintTime(_time - DateTime.Now);
             if (DateTime.Now > _time)
@@ -62,13 +64,13 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (CharResearch.Id == -1)
+        if (TargetResearch == null)
             return;
         _tooltip.Activate(TargetResearch);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (CharResearch.Id == -1)
+        if (TargetResearch == null)
             return;
         _tooltip.Deactivate();
     }
@@ -76,7 +78,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     {
         if (ItemLocked)
             return;
-        if (CharResearch.Id == -1)
+        if (TargetResearch == null)
             return;
         _offset = eventData.position - (Vector2)this.transform.position;
         this.transform.position = eventData.position - _offset;
@@ -85,7 +87,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     {
         if (ItemLocked)
             return;
-        if (CharResearch.Id == -1)
+        if (TargetResearch == null)
             return;
         _parent = transform.parent;
         this.transform.SetParent(this.transform.parent.parent.parent);
@@ -93,7 +95,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (CharResearch.Id == -1)
+        if (TargetResearch == null)
             return;
         if (_time < DateTime.Now)
             SceneSettings.GoToResearchScene();
@@ -123,7 +125,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     {
         if (ItemLocked)
             return;
-        if (CharResearch.Id == -1)
+        if (TargetResearch == null)
             return;
         this.transform.position = eventData.position - _offset;
     }
@@ -136,7 +138,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         this.transform.SetParent(_parent);
         this.transform.SetSiblingIndex(0);
 
-        if (CharResearch.Id == -1)
+        if (TargetResearch == null)
         {
             TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
             texts[0].text = "Empty";
@@ -144,10 +146,22 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
-    internal void LoadResearch(CharacterResearch charResearch, DateTime time)
+    internal bool IsEmpty()
     {
-        CharResearch = new CharacterResearch(charResearch.ResearchId, charResearch.UserPlayerId, charResearch.Level);
-        TargetResearch = _characterManager.FindResearch(CharResearch.ResearchId);
+        if (TargetResearch == null)
+            return true;
+        return false;
+    }
+
+    internal void LoadResearch(CharacterResearching researching)
+    {
+        LoadResearch(researching.ResearchId, researching.Level, researching.ResearchTime);
+    }
+    internal void LoadResearch(int researchId,int level, DateTime time)
+    {
+        var characterDatabase = CharacterDatabase.Instance();
+        TargetResearch = characterDatabase.GetResearchById(researchId);
+        Level = level;
         GetComponent<Image>().sprite = TargetResearch.GetSprite();
         _time = time;
         ItemLocked = true;
@@ -156,7 +170,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     public void LoadEmpty()
     {
         ItemLocked = false;
-        CharResearch = new CharacterResearch();
+        TargetResearch = null;
         GetComponent<Image>().sprite = DefaultSprite;
         _time = DateTime.MinValue;
         _setEmpty = true;
@@ -171,5 +185,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         }
         return _researchingSlot;
     }
+
+
 }
 

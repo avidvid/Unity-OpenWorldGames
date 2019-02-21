@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public ItemContainer Item;
+    public ItemIns ItemIns;
     public Sprite EmptySprite;
 
 
@@ -26,9 +27,9 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 	// Update is called once per frame
 	void Update ()
     {
-        if (Item.Id == -1)
+        if (ItemIns == null)
             return;
-        if (Item.StackCnt == 0)
+        if (ItemIns.UserItem.StackCnt == 0)
         {
             LoadItem();
             _inv.UpdateEquipments(true);
@@ -37,21 +38,21 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (ItemIns == null)
             return;
-        _tooltip.Activate(Item);
+        _tooltip.Activate(ItemIns);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (ItemIns == null)
             return;
         _tooltip.Deactivate();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (ItemIns == null)
             return;
         _offset = eventData.position - (Vector2)this.transform.position;
         this.transform.position = eventData.position - _offset;
@@ -59,7 +60,7 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (ItemIns == null)
             return;
         _parent = transform.parent;
         this.transform.SetParent(this.transform.parent.parent.parent.parent);
@@ -68,7 +69,7 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (Item.Id == -1)
+        if (ItemIns == null)
             return;
         this.transform.position = eventData.position - _offset;
     }
@@ -82,22 +83,26 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         this.transform.SetSiblingIndex(0);
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
-
-    public void LoadItem(ItemContainer item =null)
+    internal void LoadItem()
     {
-        if (item == null)
-        {
-            Item = new ItemContainer();
-            GetComponent<Image>().sprite = EmptySprite;
-            this.transform.name = "Empty";
-        }
-        else
-        {
-            Item = item;
-            Sprite itemSprite = Item.GetSprite();
-            GetComponent<Image>().sprite = itemSprite!=null? itemSprite:EmptySprite;
-            this.transform.name = Item.Name;
-        }
+        _inv.UnUseItem(ItemIns);
+        ItemIns = null;
+        GetComponent<Image>().sprite = EmptySprite;
+        this.transform.name = "Empty";
     }
+    internal void LoadItem(ItemIns itemIns)
+    {
+        ItemIns = itemIns;
+        Sprite itemSprite = ItemIns.Item.GetSprite();
+        GetComponent<Image>().sprite = itemSprite != null ? itemSprite : EmptySprite;
+        this.transform.name = ItemIns.Item.Name;
+        //LoadItem(itemIns.Item, itemIns.UserItem);
+    }
+
+    internal void UseItem(int count)
+    {
+        ItemIns.UserItem.TimeToUse-= count;
+    }
+
 
 }

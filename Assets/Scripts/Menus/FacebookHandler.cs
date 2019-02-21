@@ -13,14 +13,14 @@ public class FacebookHandler : MonoBehaviour
     private static FacebookHandler _facebook;
     private int _counter =0 ; 
 
-    public string FirstName;
-    public string LastName;
-    public string FBid;
-    public string Email;
-    public Sprite ProfilePicture;
-    public List<string> FriendList = new List<string>();
+    internal string FirstName;
+    internal string LastName;
+    internal string FBid;
+    internal string Email;
+    internal Sprite ProfilePicture;
+    internal List<string> FriendList = new List<string>();
 
-    public bool LoggedIn ;
+    internal bool LoggedIn ;
 
     void Awake()
     {
