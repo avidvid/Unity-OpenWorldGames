@@ -115,15 +115,14 @@ public class UserPlayer  {
     }
     public UserPlayer()
     {
+        Id = -1;
     }
     internal void Print()
     {
-        Debug.Log("UserPlayer = " + MyInfo());
+        Debug.Log("UserPlayer = " + Id + "-" + UserName + " " + Rank + " " + LastLogin+": (" + Latitude + ","+ Longitude + ") " 
+                  + LockUntil );
     }
-    internal string MyInfo()
-    {
-        return Id + "-" + UserName + " " + Rank + " " + LastLogin + ": (" + Latitude + "," + Longitude + ") "+ LockUntil;
-    }
+
     internal int CalculateHealthCheck(int value, string field)
     {
         int fieldCode;

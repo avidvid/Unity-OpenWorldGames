@@ -30,7 +30,7 @@ public class MiniMapHandler : MonoBehaviour {
             _key = starter.Key;
             _previousPosition = starter.PreviousPosition;
         }
-        _availableTerrainTypes = _terrainDatabase.GetTerrains();
+        _availableTerrainTypes = _terrainDatabase.Terrains;
 
         print("_availableTerrainTypes count = " + _availableTerrainTypes.Count);
         _markers = GetAllMarkers(_mapPosition.x, _mapPosition.y, _key);

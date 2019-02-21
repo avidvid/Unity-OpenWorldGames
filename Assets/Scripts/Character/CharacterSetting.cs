@@ -51,6 +51,7 @@ public class CharacterSetting {
     public float Researching { get; set; }
     public float Bravery { get; set; }
     public float Charming { get; set; }
+    public List<ItemContainer> Equipments { get; set; }
     //Todo: add the hashcode
 
     public CharacterSetting(int id = -1, int userPlayerId = -1, int characterId = -1, string name = null,
@@ -63,7 +64,7 @@ public class CharacterSetting {
         float magicAttack = 0, float magicDefense = 0, float poisonAttack = 0, float poisonDefense = 0, 
         Character.Elements element = 0,float carry = 0, int carryCnt = 0,
         float speed = 0, float intellect = 0, float agility = 0, float strength = 0, float stamina = 0,
-        float crafting = 0, float researching = 0, float bravery = 0, float charming = 0)
+        float crafting = 0, float researching = 0, float bravery = 0, float charming = 0, List<ItemContainer>  equipments = null)
     {
         Id = id;
         UserPlayerId = userPlayerId;
@@ -107,6 +108,14 @@ public class CharacterSetting {
         Speed = speed;
         Stamina = stamina;
         Strength = strength;
+        if (equipments ==null)
+        {
+            Equipments = new List<ItemContainer>();
+            for (int i = 0; i < (int) Equipment.PlaceType.None; i++)
+                Equipments.Add(new ItemContainer());
+        }
+        else
+            Equipments = equipments;
     }
 
 
@@ -159,14 +168,11 @@ public class CharacterSetting {
         Speed = characterSetting.Speed;
         Stamina = characterSetting.Stamina;
         Strength = characterSetting.Strength;
+        Equipments = characterSetting.Equipments;
     }
     internal void Print()
     {
-        Debug.Log("CharacterSetting = " + MyInfo());
-    }
-    internal string MyInfo()
-    {
-        return Id + "-" + Name + " (" + Level + ")";
+        Debug.Log("CharacterSetting = " + Id+"-"+Name+" ("+ Level+")");
     }
     internal Sprite GetSpellSprite()
     {
@@ -184,8 +190,6 @@ public class CharacterSetting {
     {
         switch (field)
         {
-            case "MaxHealth":
-                return MaxHealth.ToString();
             case "Health":
                 return Health.ToString();
             case "Energy":

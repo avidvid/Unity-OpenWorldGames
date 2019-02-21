@@ -1168,6 +1168,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1060914859620073008, guid: 871ea2d19e2699c4898eb1cba41980bf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.41999817
+      objectReference: {fileID: 0}
     - target: {fileID: 114803371791010518, guid: 871ea2d19e2699c4898eb1cba41980bf,
         type: 3}
       propertyPath: m_Sprite
@@ -1219,11 +1224,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -33.499992
       objectReference: {fileID: 0}
-    - target: {fileID: 1060914859620073008, guid: 871ea2d19e2699c4898eb1cba41980bf,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.41999817
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 871ea2d19e2699c4898eb1cba41980bf, type: 3}
 --- !u!224 &306538320 stripped
@@ -1274,12 +1274,6 @@ PrefabInstance:
     - target: {fileID: 114743160573914424, guid: 9e021f20fee712d449f1f173050e7be1,
         type: 3}
       propertyPath: _lockSprite
-      value: 
-      objectReference: {fileID: 21300010, guid: 7e9d88b801724754d98182f02f7808e2,
-        type: 3}
-    - target: {fileID: 114743160573914424, guid: 9e021f20fee712d449f1f173050e7be1,
-        type: 3}
-      propertyPath: LockSprite
       value: 
       objectReference: {fileID: 21300010, guid: 7e9d88b801724754d98182f02f7808e2,
         type: 3}
@@ -3674,7 +3668,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultSprite: {fileID: 21300004, guid: 7b30c24227171894ea7f7a1bfe1186e0, type: 3}
   ItemLocked: 0
-  Level: 0
 --- !u!1 &1009350410
 GameObject:
   m_ObjectHideFlags: 0
@@ -5886,6 +5879,8 @@ MonoBehaviour:
   DoorShadow: {fileID: 21300000, guid: fcb0ed92d05f4af4cba749448c5d6fc7, type: 3}
   Player: {fileID: 1580321972}
   PreviousPosition: {x: 0, y: 0, z: 0}
+  _monsterObj: {fileID: 1064894520981986, guid: 2a7e361d05134fe44b65b45b74714c56,
+    type: 3}
 --- !u!1 &1580321969
 GameObject:
   m_ObjectHideFlags: 0
@@ -5917,6 +5912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118b782c14f8e234dae75df69424ea85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _building: {fileID: 1570060178}
 --- !u!114 &1580321971
 MonoBehaviour:
   m_ObjectHideFlags: 0
