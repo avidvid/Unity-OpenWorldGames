@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class ResearchData : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
+
     // Use this for initialization
-    internal Research Research;
-    internal int Level;
+    public Research Research;
+    public CharacterResearch CharacterResearch;
 
     private Tooltip _tooltip;
 
@@ -21,23 +22,30 @@ public class ResearchData : MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
         var texts = GetComponentsInChildren<TextMeshProUGUI>();
         var buttons = GetComponentsInChildren<Button>();
         images[1].sprite = Research.GetSprite();
-        texts[0].text = "Level "+ Level;
-        if (Level >= Research.MaxLevel)
+        int nextLevel = CharacterResearch != null ? CharacterResearch.Level+1 : 1;
+        texts[0].text = "Level "+ nextLevel;
+        if (nextLevel >= Research.MaxLevel)
         {
             buttons[0].interactable = false;
             texts[1].text = "MAX";
         }
         else
-            texts[1].text = Research.CalculatePrice(Level).ToString();
+            texts[1].text = Research.CalculatePrice(nextLevel).ToString();
     }
+
+    void Update()
+    {
+    
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (Research == null)
-            return;
         _tooltip.Activate(Research);
     }
+
     public void OnPointerExit(PointerEventData eventData)
     {
         _tooltip.Deactivate();
     }
+
 }

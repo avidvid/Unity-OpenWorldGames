@@ -240,10 +240,6 @@ public class Character {
     }
     internal void Print()
     {
-        Debug.Log("Character = " +  MyInfo());
-    }
-    internal string MyInfo()
-    {
-        return Id + "-" + Name + " (" + Description + ")";
+        Debug.Log("Character = " + Id + "-" + Name + " (" + Description + ")");
     }
 }

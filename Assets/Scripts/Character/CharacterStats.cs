@@ -21,6 +21,12 @@ public class CharacterStats : MonoBehaviour {
     void Awake()
     {
         _characterManager = CharacterManager.Instance();
+        _settings = _characterManager.CharacterSetting;
+        _player = _characterManager.UserPlayer;
+    }
+
+    void Start ()
+    {
         if (_health == null)
             _health = GameObject.FindGameObjectWithTag("Health").GetComponent<BarHandler>();
         if (_mana == null)
@@ -33,12 +39,6 @@ public class CharacterStats : MonoBehaviour {
             _coin = GameObject.FindGameObjectWithTag("Coin").GetComponent<ContainerValueHandler>();
         if (_gem == null)
             _gem = GameObject.FindGameObjectWithTag("Gem").GetComponent<ContainerValueHandler>();
-    }
-
-    void Start ()
-    {
-        _settings = _characterManager.CharacterSetting;
-        _player = _characterManager.UserPlayer;
         
         _health.UpdateValues(_settings.Health, _settings.MaxHealth);
         _mana.UpdateValues(_settings.Mana, _settings.MaxMana);

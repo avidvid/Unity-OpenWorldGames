@@ -3,17 +3,21 @@ using System.Collections; using System.Collections.Generic; using UnityEngin
     private CharacterManager _characterManager;
     private Cache _cache;
     private GUIManager _GUIManager;
+    [SerializeField]
     private BuildingInterior _building;
 
+
+    private bool _monsterWarned;
+
+    //private float nextActionTime = 0.0f;
+
+    // Use this for initialization
     void Start ()     {
-        var insideBuilding = GameObject.Find("Building Interior");
-        if (insideBuilding == null)
+        if (_building == null)
         {
             _cache = Cache.Instance();
             _terrainManager = TerrainManager.Instance();
         }
-        else
-            _building = insideBuilding.GetComponent<BuildingInterior>();
         _GUIManager = GUIManager.Instance();
         _characterManager = CharacterManager.Instance();     } 	     internal void AttackDealing(ActiveMonsterType monster, float dealAtt, string environmentType)
     {

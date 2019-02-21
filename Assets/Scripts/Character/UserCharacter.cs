@@ -30,7 +30,7 @@ public class UserCharacter
         CharacterDatabase characterDatabase = CharacterDatabase.Instance();
         try
         {
-            Character character  = characterDatabase.GetCharacterById(CharacterId);
+            Character character  = characterDatabase.FindCharacter(CharacterId);
             character.Print();
         }
         catch (Exception e)

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="Windows-1252"?>
-<ArrayOfOupItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <OupItem>
-      <Id>1</Id>
+<ArrayOfItemContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ItemContainer>
+    <Consumable>
+      <Id>0</Id>
       <Name>Black Berry</Name>
       <Description>Black Berry</Description>
       <IconPath>Inventory/InventorySet1</IconPath>
@@ -9,9 +10,13 @@
       <Cost>0</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>20</MaxStackCnt>
-      <ExpirationDays>365</ExpirationDays>
+      <StackCnt>1</StackCnt>
       <Type>Consumable</Type>
       <Rarity>Common</Rarity>
+      <IsUnique>false</IsUnique>
+      <Slug>Black_Berry</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-06-14T14:08:24.5968313-05:00</ExpirationTime>
       <IsEnable>false</IsEnable>
       <Health>1</Health>
       <Mana>0</Mana>
@@ -20,8 +25,37 @@
       <Gem>0</Gem>
       <Recipe>0</Recipe>
       <Egg>0</Egg>
-  </OupItem>
-  <OupItem>
+    </Consumable>
+  </ItemContainer>
+  <ItemContainer>
+    <Consumable>
+      <Id>1</Id>
+      <Name>Cherry</Name>
+      <Description>One Cherry</Description>
+      <IconPath>Inventory/InventorySet1</IconPath>
+      <IconId>1</IconId>
+      <Cost>0</Cost>
+      <Weight>0</Weight>
+      <MaxStackCnt>20</MaxStackCnt>
+      <StackCnt>1</StackCnt>
+      <Type>Consumable</Type>
+      <Rarity>Common</Rarity>
+      <IsUnique>false</IsUnique>
+      <Slug>Cherry</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-06-14T14:08:24.5968313-05:00</ExpirationTime>
+      <IsEnable>true</IsEnable>
+      <Health>1</Health>
+      <Mana>0</Mana>
+      <Energy>0</Energy>
+      <Coin>0</Coin>
+      <Gem>0</Gem>
+      <Recipe>0</Recipe>
+      <Egg>0</Egg>
+    </Consumable>
+  </ItemContainer>
+  <ItemContainer>
+    <Weapon>
       <Id>2</Id>
       <Name>Small Sword</Name>
       <Description>Small Sword</Description>
@@ -30,9 +64,13 @@
       <Cost>10</Cost>
       <Weight>3</Weight>
       <MaxStackCnt>1</MaxStackCnt>
-      <ExpirationDays>365</ExpirationDays>
+      <StackCnt>1</StackCnt>
       <Type>Weapon</Type>
       <Rarity>Uncommon</Rarity>
+      <IsUnique>true</IsUnique>
+      <Slug>Small_Sword</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-06-14T15:17:24.2938024-05:00</ExpirationTime>
       <IsEnable>true</IsEnable>
       <CarryType>OneHand</CarryType>
       <SpeedAttack>1</SpeedAttack>
@@ -43,8 +81,10 @@
       <MagicDefense>0</MagicDefense>
       <PoisonAttack>0</PoisonAttack>
       <PoisonDefense>0</PoisonDefense>
-  </OupItem>
-  <OupItem>
+    </Weapon>
+  </ItemContainer>
+  <ItemContainer>
+    <Substance>
       <Id>3</Id>
       <Name>Round Rock</Name>
       <Description>Round Rock</Description>
@@ -53,12 +93,18 @@
       <Cost>0</Cost>
       <Weight>5</Weight>
       <MaxStackCnt>5</MaxStackCnt>
-      <ExpirationDays>365</ExpirationDays>
+      <StackCnt>1</StackCnt>
       <Type>Substance</Type>
       <Rarity>Common</Rarity>
+      <IsUnique>false</IsUnique>
+      <Slug>Round_Rock</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-06-14T17:06:57.5051813-05:00</ExpirationTime>
       <IsEnable>true</IsEnable>
-  </OupItem>
-  <OupItem>
+    </Substance>
+  </ItemContainer>
+  <ItemContainer>
+    <Equipment>
       <Id>4</Id>
       <Name>Basic Shoe</Name>
       <Description>Basic shoe from animal leather</Description>
@@ -67,9 +113,13 @@
       <Cost>5</Cost>
       <Weight>1</Weight>
       <MaxStackCnt>2</MaxStackCnt>
-      <ExpirationDays>365</ExpirationDays>
+      <StackCnt>1</StackCnt>
       <Type>Equipment</Type>
       <Rarity>Common</Rarity>
+      <IsUnique>false</IsUnique>
+      <Slug>Basic_Shoe</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-06-21T11:37:40.2849039-05:00</ExpirationTime>
       <IsEnable>true</IsEnable>
       <PlaceHolder>Feet</PlaceHolder>
       <Agility>0</Agility>
@@ -83,8 +133,10 @@
       <Speed>0</Speed>
       <Stamina>0</Stamina>
       <Strength>0</Strength>
-  </OupItem>
-  <OupItem>
+    </Equipment>
+  </ItemContainer>
+  <ItemContainer>
+    <Equipment>
       <Id>5</Id>
       <Name>Basic Glove</Name>
       <Description>Basic glove from animal leather</Description>
@@ -93,9 +145,13 @@
       <Cost>3</Cost>
       <Weight>1</Weight>
       <MaxStackCnt>2</MaxStackCnt>
-      <ExpirationDays>365</ExpirationDays>
+      <StackCnt>1</StackCnt>
       <Type>Equipment</Type>
       <Rarity>Common</Rarity>
+      <IsUnique>false</IsUnique>
+      <Slug>Basic_Glove</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-06-28T18:35:01.5138436-05:00</ExpirationTime>
       <IsEnable>true</IsEnable>
       <PlaceHolder>Feet</PlaceHolder>
       <Agility>0</Agility>
@@ -109,8 +165,10 @@
       <Speed>0</Speed>
       <Stamina>0</Stamina>
       <Strength>0</Strength>
-  </OupItem>
-  <OupItem>
+    </Equipment>
+  </ItemContainer>
+  <ItemContainer>
+    <Tool>
       <Id>6</Id>
       <Name>Iron Shovel</Name>
       <Description>Iron Shovel</Description>
@@ -119,14 +177,20 @@
       <Cost>10</Cost>
       <Weight>5</Weight>
       <MaxStackCnt>1</MaxStackCnt>
-      <ExpirationDays>365</ExpirationDays>
+      <StackCnt>1</StackCnt>
       <Type>Tool</Type>
       <Rarity>Common</Rarity>
+      <IsUnique>true</IsUnique>
+      <Slug>Iron_Shovel</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-08-09T11:51:45.0731418-05:00</ExpirationTime>
       <IsEnable>true</IsEnable>
-      <MaxTimeToUse>100</MaxTimeToUse>
+      <TimeToUse>100</TimeToUse>
       <FavouriteElement>Hole</FavouriteElement>
-  </OupItem>
-  <OupItem>
+    </Tool>
+  </ItemContainer>
+  <ItemContainer>
+    <Tool>
       <Id>7</Id>
       <Name>Iron Axe</Name>
       <Description>Iron Axe</Description>
@@ -135,14 +199,20 @@
       <Cost>10</Cost>
       <Weight>5</Weight>
       <MaxStackCnt>1</MaxStackCnt>
-      <ExpirationDays>365</ExpirationDays>
+      <StackCnt>1</StackCnt>
       <Type>Tool</Type>
       <Rarity>Common</Rarity>
+      <IsUnique>true</IsUnique>
+      <Slug>Iron_Axe</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-08-14T15:42:05.8492805-05:00</ExpirationTime>
       <IsEnable>true</IsEnable>
-      <MaxTimeToUse>100</MaxTimeToUse>
+      <TimeToUse>100</TimeToUse>
       <FavouriteElement>Tree</FavouriteElement>
-  </OupItem>
-  <OupItem>
+    </Tool>
+  </ItemContainer>
+  <ItemContainer>
+    <Consumable>
       <Id>8</Id>
       <Name>Coins</Name>
       <Description>Coins</Description>
@@ -151,9 +221,13 @@
       <Cost>0</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>100</MaxStackCnt>
-      <ExpirationDays>365</ExpirationDays>
+      <StackCnt>10</StackCnt>
       <Type>Consumable</Type>
       <Rarity>Common</Rarity>
+      <IsUnique>false</IsUnique>
+      <Slug>Coins</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-11-15T16:12:55.2234687-06:00</ExpirationTime>
       <IsEnable>true</IsEnable>
       <Health>0</Health>
       <Mana>0</Mana>
@@ -162,8 +236,10 @@
       <Gem>0</Gem>
       <Recipe>0</Recipe>
       <Egg>0</Egg>
-  </OupItem>
-  <OupItem>
+    </Consumable>
+  </ItemContainer>
+  <ItemContainer>
+    <Consumable>
       <Id>9</Id>
       <Name>Gem</Name>
       <Description>Gem</Description>
@@ -172,9 +248,13 @@
       <Cost>0</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>10</MaxStackCnt>
-      <ExpirationDays>365</ExpirationDays>
+      <StackCnt>1</StackCnt>
       <Type>Consumable</Type>
       <Rarity>Common</Rarity>
+      <IsUnique>false</IsUnique>
+      <Slug>Gem</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-11-15T16:12:55.2234687-06:00</ExpirationTime>
       <IsEnable>true</IsEnable>
       <Health>0</Health>
       <Mana>0</Mana>
@@ -183,8 +263,10 @@
       <Gem>1</Gem>
       <Recipe>0</Recipe>
       <Egg>0</Egg>
-  </OupItem>
-  <OupItem>
+    </Consumable>
+  </ItemContainer>
+  <ItemContainer>
+    <Consumable>
       <Id>10</Id>
       <Name>Recipe</Name>
       <Description>Recipe</Description>
@@ -193,9 +275,13 @@
       <Cost>0</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>1</MaxStackCnt>
-      <ExpirationDays>365</ExpirationDays>
+      <StackCnt>1</StackCnt>
       <Type>Consumable</Type>
       <Rarity>Common</Rarity>
+      <IsUnique>true</IsUnique>
+      <Slug>Recipe</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-11-15T16:12:55.2234687-06:00</ExpirationTime>
       <IsEnable>true</IsEnable>
       <Health>0</Health>
       <Mana>0</Mana>
@@ -204,8 +290,10 @@
       <Gem>0</Gem>
       <Recipe>1</Recipe>
       <Egg>0</Egg>
-  </OupItem>
-  <OupItem>
+    </Consumable>
+  </ItemContainer>
+  <ItemContainer>
+    <Consumable>
       <Id>11</Id>
       <Name>UltimateEgg</Name>
       <Description>Ultimate Egg</Description>
@@ -214,9 +302,13 @@
       <Cost>0</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>1</MaxStackCnt>
-      <ExpirationDays>365</ExpirationDays>
+      <StackCnt>1</StackCnt>
       <Type>Consumable</Type>
       <Rarity>Common</Rarity>
+      <IsUnique>true</IsUnique>
+      <Slug>Recipe</Slug>
+      <DurationDays>365</DurationDays>
+      <ExpirationTime>2019-11-15T16:12:55.2234687-06:00</ExpirationTime>
       <IsEnable>true</IsEnable>
       <Health>0</Health>
       <Mana>0</Mana>
@@ -225,5 +317,6 @@
       <Gem>0</Gem>
       <Recipe>1</Recipe>
       <Egg>0</Egg>
-  </OupItem>
-</ArrayOfOupItem>
+    </Consumable>
+  </ItemContainer>
+</ArrayOfItemContainer>

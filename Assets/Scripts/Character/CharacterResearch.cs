@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-//Todo Rename to user research
 [Serializable]
 public class CharacterResearch
 {
+    private int nextLevel;
+    private DateTime time;
+
+
     public int Id { get; set; }
     public int UserPlayerId { get; set; }
     public int ResearchId { get; set; }

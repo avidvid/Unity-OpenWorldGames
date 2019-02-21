@@ -7,20 +7,19 @@ using UnityEngine.UI;
 
 public class RecipeListHandler : MonoBehaviour {
 
-    private CharacterManager _characterManager;
+
     private ItemDatabase _itemDatabase;
     private ModalPanel _modalPanel;
 
     //Recipe Prefab
     public GameObject RecipeContent;
 
-    private List<Recipe> _recipes ;
+    private List<Recipe> _recipes = new List<Recipe>();
     private GameObject _addRecipePanel;
 
     void Awake()
     {
         _itemDatabase = ItemDatabase.Instance();
-        _characterManager = CharacterManager.Instance();
         _modalPanel = ModalPanel.Instance();
         _addRecipePanel = GameObject.Find("AddRecipePanel");
     }
@@ -30,7 +29,7 @@ public class RecipeListHandler : MonoBehaviour {
         var contentPanel = GameObject.Find("ContentPanel");
         var recipeInfo = GameObject.Find("RecipeInfo").GetComponent<TextMeshProUGUI>();
         _addRecipePanel.SetActive(false);
-        _recipes = _characterManager.UserRecipes;
+        _recipes = _itemDatabase.UserRecipeList();
         recipeInfo.text = "Your recipes: " + _recipes.Count(p => p.IsEnable);
         for (int i = 0; i < _recipes.Count; i++)
         {
@@ -39,7 +38,7 @@ public class RecipeListHandler : MonoBehaviour {
                 _addRecipePanel.SetActive( true);
                 continue;
             }
-            List<OupItem> recipeItems = _itemDatabase.RecipeItems(_recipes[i]);
+            List<ItemContainer> recipeItems = _itemDatabase.RecipeItems(_recipes[i]);
             List<int> recipeCnt = new List<int> { _recipes[i].FirstItemCnt, _recipes[i].SecondItemCnt, _recipes[i].FinalItemCnt };
 
             GameObject recipeObject = Instantiate(RecipeContent);
@@ -67,7 +66,7 @@ public class RecipeListHandler : MonoBehaviour {
     {
         var recipeCode = _addRecipePanel.GetComponentInChildren<TMP_InputField>().text;
         if (!string.IsNullOrEmpty(recipeCode))
-            if (_characterManager.ValidateRecipeCode(recipeCode))
+            if (_itemDatabase.ValidateRecipeCode(recipeCode))
                 _modalPanel.Choice("Your New Recipe is ready! ", ModalPanel.ModalPanelType.Ok, RefreshTheScene);
             else
                 _modalPanel.Choice("The Recipe Code is Wrong! ", ModalPanel.ModalPanelType.Ok);

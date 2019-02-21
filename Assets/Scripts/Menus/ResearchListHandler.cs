@@ -44,11 +44,10 @@ public class ResearchListHandler : MonoBehaviour {
                     continue;
                 //_researches[i].Id == uiId
                 uiResearch.Research = _researches[i];
-                uiResearch.Level = 1;
                 foreach (var chResearch in _characterResearches)
                     if (chResearch.ResearchId == uiId)
                     {
-                        uiResearch.Level = chResearch.Level+1;
+                        uiResearch.CharacterResearch = chResearch;
                         break;
                     }
                 //Coloring the lines
@@ -56,18 +55,15 @@ public class ResearchListHandler : MonoBehaviour {
                     foreach (var urLink in uiLinks)
                         if (urLink.name == "Link" + uiResearch.Research.RequiredResearchId1 + "-" + uiResearch.Research.Id)
                             if (ResearchLinkValid(uiResearch.Research.RequiredResearchId1, uiResearch.Research.RequiredResearchLevel1))
-                                urLink.GetComponent<Image>().color = Color.green;
+                                urLink.GetComponent<Image>().color = Color.yellow;
                             else
                                 urLink.GetComponent<Image>().color = Color.red;
                 //Purging the buttons
                 var buttons = uiResearch.GetComponentsInChildren<Button>();
                 buttons[0].name = _researches[i].Id.ToString();
                 //There is another active research progressing 
-                if (_characterManager.CharacterResearching!= null)
+                if (_characterManager.CharacterResearching.Id != -1)
                 {
-                    //blink the active building Research 
-                    if (_characterManager.CharacterResearching.ResearchId == _researches[i].Id)
-                        uiResearch.gameObject.AddComponent<BlinkMe>();
                     buttons[0].interactable = false;
                     continue;
                 }
@@ -79,10 +75,6 @@ public class ResearchListHandler : MonoBehaviour {
                 buttons[0].onClick.AddListener(DoResearch);
             }
         }
-    }
-    void Update()
-    {
-
     }
     private void DoResearch()
     {
@@ -142,7 +134,8 @@ public class ResearchListHandler : MonoBehaviour {
         float speed = _characterManager.GetCharacterAttribute("Researching");
         int durationMinutes = research.CalculateTime(nextLevel);
         DateTime time = DateTime.Now.AddMinutes(durationMinutes * (1 - speed));
-        _characterManager.SaveCharacterResearching(research.Id, nextLevel, time);
+        CharacterResearch characterResearch = new CharacterResearch(research.Id, _characterManager.UserPlayer.Id, nextLevel);
+        _characterManager.SaveCharacterResearching(characterResearch,time);
     }
     private bool ResearchUpgradeIsValid(Research research)
     {
@@ -172,14 +165,14 @@ public class ResearchListHandler : MonoBehaviour {
         if (research.RequiredItem == -1)
             item = true;
         else
-        if (_characterManager.ItemIsInInventory(research.RequiredItem))
+        if (_characterManager.InventoryExists(research.RequiredItem))
             item = true;
         return research1 && research2 && research3 && item;
     }
     private bool ResearchLinkValid(int requiredResearchId, int requiredResearchLevel)
     {  
         foreach (var chResearch in _characterResearches)
-            if (requiredResearchId == chResearch.ResearchId && requiredResearchLevel <= chResearch.Level)
+            if (requiredResearchId == chResearch.ResearchId && requiredResearchLevel >= chResearch.Level)
                 return true ;
         return false;
     }

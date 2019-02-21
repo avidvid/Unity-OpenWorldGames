@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SlotEquipment : MonoBehaviour, IDropHandler
 {
-    public OupItem.PlaceType EquType;
+    public Equipment.PlaceType EquType;
     // Use this for initialization
     private InventoryHandler _inv;
 
@@ -28,25 +28,24 @@ public class SlotEquipment : MonoBehaviour, IDropHandler
         
         if (draggedItem == null)
             return;
-        if (draggedItem.ItemIns == null)
+        if (draggedItem.Item.Id == -1)
             return;
-        var item = draggedItem.ItemIns.Item;
-        var userItem = draggedItem.ItemIns.UserItem;
+
         //Wearing Equipment
-        if (EquType != OupItem.PlaceType.None)
+        if (EquType != Equipment.PlaceType.None)
         {
-            switch (item.Type)
+            switch (draggedItem.Item.Type)
             {
-                case OupItem.ItemType.Equipment:
-                    if (item.PlaceHolder == EquType)
-                        if (userItem.StackCnt == item.MaxStackCnt)
+                case Item.ItemType.Equipment:
+                    if (draggedItem.Item.PlaceHolder == EquType)
+                        if (draggedItem.Item.StackCnt == draggedItem.Item.MaxStackCnt)
                         {
                             ItemEquipment existingEquipment = this.transform.GetComponentInChildren<ItemEquipment>();
-                            ItemIns itemEquipment = existingEquipment.ItemIns;
-                            if (_inv.UseItem(draggedItem.ItemIns))
+                            ItemContainer itemEquipment = existingEquipment.Item;
+                            if (_inv.UseItem(draggedItem.Item))
                             {
                                 //load new Item to equipments
-                                existingEquipment.LoadItem(draggedItem.ItemIns);
+                                existingEquipment.LoadItem(draggedItem.Item);
                                 //unload new Item to equipments
                                 draggedItem.LoadItem(itemEquipment);
                                 _inv.UnUseItem(itemEquipment);
@@ -55,21 +54,21 @@ public class SlotEquipment : MonoBehaviour, IDropHandler
                             }
                         }
                         else
-                            _inv.PrintMessage("You need " + (item.MaxStackCnt - userItem.StackCnt) + " of this item to equip", Color.yellow);
+                            _inv.PrintMessage("You need " + (draggedItem.Item.MaxStackCnt - draggedItem.Item.StackCnt) + " of this item to equip", Color.yellow);
                     else
                         _inv.PrintMessage("You cannot equip this item here", Color.yellow);
                     break;
-                case OupItem.ItemType.Weapon:
-                    if (EquType == OupItem.PlaceType.Left || EquType == OupItem.PlaceType.Right)
-                        if (item.CarryType == OupItem.Hands.OneHand)
+                case Item.ItemType.Weapon:
+                    if (EquType == Equipment.PlaceType.Left || EquType == Equipment.PlaceType.Right)
+                        if (draggedItem.Item.CarryType == Weapon.Hands.OneHand)
                         {
                             //Todo: Add logic of hands carry 
                             ItemEquipment existingEquipment = this.transform.GetComponentInChildren<ItemEquipment>();
-                            ItemIns itemEquipment = existingEquipment.ItemIns;
-                            if (_inv.UseItem(draggedItem.ItemIns))
+                            ItemContainer itemEquipment = existingEquipment.Item;
+                            if (_inv.UseItem(draggedItem.Item))
                             {
                                 //load new Item to equipments
-                                existingEquipment.LoadItem(draggedItem.ItemIns);
+                                existingEquipment.LoadItem(draggedItem.Item);
                                 //unload new Item to equipments
                                 draggedItem.LoadItem(itemEquipment);
                                 _inv.UnUseItem(itemEquipment);
@@ -82,14 +81,14 @@ public class SlotEquipment : MonoBehaviour, IDropHandler
                     else
                         _inv.PrintMessage("You cannot equip this item here", Color.yellow);
                     break;
-                case OupItem.ItemType.Tool:
-                    if (EquType == OupItem.PlaceType.Left || EquType == OupItem.PlaceType.Right)
+                case Item.ItemType.Tool:
+                    if (EquType == Equipment.PlaceType.Left || EquType == Equipment.PlaceType.Right)
                     {
                         //Todo: Add logic of hands carry 
                         ItemEquipment existingEquipment = this.transform.GetComponentInChildren<ItemEquipment>();
-                        ItemIns itemEquipment = existingEquipment.ItemIns;
+                        ItemContainer itemEquipment = existingEquipment.Item;
                         //Todo: remove the effect of item
-                        existingEquipment.LoadItem(draggedItem.ItemIns);
+                        existingEquipment.LoadItem(draggedItem.Item);
                         draggedItem.LoadItem(itemEquipment);
                         _inv.UpdateInventory(true);
                         _inv.UpdateEquipments(true);

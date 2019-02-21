@@ -35,11 +35,11 @@ public class Recipe{
         {
             return "Ready to mix " + Rarity + " Recipe" +
                    FirstItemCnt + " of "+
-                   itemDatabase.GetItemById(FirstItemId).Name+
+                   itemDatabase.FindItem(FirstItemId).Name+
                    " with " + SecondItemCnt + " of " +
-                   itemDatabase.GetItemById(SecondItemId).Name +
+                   itemDatabase.FindItem(SecondItemId).Name +
                    " to make " + FinalItemCnt + " of " +
-                   itemDatabase.GetItemById(FinalItemId).Name +
+                   itemDatabase.FindItem(FinalItemId).Name +
                    " for " + Energy + " energy ? ";
             //todo: current font doesn't support ( ) 
             //return "Ready to mix " +
@@ -63,9 +63,10 @@ public class Recipe{
         ItemDatabase itemDatabase = ItemDatabase.Instance();
         try
         {
-            Debug.Log("Recipe(" + Id + "): " + itemDatabase.GetItemById(FirstItemId).Name +
-                   " with " + itemDatabase.GetItemById(SecondItemId).Name +
-                   " to " + itemDatabase.GetItemById(FinalItemId).Name +
+
+            Debug.Log("Recipe(" + Id + "): " + itemDatabase.FindItem(FirstItemId).Name +
+                   " with " + itemDatabase.FindItem(SecondItemId).Name +
+                   " to " + itemDatabase.FindItem(FinalItemId).Name +
                    " Enable " + IsEnable +
                    " Public " + IsPublic);
         }
@@ -75,14 +76,4 @@ public class Recipe{
         }
     }
 
-    internal Recipe Reverse()
-    {
-        int temp = FirstItemId;
-        FirstItemId = SecondItemId;
-        SecondItemId = temp;
-        temp = FirstItemCnt;
-        FirstItemCnt = SecondItemCnt;
-        SecondItemCnt = temp;
-        return this;
-    }
 }
