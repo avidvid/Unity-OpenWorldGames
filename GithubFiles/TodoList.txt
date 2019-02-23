@@ -14,7 +14,6 @@ Users Want to do what they want, not what you want them to do
 ###############
 #### Home #####
 ###############
--kevin 2
 
 ###############
 ####Office#####
