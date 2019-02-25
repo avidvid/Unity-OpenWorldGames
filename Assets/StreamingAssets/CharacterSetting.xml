@@ -7,7 +7,7 @@
   <Level>6</Level>
   <Updated>true</Updated>
   <HealthCheck>0</HealthCheck>
-  <LastUpdated>2019-02-20T16:29:06.9064888-06:00</LastUpdated>
+  <LastUpdated>2019-02-22T21:33:36.9402305-06:00</LastUpdated>
   <IsEnable>true</IsEnable>
   <FightMode>false</FightMode>
   <Alive>true</Alive>
@@ -16,12 +16,12 @@
   <Experience>209</Experience>
   <MaxExperience>10500</MaxExperience>
   <HandsCnt>2</HandsCnt>
-  <MaxHealth>800</MaxHealth>
+  <MaxHealth>1000</MaxHealth>
   <Health>800</Health>
   <MaxMana>400</MaxMana>
   <Mana>400</Mana>
   <MaxEnergy>1600</MaxEnergy>
-  <Energy>1560</Energy>
+  <Energy>1550</Energy>
   <SpeedAttack>6</SpeedAttack>
   <SpeedDefense>5</SpeedDefense>
   <AbilityAttack>10</AbilityAttack>
@@ -38,7 +38,7 @@
   <Agility>0</Agility>
   <Strength>0</Strength>
   <Stamina>0</Stamina>
-  <Crafting>1</Crafting>
+  <Crafting>0</Crafting>
   <Researching>0</Researching>
   <Bravery>0</Bravery>
   <Charming>0</Charming>

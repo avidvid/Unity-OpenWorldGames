@@ -115,7 +115,7 @@ public class ActionHandler : MonoBehaviour
     }
     public void GrabItem()
     {
-        if (_inv.AddItemToInventory(_item.ItemTypeInUse.Id))
+        if (_inv.AddItemToInventory(_item.ItemTypeInUse))
         {
             //print("GrabItem: " + _item.ItemTypeInUse.Name + "Added to inventory ");
             if (_isInside)

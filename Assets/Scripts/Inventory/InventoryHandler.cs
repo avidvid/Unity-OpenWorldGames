@@ -167,29 +167,28 @@ public class InventoryHandler : MonoBehaviour
 
         if (_updateInventory || _updateEquipments)
         {
-            _inventoryManager.PrintInventory();
             //Save new inventory 
             if (_updateInventory)
             {
-                _invCarry.Clear();
-                for (int i = 0; i < _playerSlots; i++)
-                {
-                    var tmpItem = InvSlots[i].transform.GetChild(0).GetComponent<ItemData>().ItemIns;
-                    _invCarry.Add(tmpItem);
-                }
+                //for (int i = 0; i < _playerSlots; i++)
+                //{
+                //    var tmpItem = InvSlots[i].transform.GetChild(0).GetComponent<ItemData>().ItemIns;
+                    
+                //    _invCarry.Add(tmpItem);
+                //}
                 _updateInventory = false;
             }
-            //Save new Equipments 
-            if (_updateEquipments)
-            {
-                _invEquipment.Clear();
-                foreach (var equipmentSlot in EquiSlots)
-                {
-                    var tmpItem = equipmentSlot.transform.GetComponentInChildren<ItemEquipment>().ItemIns;
-                    _invCarry.Add(tmpItem);
-                }
-                _updateEquipments = false;
-            }
+            ////Save new Equipments 
+            //if (_updateEquipments)
+            //{
+            //    _invEquipment.Clear();
+            //    foreach (var equipmentSlot in EquiSlots)
+            //    {
+            //        var tmpItem = equipmentSlot.transform.GetComponentInChildren<ItemEquipment>().ItemIns;
+            //        _invCarry.Add(tmpItem);
+            //    }
+            _updateEquipments = false;
+            //}
             _inventoryManager.UpdateInventory = true;
         }
 
@@ -232,6 +231,25 @@ public class InventoryHandler : MonoBehaviour
             return true;
         return false;
     }
+    internal int GetAvailableSlot()
+    {
+        int availableSlot = -1;
+        if (_invCarry.Count < _playerSlots)
+            return availableSlot;
+        for (int i = 0; i < _playerSlots; i++)
+        {
+            availableSlot = i;
+            foreach (var itemIns in _invCarry)
+                if (itemIns.UserItem.Order == i)
+                {
+                    availableSlot = -1;
+                    break;
+                }
+            if (availableSlot == i)
+                break;
+        }
+        return availableSlot;
+    }
 
     internal bool UseEnergy(int amount)
     {
@@ -249,50 +267,41 @@ public class InventoryHandler : MonoBehaviour
     }
 
     //Should match with the AddItemToInventory in CharacterManager
-    public bool AddItemToInventory(int itemId,int stackCnt =1)
+    public bool AddItemToInventory(OupItem item, int stackCnt =1,int order=-1)
     {
-        var item = BuildItemFromDatabase(itemId);
-        if (_characterManager.ItemIsInInventory(item.Id))
+        print("AddItemToInventory: " +item.MyInfo()+ " stackCnt= " + stackCnt+ " order="+ order);
+        if (ItemIndexInInventory(item.Id)!= -1)
         {
             if (item.MaxStackCnt == 1)
             {
                 PrintMessage("You Can Only Carry one of this item!", Color.yellow);
                 return false;
             }
-            for (int i = 0; i < _playerSlots; i++)
-            {
-                var tmpItem = InvSlots[i].transform.GetChild(0).GetComponent<ItemData>().ItemIns;
-                if (tmpItem != null)
-                {
-                    if (tmpItem.Item.Id == item.Id)
-                    {
-                        //It can be stacked in the existing slot that has the same item
-                        if (tmpItem.UserItem.StackCnt + stackCnt <= tmpItem.Item.MaxStackCnt)
-                        {
-                            tmpItem.UserItem.StackCnt += stackCnt;
-                            UpdateInventory(true);
-                            return true;
-                        }
-                        //It can NOT be stacked in the existing slot that has the same item so we go to the next Slot
-                    }
-                }
-            }
+
+            //todo: It can be stacked in the existing slot that has the same item
         }
-        else{
-            for (int i = 0; i < _playerSlots; i++)
-            {
-                var tmpItem = InvSlots[i].transform.GetChild(0).GetComponent<ItemData>();
-                if (tmpItem.ItemIns == null)
-                {
-                    tmpItem.LoadItem(new ItemIns(item,new UserItem(item,stackCnt)));
-                    UpdateInventory(true);
-                    return true;
-                }
-            }
+        if (order == -1)
+            order = GetAvailableSlot();
+        if (order == -1)
+        {
+            PrintMessage("Not Enough room in inventory", Color.red);
+            return false;
         }
-        PrintMessage("Not Enough room in inventory",Color.red);
-        return false;
+        var itemData = InvSlots[order].transform.GetComponentInChildren<ItemData>();
+        itemData.ItemIns = new ItemIns(item, new UserItem(item, stackCnt, order));
+        itemData.LoadItem();
+        _invCarry.Add(itemData.ItemIns);
+        return true;
     }
+
+    private int ItemIndexInInventory(int itemId)
+    {
+        foreach (var itemIns in _invCarry)
+            if (itemIns.Item.Id == itemId)
+                return itemIns.UserItem.Order;
+        return -1;
+    }
+
     public void OpenInventoryPanel()
     {
         _popupAction.SetActive(false);

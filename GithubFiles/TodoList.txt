@@ -18,6 +18,9 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####Office#####
 ###############	
+	Fix Offers  based on the new ids 
+	
+
 	new user database
 	ChangeItemcontainer To suppport webservice format 
 	

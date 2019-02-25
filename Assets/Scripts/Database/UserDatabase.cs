@@ -156,7 +156,8 @@ public class UserDatabase : MonoBehaviour
     {
         _userInventory.Clear();
         foreach (var userItem in invCarry)
-            _userInventory.Add(userItem.UserItem);
+            if (userItem.UserItem.StackCnt!=0)
+                _userInventory.Add(userItem.UserItem);
         if (invEquipment!=null)
             foreach (var userItem in invEquipment)
                 _userInventory.Add(userItem.UserItem);

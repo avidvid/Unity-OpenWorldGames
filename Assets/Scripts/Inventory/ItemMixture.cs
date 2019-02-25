@@ -178,6 +178,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         _time = DateTime.MinValue;
         ItemLocked = false;
         TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
+        texts[0].text = "";
         texts[1].text = "Empty";
         //Save empty item in mixture
         _inv.SaveCharacterMixture(0,0, DateTime.Now);

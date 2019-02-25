@@ -13,14 +13,14 @@ public class UserItem
     public bool Deleted { get; set; }
     public DateTime Created { get; set; }
 
-    public UserItem(OupItem item, int stackCnt=1)
+    public UserItem(OupItem item, int stackCnt=1, int order = -1)
     {
         UserId = 22;
         ItemId = item.Id;
         StackCnt = stackCnt;
         Equipped = false;
         Stored = false;
-        Order = 100;
+        Order = order;
         TimeToUse = 1;
         Deleted = false;
         Created = DateTime.Now;

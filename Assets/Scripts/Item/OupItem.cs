@@ -171,12 +171,12 @@ public class OupItem
     }
     internal void Print()
     {
+        Debug.Log("UserPlayer = " + MyInfo());
+    }
+    internal string MyInfo()
+    {
         if (Id == -1)
-        {
-            Debug.Log("Id:" + Id);
-            return;
-        }
-        Sprite Sprite = this.GetSprite();
-        Debug.Log("Id:" + Id + " Name:" + Name + " Sprite:" + Sprite.name + " Type:" + Type + " Rarity:" + Rarity);
+            return "Empty Item";
+        return Id + " Name:" + Name + " Sprite:" + GetSprite().name + " Type:" + Type + " Rarity:" + Rarity;
     }
 }
