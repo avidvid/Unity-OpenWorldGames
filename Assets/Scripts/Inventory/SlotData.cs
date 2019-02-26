@@ -90,15 +90,15 @@ public class SlotData : MonoBehaviour,IDropHandler{
                 else
                 {
                     //Set the slot Item
-                    existingItem.transform.name = equipedItem.ItemIns.Item.Name;
-                    existingItem.GetComponent<Image>().sprite = equipedItem.ItemIns.Item.GetSprite();
-                    TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-                    stackCntText.text = equipedItem.ItemIns.UserItem.StackCnt > 1 ? equipedItem.ItemIns.UserItem.StackCnt.ToString() : "";
-                    existingItem.ItemIns = new ItemIns(equipedItem.ItemIns.Item, equipedItem.ItemIns.UserItem);
-                    _inv.InvSlots[SlotIndex].name = equipedItem.ItemIns.Item.Name;
+                    existingItem.ItemIns = equipedItem.ItemIns;
+                    existingItem.transform.parent.name = existingItem.transform.name = existingItem.ItemIns.Item.Name;
+                    existingItem.GetComponent<Image>().sprite = existingItem.ItemIns.Item.GetSprite();
+                    var stackCntText = existingItem.transform.GetComponentInChildren<TextMeshProUGUI>();
+                    stackCntText.text = existingItem.ItemIns.UserItem.StackCnt > 1 ? existingItem.ItemIns.UserItem.StackCnt.ToString() : "";
+                    existingItem.ItemIns.UserItem.Order = existingItem.SlotIndex;
+                    existingItem.ItemIns.UserItem.Equipped = false;
                     //unload new Item to equipments
                     equipedItem.LoadItem();
-
                     _inv.UpdateInventory(true);
                     _inv.UpdateEquipments(true);
                 }
@@ -190,7 +190,6 @@ public class SlotData : MonoBehaviour,IDropHandler{
                 }
             }
     }
-
     private void MixItemData(ref ItemData existingItem, ref ItemData draggedItem,Recipe newRecipe)
     {
         if (!_inv.UseEnergy(newRecipe.Energy))
