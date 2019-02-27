@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -93,8 +94,8 @@ public class InventoryHandler : MonoBehaviour
             {
                 if ( ( (equipmentIns.Item.Type == OupItem.ItemType.Weapon || equipmentIns.Item.Type == OupItem.ItemType.Tool)
                       &&
-                       ( (EquiSlots[i].EquType == OupItem.PlaceType.Right && equipmentIns.UserItem.Order == 1) || 
-                         (EquiSlots[i].EquType == OupItem.PlaceType.Left  && equipmentIns.UserItem.Order == 2) ))
+                       ( (EquiSlots[i].EquType == OupItem.PlaceType.Right && equipmentIns.UserItem.Order == (int)OupItem.PlaceType.Right) || 
+                         (EquiSlots[i].EquType == OupItem.PlaceType.Left  && equipmentIns.UserItem.Order == (int)OupItem.PlaceType.Left) ))
                     ||
                      (equipmentIns.Item.PlaceHolder == EquiSlots[i].EquType && equipmentIns.Item.Type == OupItem.ItemType.Equipment)
                     )
@@ -170,25 +171,28 @@ public class InventoryHandler : MonoBehaviour
             //Save new inventory 
             if (_updateInventory)
             {
-                //for (int i = 0; i < _playerSlots; i++)
-                //{
-                //    var tmpItem = InvSlots[i].transform.GetChild(0).GetComponent<ItemData>().ItemIns;
-                    
-                //    _invCarry.Add(tmpItem);
-                //}
+                var selected = _invCarry.Where(item => item.UserItem.StackCnt != 0).ToList();
+                selected.ForEach(item => _invCarry.Remove(item));
                 _updateInventory = false;
             }
             ////Save new Equipments 
-            //if (_updateEquipments)
-            //{
-            //    _invEquipment.Clear();
-            //    foreach (var equipmentSlot in EquiSlots)
-            //    {
-            //        var tmpItem = equipmentSlot.transform.GetComponentInChildren<ItemEquipment>().ItemIns;
-            //        _invCarry.Add(tmpItem);
-            //    }
-            _updateEquipments = false;
-            //}
+            if (_updateEquipments)
+            {
+                var selected = _invCarry.Where(item => item.UserItem.StackCnt == 0 ).ToList();
+                selected.ForEach(item => _invCarry.Remove(item));
+                selected = _invCarry.Where(item => item.UserItem.Equipped).ToList();
+                selected.ForEach(item => _invCarry.Remove(item));
+                _invEquipment.AddRange(selected);
+
+
+                selected = _invEquipment.Where(item => item.UserItem.StackCnt == 0).ToList();
+                selected.ForEach(item => _invEquipment.Remove(item));
+                selected = _invEquipment.Where(item => !item.UserItem.Equipped).ToList();
+                selected.ForEach(item => _invEquipment.Remove(item));
+                _invCarry.AddRange(selected);
+
+                _updateEquipments = false;
+            }
             _inventoryManager.UpdateInventory = true;
         }
 

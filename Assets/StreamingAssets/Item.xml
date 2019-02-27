@@ -123,6 +123,7 @@
       <Type>Tool</Type>
       <Rarity>Common</Rarity>
       <IsEnable>true</IsEnable>
+      <CarryType>OneHand</CarryType>
       <MaxTimeToUse>100</MaxTimeToUse>
       <FavouriteElement>Hole</FavouriteElement>
   </OupItem>
@@ -139,6 +140,7 @@
       <Type>Tool</Type>
       <Rarity>Common</Rarity>
       <IsEnable>true</IsEnable>
+      <CarryType>OneHand</CarryType>
       <MaxTimeToUse>100</MaxTimeToUse>
       <FavouriteElement>Tree</FavouriteElement>
   </OupItem>

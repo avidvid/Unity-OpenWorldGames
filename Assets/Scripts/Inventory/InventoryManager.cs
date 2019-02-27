@@ -70,7 +70,8 @@ public class InventoryManager : MonoBehaviour
                 if ((int) InvEquipment[i].Item.PlaceHolder != InvEquipment[i].UserItem.Order)
                     throw new Exception("IM-InvEquipment Invalid Equipment Order!!!");
             if (InvEquipment[i].Item.Type == OupItem.ItemType.Tool || InvEquipment[i].Item.Type == OupItem.ItemType.Weapon)
-                if (InvEquipment[i].UserItem.Order != 1 && InvEquipment[i].UserItem.Order != 2)
+                if (InvEquipment[i].UserItem.Order != (int)OupItem.PlaceType.Left 
+                        && InvEquipment[i].UserItem.Order != (int)OupItem.PlaceType.Right)
                     throw new Exception("IM-InvEquipment Invalid Weapon/Tool Order!!!");
         }
     }

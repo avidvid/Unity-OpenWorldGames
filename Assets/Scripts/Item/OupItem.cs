@@ -136,6 +136,7 @@ public class OupItem
                 PoisonAttack = PoisonDefense = 0;
                 break;
             case ItemType.Tool:
+                CarryType = Hands.OneHand;
                 MaxTimeToUse = 0;
                 FavoriteElement = ElementIns.ElementType.Hole;
                 break;

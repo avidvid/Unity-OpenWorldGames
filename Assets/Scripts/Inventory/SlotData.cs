@@ -98,7 +98,7 @@ public class SlotData : MonoBehaviour,IDropHandler{
                     existingItem.ItemIns.UserItem.Order = existingItem.SlotIndex;
                     existingItem.ItemIns.UserItem.Equipped = false;
                     //unload new Item to equipments
-                    equipedItem.LoadItem();
+                    equipedItem.LoadItem(null);
                     _inv.UpdateInventory(true);
                     _inv.UpdateEquipments(true);
                 }

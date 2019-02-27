@@ -31,7 +31,7 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             return;
         if (ItemIns.UserItem.StackCnt == 0)
         {
-            LoadItem();
+            LoadItem(null);
             _inv.UpdateEquipments(true);
         }
     }
@@ -78,31 +78,37 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         if (_parent == null)
             return;
-        this.transform.position = _parent.position;
         this.transform.SetParent(_parent);
-        this.transform.SetSiblingIndex(0);
+        this.transform.position = _parent.position;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
     internal void LoadItem()
     {
-        _inv.UnUseItem(ItemIns);
-        ItemIns = null;
-        GetComponent<Image>().sprite = EmptySprite;
-        this.transform.name = "Empty";
+        if (ItemIns == null)
+        {
+            this.ItemIns = null;
+            GetComponent<Image>().sprite = EmptySprite;
+            this.transform.name = "Empty";
+        }
+        else
+        {
+            Sprite itemSprite = ItemIns.Item.GetSprite();
+            GetComponent<Image>().sprite = itemSprite != null ? itemSprite : EmptySprite;
+            this.transform.name = ItemIns.Item.Name;
+        }
+        _inv.UpdateEquipments(true);
+
     }
     internal void LoadItem(ItemIns itemIns)
     {
-        ItemIns = itemIns;
-        Sprite itemSprite = ItemIns.Item.GetSprite();
-        GetComponent<Image>().sprite = itemSprite != null ? itemSprite : EmptySprite;
-        this.transform.name = ItemIns.Item.Name;
-        //LoadItem(itemIns.Item, itemIns.UserItem);
+        if (ItemIns!=null)
+            _inv.UnUseItem(ItemIns);
+        this.ItemIns = itemIns;
+        LoadItem();
     }
 
     internal void UseItem(int count)
     {
         ItemIns.UserItem.TimeToUse-= count;
     }
-
-
 }

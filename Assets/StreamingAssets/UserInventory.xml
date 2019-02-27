@@ -72,7 +72,7 @@
     <StackCnt>1</StackCnt>
     <Equipped>true</Equipped>
     <Stored>false</Stored>
-    <Order>1</Order>
+    <Order>11</Order>
     <TimeToUse>1</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
@@ -83,7 +83,7 @@
     <StackCnt>1</StackCnt>
     <Equipped>true</Equipped>
     <Stored>false</Stored>
-    <Order>2</Order>
+    <Order>12</Order>
     <TimeToUse>903</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>

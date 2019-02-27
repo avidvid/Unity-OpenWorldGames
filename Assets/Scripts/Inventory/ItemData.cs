@@ -115,37 +115,42 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
         else
         {
             transform.parent.name = this.transform.name = ItemIns.Item.Name;
+            this.ItemIns.UserItem.Order = SlotIndex;
+            this.ItemIns.UserItem.Equipped = false;
             GetComponent<Image>().sprite = ItemIns.Item.GetSprite();
             this.transform.GetComponentInChildren<TextMeshProUGUI>().text = ItemIns.UserItem.StackCnt > 1 ? ItemIns.UserItem.StackCnt.ToString() : "";
         }
+        _inv.UpdateInventory(true);
     }
 
     internal void LoadItem(ItemIns itemIns)
     {
-        LoadItem(itemIns.Item, itemIns.UserItem);
+        this.ItemIns = itemIns;
+        LoadItem();
     }
-    public void LoadItem(OupItem item,UserItem userItem)
-    {
-        if (ItemIns == null)
-        {
-            this.ItemIns = null;
-            GetComponent<Image>().sprite = EmptySprite;
-            var stackCntText = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            stackCntText.text = "";
-            _inv.UpdateInventory(true);
-        }
-        else
-        {
-            ItemIns.Item = item;
-            ItemIns.UserItem = userItem;
-            this.transform.name = item.Name;
-            GetComponent<Image>().sprite = item.GetSprite();
-            this.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = userItem.StackCnt > 1 ? userItem.StackCnt.ToString() : "";
-            if (_inv ==null)
-                _inv = InventoryHandler.Instance();
-            _inv.InvSlots[SlotIndex].transform.name = item.Name;
-            _inv.UpdateInventory(true);
-        }
-    }
+
+    //public void LoadItem(OupItem item,UserItem userItem)
+    //{
+    //    if (ItemIns == null)
+    //    {
+    //        this.ItemIns = null;
+    //        GetComponent<Image>().sprite = EmptySprite;
+    //        var stackCntText = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+    //        stackCntText.text = "";
+    //        _inv.UpdateInventory(true);
+    //    }
+    //    else
+    //    {
+    //        ItemIns.Item = item;
+    //        ItemIns.UserItem = userItem;
+    //        this.transform.name = item.Name;
+    //        GetComponent<Image>().sprite = item.GetSprite();
+    //        this.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = userItem.StackCnt > 1 ? userItem.StackCnt.ToString() : "";
+    //        if (_inv ==null)
+    //            _inv = InventoryHandler.Instance();
+    //        _inv.InvSlots[SlotIndex].transform.name = item.Name;
+    //        _inv.UpdateInventory(true);
+    //    }
+    //}
 
 }
