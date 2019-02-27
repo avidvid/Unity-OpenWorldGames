@@ -7,7 +7,7 @@
   <Level>6</Level>
   <Updated>true</Updated>
   <HealthCheck>0</HealthCheck>
-  <LastUpdated>2019-02-27T11:32:09.5603428-06:00</LastUpdated>
+  <LastUpdated>2019-02-27T13:41:31.4683566-06:00</LastUpdated>
   <IsEnable>true</IsEnable>
   <FightMode>false</FightMode>
   <Alive>true</Alive>
@@ -21,7 +21,7 @@
   <MaxMana>400</MaxMana>
   <Mana>400</Mana>
   <MaxEnergy>1600</MaxEnergy>
-  <Energy>1380</Energy>
+  <Energy>740</Energy>
   <SpeedAttack>6</SpeedAttack>
   <SpeedDefense>5</SpeedDefense>
   <AbilityAttack>10</AbilityAttack>

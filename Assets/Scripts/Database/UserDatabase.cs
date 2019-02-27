@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -161,6 +162,7 @@ public class UserDatabase : MonoBehaviour
         if (invEquipment!=null)
             foreach (var userItem in invEquipment)
                 _userInventory.Add(userItem.UserItem);
+        //_userInventory = _userInventory.OrderBy(x => x.Equipped).ThenBy(x => x.Stored).ToList();
         SaveUserInventory();
     }
     internal List<UserItem> GetUserInventory()

@@ -3,32 +3,10 @@
   <UserItem>
     <UserId>22</UserId>
     <ItemId>1</ItemId>
-    <StackCnt>4</StackCnt>
+    <StackCnt>13</StackCnt>
     <Equipped>false</Equipped>
     <Stored>false</Stored>
     <Order>5</Order>
-    <TimeToUse>1</TimeToUse>
-    <Deleted>false</Deleted>
-    <Created>2019-06-14T17:06:57.5051813-05:00</Created>
-  </UserItem>
-  <UserItem>
-    <UserId>22</UserId>
-    <ItemId>7</ItemId>
-    <StackCnt>1</StackCnt>
-    <Equipped>false</Equipped>
-    <Stored>false</Stored>
-    <Order>2</Order>
-    <TimeToUse>1</TimeToUse>
-    <Deleted>false</Deleted>
-    <Created>2019-06-14T17:06:57.5051813-05:00</Created>
-  </UserItem>
-  <UserItem>
-    <UserId>22</UserId>
-    <ItemId>1</ItemId>
-    <StackCnt>9</StackCnt>
-    <Equipped>false</Equipped>
-    <Stored>false</Stored>
-    <Order>3</Order>
     <TimeToUse>1</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
@@ -57,22 +35,22 @@
   </UserItem>
   <UserItem>
     <UserId>22</UserId>
-    <ItemId>5</ItemId>
-    <StackCnt>2</StackCnt>
-    <Equipped>true</Equipped>
+    <ItemId>7</ItemId>
+    <StackCnt>1</StackCnt>
+    <Equipped>false</Equipped>
     <Stored>false</Stored>
-    <Order>10</Order>
+    <Order>2</Order>
     <TimeToUse>1</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
   </UserItem>
   <UserItem>
     <UserId>22</UserId>
-    <ItemId>2</ItemId>
-    <StackCnt>1</StackCnt>
-    <Equipped>true</Equipped>
+    <ItemId>5</ItemId>
+    <StackCnt>2</StackCnt>
+    <Equipped>false</Equipped>
     <Stored>false</Stored>
-    <Order>11</Order>
+    <Order>1</Order>
     <TimeToUse>1</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
@@ -85,6 +63,17 @@
     <Stored>false</Stored>
     <Order>12</Order>
     <TimeToUse>903</TimeToUse>
+    <Deleted>false</Deleted>
+    <Created>2019-06-14T17:06:57.5051813-05:00</Created>
+  </UserItem>
+  <UserItem>
+    <UserId>22</UserId>
+    <ItemId>2</ItemId>
+    <StackCnt>1</StackCnt>
+    <Equipped>true</Equipped>
+    <Stored>false</Stored>
+    <Order>11</Order>
+    <TimeToUse>1</TimeToUse>
     <Deleted>false</Deleted>
     <Created>2019-06-14T17:06:57.5051813-05:00</Created>
   </UserItem>

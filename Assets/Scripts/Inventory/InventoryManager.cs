@@ -38,7 +38,20 @@ public class InventoryManager : MonoBehaviour
 
     void Start()
     {
+        RefreshInventory();
+
+        ValidateInventory();
+        Debug.Log("IM-InvCarry.Count = " + InvCarry.Count);
+        Debug.Log("IM-InvEquipment.Count = " + InvEquipment.Count);
+        Debug.Log("IM-InvBank.Count = " + InvBank.Count);
+    }
+
+    private void RefreshInventory()
+    {
         var userInvItems = _characterManager.CharacterInventory;
+        InvEquipment.Clear();
+        InvBank.Clear();
+        InvCarry.Clear();
         foreach (var itemIns in userInvItems)
         {
             if (itemIns.UserItem.Equipped)
@@ -48,11 +61,6 @@ public class InventoryManager : MonoBehaviour
             else
                 InvCarry.Add(itemIns);
         }
-
-        ValidateInventory();
-        Debug.Log("IM-InvCarry.Count = " + InvCarry.Count);
-        Debug.Log("IM-InvEquipment.Count = " + InvEquipment.Count);
-        Debug.Log("IM-InvBank.Count = " + InvBank.Count);
     }
 
     private void ValidateInventory()
@@ -80,6 +88,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (UpdateInventory)
         {
+            RefreshInventory();
             _userDatabase.UpdateUserInventory(InvCarry, InvEquipment);
             UpdateInventory = false;
             PrintInventory();

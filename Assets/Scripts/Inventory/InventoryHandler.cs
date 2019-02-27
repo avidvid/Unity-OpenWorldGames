@@ -171,26 +171,11 @@ public class InventoryHandler : MonoBehaviour
             //Save new inventory 
             if (_updateInventory)
             {
-                var selected = _invCarry.Where(item => item.UserItem.StackCnt != 0).ToList();
-                selected.ForEach(item => _invCarry.Remove(item));
                 _updateInventory = false;
             }
             ////Save new Equipments 
             if (_updateEquipments)
             {
-                var selected = _invCarry.Where(item => item.UserItem.StackCnt == 0 ).ToList();
-                selected.ForEach(item => _invCarry.Remove(item));
-                selected = _invCarry.Where(item => item.UserItem.Equipped).ToList();
-                selected.ForEach(item => _invCarry.Remove(item));
-                _invEquipment.AddRange(selected);
-
-
-                selected = _invEquipment.Where(item => item.UserItem.StackCnt == 0).ToList();
-                selected.ForEach(item => _invEquipment.Remove(item));
-                selected = _invEquipment.Where(item => !item.UserItem.Equipped).ToList();
-                selected.ForEach(item => _invEquipment.Remove(item));
-                _invCarry.AddRange(selected);
-
                 _updateEquipments = false;
             }
             _inventoryManager.UpdateInventory = true;
