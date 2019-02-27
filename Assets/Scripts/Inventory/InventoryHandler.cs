@@ -269,17 +269,20 @@ public class InventoryHandler : MonoBehaviour
 
             //todo: It can be stacked in the existing slot that has the same item
         }
-        if (order == -1)
-            order = GetAvailableSlot();
+
         if (order == -1)
         {
-            PrintMessage("Not Enough room in inventory", Color.red);
-            return false;
+            order = GetAvailableSlot();
+            if (order == -1)
+            {
+                PrintMessage("Not Enough room in inventory", Color.red);
+                return false;
+            }
         }
         var itemData = InvSlots[order].transform.GetComponentInChildren<ItemData>();
         itemData.ItemIns = new ItemIns(item, new UserItem(item, stackCnt, order));
         itemData.LoadItem();
-        _invCarry.Add(itemData.ItemIns);
+        _inventoryManager.AddItemToInventory(itemData.ItemIns);
         return true;
     }
 

@@ -10,11 +10,13 @@ public class SlotDelete : MonoBehaviour, IDropHandler
     
     private ModalPanel _modalPanel;
     private CharacterManager _characterManager;
+    private InventoryHandler _inv;
 
     void Start()
     {
         _modalPanel = ModalPanel.Instance();
         _characterManager =CharacterManager.Instance();
+        _inv = InventoryHandler.Instance();
     }
     
     public void OnDrop(PointerEventData eventData)
@@ -30,8 +32,9 @@ public class SlotDelete : MonoBehaviour, IDropHandler
 
     private void DeleteItem(ItemIns itemIns)
     {
-        _characterManager.AddCharacterSetting("Coin", (int) (itemIns.UserItem.StackCnt * itemIns.Item.Cost) /2);
+        _characterManager.AddCharacterSetting("Coin", (int) (itemIns.UserItem.StackCnt * itemIns.Item.Cost /2));
         itemIns.UserItem.StackCnt = 0;
+        _inv.UpdateInventory(true);
     }
 
 }

@@ -9,8 +9,9 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####comite#####
 ###############
-
-
+2,691.94
+6,281.19
+8,973.13
 ###############
 #### Home #####
 ###############
@@ -18,7 +19,9 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####Office#####
 ###############	
-	Fix Offers  based on the new ids 
+	
+	Healthcheck for user befixed 
+	
 	
 
 	new user database

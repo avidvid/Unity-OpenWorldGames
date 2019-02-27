@@ -79,28 +79,29 @@ public class SlotConsume: MonoBehaviour, IDropHandler
             case OupItem.ItemType.Consumable:
                 //Use all the stack
                 if (_inv.UseItem(draggedItem.ItemIns))
+                {
+                    _inv.UpdateInventory(true);
                     draggedItem.ItemIns.UserItem.StackCnt = 0;
+                }
                 break;
             case OupItem.ItemType.Equipment:
                 if (draggedItem.ItemIns.UserItem.StackCnt == draggedItem.ItemIns.Item.MaxStackCnt)
                 {
-                    existingEquipment = _inv.EquiSlots[(int)draggedItem.ItemIns.Item.PlaceHolder]
-                        .GetComponentInChildren<ItemEquipment>();
-                    itemEquipment = existingEquipment.ItemIns;
-                    if (itemEquipment.Item.Id == draggedItem.ItemIns.Item.Id)
-                    {
-                        _inv.PrintMessage("You are equipped with the same Equipment" ,Color.yellow);
-                        break;
-                    }
+                    existingEquipment = _inv.EquiSlots[(int)draggedItem.ItemIns.Item.PlaceHolder].GetComponentInChildren<ItemEquipment>();
                     if (_inv.UseItem(draggedItem.ItemIns))
                     {
-                        //load new Item to equipments
+                        //Swap ItemIns
+                        itemEquipment = existingEquipment.ItemIns;
+                        if (itemEquipment!=null)
+                            if (itemEquipment.Item.Id == draggedItem.ItemIns.Item.Id)
+                            {
+                                _inv.PrintMessage("You are equipped with the same Equipment", Color.yellow);
+                                break;
+                            }
+                        draggedItem.ItemIns.UserItem.Order = (int)draggedItem.ItemIns.Item.PlaceHolder;
+                        draggedItem.ItemIns.UserItem.Equipped = true;
                         existingEquipment.LoadItem(draggedItem.ItemIns);
-                        //unload new Item to equipments
                         draggedItem.LoadItem(itemEquipment);
-                        _inv.UnUseItem(itemEquipment);
-                        _inv.UpdateInventory(true);
-                        _inv.UpdateEquipments(true);
                     }
                 }
                 else
@@ -109,44 +110,30 @@ public class SlotConsume: MonoBehaviour, IDropHandler
                         Color.yellow);
                 break;
             case OupItem.ItemType.Weapon:
+            case OupItem.ItemType.Tool:
                 //Todo: Add the logic of two hand item 
-                existingEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Left].GetComponentInChildren<ItemEquipment>();
+                var order = (int) OupItem.PlaceType.Left;
+                existingEquipment = _inv.EquiSlots[order].GetComponentInChildren<ItemEquipment>();
                 itemEquipment = existingEquipment.ItemIns;
                 if (itemEquipment!= null)
                 {
-                    existingEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Right]
-                        .GetComponentInChildren<ItemEquipment>();
+                    order = (int)OupItem.PlaceType.Right;
+                    existingEquipment = _inv.EquiSlots[order].GetComponentInChildren<ItemEquipment>();
                     itemEquipment = existingEquipment.ItemIns;
                 }
                 if (draggedItem.ItemIns.Item.CarryType == OupItem.Hands.OneHand)
                 {
                     if (_inv.UseItem(draggedItem.ItemIns))
                     {
-                        //load new Item to equipments
+                        //Swap ItemIns
+                        draggedItem.ItemIns.UserItem.Order = order;
+                        draggedItem.ItemIns.UserItem.Equipped = true;
                         existingEquipment.LoadItem(draggedItem.ItemIns);
-                        //unload new Item to equipments
                         draggedItem.LoadItem(itemEquipment);
-                        _inv.UnUseItem(itemEquipment);
-                        _inv.UpdateInventory(true);
-                        _inv.UpdateEquipments(true);
                     }
                 }
                 else
                     _inv.PrintMessage("It is not possible to carry this weapon yet", Color.yellow);
-                break;
-            case OupItem.ItemType.Tool:
-                existingEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Left].GetComponentInChildren<ItemEquipment>();
-                itemEquipment = existingEquipment.ItemIns;
-                if (itemEquipment != null)
-                {
-                    existingEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Right]
-                        .GetComponentInChildren<ItemEquipment>();
-                    itemEquipment = existingEquipment.ItemIns;
-                }
-                existingEquipment.LoadItem(draggedItem.ItemIns);
-                draggedItem.LoadItem(itemEquipment);
-                _inv.UpdateInventory(true);
-                _inv.UpdateEquipments(true);
                 break;
             default:
                 _GUIManager.PrintMessage(draggedItem.ItemIns.Item.Name + " can not be used", Color.yellow);

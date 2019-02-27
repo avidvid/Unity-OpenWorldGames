@@ -166,7 +166,7 @@ public class CharacterSetting {
     }
     internal string MyInfo()
     {
-        return Id + "-" + Name + " (" + Level + ")";
+        return Id + "-" + Name + " (" + Level + ") HC:" +HealthCheck;
     }
     internal Sprite GetSpellSprite()
     {
@@ -222,45 +222,63 @@ public class CharacterSetting {
         }
     }
 
-    internal int CalculateHealthCheck(int value, string field)
+    #region HealthCheck
+    internal int CalculateHealthCheck()
     {
-        int fieldCode;
+        return 
+                (this.Coin * (int) FieldCode.Coin +
+                0)
+                * RandomHelper.StringToRandomNumber(Name)
+            ;
+    }
+
+    internal int CalculateHealthCheckByField(int value, string field)
+    {
+        var fieldCode = (int) GetFieldCode(field);
+        return value * fieldCode * RandomHelper.StringToRandomNumber(Name);
+    }
+
+    private static FieldCode GetFieldCode(string field)
+    {
         switch (field)
         {
             case "Health":
-                fieldCode = 1;
-                break;
+                return FieldCode.Health;
             case "Mana":
-                fieldCode = 2;
-                break;
+                return FieldCode.Mana;
             case "Energy":
-                fieldCode = 3;
-                break;
+                return FieldCode.Energy;
             case "Experience":
-                fieldCode = 4;
-                break;
+                return FieldCode.Experience;
             case "Coin":
-                fieldCode = 5;
-                break;
+                return FieldCode.Coin;
             case "CarryCnt":
-                fieldCode = 6;
-                break;
+                return FieldCode.CarryCnt;
             case "Life":
-                fieldCode = 7;
-                break;
+                return FieldCode.Life;
             case "Alive":
-                fieldCode = 8;
-                break;
+                return FieldCode.Alive;
             case "Agility":
-                fieldCode = 9;
-                break;
+                return FieldCode.Agility;
             case "Crafting":
-                fieldCode = 10;
-                break;
+                return FieldCode.Crafting;
             default:
-                fieldCode = 0;
-                break;
+                return FieldCode.None;
         }
-        return value * fieldCode * RandomHelper.StringToRandomNumber(Name);
     }
+    public enum FieldCode
+    {
+        None = 0,
+        Health =1,
+        Mana=2,
+        Energy=3,
+        Experience=4,
+        Coin=5,
+        CarryCnt=6,
+        Life=7,
+        Alive=8,
+        Agility=9,
+        Crafting=10,
+    }
+    #endregion
 }

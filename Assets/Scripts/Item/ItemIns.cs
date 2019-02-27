@@ -13,6 +13,10 @@ public class ItemIns
 
     internal void Print()
     {
-        Debug.Log("User= " + UserItem.UserId + "Item = " + Item.Name + "(" + UserItem.StackCnt +")");
+        Debug.Log("ItemIns = " + MyInfo());
+    }
+    internal string MyInfo()
+    {
+        return "User= " + UserItem.UserId + "Item = " + Item.Name + "(" + UserItem.StackCnt + ")";
     }
 }

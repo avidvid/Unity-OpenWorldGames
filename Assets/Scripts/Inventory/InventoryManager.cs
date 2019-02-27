@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -91,7 +92,6 @@ public class InventoryManager : MonoBehaviour
             RefreshInventory();
             _userDatabase.UpdateUserInventory(InvCarry, InvEquipment);
             UpdateInventory = false;
-            PrintInventory();
         }
     }
     internal bool HaveAvailableSlot()
@@ -108,5 +108,10 @@ public class InventoryManager : MonoBehaviour
         foreach (var itemIns in InvEquipment)
             equipment += itemIns.UserItem.Order + "-" + itemIns.Item.Name + "(" + itemIns.UserItem.StackCnt + ")#";
         Debug.Log("IM-PrintInventory InvCarry=" + InvCarry.Count +":"+ carry+ " InvEquipment= " + InvEquipment.Count + ":" + equipment);
+    }
+
+    internal void AddItemToInventory(ItemIns itemIns)
+    {
+        _characterManager.CharacterInventory.Add(itemIns);
     }
 }

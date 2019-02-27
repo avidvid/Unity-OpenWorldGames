@@ -268,7 +268,7 @@ public class CharacterManager : MonoBehaviour
         string message = "";
         if (itemIns == null)
             return message;
-        itemIns.Print();
+        Debug.Log("ItemIns = " + itemIns.MyInfo());  
         var item = itemIns.Item;
         var userItem = itemIns.UserItem;
         switch (itemIns.Item.Type)
@@ -356,7 +356,7 @@ public class CharacterManager : MonoBehaviour
     }
     public void AddCharacterSetting(string field, float value)
     {
-        print(field + "= CharacterSetting." + CharacterSetting.FieldValue(field) + " " + value);
+        print("CharacterSetting." + field + "=" + CharacterSetting.FieldValue(field) + " + " + value);
         switch (field)
         {
             case "MaxHealth":
@@ -379,11 +379,13 @@ public class CharacterManager : MonoBehaviour
                 break;
             case "Gem":
                 UserPlayer.Gem += (int)value;
+                UserPlayer.HealthCheck += UserPlayer.CalculateHealthCheck((int)value, "Gem");
                 CharacterSetting.Updated = true;
                 SaveUserPlayer();
                 return;
             case "Coin":
                 CharacterSetting.Coin += (int)value;
+                CharacterSetting.HealthCheck += CharacterSetting.CalculateHealthCheckByField((int)value, "Coin");
                 CharacterSetting.Updated = true;
                 break;
             case "CarryCnt":

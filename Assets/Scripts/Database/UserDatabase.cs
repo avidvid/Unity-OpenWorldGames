@@ -65,6 +65,7 @@ public class UserDatabase : MonoBehaviour
             return;
             //throw new Exception("UDB-Character Setting doesn't Exists!!!");
         }
+        _characterSetting.HealthCheck = _characterSetting.CalculateHealthCheck();
         _characterSetting.Print();
         if (_characterSetting != null)
         {        
@@ -162,7 +163,7 @@ public class UserDatabase : MonoBehaviour
         if (invEquipment!=null)
             foreach (var userItem in invEquipment)
                 _userInventory.Add(userItem.UserItem);
-        //_userInventory = _userInventory.OrderBy(x => x.Equipped).ThenBy(x => x.Stored).ToList();
+        _userInventory = _userInventory.OrderBy(x => !x.Equipped).ThenBy(x => !x.Stored).ThenBy(x => x.Order).ToList();
         SaveUserInventory();
     }
     internal List<UserItem> GetUserInventory()
@@ -417,12 +418,8 @@ public class UserDatabase : MonoBehaviour
     }
     private void HealthCheckCharacterSetting()
     {
-        var oldCharacterSetting = LoadCharacterSetting();
-        int healthCheck = 0;
-        healthCheck +=
-            oldCharacterSetting.CalculateHealthCheck(oldCharacterSetting.Coin - _characterSetting.Coin, "Coin");
-
-        if (oldCharacterSetting.HealthCheck + healthCheck != _characterSetting.HealthCheck)
+        var healthCheck = _characterSetting.CalculateHealthCheck();
+        if (healthCheck != _characterSetting.HealthCheck)
             throw new Exception("Health Check CharacterSetting Failed. It is off by " + (healthCheck - _characterSetting.HealthCheck));
     }
     #endregion

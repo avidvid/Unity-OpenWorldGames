@@ -6,7 +6,7 @@
       <Description>Black Berry</Description>
       <IconPath>Inventory/InventorySet1</IconPath>
       <IconId>0</IconId>
-      <Cost>0</Cost>
+      <Cost>1</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>20</MaxStackCnt>
       <ExpirationDays>365</ExpirationDays>
@@ -50,7 +50,7 @@
       <Description>Round Rock</Description>
       <IconPath>Inventory/InventorySet1</IconPath>
       <IconId>240</IconId>
-      <Cost>0</Cost>
+      <Cost>1</Cost>
       <Weight>5</Weight>
       <MaxStackCnt>5</MaxStackCnt>
       <ExpirationDays>365</ExpirationDays>
@@ -150,7 +150,7 @@
       <Description>Coins</Description>
       <IconPath>Inventory/coins</IconPath>
       <IconId>0</IconId>
-      <Cost>0</Cost>
+      <Cost>2</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>100</MaxStackCnt>
       <ExpirationDays>365</ExpirationDays>
@@ -171,7 +171,7 @@
       <Description>Gem</Description>
       <IconPath>Inventory/gem</IconPath>
       <IconId>0</IconId>
-      <Cost>0</Cost>
+      <Cost>100</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>10</MaxStackCnt>
       <ExpirationDays>365</ExpirationDays>
@@ -192,7 +192,7 @@
       <Description>Recipe</Description>
       <IconPath>Inventory/InventorySet1</IconPath>
       <IconId>250</IconId>
-      <Cost>0</Cost>
+      <Cost>10</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>1</MaxStackCnt>
       <ExpirationDays>365</ExpirationDays>
@@ -213,7 +213,7 @@
       <Description>Ultimate Egg</Description>
       <IconPath>Inventory/UltimateEgg</IconPath>
       <IconId>0</IconId>
-      <Cost>0</Cost>
+      <Cost>20</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>1</MaxStackCnt>
       <ExpirationDays>365</ExpirationDays>

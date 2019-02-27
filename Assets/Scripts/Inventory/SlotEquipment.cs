@@ -44,6 +44,7 @@ public class SlotEquipment : MonoBehaviour, IDropHandler
                                 //Swap ItemIns
                                 var itemEquipment = existingEquipment.ItemIns;
                                 draggedItem.ItemIns.UserItem.Order = (int)EquType;
+                                draggedItem.ItemIns.UserItem.Equipped = true;
                                 existingEquipment.LoadItem(draggedItem.ItemIns);
                                 draggedItem.LoadItem(itemEquipment);
                             }
@@ -55,6 +56,7 @@ public class SlotEquipment : MonoBehaviour, IDropHandler
                     break;
                 case OupItem.ItemType.Weapon:
                 case OupItem.ItemType.Tool:
+                    //Todo: Add the logic of two hand item 
                     if (EquType == OupItem.PlaceType.Left || EquType == OupItem.PlaceType.Right)
                         if (item.CarryType == OupItem.Hands.OneHand)
                         {
@@ -67,7 +69,6 @@ public class SlotEquipment : MonoBehaviour, IDropHandler
                                 draggedItem.ItemIns.UserItem.Order = (int) EquType;
                                 draggedItem.ItemIns.UserItem.Equipped = true;
                                 existingEquipment.LoadItem(draggedItem.ItemIns);
-                                itemEquipment.Print();
                                 draggedItem.LoadItem(itemEquipment);
                             }
                         }
@@ -75,23 +76,6 @@ public class SlotEquipment : MonoBehaviour, IDropHandler
                             _inv.PrintMessage("It is not possible to carry this weapon yet", Color.yellow);
                     else
                         _inv.PrintMessage("You cannot equip this item here", Color.yellow);
-                //    break;
-                //    if (EquType == OupItem.PlaceType.Left || EquType == OupItem.PlaceType.Right)
-                //    {
-                //        //Todo: Add logic of hands carry 
-                //        ItemEquipment existingEquipment = this.transform.GetComponentInChildren<ItemEquipment>();
-                //        ItemIns itemEquipment = existingEquipment.ItemIns;
-                //        //Todo: remove the effect of item
-                //        existingEquipment.LoadItem(draggedItem.ItemIns);
-                //        draggedItem.LoadItem(itemEquipment);
-                //        _inv.UpdateInventory(true);
-                //        _inv.UpdateEquipments(true);
-                //    }
-                //    else
-                //        _inv.PrintMessage("You cannot equip this item here", Color.yellow);
-                //    break;
-                //default:
-                //    _inv.PrintMessage("This item can not be equiped", Color.yellow);
                     break;
             }
         }
