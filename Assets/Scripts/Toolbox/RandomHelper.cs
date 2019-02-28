@@ -89,7 +89,7 @@ public class RandomHelper
     {
         MD5 md5Hasher = MD5.Create();
         var hashed = md5Hasher.ComputeHash(Encoding.UTF8.GetBytes(myString));
-        var iValue = BitConverter.ToInt32(hashed, 0)% range;
+        var iValue = Math.Abs(BitConverter.ToInt32(hashed, 0))% range;
         return iValue;
     }
 

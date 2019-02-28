@@ -231,13 +231,11 @@ public class CharacterSetting {
                 * RandomHelper.StringToRandomNumber(Name)
             ;
     }
-
     internal int CalculateHealthCheckByField(int value, string field)
     {
         var fieldCode = (int) GetFieldCode(field);
         return value * fieldCode * RandomHelper.StringToRandomNumber(Name);
     }
-
     private static FieldCode GetFieldCode(string field)
     {
         switch (field)

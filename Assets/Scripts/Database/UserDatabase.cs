@@ -49,6 +49,7 @@ public class UserDatabase : MonoBehaviour
             //throw new Exception("UDB-User Player doesn't Exists!!!");
         }
         _userPlayer.Print();
+        _userPlayer.HealthCheck = _userPlayer.CalculateHealthCheck();
         _userPlayer.LastLogin = DateTime.Now;
         SaveUserPlayer();
         if (DateTime.Now < _userPlayer.LockUntil)
@@ -128,11 +129,8 @@ public class UserDatabase : MonoBehaviour
     }
     private void HealthCheckUserPlayer()
     {
-        var oldUserPlayer = LoadUserPlayer();
-        int healthCheck = 0;
-        healthCheck +=
-            oldUserPlayer.CalculateHealthCheck(oldUserPlayer.Gem - _userPlayer.Gem, "Gem");
-        if (oldUserPlayer.HealthCheck + healthCheck != _userPlayer.HealthCheck)
+        var healthCheck = _userPlayer.CalculateHealthCheck();
+        if (healthCheck != _userPlayer.HealthCheck)
             throw new Exception("Health Check User Player Failed. It is off by " + (healthCheck - _userPlayer.HealthCheck));
     }
     #endregion

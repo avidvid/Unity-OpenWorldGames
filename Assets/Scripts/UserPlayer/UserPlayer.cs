@@ -91,7 +91,6 @@ public class UserPlayer  {
         GLoggedIn = g;
         IsEnable = isEnable;
     }
-
     public UserPlayer(UserPlayer userPlayer)
     {
         Id = userPlayer.Id;
@@ -116,13 +115,45 @@ public class UserPlayer  {
     public UserPlayer()
     {
     }
+
+    #region Print
     internal void Print()
     {
         Debug.Log("UserPlayer = " + MyInfo());
     }
     internal string MyInfo()
     {
-        return Id + "-" + UserName + " " + Rank + " " + LastLogin + ": (" + Latitude + "," + Longitude + ") "+ LockUntil;
+        return Id + "-" + UserName + " " + Rank + " " + LastLogin + ": (" + Latitude + "," + Longitude + ") " + " HC:" + HealthCheck + LockUntil; 
+    }
+    #endregion
+    #region HealthCheck
+    internal int CalculateHealthCheck()
+    {
+        return
+            (this.Gem * (int)FieldCode.Gem +
+             0)
+            * RandomHelper.StringToRandomNumber(UserName)
+            ;
+    }
+    internal int CalculateHealthCheckByField(int value, string field)
+    {
+        var fieldCode = (int)GetFieldCode(field);
+        return value * fieldCode * RandomHelper.StringToRandomNumber(UserName);
+    }
+    private static FieldCode GetFieldCode(string field)
+    {
+        switch (field)
+        {
+            case "Gem":
+                return FieldCode.Gem;
+            default:
+                return FieldCode.None;
+        }
+    }
+    public enum FieldCode
+    {
+        None = 0,
+        Gem = 1,
     }
     internal int CalculateHealthCheck(int value, string field)
     {
@@ -138,5 +169,5 @@ public class UserPlayer  {
         }
         return value * fieldCode * RandomHelper.StringToRandomNumber(UserName);
     }
-
+    #endregion
 }

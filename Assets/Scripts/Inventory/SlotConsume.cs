@@ -25,7 +25,6 @@ public class SlotConsume: MonoBehaviour, IDropHandler
         _characterManager = CharacterManager.Instance();
         _GUIManager = GUIManager.Instance();
     }
-
     void Start()
     {
         if (_characterManager.UserPlayer.FBLoggedIn)
@@ -37,7 +36,6 @@ public class SlotConsume: MonoBehaviour, IDropHandler
         _characterName.text = _characterManager.CharacterSetting.Name;
         StartCoroutine("LoadProfilePicture");
     }
-
     private IEnumerator LoadProfilePicture()
     {
         if (_facebook != null)
@@ -45,8 +43,6 @@ public class SlotConsume: MonoBehaviour, IDropHandler
                 _playerPic.image.sprite = _facebook.GetProfilePic();
         yield return "Done";
     }
-
-
     public void OnDrop(PointerEventData eventData)
     {
         ItemData draggedItem = eventData.pointerDrag.GetComponent<ItemData>();
@@ -67,13 +63,10 @@ public class SlotConsume: MonoBehaviour, IDropHandler
         if (draggedItem != null)
             ConsumeItem(draggedItem);
     }
-
     private void ConsumeItem(ItemData draggedItem)
     {
         if (draggedItem.ItemIns == null)
             return;
-        ItemEquipment existingEquipment;
-        ItemIns itemEquipment;
         switch (draggedItem.ItemIns.Item.Type)
         {
             case OupItem.ItemType.Consumable:
@@ -85,55 +78,10 @@ public class SlotConsume: MonoBehaviour, IDropHandler
                 }
                 break;
             case OupItem.ItemType.Equipment:
-                if (draggedItem.ItemIns.UserItem.StackCnt == draggedItem.ItemIns.Item.MaxStackCnt)
-                {
-                    existingEquipment = _inv.EquiSlots[(int)draggedItem.ItemIns.Item.PlaceHolder].GetComponentInChildren<ItemEquipment>();
-                    if (_inv.UseItem(draggedItem.ItemIns))
-                    {
-                        //Swap ItemIns
-                        itemEquipment = existingEquipment.ItemIns;
-                        if (itemEquipment!=null)
-                            if (itemEquipment.Item.Id == draggedItem.ItemIns.Item.Id)
-                            {
-                                _inv.PrintMessage("You are equipped with the same Equipment", Color.yellow);
-                                break;
-                            }
-                        draggedItem.ItemIns.UserItem.Order = (int)draggedItem.ItemIns.Item.PlaceHolder;
-                        draggedItem.ItemIns.UserItem.Equipped = true;
-                        existingEquipment.LoadItem(draggedItem.ItemIns);
-                        draggedItem.LoadItem(itemEquipment);
-                    }
-                }
-                else
-                    _inv.PrintMessage(
-                        "You need " + (draggedItem.ItemIns.Item.MaxStackCnt - draggedItem.ItemIns.UserItem.StackCnt) + " of this item to equip",
-                        Color.yellow);
-                break;
             case OupItem.ItemType.Weapon:
             case OupItem.ItemType.Tool:
-                //Todo: Add the logic of two hand item 
-                var order = (int) OupItem.PlaceType.Left;
-                existingEquipment = _inv.EquiSlots[order].GetComponentInChildren<ItemEquipment>();
-                itemEquipment = existingEquipment.ItemIns;
-                if (itemEquipment!= null)
-                {
-                    order = (int)OupItem.PlaceType.Right;
-                    existingEquipment = _inv.EquiSlots[order].GetComponentInChildren<ItemEquipment>();
-                    itemEquipment = existingEquipment.ItemIns;
-                }
-                if (draggedItem.ItemIns.Item.CarryType == OupItem.Hands.OneHand)
-                {
-                    if (_inv.UseItem(draggedItem.ItemIns))
-                    {
-                        //Swap ItemIns
-                        draggedItem.ItemIns.UserItem.Order = order;
-                        draggedItem.ItemIns.UserItem.Equipped = true;
-                        existingEquipment.LoadItem(draggedItem.ItemIns);
-                        draggedItem.LoadItem(itemEquipment);
-                    }
-                }
-                else
-                    _inv.PrintMessage("It is not possible to carry this weapon yet", Color.yellow);
+            case OupItem.ItemType.Substance:
+                _inv.PrintMessage("You can not consume this item", Color.yellow);
                 break;
             default:
                 _GUIManager.PrintMessage(draggedItem.ItemIns.Item.Name + " can not be used", Color.yellow);

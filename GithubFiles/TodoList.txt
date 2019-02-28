@@ -19,9 +19,8 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####Office#####
 ###############	
-	
-	Healthcheck for user befixed 
-	
+
+	Add item in terain and Building need to be adjusted and fixed with new changes 
 	
 
 	new user database
