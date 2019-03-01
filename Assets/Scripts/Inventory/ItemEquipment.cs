@@ -110,5 +110,7 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     internal void UseItem(int count)
     {
         ItemIns.UserItem.TimeToUse-= count;
+        if (ItemIns.UserItem.TimeToUse <=0)
+            ItemIns.UserItem.StackCnt = 0;
     }
 }

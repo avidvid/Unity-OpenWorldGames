@@ -117,15 +117,12 @@ public class ActionHandler : MonoBehaviour
     {
         if (_inv.AddItemToInventory(_item.ItemTypeInUse))
         {
-            //print("GrabItem: " + _item.ItemTypeInUse.Name + "Added to inventory ");
+            _inv.UpdateInventory(true);
             if (_isInside)
                 _building.DestroyItem(_item);
             else
                 _terrainManager.DestroyItem(_item);
         }
-        //Todo: if added Character will walk toward the item 
-        //var moveManager = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<MoveManager>();
-        //moveManager.SetMovement(_location);
     }
     //Element
     internal void SetActiveElement(ActiveElementType currentElement)

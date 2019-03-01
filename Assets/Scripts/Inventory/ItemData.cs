@@ -23,7 +23,7 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
 
     public Sprite EmptySprite;
 
-    void Start()
+    void Awake()
     {
         _inv = InventoryHandler.Instance();
         _tooltip = Tooltip.Instance();
@@ -104,6 +104,7 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
 
     internal void LoadItem()
     {
+        print("Item data loading " + (ItemIns==null?"Empty": ItemIns.Item.Name) );
         if (ItemIns == null)
         {
             this.ItemIns = null;
@@ -128,29 +129,4 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
         this.ItemIns = itemIns;
         LoadItem();
     }
-
-    //public void LoadItem(OupItem item,UserItem userItem)
-    //{
-    //    if (ItemIns == null)
-    //    {
-    //        this.ItemIns = null;
-    //        GetComponent<Image>().sprite = EmptySprite;
-    //        var stackCntText = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-    //        stackCntText.text = "";
-    //        _inv.UpdateInventory(true);
-    //    }
-    //    else
-    //    {
-    //        ItemIns.Item = item;
-    //        ItemIns.UserItem = userItem;
-    //        this.transform.name = item.Name;
-    //        GetComponent<Image>().sprite = item.GetSprite();
-    //        this.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = userItem.StackCnt > 1 ? userItem.StackCnt.ToString() : "";
-    //        if (_inv ==null)
-    //            _inv = InventoryHandler.Instance();
-    //        _inv.InvSlots[SlotIndex].transform.name = item.Name;
-    //        _inv.UpdateInventory(true);
-    //    }
-    //}
-
 }

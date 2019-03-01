@@ -89,8 +89,10 @@ public class ItemDatabase : MonoBehaviour {
         fs.Close();
         return items;
     }
-    internal int GetItemIdBasedOnRarity(Vector3 position, string dropItems)
-    {
+    internal int GetItemIdBasedOnRarity(Vector3 position, string dropItems=null)
+    {   
+        if (dropItems == null) //Drop coin/Gem/Recipe 
+            dropItems = "8,9,10";
         List<int> items = dropItems.Split(',').Select(Int32.Parse).ToList();
         List<int> availableItems = new List<int>();
         var rarity = RandomHelper.Range(position, DateTime.Now.DayOfYear, (int)OupItem.ItemRarity.Common);

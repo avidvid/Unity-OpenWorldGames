@@ -17,7 +17,6 @@ public class TerrainActions : MonoBehaviour {
         _characterManager = CharacterManager.Instance();
         _terrainManager = TerrainManager.Instance();
         _GUIManager = GUIManager.Instance();
-
         _popupAction = GameObject.Find("Popup Action");
     }
 	

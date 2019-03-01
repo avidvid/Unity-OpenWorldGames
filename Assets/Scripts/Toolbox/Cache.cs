@@ -19,7 +19,6 @@ public class Cache : MonoBehaviour {
         LoadPersistContents();
         PurgePersistContents();
     }
-
     private void PurgePersistContents()
     {
         if (PersistContents.Count == 0)
@@ -34,12 +33,10 @@ public class Cache : MonoBehaviour {
         if (updated)
             SavePersistContents();
     }
-
     public void Add(CacheContent content)
     {
         _contents.Add(content);
     }
-
     public void PersistAdd(CacheContent content)
     {
         PersistContents.Add(content);
@@ -56,7 +53,6 @@ public class Cache : MonoBehaviour {
         PersistContents = (List<CacheContent>)serializer.Deserialize(fs);
         fs.Close();
     }
-
     private void SavePersistContents()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "Cache.xml");
@@ -65,7 +61,6 @@ public class Cache : MonoBehaviour {
         serializer.Serialize(fs, PersistContents);
         fs.Close();
     }
-
     internal IEnumerable<CacheContent> FindPersist(
                                 string objectType
                             )

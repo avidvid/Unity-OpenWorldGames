@@ -9,6 +9,7 @@
       <Cost>1</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>20</MaxStackCnt>
+      <Unique>false</Unique>
       <ExpirationDays>365</ExpirationDays>
       <Type>Consumable</Type>
       <Rarity>Common</Rarity>
@@ -30,6 +31,7 @@
       <Cost>10</Cost>
       <Weight>3</Weight>
       <MaxStackCnt>1</MaxStackCnt>
+      <Unique>true</Unique>
       <ExpirationDays>365</ExpirationDays>
       <Type>Weapon</Type>
       <Rarity>Uncommon</Rarity>
@@ -53,6 +55,7 @@
       <Cost>1</Cost>
       <Weight>5</Weight>
       <MaxStackCnt>5</MaxStackCnt>
+    <Unique>false</Unique>
       <ExpirationDays>365</ExpirationDays>
       <Type>Substance</Type>
       <Rarity>Common</Rarity>
@@ -67,6 +70,7 @@
       <Cost>5</Cost>
       <Weight>1</Weight>
       <MaxStackCnt>2</MaxStackCnt>
+    <Unique>false</Unique>
       <ExpirationDays>365</ExpirationDays>
       <Type>Equipment</Type>
       <Rarity>Common</Rarity>
@@ -93,6 +97,7 @@
       <Cost>3</Cost>
       <Weight>1</Weight>
       <MaxStackCnt>2</MaxStackCnt>
+    <Unique>false</Unique>
       <ExpirationDays>365</ExpirationDays>
       <Type>Equipment</Type>
       <Rarity>Common</Rarity>
@@ -119,6 +124,7 @@
       <Cost>10</Cost>
       <Weight>5</Weight>
       <MaxStackCnt>1</MaxStackCnt>
+    <Unique>false</Unique>
       <ExpirationDays>365</ExpirationDays>
       <Type>Tool</Type>
       <Rarity>Common</Rarity>
@@ -136,6 +142,7 @@
       <Cost>10</Cost>
       <Weight>5</Weight>
       <MaxStackCnt>1</MaxStackCnt>
+    <Unique>false</Unique>
       <ExpirationDays>365</ExpirationDays>
       <Type>Tool</Type>
       <Rarity>Common</Rarity>
@@ -153,6 +160,7 @@
       <Cost>2</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>100</MaxStackCnt>
+    <Unique>true</Unique>
       <ExpirationDays>365</ExpirationDays>
       <Type>Consumable</Type>
       <Rarity>Common</Rarity>
@@ -174,6 +182,7 @@
       <Cost>100</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>10</MaxStackCnt>
+    <Unique>true</Unique>
       <ExpirationDays>365</ExpirationDays>
       <Type>Consumable</Type>
       <Rarity>Common</Rarity>
@@ -195,6 +204,7 @@
       <Cost>10</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>1</MaxStackCnt>
+    <Unique>true</Unique>
       <ExpirationDays>365</ExpirationDays>
       <Type>Consumable</Type>
       <Rarity>Common</Rarity>
@@ -216,6 +226,7 @@
       <Cost>20</Cost>
       <Weight>0</Weight>
       <MaxStackCnt>1</MaxStackCnt>
+    <Unique>true</Unique>
       <ExpirationDays>365</ExpirationDays>
       <Type>Consumable</Type>
       <Rarity>Common</Rarity>

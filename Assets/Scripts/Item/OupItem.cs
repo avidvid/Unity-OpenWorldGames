@@ -59,6 +59,7 @@ public class OupItem
     public int Cost { get; set; }
     public int Weight { get; set; }
     public int MaxStackCnt { get; set; }
+    public bool Unique { get; set; }
     public int ExpirationDays { get; set; }
     public ItemType Type { get; set; }
     public ItemRarity Rarity { get; set; }
@@ -103,7 +104,7 @@ public class OupItem
     protected OupItem(
         int id, string name, string desc,
         string iconPath, int iconId, int cost,
-        int weight, int maxStackCnt,int expirationDays,
+        int weight, int maxStackCnt,bool unique, int expirationDays,
         ItemType type, ItemRarity rarity)
     {
         Id = id;
@@ -115,6 +116,7 @@ public class OupItem
         Weight = weight;
         Type = type;
         MaxStackCnt = maxStackCnt;
+        Unique = unique;
         ExpirationDays = expirationDays;
         Rarity = rarity;
         IsEnable = true;
@@ -146,25 +148,6 @@ public class OupItem
     protected OupItem()
     {
     }
-    public virtual string GetTooltip()
-    {
-        string color;
-        switch (Type)
-        {
-            case ItemType.Consumable:
-                color = "green";
-                break;
-            case ItemType.Weapon:
-            case ItemType.Equipment:
-                color = "blue";
-                break;
-            default:
-                color = "white";
-                break;
-        }
-        var tooltip = "<color=" + color + ">  " + this.Id + "  -" + this.Name + "</color>\n\n" + this.Description + "\n<color=yellow>Cost:" + this.Cost + "</color>";
-        return tooltip;
-    }
     public Sprite GetSprite()
     {
         Sprite[] spriteList = Resources.LoadAll<Sprite>(IconPath);
@@ -178,6 +161,11 @@ public class OupItem
     {
         if (Id == -1)
             return "Empty Item";
-        return Id + " Name:" + Name + " Sprite:" + GetSprite().name + " Type:" + Type + " Rarity:" + Rarity;
+        return Id + " Name:" + Name +
+                " Sprite:" + GetSprite().name +
+               " Type:" + Type +
+               " Rarity:" + Rarity+
+                (Unique?" Unique":"")
+            ;
     }
 }

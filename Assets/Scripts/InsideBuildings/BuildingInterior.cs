@@ -258,8 +258,8 @@ public class BuildingInterior : MonoBehaviour {
         int itemId;
         if (RandomHelper.GetLucky(pos, chance))
             itemId = _itemDatabase.GetItemIdBasedOnRarity(pos, dropItems);
-        else //Drop coin/Gem
-            itemId = _itemDatabase.GetItemIdBasedOnRarity(pos, "8,9");
+        else //Drop coin/Gem/Recipe
+            itemId = _itemDatabase.GetItemIdBasedOnRarity(pos);
         if (itemId != -1)
             CreateItem(pos, itemId);
     }

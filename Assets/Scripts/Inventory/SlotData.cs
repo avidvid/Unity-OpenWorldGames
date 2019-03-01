@@ -56,22 +56,13 @@ public class SlotData : MonoBehaviour,IDropHandler{
             if (mixedItem.ItemIns != null)
             {
                 //#################################### not empty slot
-                if (existingItem.ItemIns != null)
+                if (existingItem.ItemIns != null && existingItem.ItemIns.Item.Id != mixedItem.ItemIns.Item.Id)
                     _inv.PrintMessage("New item should be placed in an empty inventory slot", Color.yellow);
                 //#################################### empty slot
                 else
                 {
                     if (_inv.AddItemToInventory(mixedItem.ItemIns.Item, mixedItem.ItemIns.UserItem.StackCnt,existingItem.SlotIndex))
                     {
-                        //    //Set the slot Item
-                        //    existingItem.transform.parent.name = existingItem.transform.name = mixedItem.ItemIns.Item.Name;
-                        //    existingItem.GetComponent<Image>().sprite = mixedItem.ItemIns.Item.GetSprite();
-                        //    var stackCntText = existingItem.transform.GetComponentInChildren<TextMeshProUGUI>();
-                        //    stackCntText.text = mixedItem.ItemIns.UserItem.StackCnt > 1 ? mixedItem.ItemIns.UserItem.StackCnt.ToString() : "";
-                        //    var newItemIns = new ItemIns(mixedItem.ItemIns.Item, mixedItem.ItemIns.UserItem);
-                        //    ;
-                        //    existingItem.ItemIns = newItemIns;
-
                         //Delete mixedItem Item
                         mixedItem.LoadEmpty();
                         _inv.UpdateInventory(true);

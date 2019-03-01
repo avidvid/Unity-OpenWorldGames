@@ -222,8 +222,9 @@ public class InventoryHandler : MonoBehaviour
     }
     internal int GetAvailableSlot()
     {
+        //print("AvailableSlot: " + _invCarry.Count +" "+_playerSlots);
         int availableSlot = -1;
-        if (_invCarry.Count < _playerSlots)
+        if (!HaveAvailableSlot())
             return availableSlot;
         for (int i = 0; i < _playerSlots; i++)
         {
@@ -259,17 +260,26 @@ public class InventoryHandler : MonoBehaviour
     public bool AddItemToInventory(OupItem item, int stackCnt =1,int order=-1)
     {
         print("AddItemToInventory: " +item.MyInfo()+ " stackCnt= " + stackCnt+ " order="+ order);
+        if (item.MaxStackCnt < stackCnt)
+            throw new Exception("IH-Invalid Item!!! MaxStackCnt < stackCnt ");
         if (ItemIndexInInventory(item.Id)!= -1)
         {
-            if (item.MaxStackCnt == 1)
+            if (!TryStackInInventory(item.Id, stackCnt, order))
             {
-                PrintMessage("You Can Only Carry one of this item!", Color.yellow);
-                return false;
+                if (item.Unique)
+                {
+                    PrintMessage("You Can Only Carry one of this item!", Color.yellow);
+                    return false;
+                }
+                if (order!=-1)
+                {
+                    PrintMessage("You Can not stack this item here!", Color.yellow);
+                    return false;
+                }
             }
-
-            //todo: It can be stacked in the existing slot that has the same item
+            else
+                return true;
         }
-
         if (order == -1)
         {
             order = GetAvailableSlot();
@@ -285,7 +295,6 @@ public class InventoryHandler : MonoBehaviour
         _inventoryManager.AddItemToInventory(itemData.ItemIns);
         return true;
     }
-
     private int ItemIndexInInventory(int itemId)
     {
         foreach (var itemIns in _invCarry)
@@ -293,7 +302,26 @@ public class InventoryHandler : MonoBehaviour
                 return itemIns.UserItem.Order;
         return -1;
     }
-
+    private bool TryStackInInventory(int itemId, int stackCnt,int order)
+    {
+        foreach (var itemIns in _invCarry)
+            if (itemIns.Item.Id == itemId && itemIns.Item.MaxStackCnt >= stackCnt + itemIns.UserItem.StackCnt)
+            {
+                if (order==-1 || itemIns.UserItem.Order == order)
+                {
+                    itemIns.UserItem.StackCnt += stackCnt;
+                    return true;
+                }
+            }
+        return false;
+    }
+    private ItemIns GetItemInInventory(int itemId)
+    {
+        foreach (var itemIns in _invCarry)
+            if (itemIns.Item.Id == itemId)
+                return itemIns;
+        return null;
+    }
     public void OpenInventoryPanel()
     {
         _popupAction.SetActive(false);
@@ -415,48 +443,41 @@ public class InventoryHandler : MonoBehaviour
     public bool ElementToolUse(ElementIns element=null)
     {
         ElementIns.ElementType targetType = element != null ? element.Type : ElementIns.ElementType.Hole;
-        //Check Left hand for tool
-        ItemIns toolIns = null;
-        var toolEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Left].GetComponentInChildren<ItemEquipment>();
-        if (toolEquipment!=null)
+        for (int i = 0; i < EquiSlots.Length; i++)
         {
-            toolIns = toolEquipment.ItemIns;
-            if (toolIns.Item.Type == OupItem.ItemType.Tool ||
-                toolIns.UserItem.TimeToUse > 0 ||
-                targetType == toolIns.Item.FavoriteElement)
-            {
-                toolEquipment.UseItem(1);
-                return true;
-            }
-        }
-        //Check Right hand for tool
-        toolEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Right].GetComponentInChildren<ItemEquipment>();
-        if (toolEquipment != null)
-        {
-            toolIns = toolEquipment.ItemIns;
-            if (toolIns.Item.Type == OupItem.ItemType.Tool ||
-                toolIns.UserItem.TimeToUse > 0 ||
-                targetType == toolIns.Item.FavoriteElement)
-            {
-                toolEquipment.UseItem(1);
-                return true;
-            }
+            var toolEquipment = EquiSlots[i].GetComponentInChildren<ItemEquipment>();
+            if (toolEquipment==null)
+                continue;
+            var toolIns = toolEquipment.ItemIns;
+            if (toolIns == null)
+                continue;
+            if (toolIns.Item.Type == OupItem.ItemType.Tool
+                &&
+                (EquiSlots[i].EquType == OupItem.PlaceType.Right && toolIns.UserItem.Order == (int) OupItem.PlaceType.Right ||
+                 EquiSlots[i].EquType == OupItem.PlaceType.Left && toolIns.UserItem.Order == (int) OupItem.PlaceType.Left)
+                &&
+                toolIns.UserItem.TimeToUse > 0 
+                && 
+                targetType == toolIns.Item.FavoriteElement
+                    )
+                {
+                    toolEquipment.UseItem(1);
+                    _updateEquipments = true;
+                    return true;
+                }
         }
         PrintMessage("You don't have a right tool to use", Color.yellow);
         return false;
     }
-
     //Middle Man
     public void AddCharacterSetting(string field, float value)
     {
         _characterManager.AddCharacterSetting("Experience", value);
     }
-
     internal float GetCrafting()
     {
         return _characterManager.GetCharacterAttribute("Crafting");
     }
-
     public static InventoryHandler Instance()
     {
         if (!_inv)
@@ -467,5 +488,4 @@ public class InventoryHandler : MonoBehaviour
         }
         return _inv;
     }
-
 }
