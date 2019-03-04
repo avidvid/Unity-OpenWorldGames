@@ -75,12 +75,12 @@ public class InventoryManager : MonoBehaviour
             for (int j = 0; j < InvEquipment.Count; j++)
                 if (i != j && InvEquipment[i].UserItem.Order == InvEquipment[j].UserItem.Order)
                     throw new Exception("IM-InvEquipment Invalid!!!");
-            if (InvEquipment[i].Item.Type == OupItem.ItemType.Equipment)
+            if (InvEquipment[i].Item.Type == ItemContainer.ItemType.Equipment)
                 if ((int) InvEquipment[i].Item.PlaceHolder != InvEquipment[i].UserItem.Order)
                     throw new Exception("IM-InvEquipment Invalid Equipment Order!!!");
-            if (InvEquipment[i].Item.Type == OupItem.ItemType.Tool || InvEquipment[i].Item.Type == OupItem.ItemType.Weapon)
-                if (InvEquipment[i].UserItem.Order != (int)OupItem.PlaceType.Left 
-                        && InvEquipment[i].UserItem.Order != (int)OupItem.PlaceType.Right)
+            if (InvEquipment[i].Item.Type == ItemContainer.ItemType.Tool || InvEquipment[i].Item.Type == ItemContainer.ItemType.Weapon)
+                if (InvEquipment[i].UserItem.Order != (int)ItemContainer.PlaceType.Left 
+                        && InvEquipment[i].UserItem.Order != (int)ItemContainer.PlaceType.Right)
                     throw new Exception("IM-InvEquipment Invalid Weapon/Tool Order!!!");
         }
     }

@@ -69,7 +69,7 @@ public class SlotConsume: MonoBehaviour, IDropHandler
             return;
         switch (draggedItem.ItemIns.Item.Type)
         {
-            case OupItem.ItemType.Consumable:
+            case ItemContainer.ItemType.Consumable:
                 //Use all the stack
                 if (_inv.UseItem(draggedItem.ItemIns))
                 {
@@ -77,10 +77,10 @@ public class SlotConsume: MonoBehaviour, IDropHandler
                     draggedItem.ItemIns.UserItem.StackCnt = 0;
                 }
                 break;
-            case OupItem.ItemType.Equipment:
-            case OupItem.ItemType.Weapon:
-            case OupItem.ItemType.Tool:
-            case OupItem.ItemType.Substance:
+            case ItemContainer.ItemType.Equipment:
+            case ItemContainer.ItemType.Weapon:
+            case ItemContainer.ItemType.Tool:
+            case ItemContainer.ItemType.Substance:
                 _inv.PrintMessage("You can not consume this item", Color.yellow);
                 break;
             default:

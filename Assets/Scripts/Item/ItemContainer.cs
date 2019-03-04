@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class OupItem
+public class ItemContainer
 {
     public enum ItemType
     {
@@ -101,7 +101,7 @@ public class OupItem
     public int MaxTimeToUse { get; set; }
     public ElementIns.ElementType FavoriteElement { get; set; }
 
-    protected OupItem(
+    protected ItemContainer(
         int id, string name, string desc,
         string iconPath, int iconId, int cost,
         int weight, int maxStackCnt,bool unique, int expirationDays,
@@ -145,7 +145,7 @@ public class OupItem
 
         }
     }
-    protected OupItem()
+    protected ItemContainer()
     {
     }
     public Sprite GetSprite()

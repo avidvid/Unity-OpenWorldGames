@@ -249,7 +249,7 @@ public class UserDatabase : MonoBehaviour
         var characters = characterDatabase.GetCharacters();
         List<int> availableCharacters = new List<int>();
         int key = DateTime.Now.DayOfYear;
-        var rarity = RandomHelper.Range(key, (int)OupItem.ItemRarity.Common);
+        var rarity = RandomHelper.Range(key, (int)ItemContainer.ItemRarity.Common);
         bool userOwnedRecipe = false;
         for (int i = 0; i < characters.Count; i++)
             if (characters[i].IsEnable)
@@ -483,7 +483,7 @@ public class UserDatabase : MonoBehaviour
         var recipes = itemDatabase.GetRecipes();
         List<int> availableRecipe = new List<int>();
         int key = DateTime.Now.DayOfYear;
-        var rarity = RandomHelper.Range(key, (int)OupItem.ItemRarity.Common);
+        var rarity = RandomHelper.Range(key, (int)ItemContainer.ItemRarity.Common);
         bool userOwnedRecipe = false;
         for (int i = 0; i < recipes.Count; i++)
             if (recipes[i].IsEnable && !recipes[i].IsPublic)

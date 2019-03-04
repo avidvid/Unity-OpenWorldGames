@@ -197,7 +197,7 @@ public class CharacterManager : MonoBehaviour
         var item = ItemInInventory(itemId);
         return item!=null ;
     }
-    internal bool AddItemToInventory(OupItem item,int stcCnt=1)
+    internal bool AddItemToInventory(ItemContainer item,int stcCnt=1)
     {
         //Todo: make sure about the carry count of user 
         //Should match with the AddItemToInventory in InventoryHandler
@@ -231,9 +231,9 @@ public class CharacterManager : MonoBehaviour
         var item = itemIns.Item;
         switch (itemIns.Item.Type)
         {
-            case OupItem.ItemType.Consumable:
+            case ItemContainer.ItemType.Consumable:
                 return;
-            case OupItem.ItemType.Equipment:
+            case ItemContainer.ItemType.Equipment:
                 CharacterSetting.Agility -= item.Agility;
                 CharacterSetting.Bravery -= item.Bravery;
                 CharacterSetting.Carry -= item.Carry;
@@ -246,7 +246,7 @@ public class CharacterManager : MonoBehaviour
                 CharacterSetting.Stamina -= item.Stamina;
                 CharacterSetting.Strength -= item.Strength;
                 break;
-            case OupItem.ItemType.Weapon:
+            case ItemContainer.ItemType.Weapon:
                 CharacterSetting.SpeedAttack -= item.SpeedAttack;
                 CharacterSetting.SpeedDefense -= item.SpeedDefense;
                 CharacterSetting.AbilityAttack -= item.AbilityAttack;
@@ -256,7 +256,7 @@ public class CharacterManager : MonoBehaviour
                 CharacterSetting.PoisonAttack -= item.PoisonAttack;
                 CharacterSetting.PoisonDefense -= item.PoisonDefense;
                 break;
-            case OupItem.ItemType.Tool:
+            case ItemContainer.ItemType.Tool:
                 return;
         }
         CharacterSetting.Updated = true;
@@ -273,7 +273,7 @@ public class CharacterManager : MonoBehaviour
         var userItem = itemIns.UserItem;
         switch (itemIns.Item.Type)
         {
-            case OupItem.ItemType.Consumable:
+            case ItemContainer.ItemType.Consumable:
                 if (item.Recipe > 0)
                 {
                     if (_userDatabase.AddNewRandomUserRecipe(UserPlayer.Id))
@@ -297,7 +297,7 @@ public class CharacterManager : MonoBehaviour
                 if (item.Gem > 0)
                     AddCharacterSetting("Gem", item.Gem * userItem.StackCnt, false);
                 break;
-            case OupItem.ItemType.Equipment:
+            case ItemContainer.ItemType.Equipment:
                 if (item.Agility > 0)
                     AddCharacterSetting("Agility", item.Agility , false);
                 if (item.Bravery > 0)
@@ -321,7 +321,7 @@ public class CharacterManager : MonoBehaviour
                 if (item.Strength > 0)
                     AddCharacterSetting("Strength", item.Strength, false);
                 break;
-            case OupItem.ItemType.Weapon:
+            case ItemContainer.ItemType.Weapon:
                 if (item.SpeedAttack > 0)
                     AddCharacterSetting("SpeedAttack", item.SpeedAttack, false);
                 if (item.SpeedDefense > 0)
@@ -339,7 +339,7 @@ public class CharacterManager : MonoBehaviour
                 if (item.PoisonDefense > 0)
                     AddCharacterSetting("PoisonDefense", item.PoisonDefense, false);
                 break;
-            case OupItem.ItemType.Tool:
+            case ItemContainer.ItemType.Tool:
                 return message;
         }
         CharacterSetting.HealthCheck = CharacterSetting.CalculateHealthCheck();

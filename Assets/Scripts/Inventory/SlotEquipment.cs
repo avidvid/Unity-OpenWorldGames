@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SlotEquipment : MonoBehaviour, IDropHandler
 {
-    public OupItem.PlaceType EquType;
+    public ItemContainer.PlaceType EquType;
     // Use this for initialization
     private InventoryHandler _inv;
 
@@ -30,11 +30,11 @@ public class SlotEquipment : MonoBehaviour, IDropHandler
         var item = draggedItem.ItemIns.Item;
         var userItem = draggedItem.ItemIns.UserItem;
         //Wearing Equipment
-        if (EquType != OupItem.PlaceType.None)
+        if (EquType != ItemContainer.PlaceType.None)
         {
             switch (item.Type)
             {
-                case OupItem.ItemType.Equipment:
+                case ItemContainer.ItemType.Equipment:
                     if (item.PlaceHolder == EquType)
                         if (userItem.StackCnt == item.MaxStackCnt)
                         {
@@ -54,11 +54,11 @@ public class SlotEquipment : MonoBehaviour, IDropHandler
                     else
                         _inv.PrintMessage("You cannot equip this item here", Color.yellow);
                     break;
-                case OupItem.ItemType.Weapon:
-                case OupItem.ItemType.Tool:
+                case ItemContainer.ItemType.Weapon:
+                case ItemContainer.ItemType.Tool:
                     //Todo: Add the logic of two hand item 
-                    if (EquType == OupItem.PlaceType.Left || EquType == OupItem.PlaceType.Right)
-                        if (item.CarryType == OupItem.Hands.OneHand)
+                    if (EquType == ItemContainer.PlaceType.Left || EquType == ItemContainer.PlaceType.Right)
+                        if (item.CarryType == ItemContainer.Hands.OneHand)
                         {
                             //Todo: Add logic of hands carry 
                             ItemEquipment existingEquipment = this.transform.GetComponentInChildren<ItemEquipment>();

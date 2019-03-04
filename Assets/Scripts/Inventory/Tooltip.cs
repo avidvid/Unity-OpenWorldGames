@@ -13,7 +13,7 @@ public class Tooltip : MonoBehaviour
     {
         _tooltip = Tooltip.Instance();
     }
-    //internal void Activate(OupItem item)
+    //internal void Activate(ItemContainer item)
     //{
     //    if (item != null)
     //    {

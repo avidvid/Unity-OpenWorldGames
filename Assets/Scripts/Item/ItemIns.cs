@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class ItemIns
 {
-    public OupItem Item;
+    public ItemContainer Item;
     public UserItem UserItem;
     
-    public ItemIns(OupItem item,UserItem userItem)
+    public ItemIns(ItemContainer item,UserItem userItem)
     {
         Item = item;
         UserItem = userItem;
@@ -24,11 +24,11 @@ public class ItemIns
         string color;
         switch (Item.Type)
         {
-            case OupItem.ItemType.Consumable:
+            case ItemContainer.ItemType.Consumable:
                 color = "green";
                 break;
-            case OupItem.ItemType.Weapon:
-            case OupItem.ItemType.Equipment:
+            case ItemContainer.ItemType.Weapon:
+            case ItemContainer.ItemType.Equipment:
                 color = "blue";
                 break;
             default:

@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class ActiveItemType : MonoBehaviour {
 
-    public OupItem ItemTypeInUse;
+    public ItemContainer ItemTypeInUse;
     public Vector3 Location;
 }

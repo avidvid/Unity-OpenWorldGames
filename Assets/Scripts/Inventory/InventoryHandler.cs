@@ -92,12 +92,12 @@ public class InventoryHandler : MonoBehaviour
             equipmentItem.name = "Empty";
             foreach (var equipmentIns in _invEquipment)
             {
-                if ( ( (equipmentIns.Item.Type == OupItem.ItemType.Weapon || equipmentIns.Item.Type == OupItem.ItemType.Tool)
+                if ( ( (equipmentIns.Item.Type == ItemContainer.ItemType.Weapon || equipmentIns.Item.Type == ItemContainer.ItemType.Tool)
                       &&
-                       ( (EquiSlots[i].EquType == OupItem.PlaceType.Right && equipmentIns.UserItem.Order == (int)OupItem.PlaceType.Right) || 
-                         (EquiSlots[i].EquType == OupItem.PlaceType.Left  && equipmentIns.UserItem.Order == (int)OupItem.PlaceType.Left) ))
+                       ( (EquiSlots[i].EquType == ItemContainer.PlaceType.Right && equipmentIns.UserItem.Order == (int)ItemContainer.PlaceType.Right) || 
+                         (EquiSlots[i].EquType == ItemContainer.PlaceType.Left  && equipmentIns.UserItem.Order == (int)ItemContainer.PlaceType.Left) ))
                     ||
-                     (equipmentIns.Item.PlaceHolder == EquiSlots[i].EquType && equipmentIns.Item.Type == OupItem.ItemType.Equipment)
+                     (equipmentIns.Item.PlaceHolder == EquiSlots[i].EquType && equipmentIns.Item.Type == ItemContainer.ItemType.Equipment)
                     )
                 {
                     equipmentItem.ItemIns = equipmentIns;
@@ -257,7 +257,7 @@ public class InventoryHandler : MonoBehaviour
     }
 
     //Should match with the AddItemToInventory in CharacterManager
-    public bool AddItemToInventory(OupItem item, int stackCnt =1,int order=-1)
+    public bool AddItemToInventory(ItemContainer item, int stackCnt =1,int order=-1)
     {
         print("AddItemToInventory: " +item.MyInfo()+ " stackCnt= " + stackCnt+ " order="+ order);
         if (item.MaxStackCnt < stackCnt)
@@ -436,7 +436,7 @@ public class InventoryHandler : MonoBehaviour
     {
         _GUIManager.PrintMessage(message, color);
     }
-    public OupItem BuildItemFromDatabase(int id)
+    public ItemContainer BuildItemFromDatabase(int id)
     {
         return _itemDatabase.GetItemById(id);
     }
@@ -451,10 +451,10 @@ public class InventoryHandler : MonoBehaviour
             var toolIns = toolEquipment.ItemIns;
             if (toolIns == null)
                 continue;
-            if (toolIns.Item.Type == OupItem.ItemType.Tool
+            if (toolIns.Item.Type == ItemContainer.ItemType.Tool
                 &&
-                (EquiSlots[i].EquType == OupItem.PlaceType.Right && toolIns.UserItem.Order == (int) OupItem.PlaceType.Right ||
-                 EquiSlots[i].EquType == OupItem.PlaceType.Left && toolIns.UserItem.Order == (int) OupItem.PlaceType.Left)
+                (EquiSlots[i].EquType == ItemContainer.PlaceType.Right && toolIns.UserItem.Order == (int) ItemContainer.PlaceType.Right ||
+                 EquiSlots[i].EquType == ItemContainer.PlaceType.Left && toolIns.UserItem.Order == (int) ItemContainer.PlaceType.Left)
                 &&
                 toolIns.UserItem.TimeToUse > 0 
                 && 

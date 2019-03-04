@@ -6,18 +6,18 @@
   <Name>Silor dady</Name>
   <Level>6</Level>
   <Updated>true</Updated>
-  <HealthCheck>261900</HealthCheck>
-  <LastUpdated>2019-02-28T15:36:06.1487774-06:00</LastUpdated>
+  <HealthCheck>262260</HealthCheck>
+  <LastUpdated>2019-03-03T15:08:38.1181881-06:00</LastUpdated>
   <IsEnable>true</IsEnable>
   <FightMode>false</FightMode>
   <Alive>true</Alive>
   <Life>1</Life>
-  <Coin>8730</Coin>
-  <Experience>219</Experience>
+  <Coin>8742</Coin>
+  <Experience>1624</Experience>
   <MaxExperience>10500</MaxExperience>
   <HandsCnt>2</HandsCnt>
   <MaxHealth>1000</MaxHealth>
-  <Health>800</Health>
+  <Health>810</Health>
   <MaxMana>400</MaxMana>
   <Mana>400</Mana>
   <MaxEnergy>1600</MaxEnergy>
