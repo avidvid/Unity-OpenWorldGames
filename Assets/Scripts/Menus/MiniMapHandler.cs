@@ -6,19 +6,16 @@ using UnityEngine.UI;
 
 public class MiniMapHandler : MonoBehaviour {
 
-    private Vector3 _previousPosition = Vector3.zero;
-
-    private List<TerrainIns> _availableTerrainTypes = new List<TerrainIns>();
-    private int _key;
     private TerrainDatabase _terrainDatabase;
     private CharacterManager _characterManager;
-    
-    public Vector2 _mapPosition = Vector2.zero;
 
+    private int _key;
+    private List<TerrainIns> _availableTerrainTypes;
     private List<Marker> _markers;
-    public GameObject PixelMap;
+    private Vector3 _previousPosition = Vector3.zero;
+    private Vector2 _mapPosition = Vector2.zero;
     private GameObject _mapPanel;
-    
+
     void Start()
     {
         _terrainDatabase = TerrainDatabase.Instance();
@@ -31,34 +28,30 @@ public class MiniMapHandler : MonoBehaviour {
             _previousPosition = starter.PreviousPosition;
         }
         _availableTerrainTypes = _terrainDatabase.GetTerrains();
-
-        print("_availableTerrainTypes count = " + _availableTerrainTypes.Count);
+        Debug.Log("Mini Map-Available TerrainTypes.Count = " + _availableTerrainTypes.Count);
         _markers = GetAllMarkers(_mapPosition.x, _mapPosition.y, _key);
-        print("_terrains count = " + _markers.Count);
-
-        Debug.Log("OpenMiniMap " + "currentPos =" + _previousPosition + "mapPos =" + _mapPosition + "Key =" + _key);
-
-
+        Debug.Log("Mini Map-Map Markers.Count = " + _markers.Count);
+        Debug.Log("Mini Map-" + "currentPos =" + _previousPosition + "mapPos =" + _mapPosition + "Key =" + _key);
         _mapPanel = GameObject.Find("MapPanel");
         for (int i = 0; i < 13; i++)  //25/49/81
         {
             for (int j = 0; j < 9; j++)
             {
-                GameObject pixelMap = Instantiate(PixelMap);
+                GameObject pixelMap = new GameObject(_markers[i * 9 + j].MarkerIndex + "-" + i + "x" + j + " " + _markers[i * 9 + j].Terrain.Name + _markers[i * 9 + j].Location);
                 pixelMap.transform.SetParent(_mapPanel.transform);
-                pixelMap.transform.localScale = new Vector3(2, 2, 0);
-                pixelMap.transform.name = "PixelMap "+ _markers[i * 9 + j].MarkerIndex+"-"  + (i + 1) + "x" + (j + 1) + _markers[i * 9 + j].Terrain.Name+ _markers[i * 9 + j].Location;
-
-                var images = pixelMap.GetComponentsInChildren<Image>();
-                images[0].sprite = _markers[i * 9 + j].Terrain.GetSprite();
+                pixelMap.transform.localScale = new Vector3(1.70f, 1.70f, 0);
+                pixelMap.AddComponent<Image>().sprite = _markers[i * 9 + j].Terrain.GetSprite();
                 if (i == 6 && j == 4) //"Center" 
                 {
-                    images[1].sprite =_characterManager.MyCharacter.GetSprite();
+                    GameObject characterPin = new GameObject("Character Pin " + _characterManager.MyCharacter.Name);
+                    characterPin.transform.SetParent(pixelMap.transform);
+                    characterPin.transform.localScale = new Vector3(0.3f, 0.3f, 0);
+                    characterPin.transform.localPosition = new Vector3(5, 5, 0);
+                    characterPin.AddComponent<Image>().sprite = _characterManager.MyCharacter.GetSprite();
                 }
             }
         }
     }
-
     public List<Marker> GetAllMarkers(float x, float y, int key)
     {
         var markers = new List<Marker>();
@@ -81,7 +74,6 @@ public class MiniMapHandler : MonoBehaviour {
         }
         return markers;
     }
-
     public void BackToMainScene()
     {
         SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);

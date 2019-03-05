@@ -11,6 +11,7 @@ public class ItemDatabase : MonoBehaviour {
     private static ItemDatabase _itemDatabase;
     private List<ItemContainer> _items = new List<ItemContainer>();
     private List<Recipe> _recipes = new List<Recipe>();
+    private List<Offer> _offers ;
 
     #region ItemDatabase Instance
     public static ItemDatabase Instance()
@@ -105,46 +106,55 @@ public class ItemDatabase : MonoBehaviour {
     }
     #endregion
     #region Offers
-    public List<Offer> LoadOffers()
+    public List<Offer> GetOffers()
+    {
+        if (_offers==null )
+        {
+            _offers = LoadOffers();
+        }
+        return _offers;
+    }
+    private List<Offer> LoadOffers()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "Offer.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<Offer>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        List<Offer> offers = (List<Offer>)serializer.Deserialize(fs);
+        var offers = (List<Offer>)serializer.Deserialize(fs);
         fs.Close();
         return offers;
     }
-    private void SaveOffersJson()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
-        Offers offers = new Offers(LoadOffers());
-        using (StreamWriter stream = new StreamWriter(path))
-        {
-            string jsonData = JsonUtility.ToJson(offers);
-            print(offers.OfferList.Count + jsonData);
-            stream.Write(jsonData);
-        }
-    }
-    public List<Offer> LoadOffersJson()
-    {
-        Offers offers = new Offers();
-        string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
-        try
-        {
-            if (File.Exists(path))
-            {
-                string jsonData = File.ReadAllText(path);
-                offers = JsonUtility.FromJson<Offers>(jsonData);
-            }
-            else
-                Debug.LogError("Error in Load Data");
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e);
-            throw;
-        }
-        return offers.OfferList;
-    }
+    //Json try
+    //private void SaveOffersJson()
+    //{
+    //    string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
+    //    Offers offers = new Offers(LoadOffers());
+    //    using (StreamWriter stream = new StreamWriter(path))
+    //    {
+    //        string jsonData = JsonUtility.ToJson(offers);
+    //        print(offers.OfferList.Count + jsonData);
+    //        stream.Write(jsonData);
+    //    }
+    //}
+    //public List<Offer> LoadOffersJson()
+    //{
+    //    Offers offers = new Offers();
+    //    string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
+    //    try
+    //    {
+    //        if (File.Exists(path))
+    //        {
+    //            string jsonData = File.ReadAllText(path);
+    //            offers = JsonUtility.FromJson<Offers>(jsonData);
+    //        }
+    //        else
+    //            Debug.LogError("Error in Load Data");
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        Debug.LogError(e);
+    //        throw;
+    //    }
+    //    return offers.OfferList;
+    //}
     #endregion
 }

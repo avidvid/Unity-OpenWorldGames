@@ -35,19 +35,8 @@
   </UserItem>
   <UserItem>
     <UserId>22</UserId>
-    <ItemId>9</ItemId>
-    <StackCnt>1</StackCnt>
-    <Equipped>false</Equipped>
-    <Stored>false</Stored>
-    <Order>0</Order>
-    <TimeToUse>1</TimeToUse>
-    <Deleted>false</Deleted>
-    <Created>2019-03-01T14:34:50.4223396-06:00</Created>
-  </UserItem>
-  <UserItem>
-    <UserId>22</UserId>
     <ItemId>4</ItemId>
-    <StackCnt>2</StackCnt>
+    <StackCnt>1</StackCnt>
     <Equipped>false</Equipped>
     <Stored>false</Stored>
     <Order>1</Order>
@@ -68,6 +57,17 @@
   </UserItem>
   <UserItem>
     <UserId>22</UserId>
+    <ItemId>4</ItemId>
+    <StackCnt>2</StackCnt>
+    <Equipped>false</Equipped>
+    <Stored>false</Stored>
+    <Order>3</Order>
+    <TimeToUse>1</TimeToUse>
+    <Deleted>false</Deleted>
+    <Created>2019-03-04T09:30:26.4722977-06:00</Created>
+  </UserItem>
+  <UserItem>
+    <UserId>22</UserId>
     <ItemId>8</ItemId>
     <StackCnt>12</StackCnt>
     <Equipped>false</Equipped>
@@ -80,7 +80,7 @@
   <UserItem>
     <UserId>22</UserId>
     <ItemId>1</ItemId>
-    <StackCnt>13</StackCnt>
+    <StackCnt>8</StackCnt>
     <Equipped>false</Equipped>
     <Stored>false</Stored>
     <Order>5</Order>

@@ -44,14 +44,11 @@ public class ActionHandler : MonoBehaviour
             _cache = Cache.Instance();
             _terrainManager = TerrainManager.Instance();
         }
-
         _inv = InventoryHandler.Instance();
         _characterManager = CharacterManager.Instance();
-
         _popupAction = GameObject.Find("Popup Action");
         _toolSpriteList = Resources.LoadAll<Sprite>("Inventory/InventoryTools");
     }
-
     public void SetAction(Vector3 location, string action)
     {
         _location = location;
@@ -66,7 +63,7 @@ public class ActionHandler : MonoBehaviour
                     if (_element.ElementTypeInUse.Destroyable)
                     {
                         ActionButton.onClick.AddListener(ConsumeElement);
-                        ActionButton.GetComponentsInChildren<Image>()[1].sprite = GetElementConsumeSprite(_element.ElementTypeInUse.Type);
+                        ActionButton.GetComponentsInChildren<Image>()[1].sprite = GetToolSprite(_element.ElementTypeInUse.Type);
                     }
                     if (_element.ElementTypeInUse.Enterable)
                         WalkButton.GetComponentsInChildren<Image>()[1].sprite = Enter;
@@ -76,8 +73,7 @@ public class ActionHandler : MonoBehaviour
                 ActionButton.onClick.RemoveAllListeners();
                 ActionButton.onClick.AddListener(CloseMe);
                 ActionButton.onClick.AddListener(SetStop);
-                ActionButton.onClick.AddListener(AttackMonster);
-                ActionButton.GetComponentsInChildren<Image>()[1].sprite = Attack;
+                WalkButton.GetComponentsInChildren<Image>()[1].sprite = Attack;
                 break;
             case "Item":
                 ActionButton.onClick.RemoveAllListeners();
@@ -91,7 +87,7 @@ public class ActionHandler : MonoBehaviour
                 ActionButton.onClick.AddListener(CloseMe);
                 ActionButton.onClick.AddListener(SetStop);
                 ActionButton.onClick.AddListener(TerrainDig);
-                ActionButton.GetComponentsInChildren<Image>()[1].sprite = GetElementConsumeSprite(ElementIns.ElementType.Hole);
+                ActionButton.GetComponentsInChildren<Image>()[1].sprite = GetToolSprite(ElementIns.ElementType.Hole);
                 break;
             default:
                 ActionButton.onClick.RemoveAllListeners();
@@ -106,6 +102,25 @@ public class ActionHandler : MonoBehaviour
     public void CloseMe()
     {
         _popupAction.SetActive(false);
+    }
+    private Sprite GetToolSprite(ElementIns.ElementType type)
+    {
+        switch (type)
+        {
+            case ElementIns.ElementType.Hole:
+                return _toolSpriteList[16];
+            case ElementIns.ElementType.Building:
+                return _toolSpriteList[10];
+            case ElementIns.ElementType.Bush:
+                return _toolSpriteList[8];
+            case ElementIns.ElementType.Rock:
+                return _toolSpriteList[0];
+            case ElementIns.ElementType.Tree:
+                print("Tree");
+                return _toolSpriteList[2];
+            default:
+                return null;
+        }
     }
     //Item
     internal void SetActiveItem(ActiveItemType currentItem, string environmentType)
@@ -145,6 +160,7 @@ public class ActionHandler : MonoBehaviour
             _terrainManager.TerrainDropItem(elementPos, _element.ElementTypeInUse.DropChance, _element.ElementTypeInUse.DropItems);
         }
     }
+    //Terrain
     internal void SetActiveTerrain(TerrainIns currentTerrain)
     {
         _terrain = currentTerrain;
@@ -162,25 +178,6 @@ public class ActionHandler : MonoBehaviour
             _terrainManager.TerrainDropItem(_location, _terrain.DropChance, _terrain.DropItems);
         }
     }
-    private Sprite GetElementConsumeSprite(ElementIns.ElementType type)
-    {
-        switch (type)
-        {
-            case ElementIns.ElementType.Hole:
-                return _toolSpriteList[16];
-            case ElementIns.ElementType.Building:
-                return _toolSpriteList[10];
-            case ElementIns.ElementType.Bush:
-                return _toolSpriteList[8];
-            case ElementIns.ElementType.Rock:
-                return _toolSpriteList[0];
-            case ElementIns.ElementType.Tree:
-                print("Tree");
-                return _toolSpriteList[2];
-            default:
-                return null;
-        }
-    }
     //Moving
     public void WalkToLocation()
     {
@@ -192,7 +189,6 @@ public class ActionHandler : MonoBehaviour
         var moveManager = GameObject.FindGameObjectWithTag("PlayerCamera").GetComponent<MoveManager>();
         moveManager.SetStop(false);
     }
-
     public void ShowMapInfo()
     {
          _inv.PrintMessage("Austin", Color.black); //todo:fix this 

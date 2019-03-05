@@ -356,6 +356,7 @@ public class CharacterManager : MonoBehaviour
         float value = research.CalculateValue(level);
         _userDatabase.AddCharacterResearch(research, level);
         _userDatabase.EmptyCharacterResearching();
+        CharacterResearching = _userDatabase.GetCharacterResearching();
         AddCharacterSetting(research.Target, value);
     }
 
@@ -415,6 +416,16 @@ public class CharacterManager : MonoBehaviour
                 break;
             case "Alive":
                 CharacterSetting.Alive = (value > 0) ;  
+                break;
+            //Research
+            case "MaxHealth":
+                CharacterSetting.MaxHealth += (int) value;
+                break;
+            case "MaxMana":
+                CharacterSetting.MaxMana += (int)value;
+                break;
+            case "MaxEnergy":
+                CharacterSetting.MaxEnergy += (int)value;
                 break;
             //Equipments
             case "Agility":

@@ -39,7 +39,6 @@ public class SpellManager : MonoBehaviour {
             GameObject.Destroy(gameObject);
         }
     }
-    
     public static void CreateFloatingText(string text, Vector3 location)
     {
         var popupText = Instantiate(_popupText);

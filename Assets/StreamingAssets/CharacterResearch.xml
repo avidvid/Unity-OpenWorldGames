@@ -6,4 +6,10 @@
     <ResearchId>1</ResearchId>
     <Level>2</Level>
   </CharacterResearch>
+  <CharacterResearch>
+    <Id>0</Id>
+    <UserPlayerId>22</UserPlayerId>
+    <ResearchId>2</ResearchId>
+    <Level>1</Level>
+  </CharacterResearch>
 </ArrayOfCharacterResearch>

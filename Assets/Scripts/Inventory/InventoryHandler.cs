@@ -271,11 +271,11 @@ public class InventoryHandler : MonoBehaviour
                     PrintMessage("You Can Only Carry one of this item!", Color.yellow);
                     return false;
                 }
-                if (order!=-1)
-                {
-                    PrintMessage("You Can not stack this item here!", Color.yellow);
-                    return false;
-                }
+                //if (order!=-1)
+                //{
+                //    PrintMessage("You Can not stack this item here!", Color.yellow);
+                //    return false;
+                //}
             }
             else
                 return true;

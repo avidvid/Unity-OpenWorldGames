@@ -2,22 +2,22 @@
 <CharacterSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Id>11</Id>
   <UserPlayerId>22</UserPlayerId>
-  <CharacterId>1</CharacterId>
+  <CharacterId>0</CharacterId>
   <Name>Silor dady</Name>
   <Level>6</Level>
   <Updated>true</Updated>
-  <HealthCheck>262260</HealthCheck>
-  <LastUpdated>2019-03-03T15:08:38.1181881-06:00</LastUpdated>
+  <HealthCheck>244260</HealthCheck>
+  <LastUpdated>2019-03-05T11:54:13.3332366-06:00</LastUpdated>
   <IsEnable>true</IsEnable>
   <FightMode>false</FightMode>
   <Alive>true</Alive>
   <Life>1</Life>
-  <Coin>8742</Coin>
-  <Experience>1624</Experience>
+  <Coin>8142</Coin>
+  <Experience>3824</Experience>
   <MaxExperience>10500</MaxExperience>
   <HandsCnt>2</HandsCnt>
-  <MaxHealth>1000</MaxHealth>
-  <Health>810</Health>
+  <MaxHealth>1200</MaxHealth>
+  <Health>830</Health>
   <MaxMana>400</MaxMana>
   <Mana>400</Mana>
   <MaxEnergy>1600</MaxEnergy>

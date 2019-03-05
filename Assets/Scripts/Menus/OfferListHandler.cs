@@ -38,7 +38,7 @@ public class OfferListHandler : MonoBehaviour {
 
     void Start()
     {
-        List<Offer> offers = _itemDatabase.LoadOffersJson();
+        List<Offer> offers = _itemDatabase.GetOffers();
         var offerCnt = 0;
         if (offers.Count == 0)
             throw new Exception("Offers count is ZERO");

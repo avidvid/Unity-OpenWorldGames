@@ -9,7 +9,8 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####comite#####
 ###############
- 
+Fixed Bugs
+
 	
 ###############
 #### Home #####
@@ -39,8 +40,11 @@ Users Want to do what they want, not what you want them to do
 	
 	Lambda + Gateway 
 	https://www.youtube.com/channel/UCRthRrv06q1iOl86-tTKJhg/videos
-	
-	
+
+
+null value:	
+	<?xml version="1.0" encoding="Windows-1252"?>
+<CharacterResearching xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:nil="true" />
 	
 	DynamoDB:
 	Reading data from DynamoDB tables (Getting started with AWS Lambda, part 8)
