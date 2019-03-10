@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -48,6 +49,7 @@ public class UserDatabase : MonoBehaviour
             //throw new Exception("UDB-User Player doesn't Exists!!!");
         }
         _userPlayer.Print();
+        _userPlayer.HealthCheck = _userPlayer.CalculateHealthCheck();
         _userPlayer.LastLogin = DateTime.Now;
         SaveUserPlayer();
         if (DateTime.Now < _userPlayer.LockUntil)
@@ -64,6 +66,7 @@ public class UserDatabase : MonoBehaviour
             return;
             //throw new Exception("UDB-Character Setting doesn't Exists!!!");
         }
+        _characterSetting.HealthCheck = _characterSetting.CalculateHealthCheck();
         _characterSetting.Print();
         if (_characterSetting != null)
         {        
@@ -126,11 +129,8 @@ public class UserDatabase : MonoBehaviour
     }
     private void HealthCheckUserPlayer()
     {
-        var oldUserPlayer = LoadUserPlayer();
-        int healthCheck = 0;
-        healthCheck +=
-            oldUserPlayer.CalculateHealthCheck(oldUserPlayer.Gem - _userPlayer.Gem, "Gem");
-        if (oldUserPlayer.HealthCheck + healthCheck != _userPlayer.HealthCheck)
+        var healthCheck = _userPlayer.CalculateHealthCheck();
+        if (healthCheck != _userPlayer.HealthCheck)
             throw new Exception("Health Check User Player Failed. It is off by " + (healthCheck - _userPlayer.HealthCheck));
     }
     #endregion
@@ -156,10 +156,12 @@ public class UserDatabase : MonoBehaviour
     {
         _userInventory.Clear();
         foreach (var userItem in invCarry)
-            _userInventory.Add(userItem.UserItem);
+            if (userItem.UserItem.StackCnt!=0)
+                _userInventory.Add(userItem.UserItem);
         if (invEquipment!=null)
             foreach (var userItem in invEquipment)
                 _userInventory.Add(userItem.UserItem);
+        _userInventory = _userInventory.OrderBy(x => !x.Equipped).ThenBy(x => !x.Stored).ThenBy(x => x.Order).ToList();
         SaveUserInventory();
     }
     internal List<UserItem> GetUserInventory()
@@ -247,7 +249,7 @@ public class UserDatabase : MonoBehaviour
         var characters = characterDatabase.GetCharacters();
         List<int> availableCharacters = new List<int>();
         int key = DateTime.Now.DayOfYear;
-        var rarity = RandomHelper.Range(key, (int)OupItem.ItemRarity.Common);
+        var rarity = RandomHelper.Range(key, (int)ItemContainer.ItemRarity.Common);
         bool userOwnedRecipe = false;
         for (int i = 0; i < characters.Count; i++)
             if (characters[i].IsEnable)
@@ -414,12 +416,8 @@ public class UserDatabase : MonoBehaviour
     }
     private void HealthCheckCharacterSetting()
     {
-        var oldCharacterSetting = LoadCharacterSetting();
-        int healthCheck = 0;
-        healthCheck +=
-            oldCharacterSetting.CalculateHealthCheck(oldCharacterSetting.Coin - _characterSetting.Coin, "Coin");
-
-        if (oldCharacterSetting.HealthCheck + healthCheck != _characterSetting.HealthCheck)
+        var healthCheck = _characterSetting.CalculateHealthCheck();
+        if (healthCheck != _characterSetting.HealthCheck)
             throw new Exception("Health Check CharacterSetting Failed. It is off by " + (healthCheck - _characterSetting.HealthCheck));
     }
     #endregion
@@ -485,7 +483,7 @@ public class UserDatabase : MonoBehaviour
         var recipes = itemDatabase.GetRecipes();
         List<int> availableRecipe = new List<int>();
         int key = DateTime.Now.DayOfYear;
-        var rarity = RandomHelper.Range(key, (int)OupItem.ItemRarity.Common);
+        var rarity = RandomHelper.Range(key, (int)ItemContainer.ItemRarity.Common);
         bool userOwnedRecipe = false;
         for (int i = 0; i < recipes.Count; i++)
             if (recipes[i].IsEnable && !recipes[i].IsPublic)

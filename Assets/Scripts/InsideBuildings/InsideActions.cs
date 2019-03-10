@@ -11,7 +11,6 @@ public class InsideActions : MonoBehaviour {
 
     private static GameObject _popupAction;
 
-
     // Use this for initialization
     void Start ()
     {
@@ -20,7 +19,6 @@ public class InsideActions : MonoBehaviour {
         _popupAction = GameObject.Find("Popup Action");
         _building = GameObject.Find("Building Interior").GetComponent<BuildingInterior>();
     }
-	
 	// Update is called once per frame
 	void Update ()
 	{

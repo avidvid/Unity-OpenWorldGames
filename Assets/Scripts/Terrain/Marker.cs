@@ -52,10 +52,6 @@ public class Marker  {
         }
         return markers;
     }
-
-
-
-
     public static Marker Closest(IEnumerable<Marker> markers,Vector2 location,int key)
     {
         Marker selected = null;

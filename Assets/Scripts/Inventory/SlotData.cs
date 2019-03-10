@@ -56,21 +56,17 @@ public class SlotData : MonoBehaviour,IDropHandler{
             if (mixedItem.ItemIns != null)
             {
                 //#################################### not empty slot
-                if (existingItem.ItemIns != null)
+                if (existingItem.ItemIns != null && existingItem.ItemIns.Item.Id != mixedItem.ItemIns.Item.Id)
                     _inv.PrintMessage("New item should be placed in an empty inventory slot", Color.yellow);
                 //#################################### empty slot
                 else
                 {
-                    //Set the slot Item
-                    existingItem.transform.name = mixedItem.ItemIns.Item.Name;
-                    existingItem.GetComponent<Image>().sprite = mixedItem.ItemIns.Item.GetSprite();
-                    TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-                    stackCntText.text = mixedItem.ItemIns.UserItem.StackCnt > 1 ? mixedItem.ItemIns.UserItem.StackCnt.ToString() : "";
-                    existingItem.ItemIns = new ItemIns( mixedItem.ItemIns.Item, mixedItem.ItemIns.UserItem);
-                    _inv.InvSlots[SlotIndex].name = mixedItem.ItemIns.Item.Name;
-                    //Delete mixedItem Item
-                    mixedItem.LoadEmpty();
-                    _inv.UpdateInventory(true);
+                    if (_inv.AddItemToInventory(mixedItem.ItemIns.Item, mixedItem.ItemIns.UserItem.StackCnt,existingItem.SlotIndex))
+                    {
+                        //Delete mixedItem Item
+                        mixedItem.LoadEmpty();
+                        _inv.UpdateInventory(true);
+                    }
                 }
                 return;
             }
@@ -85,15 +81,15 @@ public class SlotData : MonoBehaviour,IDropHandler{
                 else
                 {
                     //Set the slot Item
-                    existingItem.transform.name = equipedItem.ItemIns.Item.Name;
-                    existingItem.GetComponent<Image>().sprite = equipedItem.ItemIns.Item.GetSprite();
-                    TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-                    stackCntText.text = equipedItem.ItemIns.UserItem.StackCnt > 1 ? equipedItem.ItemIns.UserItem.StackCnt.ToString() : "";
-                    existingItem.ItemIns = new ItemIns(equipedItem.ItemIns.Item, equipedItem.ItemIns.UserItem);
-                    _inv.InvSlots[SlotIndex].name = equipedItem.ItemIns.Item.Name;
+                    existingItem.ItemIns = equipedItem.ItemIns;
+                    existingItem.transform.parent.name = existingItem.transform.name = existingItem.ItemIns.Item.Name;
+                    existingItem.GetComponent<Image>().sprite = existingItem.ItemIns.Item.GetSprite();
+                    var stackCntText = existingItem.transform.GetComponentInChildren<TextMeshProUGUI>();
+                    stackCntText.text = existingItem.ItemIns.UserItem.StackCnt > 1 ? existingItem.ItemIns.UserItem.StackCnt.ToString() : "";
+                    existingItem.ItemIns.UserItem.Order = existingItem.SlotIndex;
+                    existingItem.ItemIns.UserItem.Equipped = false;
                     //unload new Item to equipments
-                    equipedItem.LoadItem();
-
+                    equipedItem.LoadItem(null);
                     _inv.UpdateInventory(true);
                     _inv.UpdateEquipments(true);
                 }
@@ -102,8 +98,27 @@ public class SlotData : MonoBehaviour,IDropHandler{
         if (draggedItem != null)
             if (SlotIndex != draggedItem.SlotIndex )
             {
+                //#################################### Empty slot logic swap
+                if (existingItem.ItemIns == null)
+                {
+                    //Swap Parent
+                    draggedItem.transform.SetParent(existingItem.transform.parent);
+                    existingItem.transform.SetParent(draggedItem.Parent);
+                    draggedItem.Parent = null;
+                    //Swap positions
+                    existingItem.transform.position = existingItem.transform.parent.position;
+                    draggedItem.transform.position = draggedItem.transform.parent.position;
+                    //Swap SlotIndex
+                    var temp2 = existingItem.SlotIndex;
+                    existingItem.SlotIndex = draggedItem.SlotIndex;
+                    draggedItem.ItemIns.UserItem.Order = draggedItem.SlotIndex = temp2;
+                    //Swapping names
+                    existingItem.transform.parent.name = "Empty";
+                    draggedItem.transform.parent.name = draggedItem.ItemIns.Item.Name;
+                    _inv.UpdateInventory(true);
+                }
                 //#################################### Stacking: Same items Stack them together
-                if (existingItem.ItemIns.Item.Id == draggedItem.ItemIns.Item.Id )
+                else if (existingItem.ItemIns.Item.Id == draggedItem.ItemIns.Item.Id )
                 {
                     if (existingItem.ItemIns.UserItem.StackCnt + draggedItem.ItemIns.UserItem.StackCnt > existingItem.ItemIns.Item.MaxStackCnt)
                     {
@@ -112,12 +127,10 @@ public class SlotData : MonoBehaviour,IDropHandler{
                     }
                     else
                     {
-
+                        existingItem.ItemIns.UserItem.StackCnt = draggedItem.ItemIns.UserItem.StackCnt + existingItem.ItemIns.UserItem.StackCnt;
                         draggedItem.ItemIns.UserItem.StackCnt = 0;
-                        //todo: load empty
-                        existingItem.ItemIns.UserItem.StackCnt = draggedItem.ItemIns.UserItem.StackCnt + existingItem.ItemIns.UserItem.StackCnt;  
                     }
-                    Text stackCntText = existingItem.transform.GetChild(0).GetComponent<Text>();
+                    var stackCntText = existingItem.transform.GetComponentInChildren<TextMeshProUGUI>();
                     if (existingItem.ItemIns.UserItem.StackCnt > 1)
                         stackCntText.text = existingItem.ItemIns.UserItem.StackCnt.ToString();
                     _inv.UpdateInventory(true);
@@ -148,17 +161,26 @@ public class SlotData : MonoBehaviour,IDropHandler{
                     //#################################### Swaping: Unmixable items Stack them together
                     else
                     {
-                        existingItem.transform.SetParent(_inv.InvSlots[draggedItem.SlotIndex].transform);
-                        _inv.InvSlots[draggedItem.SlotIndex].name = existingItem.name;
-                        existingItem.transform.position = _inv.InvSlots[draggedItem.SlotIndex].transform.position;
-                        existingItem.SlotIndex = draggedItem.SlotIndex;
-                        draggedItem.SlotIndex = SlotIndex;
+                        //Swap Parent
+                        draggedItem.transform.SetParent(existingItem.transform.parent);
+                        existingItem.transform.SetParent(draggedItem.Parent);
+                        draggedItem.Parent = null;
+                        //Swap positions
+                        existingItem.transform.position = existingItem.transform.parent.position;
+                        draggedItem.transform.position = draggedItem.transform.parent.position;
+                        //Swap SlotIndex
+                        var temp2 = existingItem.SlotIndex;
+                        existingItem.ItemIns.UserItem.Order = existingItem.SlotIndex = draggedItem.SlotIndex;
+                        draggedItem.ItemIns.UserItem.Order= draggedItem.SlotIndex = temp2;
+                        //Swapping names
+                        existingItem.transform.parent.name = existingItem.ItemIns.Item.Name;
+                        draggedItem.transform.parent.name = draggedItem.ItemIns.Item.Name;
+
                         _inv.UpdateInventory(true);
                     }
                 }
             }
     }
-
     private void MixItemData(ref ItemData existingItem, ref ItemData draggedItem,Recipe newRecipe)
     {
         if (!_inv.UseEnergy(newRecipe.Energy))
@@ -174,41 +196,14 @@ public class SlotData : MonoBehaviour,IDropHandler{
         _itemMixture.LoadItem(item.Id, stackCnt, newRecipe.DurationMinutes);
         _inv.PrintMessage("Making " + item.Name + " starts",Color.green);
         _inv.AddCharacterSetting("Experience", newRecipe.Energy);
+        
+        //Update stackCnt Text
+        var stackCntText = existingItem.transform.GetComponentInChildren<TextMeshProUGUI>();
+        stackCntText.text = existingItem.ItemIns.UserItem.StackCnt > 1 ? existingItem.ItemIns.UserItem.StackCnt.ToString() : "";
 
-        if (existingItem.ItemIns.UserItem.StackCnt == 0)
-        {
-            //Logic of adding empty Item to Slot 
-            existingItem.ItemIns = null;
-            existingItem.transform.name = "Empty";
-            existingItem.GetComponent<Image>().sprite = EmptySprite;
-            //Update Text
-            TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            stackCntText.text = "";
-            _inv.InvSlots[SlotIndex].name = existingItem.name;
-        }
-        else
-        {
-            //Update Text
-            TextMeshProUGUI stackCntText = existingItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            stackCntText.text = existingItem.ItemIns.UserItem.StackCnt > 1 ? existingItem.ItemIns.UserItem.StackCnt.ToString() : "";
-        }
-        if (draggedItem.ItemIns.UserItem.StackCnt == 0)
-        {
-            //Logic of adding empty Item to Slot 
-            draggedItem.ItemIns = null;
-            draggedItem.transform.name = "Empty";
-            draggedItem.GetComponent<Image>().sprite = EmptySprite;
-            _inv.InvSlots[SlotIndex].name = draggedItem.name;
-        }
+        stackCntText = draggedItem.transform.GetComponentInChildren<TextMeshProUGUI>();
+        stackCntText.text = draggedItem.ItemIns.UserItem.StackCnt > 1 ? draggedItem.ItemIns.UserItem.StackCnt.ToString() : "";
+
         _inv.UpdateInventory(true);
     }
 }
-
-
-//logic of adding an item to a slot
-//existingItem.Item = item;
-//existingItem.GetComponent<Image>().sprite = item.GetSprite();
-//if (item.StackCnt > 1)
-//existingItem.transform.GetChild(0).GetComponent<Text>().text = item.StackCnt.ToString();
-//existingItem.name = item.Name;
-//_inv.InvSlots[SlotIndex].name = existingItem.name;

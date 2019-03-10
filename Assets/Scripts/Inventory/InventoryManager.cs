@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -38,7 +39,20 @@ public class InventoryManager : MonoBehaviour
 
     void Start()
     {
+        RefreshInventory();
+
+        ValidateInventory();
+        Debug.Log("IM-InvCarry.Count = " + InvCarry.Count);
+        Debug.Log("IM-InvEquipment.Count = " + InvEquipment.Count);
+        Debug.Log("IM-InvBank.Count = " + InvBank.Count);
+    }
+
+    private void RefreshInventory()
+    {
         var userInvItems = _characterManager.CharacterInventory;
+        InvEquipment.Clear();
+        InvBank.Clear();
+        InvCarry.Clear();
         foreach (var itemIns in userInvItems)
         {
             if (itemIns.UserItem.Equipped)
@@ -48,11 +62,6 @@ public class InventoryManager : MonoBehaviour
             else
                 InvCarry.Add(itemIns);
         }
-
-        ValidateInventory();
-        Debug.Log("IM-InvCarry.Count = " + InvCarry.Count);
-        Debug.Log("IM-InvEquipment.Count = " + InvEquipment.Count);
-        Debug.Log("IM-InvBank.Count = " + InvBank.Count);
     }
 
     private void ValidateInventory()
@@ -66,11 +75,12 @@ public class InventoryManager : MonoBehaviour
             for (int j = 0; j < InvEquipment.Count; j++)
                 if (i != j && InvEquipment[i].UserItem.Order == InvEquipment[j].UserItem.Order)
                     throw new Exception("IM-InvEquipment Invalid!!!");
-            if (InvEquipment[i].Item.Type == OupItem.ItemType.Equipment)
+            if (InvEquipment[i].Item.Type == ItemContainer.ItemType.Equipment)
                 if ((int) InvEquipment[i].Item.PlaceHolder != InvEquipment[i].UserItem.Order)
                     throw new Exception("IM-InvEquipment Invalid Equipment Order!!!");
-            if (InvEquipment[i].Item.Type == OupItem.ItemType.Tool || InvEquipment[i].Item.Type == OupItem.ItemType.Weapon)
-                if (InvEquipment[i].UserItem.Order != 1 && InvEquipment[i].UserItem.Order != 2)
+            if (InvEquipment[i].Item.Type == ItemContainer.ItemType.Tool || InvEquipment[i].Item.Type == ItemContainer.ItemType.Weapon)
+                if (InvEquipment[i].UserItem.Order != (int)ItemContainer.PlaceType.Left 
+                        && InvEquipment[i].UserItem.Order != (int)ItemContainer.PlaceType.Right)
                     throw new Exception("IM-InvEquipment Invalid Weapon/Tool Order!!!");
         }
     }
@@ -79,10 +89,9 @@ public class InventoryManager : MonoBehaviour
     {
         if (UpdateInventory)
         {
-            PrintInventory();
+            RefreshInventory();
             _userDatabase.UpdateUserInventory(InvCarry, InvEquipment);
             UpdateInventory = false;
-            PrintInventory();
         }
     }
     internal bool HaveAvailableSlot()
@@ -99,5 +108,10 @@ public class InventoryManager : MonoBehaviour
         foreach (var itemIns in InvEquipment)
             equipment += itemIns.UserItem.Order + "-" + itemIns.Item.Name + "(" + itemIns.UserItem.StackCnt + ")#";
         Debug.Log("IM-PrintInventory InvCarry=" + InvCarry.Count +":"+ carry+ " InvEquipment= " + InvEquipment.Count + ":" + equipment);
+    }
+
+    internal void AddItemToInventory(ItemIns itemIns)
+    {
+        _characterManager.CharacterInventory.Add(itemIns);
     }
 }

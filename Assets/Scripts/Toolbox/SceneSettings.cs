@@ -17,6 +17,7 @@ public class SceneSettings {
     public const int SceneIdForWait = 10;
     public const int SceneIdForResearch = 11;
     public const int SceneIdForCharacterScene = 12;
+    public const int SceneIdForFightMonster = 13;
 
     public static void BuildStarter(string domain = null, string content = null)
     {

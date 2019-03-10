@@ -14,16 +14,16 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
 	// Use this for initialization
     public ItemIns ItemIns;
     public int SlotIndex;
+    public Transform Parent;
 
 
-   
     private Vector2 _offset;
     private InventoryHandler _inv;
     private Tooltip _tooltip;
 
     public Sprite EmptySprite;
 
-    void Start()
+    void Awake()
     {
         _inv = InventoryHandler.Instance();
         _tooltip = Tooltip.Instance();
@@ -80,6 +80,7 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
     {
         if (ItemIns == null)
             return;
+        Parent = this.transform.parent;
         this.transform.SetParent(this.transform.parent.parent.parent);
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
@@ -93,39 +94,39 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Transform originalParent = _inv.InvSlots[SlotIndex].transform;
-        this.transform.SetParent(originalParent);
-        originalParent.name = this.transform.name;
-        this.transform.position = originalParent.position;
+        if (Parent != null)
+        {
+            this.transform.SetParent(Parent);
+            this.transform.position = Parent.position;
+        }
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
-    internal void LoadItem(ItemIns itemIns)
+    internal void LoadItem()
     {
-        LoadItem(itemIns.Item, itemIns.UserItem);
-    }
-    public void LoadItem(OupItem item,UserItem userItem)
-    {
+        print("Item data loading " + (ItemIns==null?"Empty": ItemIns.Item.Name) );
         if (ItemIns == null)
         {
             this.ItemIns = null;
             GetComponent<Image>().sprite = EmptySprite;
-            Text stackCntText = this.transform.GetChild(0).GetComponent<Text>();
+            var stackCntText = this.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
             stackCntText.text = "";
-            _inv.UpdateInventory(true);
+            transform.parent.name = this.transform.name = "Empty";
         }
         else
         {
-            ItemIns.Item = item;
-            ItemIns.UserItem = userItem;
-            this.transform.name = item.Name;
-            GetComponent<Image>().sprite = item.GetSprite();
-            this.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = userItem.StackCnt > 1 ? userItem.StackCnt.ToString() : "";
-            if (_inv ==null)
-                _inv = InventoryHandler.Instance();
-            _inv.InvSlots[SlotIndex].transform.name = item.Name;
-            _inv.UpdateInventory(true);
+            transform.parent.name = this.transform.name = ItemIns.Item.Name;
+            this.ItemIns.UserItem.Order = SlotIndex;
+            this.ItemIns.UserItem.Equipped = false;
+            GetComponent<Image>().sprite = ItemIns.Item.GetSprite();
+            this.transform.GetComponentInChildren<TextMeshProUGUI>().text = ItemIns.UserItem.StackCnt > 1 ? ItemIns.UserItem.StackCnt.ToString() : "";
         }
+        _inv.UpdateInventory(true);
     }
 
+    internal void LoadItem(ItemIns itemIns)
+    {
+        this.ItemIns = itemIns;
+        LoadItem();
+    }
 }

@@ -11,6 +11,7 @@ public class BuildingInterior : MonoBehaviour {
     private ItemDatabase _itemDatabase;
     private TerrainDatabase _terrainDatabase;
     private AudioManager _audioManager;
+    private CharacterManager _characterManager;
 
     //todo: make them private
     public Sprite[] FloorTiles;
@@ -18,10 +19,10 @@ public class BuildingInterior : MonoBehaviour {
     public Sprite DoorShadow;
     public Transform Player;
 
-    public Vector3 PreviousPosition = Vector3.zero;
 
     private int _key = 0;
     private Vector2 _mapPosition = Vector2.zero;
+    private Vector3 _previousPosition = Vector3.zero;
 
     private int _maxWidth;
     private int _maxHeight;
@@ -32,8 +33,6 @@ public class BuildingInterior : MonoBehaviour {
     private List<Rect> _walls = new List<Rect>();
     private Rect _exit;
 
-
-    private CharacterManager _characterManager;
     private InsideStory _story;
     private List<ActiveMonsterType> _monsters = new List<ActiveMonsterType>();
     private List<ActiveItemType> _items = new List<ActiveItemType>();
@@ -41,7 +40,6 @@ public class BuildingInterior : MonoBehaviour {
 
 
     private GameObject _monsterObj;
-
 
     void Start()
     {
@@ -57,7 +55,7 @@ public class BuildingInterior : MonoBehaviour {
         if (starter != null)
         {
             _mapPosition = starter.MapPosition;
-            PreviousPosition = starter.PreviousPosition;
+            _previousPosition = starter.PreviousPosition;
         }
 
         _floor = FloorTiles[RandomHelper.Range(new Vector2(_mapPosition.x + 0.01f, _mapPosition.y + 0.01f), _key, FloorTiles.Length)];
@@ -65,9 +63,8 @@ public class BuildingInterior : MonoBehaviour {
         _story  = _terrainDatabase.GetStoryBasedOnRarity(_mapPosition, _key);
         GenerateInterior();
         if (_audioManager!=null)
-            _audioManager.PlayInsideMusic(PreviousPosition, _key);
+            _audioManager.PlayInsideMusic(_previousPosition, _key);
     }
-
     private void GenerateInterior()
     {
         List<Vector3> applied = new List<Vector3>();
@@ -258,8 +255,8 @@ public class BuildingInterior : MonoBehaviour {
         int itemId;
         if (RandomHelper.GetLucky(pos, chance))
             itemId = _itemDatabase.GetItemIdBasedOnRarity(pos, dropItems);
-        else //Drop coin/Gem
-            itemId = _itemDatabase.GetItemIdBasedOnRarity(pos, "8,9");
+        else //Drop coin/Gem/Recipe
+            itemId = _itemDatabase.GetItemIdBasedOnRarity(pos);
         if (itemId != -1)
             CreateItem(pos, itemId);
     }

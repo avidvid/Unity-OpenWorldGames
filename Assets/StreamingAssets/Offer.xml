@@ -33,8 +33,8 @@
     <IsEnable>true</IsEnable>
   </Offer>
   <Offer>
-    <SellProd>0</SellProd>
-    <SellAmount>9</SellAmount>
+    <SellProd>1</SellProd>
+    <SellAmount>1</SellAmount>
     <PayProd>Coin</PayProd>
     <PayAmount>100</PayAmount>
     <IsSpecial>false</IsSpecial>

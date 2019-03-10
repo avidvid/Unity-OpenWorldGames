@@ -39,7 +39,7 @@ public class RecipeListHandler : MonoBehaviour {
                 _addRecipePanel.SetActive( true);
                 continue;
             }
-            List<OupItem> recipeItems = _itemDatabase.RecipeItems(_recipes[i]);
+            List<ItemContainer> recipeItems = _itemDatabase.RecipeItems(_recipes[i]);
             List<int> recipeCnt = new List<int> { _recipes[i].FirstItemCnt, _recipes[i].SecondItemCnt, _recipes[i].FinalItemCnt };
 
             GameObject recipeObject = Instantiate(RecipeContent);

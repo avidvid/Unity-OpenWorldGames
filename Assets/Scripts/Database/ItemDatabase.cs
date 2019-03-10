@@ -9,8 +9,9 @@ using System.Xml.Serialization;
 public class ItemDatabase : MonoBehaviour {
 
     private static ItemDatabase _itemDatabase;
-    private List<OupItem> _items = new List<OupItem>();
+    private List<ItemContainer> _items = new List<ItemContainer>();
     private List<Recipe> _recipes = new List<Recipe>();
+    private List<Offer> _offers ;
 
     #region ItemDatabase Instance
     public static ItemDatabase Instance()
@@ -39,9 +40,9 @@ public class ItemDatabase : MonoBehaviour {
     {
         return _recipes;
     }
-    public List<OupItem> RecipeItems(Recipe r)
+    public List<ItemContainer> RecipeItems(Recipe r)
     {
-        return new List<OupItem> { GetItemById(r.FirstItemId), GetItemById(r.SecondItemId), GetItemById(r.FinalItemId) };
+        return new List<ItemContainer> { GetItemById(r.FirstItemId), GetItemById(r.SecondItemId), GetItemById(r.FinalItemId) };
     }
     private List<Recipe> LoadRecipes()
     {
@@ -64,7 +65,7 @@ public class ItemDatabase : MonoBehaviour {
     }
     #endregion
     #region Item
-    internal OupItem GetItemById(int id)
+    internal ItemContainer GetItemById(int id)
     {
         for (int i = 0; i < _items.Count; i++)
             if (_items[i].Id == id)
@@ -74,26 +75,28 @@ public class ItemDatabase : MonoBehaviour {
     private void SaveItems()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<OupItem>));
+        XmlSerializer serializer = new XmlSerializer(typeof(List<ItemContainer>));
         FileStream fs = new FileStream(path, FileMode.Create);
         serializer.Serialize(fs, _items);
         fs.Close();
     }
-    private List<OupItem> LoadItems()
+    private List<ItemContainer> LoadItems()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
         //Read the items from Item.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(List<OupItem>));
+        XmlSerializer serializer = new XmlSerializer(typeof(List<ItemContainer>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        var items = (List<OupItem>)serializer.Deserialize(fs);
+        var items = (List<ItemContainer>)serializer.Deserialize(fs);
         fs.Close();
         return items;
     }
-    internal int GetItemIdBasedOnRarity(Vector3 position, string dropItems)
-    {
+    internal int GetItemIdBasedOnRarity(Vector3 position, string dropItems=null)
+    {   
+        if (dropItems == null) //Drop coin/Gem/Recipe 
+            dropItems = "8,9,10";
         List<int> items = dropItems.Split(',').Select(Int32.Parse).ToList();
         List<int> availableItems = new List<int>();
-        var rarity = RandomHelper.Range(position, DateTime.Now.DayOfYear, (int)OupItem.ItemRarity.Common);
+        var rarity = RandomHelper.Range(position, DateTime.Now.DayOfYear, (int)ItemContainer.ItemRarity.Common);
         for (int i = 0; i < items.Count; i++)
             if ((int)GetItemById(items[i]).Rarity >= rarity)
                 availableItems.Add(items[i]);
@@ -103,46 +106,55 @@ public class ItemDatabase : MonoBehaviour {
     }
     #endregion
     #region Offers
-    public List<Offer> LoadOffers()
+    public List<Offer> GetOffers()
+    {
+        if (_offers==null )
+        {
+            _offers = LoadOffers();
+        }
+        return _offers;
+    }
+    private List<Offer> LoadOffers()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "Offer.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<Offer>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        List<Offer> offers = (List<Offer>)serializer.Deserialize(fs);
+        var offers = (List<Offer>)serializer.Deserialize(fs);
         fs.Close();
         return offers;
     }
-    private void SaveOffersJson()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
-        Offers offers = new Offers(LoadOffers());
-        using (StreamWriter stream = new StreamWriter(path))
-        {
-            string jsonData = JsonUtility.ToJson(offers);
-            print(offers.OfferList.Count + jsonData);
-            stream.Write(jsonData);
-        }
-    }
-    public List<Offer> LoadOffersJson()
-    {
-        Offers offers = new Offers();
-        string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
-        try
-        {
-            if (File.Exists(path))
-            {
-                string jsonData = File.ReadAllText(path);
-                offers = JsonUtility.FromJson<Offers>(jsonData);
-            }
-            else
-                Debug.LogError("Error in Load Data");
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e);
-            throw;
-        }
-        return offers.OfferList;
-    }
+    //Json try
+    //private void SaveOffersJson()
+    //{
+    //    string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
+    //    Offers offers = new Offers(LoadOffers());
+    //    using (StreamWriter stream = new StreamWriter(path))
+    //    {
+    //        string jsonData = JsonUtility.ToJson(offers);
+    //        print(offers.OfferList.Count + jsonData);
+    //        stream.Write(jsonData);
+    //    }
+    //}
+    //public List<Offer> LoadOffersJson()
+    //{
+    //    Offers offers = new Offers();
+    //    string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
+    //    try
+    //    {
+    //        if (File.Exists(path))
+    //        {
+    //            string jsonData = File.ReadAllText(path);
+    //            offers = JsonUtility.FromJson<Offers>(jsonData);
+    //        }
+    //        else
+    //            Debug.LogError("Error in Load Data");
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        Debug.LogError(e);
+    //        throw;
+    //    }
+    //    return offers.OfferList;
+    //}
     #endregion
 }

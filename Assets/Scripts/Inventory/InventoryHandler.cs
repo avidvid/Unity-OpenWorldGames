@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -91,12 +92,12 @@ public class InventoryHandler : MonoBehaviour
             equipmentItem.name = "Empty";
             foreach (var equipmentIns in _invEquipment)
             {
-                if ( ( (equipmentIns.Item.Type == OupItem.ItemType.Weapon || equipmentIns.Item.Type == OupItem.ItemType.Tool)
+                if ( ( (equipmentIns.Item.Type == ItemContainer.ItemType.Weapon || equipmentIns.Item.Type == ItemContainer.ItemType.Tool)
                       &&
-                       ( (EquiSlots[i].EquType == OupItem.PlaceType.Right && equipmentIns.UserItem.Order == 1) || 
-                         (EquiSlots[i].EquType == OupItem.PlaceType.Left  && equipmentIns.UserItem.Order == 2) ))
+                       ( (EquiSlots[i].EquType == ItemContainer.PlaceType.Right && equipmentIns.UserItem.Order == (int)ItemContainer.PlaceType.Right) || 
+                         (EquiSlots[i].EquType == ItemContainer.PlaceType.Left  && equipmentIns.UserItem.Order == (int)ItemContainer.PlaceType.Left) ))
                     ||
-                     (equipmentIns.Item.PlaceHolder == EquiSlots[i].EquType && equipmentIns.Item.Type == OupItem.ItemType.Equipment)
+                     (equipmentIns.Item.PlaceHolder == EquiSlots[i].EquType && equipmentIns.Item.Type == ItemContainer.ItemType.Equipment)
                     )
                 {
                     equipmentItem.ItemIns = equipmentIns;
@@ -167,27 +168,14 @@ public class InventoryHandler : MonoBehaviour
 
         if (_updateInventory || _updateEquipments)
         {
-            _inventoryManager.PrintInventory();
             //Save new inventory 
             if (_updateInventory)
             {
-                _invCarry.Clear();
-                for (int i = 0; i < _playerSlots; i++)
-                {
-                    var tmpItem = InvSlots[i].transform.GetChild(0).GetComponent<ItemData>().ItemIns;
-                    _invCarry.Add(tmpItem);
-                }
                 _updateInventory = false;
             }
-            //Save new Equipments 
+            ////Save new Equipments 
             if (_updateEquipments)
             {
-                _invEquipment.Clear();
-                foreach (var equipmentSlot in EquiSlots)
-                {
-                    var tmpItem = equipmentSlot.transform.GetComponentInChildren<ItemEquipment>().ItemIns;
-                    _invCarry.Add(tmpItem);
-                }
                 _updateEquipments = false;
             }
             _inventoryManager.UpdateInventory = true;
@@ -232,6 +220,26 @@ public class InventoryHandler : MonoBehaviour
             return true;
         return false;
     }
+    internal int GetAvailableSlot()
+    {
+        //print("AvailableSlot: " + _invCarry.Count +" "+_playerSlots);
+        int availableSlot = -1;
+        if (!HaveAvailableSlot())
+            return availableSlot;
+        for (int i = 0; i < _playerSlots; i++)
+        {
+            availableSlot = i;
+            foreach (var itemIns in _invCarry)
+                if (itemIns.UserItem.Order == i)
+                {
+                    availableSlot = -1;
+                    break;
+                }
+            if (availableSlot == i)
+                break;
+        }
+        return availableSlot;
+    }
 
     internal bool UseEnergy(int amount)
     {
@@ -249,49 +257,70 @@ public class InventoryHandler : MonoBehaviour
     }
 
     //Should match with the AddItemToInventory in CharacterManager
-    public bool AddItemToInventory(int itemId,int stackCnt =1)
+    public bool AddItemToInventory(ItemContainer item, int stackCnt =1,int order=-1)
     {
-        var item = BuildItemFromDatabase(itemId);
-        if (_characterManager.ItemIsInInventory(item.Id))
+        print("AddItemToInventory: " +item.MyInfo()+ " stackCnt= " + stackCnt+ " order="+ order);
+        if (item.MaxStackCnt < stackCnt)
+            throw new Exception("IH-Invalid Item!!! MaxStackCnt < stackCnt ");
+        if (ItemIndexInInventory(item.Id)!= -1)
         {
-            if (item.MaxStackCnt == 1)
+            if (!TryStackInInventory(item.Id, stackCnt, order))
             {
-                PrintMessage("You Can Only Carry one of this item!", Color.yellow);
+                if (item.Unique)
+                {
+                    PrintMessage("You Can Only Carry one of this item!", Color.yellow);
+                    return false;
+                }
+                //if (order!=-1)
+                //{
+                //    PrintMessage("You Can not stack this item here!", Color.yellow);
+                //    return false;
+                //}
+            }
+            else
+                return true;
+        }
+        if (order == -1)
+        {
+            order = GetAvailableSlot();
+            if (order == -1)
+            {
+                PrintMessage("Not Enough room in inventory", Color.red);
                 return false;
             }
-            for (int i = 0; i < _playerSlots; i++)
-            {
-                var tmpItem = InvSlots[i].transform.GetChild(0).GetComponent<ItemData>().ItemIns;
-                if (tmpItem != null)
-                {
-                    if (tmpItem.Item.Id == item.Id)
-                    {
-                        //It can be stacked in the existing slot that has the same item
-                        if (tmpItem.UserItem.StackCnt + stackCnt <= tmpItem.Item.MaxStackCnt)
-                        {
-                            tmpItem.UserItem.StackCnt += stackCnt;
-                            UpdateInventory(true);
-                            return true;
-                        }
-                        //It can NOT be stacked in the existing slot that has the same item so we go to the next Slot
-                    }
-                }
-            }
         }
-        else{
-            for (int i = 0; i < _playerSlots; i++)
+        var itemData = InvSlots[order].transform.GetComponentInChildren<ItemData>();
+        itemData.ItemIns = new ItemIns(item, new UserItem(item, stackCnt, order));
+        itemData.LoadItem();
+        _inventoryManager.AddItemToInventory(itemData.ItemIns);
+        return true;
+    }
+    private int ItemIndexInInventory(int itemId)
+    {
+        foreach (var itemIns in _invCarry)
+            if (itemIns.Item.Id == itemId)
+                return itemIns.UserItem.Order;
+        return -1;
+    }
+    private bool TryStackInInventory(int itemId, int stackCnt,int order)
+    {
+        foreach (var itemIns in _invCarry)
+            if (itemIns.Item.Id == itemId && itemIns.Item.MaxStackCnt >= stackCnt + itemIns.UserItem.StackCnt)
             {
-                var tmpItem = InvSlots[i].transform.GetChild(0).GetComponent<ItemData>();
-                if (tmpItem.ItemIns == null)
+                if (order==-1 || itemIns.UserItem.Order == order)
                 {
-                    tmpItem.LoadItem(new ItemIns(item,new UserItem(item,stackCnt)));
-                    UpdateInventory(true);
+                    itemIns.UserItem.StackCnt += stackCnt;
                     return true;
                 }
             }
-        }
-        PrintMessage("Not Enough room in inventory",Color.red);
         return false;
+    }
+    private ItemIns GetItemInInventory(int itemId)
+    {
+        foreach (var itemIns in _invCarry)
+            if (itemIns.Item.Id == itemId)
+                return itemIns;
+        return null;
     }
     public void OpenInventoryPanel()
     {
@@ -407,55 +436,48 @@ public class InventoryHandler : MonoBehaviour
     {
         _GUIManager.PrintMessage(message, color);
     }
-    public OupItem BuildItemFromDatabase(int id)
+    public ItemContainer BuildItemFromDatabase(int id)
     {
         return _itemDatabase.GetItemById(id);
     }
     public bool ElementToolUse(ElementIns element=null)
     {
         ElementIns.ElementType targetType = element != null ? element.Type : ElementIns.ElementType.Hole;
-        //Check Left hand for tool
-        ItemIns toolIns = null;
-        var toolEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Left].GetComponentInChildren<ItemEquipment>();
-        if (toolEquipment!=null)
+        for (int i = 0; i < EquiSlots.Length; i++)
         {
-            toolIns = toolEquipment.ItemIns;
-            if (toolIns.Item.Type == OupItem.ItemType.Tool ||
-                toolIns.UserItem.TimeToUse > 0 ||
-                targetType == toolIns.Item.FavoriteElement)
-            {
-                toolEquipment.UseItem(1);
-                return true;
-            }
-        }
-        //Check Right hand for tool
-        toolEquipment = _inv.EquiSlots[(int)OupItem.PlaceType.Right].GetComponentInChildren<ItemEquipment>();
-        if (toolEquipment != null)
-        {
-            toolIns = toolEquipment.ItemIns;
-            if (toolIns.Item.Type == OupItem.ItemType.Tool ||
-                toolIns.UserItem.TimeToUse > 0 ||
-                targetType == toolIns.Item.FavoriteElement)
-            {
-                toolEquipment.UseItem(1);
-                return true;
-            }
+            var toolEquipment = EquiSlots[i].GetComponentInChildren<ItemEquipment>();
+            if (toolEquipment==null)
+                continue;
+            var toolIns = toolEquipment.ItemIns;
+            if (toolIns == null)
+                continue;
+            if (toolIns.Item.Type == ItemContainer.ItemType.Tool
+                &&
+                (EquiSlots[i].EquType == ItemContainer.PlaceType.Right && toolIns.UserItem.Order == (int) ItemContainer.PlaceType.Right ||
+                 EquiSlots[i].EquType == ItemContainer.PlaceType.Left && toolIns.UserItem.Order == (int) ItemContainer.PlaceType.Left)
+                &&
+                toolIns.UserItem.TimeToUse > 0 
+                && 
+                targetType == toolIns.Item.FavoriteElement
+                    )
+                {
+                    toolEquipment.UseItem(1);
+                    _updateEquipments = true;
+                    return true;
+                }
         }
         PrintMessage("You don't have a right tool to use", Color.yellow);
         return false;
     }
-
     //Middle Man
     public void AddCharacterSetting(string field, float value)
     {
         _characterManager.AddCharacterSetting("Experience", value);
     }
-
     internal float GetCrafting()
     {
         return _characterManager.GetCharacterAttribute("Crafting");
     }
-
     public static InventoryHandler Instance()
     {
         if (!_inv)
@@ -466,5 +488,4 @@ public class InventoryHandler : MonoBehaviour
         }
         return _inv;
     }
-
 }

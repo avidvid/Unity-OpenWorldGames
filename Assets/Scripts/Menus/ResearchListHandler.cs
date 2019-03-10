@@ -35,7 +35,6 @@ public class ResearchListHandler : MonoBehaviour {
         foreach (var uiResearch in uiResearches)
         {
             int uiId = Int32.Parse(Regex.Match(uiResearch.name, @"\d+").Value);
-            //Offer offer = _offers[Int32.Parse(buttonName)];
             for (int i = 0; i < _researches.Count; i++)
             {
                 if (!_researches[i].IsEnable)
@@ -60,23 +59,28 @@ public class ResearchListHandler : MonoBehaviour {
                             else
                                 urLink.GetComponent<Image>().color = Color.red;
                 //Purging the buttons
-                var buttons = uiResearch.GetComponentsInChildren<Button>();
-                buttons[0].name = _researches[i].Id.ToString();
+                var images = uiResearch.GetComponentsInChildren<Image>();
+                var button = uiResearch.GetComponentInChildren<Button>();
+                button.name = _researches[i].Id.ToString();
                 //There is another active research progressing 
                 if (_characterManager.CharacterResearching!= null)
                 {
                     //blink the active building Research 
                     if (_characterManager.CharacterResearching.ResearchId == _researches[i].Id)
-                        uiResearch.gameObject.AddComponent<BlinkMe>();
-                    buttons[0].interactable = false;
+                        images[1].gameObject.AddComponent<BlinkMe>();
+                    button.interactable = false;
+                    images[1].color = new Color(images[1].color.r, images[1].color.g, images[1].color.b, 0.5f);   
                     continue;
                 }
-                if (!ResearchUpgradeIsValid(_researches[i]))
+                if (ResearchUpgradeIsValid(_researches[i]))
                 {
-                    buttons[0].interactable = false;
-                    continue;
+                    button.onClick.AddListener(DoResearch);
                 }
-                buttons[0].onClick.AddListener(DoResearch);
+                else
+                {
+                    button.interactable = false;
+                    images[1].color = new Color(images[1].color.r, images[1].color.g, images[1].color.b, 0.5f);
+                }
             }
         }
     }
@@ -124,16 +128,22 @@ public class ResearchListHandler : MonoBehaviour {
         }
         _characterManager.AddCharacterSetting("Coin", -payAmount);
         MakeResearching(research, nextLevel );
+        NewResearchInProgress(researchId);
         _modalPanel.Choice(research.Name + " is in progress ! ", ModalPanel.ModalPanelType.Ok);
-        DisableAllButtons();
     }
-    private void DisableAllButtons()
+
+    private void NewResearchInProgress(int researchId)
     {
         List<ResearchData> uiResearches = _contentPanel.GetComponentsInChildren<ResearchData>().ToList();
         foreach (var uiResearch in uiResearches)
         {
-            var buttons = uiResearch.GetComponentsInChildren<Button>();
-            buttons[0].interactable = false;
+            var button = uiResearch.GetComponentInChildren<Button>();
+            button.interactable = false;
+            var images = uiResearch.GetComponentsInChildren<Image>();
+            images[1].color = new Color(images[1].color.r, images[1].color.g, images[1].color.b, 0.5f);
+            int uiId = Int32.Parse(Regex.Match(uiResearch.name, @"\d+").Value);
+            if (uiId == researchId)
+                images[1].gameObject.AddComponent<BlinkMe>();
         }
     }
     

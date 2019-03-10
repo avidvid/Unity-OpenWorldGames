@@ -197,7 +197,7 @@ public class CharacterManager : MonoBehaviour
         var item = ItemInInventory(itemId);
         return item!=null ;
     }
-    internal bool AddItemToInventory(OupItem item,int stcCnt=1)
+    internal bool AddItemToInventory(ItemContainer item,int stcCnt=1)
     {
         //Todo: make sure about the carry count of user 
         //Should match with the AddItemToInventory in InventoryHandler
@@ -231,9 +231,9 @@ public class CharacterManager : MonoBehaviour
         var item = itemIns.Item;
         switch (itemIns.Item.Type)
         {
-            case OupItem.ItemType.Consumable:
+            case ItemContainer.ItemType.Consumable:
                 return;
-            case OupItem.ItemType.Equipment:
+            case ItemContainer.ItemType.Equipment:
                 CharacterSetting.Agility -= item.Agility;
                 CharacterSetting.Bravery -= item.Bravery;
                 CharacterSetting.Carry -= item.Carry;
@@ -246,7 +246,7 @@ public class CharacterManager : MonoBehaviour
                 CharacterSetting.Stamina -= item.Stamina;
                 CharacterSetting.Strength -= item.Strength;
                 break;
-            case OupItem.ItemType.Weapon:
+            case ItemContainer.ItemType.Weapon:
                 CharacterSetting.SpeedAttack -= item.SpeedAttack;
                 CharacterSetting.SpeedDefense -= item.SpeedDefense;
                 CharacterSetting.AbilityAttack -= item.AbilityAttack;
@@ -256,7 +256,7 @@ public class CharacterManager : MonoBehaviour
                 CharacterSetting.PoisonAttack -= item.PoisonAttack;
                 CharacterSetting.PoisonDefense -= item.PoisonDefense;
                 break;
-            case OupItem.ItemType.Tool:
+            case ItemContainer.ItemType.Tool:
                 return;
         }
         CharacterSetting.Updated = true;
@@ -268,12 +268,12 @@ public class CharacterManager : MonoBehaviour
         string message = "";
         if (itemIns == null)
             return message;
-        itemIns.Print();
+        Debug.Log("ItemIns = " + itemIns.MyInfo());  
         var item = itemIns.Item;
         var userItem = itemIns.UserItem;
         switch (itemIns.Item.Type)
         {
-            case OupItem.ItemType.Consumable:
+            case ItemContainer.ItemType.Consumable:
                 if (item.Recipe > 0)
                 {
                     if (_userDatabase.AddNewRandomUserRecipe(UserPlayer.Id))
@@ -286,47 +286,63 @@ public class CharacterManager : MonoBehaviour
                         message = "You Hatched a New Character!!";
                     else return "The Egg you found is already rotten !! ";
                 }
-                CharacterSetting.Health += item.Health * userItem.StackCnt;
-                CharacterSetting.Mana += item.Mana * userItem.StackCnt;
-                CharacterSetting.Energy += item.Energy * userItem.StackCnt;
-                CharacterSetting.Coin += item.Coin * userItem.StackCnt;
-                UserPlayer.Gem += item.Gem * userItem.StackCnt;
-                if (CharacterSetting.Health > CharacterSetting.MaxHealth)
-                    CharacterSetting.Health = CharacterSetting.MaxHealth;
-                if (CharacterSetting.Mana > CharacterSetting.MaxMana)
-                    CharacterSetting.Mana = CharacterSetting.MaxMana;
-                if (CharacterSetting.Energy > CharacterSetting.MaxEnergy)
-                    CharacterSetting.Energy = CharacterSetting.MaxEnergy;
-                if (save)
-                    SaveUserPlayer();
+                if (item.Health>0)
+                    AddCharacterSetting("Health", item.Health * userItem.StackCnt,false);
+                if (item.Mana > 0)
+                    AddCharacterSetting("Mana", item.Mana * userItem.StackCnt, false);
+                if (item.Energy > 0)
+                    AddCharacterSetting("Energy", item.Energy * userItem.StackCnt, false);
+                if (item.Coin > 0)
+                    AddCharacterSetting("Coin", item.Coin * userItem.StackCnt, false);
+                if (item.Gem > 0)
+                    AddCharacterSetting("Gem", item.Gem * userItem.StackCnt, false);
                 break;
-            case OupItem.ItemType.Equipment:
-                CharacterSetting.Agility += item.Agility;
-                CharacterSetting.Bravery += item.Bravery;
-                CharacterSetting.Carry += item.Carry;
-                CharacterSetting.CarryCnt += item.CarryCnt;
-                CharacterSetting.Charming += item.Charming;
-                CharacterSetting.Intellect += item.Intellect;
-                CharacterSetting.Crafting += item.Crafting;
-                CharacterSetting.Researching += item.Researching;
-                CharacterSetting.Speed += item.Speed;
-                CharacterSetting.Stamina += item.Stamina;
-                CharacterSetting.Strength += item.Strength;
+            case ItemContainer.ItemType.Equipment:
+                if (item.Agility > 0)
+                    AddCharacterSetting("Agility", item.Agility , false);
+                if (item.Bravery > 0)
+                    AddCharacterSetting("Bravery", item.Bravery, false);
+                if (item.Carry > 0)
+                    AddCharacterSetting("Carry", item.Carry, false);
+                if (item.CarryCnt > 0)
+                    AddCharacterSetting("CarryCnt", item.CarryCnt, false);
+                if (item.Charming > 0)
+                    AddCharacterSetting("Charming", item.Charming, false);
+                if (item.Intellect > 0)
+                    AddCharacterSetting("Intellect", item.Intellect, false);
+                if (item.Crafting > 0)
+                    AddCharacterSetting("Crafting", item.Crafting, false);
+                if (item.Researching > 0)
+                    AddCharacterSetting("Researching", item.Researching, false);
+                if (item.Speed > 0)
+                    AddCharacterSetting("Speed", item.Speed, false);
+                if (item.Stamina > 0)
+                    AddCharacterSetting("Stamina", item.Stamina, false);
+                if (item.Strength > 0)
+                    AddCharacterSetting("Strength", item.Strength, false);
                 break;
-            case OupItem.ItemType.Weapon:
-                CharacterSetting.SpeedAttack += item.SpeedAttack;
-                CharacterSetting.SpeedDefense += item.SpeedDefense;
-                CharacterSetting.AbilityAttack += item.AbilityAttack;
-                CharacterSetting.AbilityDefense += item.AbilityDefense;
-                CharacterSetting.MagicAttack += item.MagicAttack;
-                CharacterSetting.MagicDefense += item.MagicDefense;
-                CharacterSetting.PoisonAttack += item.PoisonAttack;
-                CharacterSetting.PoisonDefense += item.PoisonDefense;
+            case ItemContainer.ItemType.Weapon:
+                if (item.SpeedAttack > 0)
+                    AddCharacterSetting("SpeedAttack", item.SpeedAttack, false);
+                if (item.SpeedDefense > 0)
+                    AddCharacterSetting("SpeedDefense", item.SpeedDefense, false);
+                if (item.AbilityAttack > 0)
+                    AddCharacterSetting("AbilityAttack", item.AbilityAttack, false);
+                if (item.AbilityDefense > 0)
+                    AddCharacterSetting("AbilityDefense", item.AbilityDefense, false);
+                if (item.MagicAttack > 0)
+                    AddCharacterSetting("MagicAttack", item.MagicAttack, false);
+                if (item.MagicDefense > 0)
+                    AddCharacterSetting("MagicDefense", item.MagicDefense, false);
+                if (item.PoisonAttack > 0)
+                    AddCharacterSetting("PoisonAttack", item.PoisonAttack, false);
+                if (item.PoisonDefense > 0)
+                    AddCharacterSetting("PoisonDefense", item.PoisonDefense, false);
                 break;
-            case OupItem.ItemType.Tool:
+            case ItemContainer.ItemType.Tool:
                 return message;
         }
-        CharacterSetting.Updated = true;
+        CharacterSetting.HealthCheck = CharacterSetting.CalculateHealthCheck();
         if (save)
             SaveCharacterSetting();
         return message;
@@ -340,6 +356,7 @@ public class CharacterManager : MonoBehaviour
         float value = research.CalculateValue(level);
         _userDatabase.AddCharacterResearch(research, level);
         _userDatabase.EmptyCharacterResearching();
+        CharacterResearching = _userDatabase.GetCharacterResearching();
         AddCharacterSetting(research.Target, value);
     }
 
@@ -354,24 +371,30 @@ public class CharacterManager : MonoBehaviour
         }
         return false;
     }
-    public void AddCharacterSetting(string field, float value)
+    public void AddCharacterSetting(string field, float value,bool save =true)
     {
-        print(field + "= CharacterSetting." + CharacterSetting.FieldValue(field) + " " + value);
+        print("CharacterSetting." + field + "=" + CharacterSetting.FieldValue(field) + " + " + value);
         switch (field)
         {
-            case "MaxHealth":
-                CharacterSetting.MaxHealth += (int)value;
-                CharacterSetting.Updated = true;
-                break;
             case "Health":
                 CharacterSetting.Health += (int)value;
                 if (CharacterSetting.Health < 0)
                     GameOverCalculations();
+                if (CharacterSetting.Health > CharacterSetting.MaxHealth)
+                    CharacterSetting.Health = CharacterSetting.MaxHealth;
+                CharacterSetting.Updated = true;
+                break;
+            case "Mana":
+                CharacterSetting.Mana += (int)value;
+                if (CharacterSetting.Mana > CharacterSetting.MaxMana)
+                    CharacterSetting.Mana = CharacterSetting.MaxMana;
                 CharacterSetting.Updated = true;
                 break;
             case "Energy":
                 CharacterSetting.Energy += (int)value;
-                CharacterSetting.Updated = true;
+                if (CharacterSetting.Energy > CharacterSetting.MaxEnergy)
+                    CharacterSetting.Energy = CharacterSetting.MaxEnergy;
+        CharacterSetting.Updated = true;
                 break;
             case "Experience":
                 CharacterSetting.Experience += (int)value;
@@ -379,15 +402,14 @@ public class CharacterManager : MonoBehaviour
                 break;
             case "Gem":
                 UserPlayer.Gem += (int)value;
+                UserPlayer.HealthCheck += UserPlayer.CalculateHealthCheck((int)value, "Gem");
                 CharacterSetting.Updated = true;
                 SaveUserPlayer();
                 return;
             case "Coin":
                 CharacterSetting.Coin += (int)value;
+                CharacterSetting.HealthCheck += CharacterSetting.CalculateHealthCheckByField((int)value, "Coin");
                 CharacterSetting.Updated = true;
-                break;
-            case "CarryCnt":
-                CharacterSetting.CarryCnt += (int)value;
                 break;
             case "Life":
                 CharacterSetting.Life += (int)value;
@@ -395,14 +417,80 @@ public class CharacterManager : MonoBehaviour
             case "Alive":
                 CharacterSetting.Alive = (value > 0) ;  
                 break;
+            //Research
+            case "MaxHealth":
+                CharacterSetting.MaxHealth += (int) value;
+                break;
+            case "MaxMana":
+                CharacterSetting.MaxMana += (int)value;
+                break;
+            case "MaxEnergy":
+                CharacterSetting.MaxEnergy += (int)value;
+                break;
+            //Equipments
             case "Agility":
                 CharacterSetting.Agility += value;
+                break;
+            case "Bravery":
+                CharacterSetting.Bravery += value;
+                break;
+            case "Carry":
+                CharacterSetting.Carry += value;
+                break;
+            case "CarryCnt":
+                CharacterSetting.CarryCnt += (int)value;
+                break;
+            case "Charming":
+                CharacterSetting.Charming += value;
+                break;
+            case "Intellect":
+                CharacterSetting.Intellect += value;
                 break;
             case "Crafting":
                 CharacterSetting.Crafting += value;
                 break;
+            case "Researching":
+                CharacterSetting.Researching += value;
+                break;
+            case "Speed":
+                CharacterSetting.Speed += value;
+                break;
+            case "Stamina":
+                CharacterSetting.Stamina += value;
+                break;
+            case "Strength":
+                CharacterSetting.Strength += value;
+                break;
+            //Weapon
+            case "SpeedAttack":
+                CharacterSetting.SpeedAttack += value;
+                break;
+            case "SpeedDefense":
+                CharacterSetting.SpeedDefense += value;
+                break;
+            case "AbilityAttack":
+                CharacterSetting.AbilityAttack += value;
+                break;
+            case "AbilityDefense":
+                CharacterSetting.AbilityDefense += value;
+                break;
+            case "MagicAttack":
+                CharacterSetting.MagicAttack += value;
+                break;
+            case "MagicDefense":
+                CharacterSetting.MagicDefense += value;
+                break;
+            case "PoisonAttack":
+                CharacterSetting.PoisonAttack += value;
+                break;
+            case "PoisonDefense":
+                CharacterSetting.PoisonDefense += value;
+                break;
+            default:
+                throw new Exception("No field for AddCharacterSetting ");
         }
-        SaveCharacterSetting();
+        if (save)
+            SaveCharacterSetting();
     }
 
     //Calculations
@@ -495,7 +583,6 @@ public class CharacterManager : MonoBehaviour
                 return 0;
         }
     }
-
     private void GameOverCalculations()
     {
         StartCoroutine(GameOverFadeInOut());

@@ -15,25 +15,23 @@ public class GameOverHandler : MonoBehaviour {
     void Awake()
     {
         _characterManager = CharacterManager.Instance();
-        _settings = _characterManager.CharacterSetting;
     }
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        _settings = _characterManager.CharacterSetting;
         _buttonUseLife = GameObject.Find("ButtonUseLife");
         _buttonBuyLife =GameObject.Find("ButtonBuyLife");
-
         if (_settings.Life > 0)
             _buttonBuyLife.SetActive(false);
         else
             _buttonUseLife.SetActive(false);
     }
-
     public void GoToStartScene()
     {
         SceneManager.LoadScene(SceneSettings.SceneIdForStart);
     }
-
     public void GoToStoreScene()
     {
         //Preparing to go to Store
@@ -46,7 +44,6 @@ public class GameOverHandler : MonoBehaviour {
         //switch the scene
         SceneManager.LoadScene(SceneSettings.SceneIdForStore);
     }
-
     public void UseLife()
     {
         _characterManager.ReviveCharacter();

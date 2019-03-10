@@ -2,17 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AudioManager : MonoBehaviour
+public class AudioManager : MonoBehaviour 
 {
-
     //private List<AudioClip> _bgAudioClips = new List<AudioClip>();
     //private List<AudioClip> _insideAudioClips = new List<AudioClip>();
     private AudioClip[] _bgAudioClips;
     private AudioClip[] _insideAudioClips;
     private AudioSource _audioSource;
     private bool _playingBg;
-
     private static AudioManager _audioManager;
 
     void Awake()
@@ -20,15 +17,12 @@ public class AudioManager : MonoBehaviour
         //Make it Singleton
         _audioManager = AudioManager.Instance();
     }
-
     void Start () {
         _bgAudioClips = Resources.LoadAll<AudioClip>("Audio/BackGround");
         _insideAudioClips = Resources.LoadAll<AudioClip>("Audio/Inside");
         _audioSource = gameObject.GetComponent<AudioSource>();
         print("Music : Main=" + _bgAudioClips.Length + " Inside=" + _insideAudioClips.Length);
     }
-
-
     public void UpdateSoundVolume(float value)
     {
         if (value == 0)
@@ -37,7 +31,6 @@ public class AudioManager : MonoBehaviour
             _audioSource.mute = false;
         _audioSource.volume = value;
     }
-
     public void PlayBgMusic(Vector3 pos, int key)
     {
         if (_playingBg)
@@ -47,7 +40,6 @@ public class AudioManager : MonoBehaviour
         _audioSource.Play();
         _playingBg = true;
     }
-
     public void PlayInsideMusic(Vector3 pos, int key)
     {
         _playingBg = false;
@@ -55,8 +47,6 @@ public class AudioManager : MonoBehaviour
         _audioSource.clip = ac;
         _audioSource.Play();
     }
-
-
     public static AudioManager Instance()
     {
         if (!_audioManager)

@@ -2,7 +2,7 @@
 <CharacterResearching xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Id>0</Id>
   <UserId>22</UserId>
-  <ResearchId>2</ResearchId>
-  <Level>1</Level>
-  <ResearchTime>2019-01-08T19:42:48.4336849-06:00</ResearchTime>
+  <ResearchId>1</ResearchId>
+  <Level>3</Level>
+  <ResearchTime>2019-03-04T12:10:51.227442-06:00</ResearchTime>
 </CharacterResearching>

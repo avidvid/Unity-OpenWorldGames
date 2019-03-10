@@ -13,21 +13,21 @@ public class Tooltip : MonoBehaviour
     {
         _tooltip = Tooltip.Instance();
     }
-    internal void Activate(OupItem item)
-    {
-        if (item != null)
-        {
-            _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = item.GetTooltip();
-            TooltipObject.SetActive(true);
-            TooltipObject.transform.position = Input.mousePosition;
-        }
-    }
+    //internal void Activate(ItemContainer item)
+    //{
+    //    if (item != null)
+    //    {
+    //        _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = item.GetTooltip();
+    //        TooltipObject.SetActive(true);
+    //        TooltipObject.transform.position = Input.mousePosition;
+    //    }
+    //}
 
     public void Activate(ItemIns itemIns)
     {
         if (itemIns != null)
         {
-            _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = itemIns.Item.GetTooltip();
+            _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = itemIns.GetTooltip();
             TooltipObject.SetActive(true);
             TooltipObject.transform.position = Input.mousePosition;
         }
