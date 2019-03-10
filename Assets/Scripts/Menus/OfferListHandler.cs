@@ -183,7 +183,6 @@ public class OfferListHandler : MonoBehaviour {
                 break;
         }
     }
-
     private bool ProcessThePay(string payProd, int payAmount)
     {
         switch (payProd)
@@ -220,7 +219,6 @@ public class OfferListHandler : MonoBehaviour {
         //todo:send to Apple store
         return true;
     }
-
     private Sprite GetSprite(string spriteName)
     {
         switch (spriteName)
@@ -250,7 +248,6 @@ public class OfferListHandler : MonoBehaviour {
         if (starter != null)
             _backScene = starter.Content;
     }
-
     public void BackToMainScene()
     {
         switch (_backScene)

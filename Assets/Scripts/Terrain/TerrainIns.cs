@@ -20,7 +20,7 @@ public class TerrainIns
     }
     public int Id { get; set; }
     public string Name { get; set; }
-    public bool Diggable { get; set; }
+    public bool Digable { get; set; }
     public bool Walkable { get; set; }
     public bool Flyable { get; set; }
     public bool Swimable { get; set; }
@@ -63,14 +63,16 @@ public class TerrainIns
     }
     internal void Print()
     {
-        Debug.Log(
-            " Terrain:" + Id + 
-            " Name:" + Name + 
-            " Type:" + Type + 
-            " Tiles:" + Tiles + 
-            " HasElement:" + HasElement + 
-            " IsEnable:" + IsEnable + 
-            " AnimationController:" + AnimationController
-            );
+        Debug.Log("Terrain = " + MyInfo());
+    }
+    internal string MyInfo()
+    {
+        return Id +
+               " Name:" + Name +
+               " Type:" + Type +
+               " Tiles:" + Tiles +
+               " HasElement:" + HasElement +
+               " IsEnable:" + IsEnable +
+               " AnimationController:" + AnimationController;
     }
 }

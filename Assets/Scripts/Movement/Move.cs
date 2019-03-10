@@ -13,21 +13,16 @@ public class Move : MonoBehaviour {
     private SpriteRenderer _renderer;
     private Cache _cache;
 
-
-
     void Awake()
     {
         _characterManager = CharacterManager.Instance();
         _terrainManager = TerrainManager.Instance();
         _GUIManager = GUIManager.Instance();
     }
-
-    // Use this for initialization
     void Start ()
     {
         _renderer = transform.GetComponentsInChildren<SpriteRenderer>()[0];
     }
-
     private bool IsBlocked(Vector3 itemLocation, ActiveElementType element)
     {
         Vector3 currentPos = itemLocation;
@@ -46,8 +41,6 @@ public class Move : MonoBehaviour {
         }
         return false;
     }
-
-    // Update is called once per frame
 	void Update ()
 	{
 	    Vector3 currentPos = transform.position;

@@ -50,14 +50,16 @@ public class MoveManager : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (Vector2.Distance(_destiny,transform.position)<0.2 && _stop)
+        if (Vector2.Distance(_destiny, transform.position) < 0.2 && _stop)
             _movement = Vector3.zero;
-        //todo: Debug: Use keyboard 
-        Vector3 keyboardUse = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        else
+        {
+            //todo: Debug: Use keyboard 
+            Vector3 keyboardUse = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 
-        if (keyboardUse!= Vector3.zero)
-            _movement =keyboardUse;
-
+            if (keyboardUse != Vector3.zero)
+                _movement = keyboardUse;
+        }
         //Change Sprite or Animation according to the direction of moving
         if (_playerCharacter.IsAnimated)
             HandleAnimation(_movement);

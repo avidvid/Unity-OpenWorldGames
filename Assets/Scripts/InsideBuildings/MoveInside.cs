@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class MoveInside : MonoBehaviour
 {
     private Vector3 _previousPosition = Vector3.zero;
-
     private BuildingInterior _building;
 
     // Update is called once per frame

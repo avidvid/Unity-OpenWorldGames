@@ -198,13 +198,6 @@ public class Character {
         string animationPath = "Characters/Animations/";
         return (RuntimeAnimatorController)Resources.Load(animationPath + Slug + "Controller");
     }
-    public bool Exist(List<Character> characters)
-    {
-        foreach (var character in characters)
-            if (character.Name == this.Name)
-                return true;
-        return false;
-    }
     internal bool CheckAttackType(AttackType attackT, string checkSum)
     {
         switch (checkSum)

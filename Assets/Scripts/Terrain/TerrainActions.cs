@@ -71,7 +71,7 @@ public class TerrainActions : MonoBehaviour {
                 TerrainIns currentTerrain = _terrainManager.SelectTerrain(touchLocation);
                 if (currentTerrain != null)
                 {
-                    if (currentTerrain.Diggable)
+                    if (currentTerrain.Digable)
                     {
                         touchLocation.z = pos.z;
                         _popupAction.GetComponent<ActionHandler>().SetActiveTerrain(currentTerrain);

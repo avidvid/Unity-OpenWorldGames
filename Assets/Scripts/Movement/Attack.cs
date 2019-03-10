@@ -1,19 +1,25 @@
 ﻿using System;
-using System.Collections; using System.Collections.Generic; using UnityEngine;  public class Attack : MonoBehaviour {          private TerrainManager _terrainManager;
+using System.Collections; using System.Collections.Generic; using UnityEngine;  public class Attack : MonoBehaviour {     
     private CharacterManager _characterManager;
     private Cache _cache;
     private GUIManager _GUIManager;
+    private TerrainManager _terrainManager;
     private BuildingInterior _building;
+    private CombatManager _combatManager;
 
     void Start ()     {
         var insideBuilding = GameObject.Find("Building Interior");
-        if (insideBuilding == null)
-        {
-            _cache = Cache.Instance();
-            _terrainManager = TerrainManager.Instance();
-        }
-        else
+        if (insideBuilding != null)
             _building = insideBuilding.GetComponent<BuildingInterior>();
+        var inTerrain = GameObject.Find("Terrain");
+        if (inTerrain != null)
+        {
+            _terrainManager = inTerrain.GetComponent<TerrainManager>();
+            _cache = Cache.Instance();
+        }
+        var insideCombat = GameObject.Find("Combat");
+        if (insideCombat != null)
+            _combatManager = insideCombat.GetComponent<CombatManager>();
         _GUIManager = GUIManager.Instance();
         _characterManager = CharacterManager.Instance();     } 	     internal void AttackDealing(ActiveMonsterType monster, float dealAtt, string environmentType)
     {
