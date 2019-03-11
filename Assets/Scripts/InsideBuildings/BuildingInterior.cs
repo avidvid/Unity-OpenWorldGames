@@ -203,7 +203,7 @@ public class BuildingInterior : MonoBehaviour {
     private void CreateMonsters(Vector3 location, InsideStory.Actor storyActor)
     {
         GameObject monster = Instantiate(_monsterObj);
-        Character monsterCharacter = _terrainDatabase.GetMonsterById(storyActor.CharacterId);
+        Character monsterCharacter = _terrainDatabase.GetInsMonsterById(storyActor.CharacterId);
         monster.transform.position = location;
         monster.transform.SetParent(transform);
         monster.name = "Monster " + monster.transform.position;

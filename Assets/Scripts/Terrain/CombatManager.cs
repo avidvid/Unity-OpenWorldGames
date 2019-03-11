@@ -1,51 +1,44 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CombatManager : MonoBehaviour
 {
     private TerrainDatabase _terrainDatabase;
-    private CharacterManager _characterManager;
-
     private int _horizontalTiles = 11;
     private int _verticalTiles = 7;
     private int _key;
-    private List<TerrainIns> _availableTerrainTypes;
+    private string _monsterInfo;
 
-    private TerrainIns _terrain;
-    private List<Marker> _markers;
-    private Vector3 _previousPosition = Vector3.zero;
+    //private Vector3 _previousPosition = Vector3.zero;
     private Vector2 _mapPosition = Vector2.zero;
     private GameObject _mapPanel;
-    // Start is called before the first frame update
+
     void Start()
     {
         _terrainDatabase = TerrainDatabase.Instance();
-        _characterManager = CharacterManager.Instance();
         var starter = GameObject.FindObjectOfType<SceneStarter>();
         if (starter != null)
         {
             _mapPosition = starter.MapPosition;
-            _key = starter.Key;
-            _previousPosition = starter.PreviousPosition;
+            _key = starter.Key; 
+            _monsterInfo = starter.Content;
+            //_previousPosition = starter.PreviousPosition;
         }
+
+        SetMonsters(_monsterInfo);
         DrawMap();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     public TerrainIns GetTerrain(float x, float y, int key)
     {
+        var availableTerrainTypes = _terrainDatabase.GetTerrains();
         x = (int)x >> 4;
         y = (int)y >> 4;
-        return _availableTerrainTypes[RandomHelper.Range(x , y , key, _availableTerrainTypes.Count)];
+        return availableTerrainTypes[RandomHelper.Range(x , y , key, availableTerrainTypes.Count)];
     }     void DrawMap()
     {
-        _availableTerrainTypes = _terrainDatabase.GetTerrains();
-        Debug.Log("CombatManager-Available TerrainTypes.Count = " + _availableTerrainTypes.Count);
         var terrain = GetTerrain(_mapPosition.x, _mapPosition.y, _key);
         Debug.Log("CombatManager-Terrain:" + terrain.MyInfo());
         var renderers = new SpriteRenderer[_horizontalTiles, _verticalTiles];
@@ -72,13 +65,30 @@ public class CombatManager : MonoBehaviour
                     }
                 }
                 else
-                {
                     if (animator != null)
                         GameObject.Destroy(animator);
-                }
             }
         }
     }
+
+    private void SetMonsters(string monsterInfo)
+    {
+        monsterInfo = "0,3";
+        List<int> monsterData = monsterInfo.Split(',').Select(Int32.Parse).ToList();
+        //monsterData[0]=CharacterId
+        //monsterData[1]=Level
+        Character monsterCharacter = _terrainDatabase.GetMonsterById(monsterData[0]);
+        var monster = GameObject.FindGameObjectWithTag("Monster");
+        monster.name = "Monster " + monsterCharacter.Name + "("+ monsterData[1] + ")"+ monster.transform.position;
+        var active = monster.GetComponent<ActiveMonsterType>();
+        active.Location = transform.position;
+        active.Alive = true;
+        active.Hidden = false;
+        active.SawTarget = true;
+        active.AttackMode = true; 
+        active.MonsterType = new MonsterIns(monsterCharacter, monsterData[1]);
+    }
+
     public void BackToMainScene()
     {
         var starter = GameObject.FindObjectOfType<SceneStarter>();

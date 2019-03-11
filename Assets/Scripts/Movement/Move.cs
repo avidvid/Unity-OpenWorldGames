@@ -85,9 +85,11 @@ public class Move : MonoBehaviour {
 	            starter.MapPosition = mapPos;
 	            starter.PreviousPosition = previousPosition;
 	            starter.LastScene = "Terrain";
-	            go.name = "Move SceneStarter";
+	            starter.Content = monster.MonsterType.CharacterId+ ","+ monster.MonsterType.Level;
+                go.name = "Move SceneStarter";
 	            //switch the scene
 	            SceneManager.LoadScene(SceneSettings.SceneIdForFightMonster);
+	            return;
 	        }
         }
         if (IsBlocked(currentPos, element))

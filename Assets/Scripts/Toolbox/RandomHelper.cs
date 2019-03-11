@@ -45,25 +45,18 @@ public class RandomHelper
         hash *= 0x63288691;
         return (int)(hash % range);
     }
-
-
     public static float Percent(Vector3 location, int key)
     {
         return Percent((int)location.x, (int)location.y, key);
     }
-
     public static float Percent(int x, int y, int key)
     {
         return (float)Range(x, y, key,int.MaxValue) / (float)int.MaxValue;
     }
-
-
     public static float Percent(float x, float y, int key)
     {
         return Percent((int) x, (int) y, key);
     }
-
-
     public static float CriticalRange(float max)
     {
         if (max<=1)
@@ -73,7 +66,6 @@ public class RandomHelper
         var result = UnityEngine.Random.Range(1, max) * criticalValue;
         return result;
     }
-
     public static bool GetLucky(Vector3 pos, float chance)
     {
         //Debug.Log("chance = " + chance + " YourChance= " + RandomHelper.Percent(pos, 1) + pos);
@@ -92,6 +84,8 @@ public class RandomHelper
         var iValue = Math.Abs(BitConverter.ToInt32(hashed, 0))% range;
         return iValue;
     }
-
+    internal static float AbsZero(float input)
+    {
+        return input > 0 ? input : 0;
+    }
 }
-

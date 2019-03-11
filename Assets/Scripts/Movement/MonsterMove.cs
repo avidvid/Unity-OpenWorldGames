@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MonsterMove : MonoBehaviour {
 
-    private TerrainManager _terrainManager;
     private CharacterManager _characterManager;
 
     private int _baseSortIndex = 0;
@@ -24,7 +19,7 @@ public class MonsterMove : MonoBehaviour {
     private Sprite _right;
     private Sprite _left;
 
-    private int _attackInterval = 1;
+    private int _attackInterval = 2;
     private float _attackNextTime = 0;
 
 
@@ -42,8 +37,6 @@ public class MonsterMove : MonoBehaviour {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         _renderer = transform.GetComponent<SpriteRenderer>();
         _animator = transform.GetComponent<Animator>();
-        
-
         if (_character.IsAnimated)
             _animator.runtimeAnimatorController = GetMoveAnimation();
         else
@@ -52,7 +45,6 @@ public class MonsterMove : MonoBehaviour {
             _renderer.sprite = _down;
         }
     }
-
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -88,7 +80,6 @@ public class MonsterMove : MonoBehaviour {
         else if (_character.IsAnimated && _character.HasFightMode)
                 HandleFightMode(false);
     }
-
     private void AttackTimeCheck()
     {
         //Do attack here every interval seconds
@@ -100,19 +91,15 @@ public class MonsterMove : MonoBehaviour {
             _attackNextTime += _attackInterval;
         }
     }
-
     private IEnumerator AttackPlayer(MonsterIns monsterType)
     {
         //todo: this is a hardcoded cast time for debugging 
         yield return new WaitForSeconds(1);
         //1-A Find Direction
         //2-A calculate Att
-        var attAmount = monsterType.AbilityAttack 
-                        - _characterManager.CharacterSetting.AbilityDefense
-                        + monsterType.MagicAttack
-                        - _characterManager.CharacterSetting.MagicDefense
-                        + monsterType.PoisonAttack
-                        - _characterManager.CharacterSetting.PoisonDefense;
+        var attAmount = RandomHelper.AbsZero(monsterType.AbilityAttack  - _characterManager.CharacterSetting.AbilityDefense)
+                        + RandomHelper.AbsZero(monsterType.MagicAttack  - _characterManager.CharacterSetting.MagicDefense)
+                        + RandomHelper.AbsZero(monsterType.PoisonAttack - _characterManager.CharacterSetting.PoisonDefense);
         //3-A calculate dealAtt
         var dealAtt = RandomHelper.CriticalRange(attAmount);
 
@@ -206,6 +193,4 @@ public class MonsterMove : MonoBehaviour {
         spellManager.AttackValue = attackDealt;
         spellManager.MonsterType =  "Inside";
     }
-
-
 }

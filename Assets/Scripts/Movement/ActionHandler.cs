@@ -205,12 +205,9 @@ public class ActionHandler : MonoBehaviour
         //1-A Find Direction
         var direction = (_monster.transform.position - _player.position).normalized;
         //2-A calculate Att
-        var attAmount = _characterManager.CharacterSetting.AbilityAttack
-                            - _monster.MonsterType.AbilityDefense
-                            + _characterManager.CharacterSetting.MagicAttack
-                            - _monster.MonsterType.MagicDefense
-                            + _characterManager.CharacterSetting.PoisonAttack
-                            - _monster.MonsterType.PoisonDefense;
+        var attAmount = RandomHelper.AbsZero(_characterManager.CharacterSetting.AbilityAttack  - _monster.MonsterType.AbilityDefense)
+                        + RandomHelper.AbsZero(_characterManager.CharacterSetting.MagicAttack  - _monster.MonsterType.MagicDefense)
+                        + RandomHelper.AbsZero(_characterManager.CharacterSetting.PoisonAttack - _monster.MonsterType.PoisonDefense);
         //3-A calculate dealAtt
         var dealAtt = RandomHelper.CriticalRange(attAmount);
         print("Player " + _characterManager.CharacterSetting.GetInfo("Attack") +

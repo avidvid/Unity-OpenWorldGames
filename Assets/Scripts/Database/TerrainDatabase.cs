@@ -208,6 +208,13 @@ public class TerrainDatabase : MonoBehaviour {
     }
     internal Character GetMonsterById(int id)
     {
+        foreach (var monster in _monsters)
+            if (monster.Id == id)
+                return monster;
+        return null;
+    }
+    internal Character GetInsMonsterById(int id)
+    {
         foreach (var inMonster in _insideMonsters)
             if (inMonster.Id == id)
                 return inMonster;

@@ -16,6 +16,7 @@ TagManager:
   - Line
   - Item
   - Database
+  - Monster
   layers:
   - Default
   - TransparentFX

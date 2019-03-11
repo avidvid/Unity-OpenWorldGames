@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MoveManager : MonoBehaviour {
-    
     public KeyCode EnableFastSpeedWithKey = KeyCode.LeftShift;
     //public Transform TurnWithMovement;
 
@@ -14,21 +14,28 @@ public class MoveManager : MonoBehaviour {
     private Sprite _down;
     private Sprite _right;
     private Sprite _left;
-    
     private RuntimeAnimatorController _playerAnimeCtrl;
 
     private GameObject _player;
     private SpriteRenderer _renderer;
     private Animator _animator;
-    private Vector3 _movement;
+    private Vector2 _movement;
     private Vector3 _destiny;
     
     private bool _stop;
+    private bool _inCombat;
 
     // Use this for initialization
     private void Start ()
     {
         _characterManager = CharacterManager.Instance();
+        var inCombat = GameObject.Find("Combat");
+        if (inCombat != null)
+        {
+            _baseSortIndex = 10;
+            _inCombat = true;
+        }
+
         _playerCharacter = _characterManager.MyCharacter;
         _playerCharacterSetting = _characterManager.CharacterSetting;
 
@@ -51,14 +58,27 @@ public class MoveManager : MonoBehaviour {
     void Update ()
     {
         if (Vector2.Distance(_destiny, transform.position) < 0.2 && _stop)
+        {
             _movement = Vector3.zero;
+            _stop = false;
+        }
         else
         {
-            //todo: Debug: Use keyboard 
-            Vector3 keyboardUse = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-
-            if (keyboardUse != Vector3.zero)
-                _movement = keyboardUse;
+            if (_inCombat)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    var touchLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    SetMovement(touchLocation);
+                }
+            }
+            else
+            {
+                //todo: Debug: Use keyboard 
+                Vector3 keyboardUse = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+                if (keyboardUse != Vector3.zero)
+                    _movement = keyboardUse;
+            }
         }
         //Change Sprite or Animation according to the direction of moving
         if (_playerCharacter.IsAnimated)
@@ -74,27 +94,22 @@ public class MoveManager : MonoBehaviour {
     {
         _stop = true;
         var direction = (location -transform.position);
-        
         _movement = direction.normalized;
         _destiny = location;
     }
     private void FixedUpdate()
     {
-        if (!_playerCharacterSetting.FightMode)
-            DoMove(_movement);
+        DoMove(_movement);
     }
     private void DoMove(Vector3 movement)
     {
         var currentSpeed = _playerCharacterSetting.Speed;
         //todo:delete
         if (Input.GetKey(EnableFastSpeedWithKey))
-        {
             currentSpeed += 2;
-        }
         //Old moving system
         transform.Translate(movement * currentSpeed * Time.deltaTime );
         //transform.position = Vector3.Lerp(transform.position, _destiny, Time.deltaTime * currentSpeed);
-    
         if (_playerCharacter.Move == Character.CharacterType.Fly)
             _renderer.sortingOrder = _baseSortIndex + 6;
         else
@@ -133,7 +148,6 @@ public class MoveManager : MonoBehaviour {
     //TODO: Attach animation and layer
     //https://www.youtube.com/watch?v=aOqQuD_1ylA
     //https://www.youtube.com/watch?v=Y03jBu6enf8 (some movement improvement animantions on layers)
-    
     private void SetMoveSprites()
     {
         var sprites = _playerCharacter.GetSprites();

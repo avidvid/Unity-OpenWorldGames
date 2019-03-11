@@ -32,7 +32,11 @@ public class MonsterSpellManager : MonoBehaviour {
     {
         float distance = Vector2.Distance(Target.transform.position, transform.position);
         if (distance > 0.1)
+        {
             transform.Translate(_direction * MoveSpeed * Time.deltaTime);
+            if (distance>10)
+                GameObject.Destroy(gameObject);
+        }
         else
         {
             _characterManager.AddCharacterSetting("Health", -AttackValue);
