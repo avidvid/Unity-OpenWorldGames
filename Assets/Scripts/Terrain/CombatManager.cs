@@ -29,7 +29,7 @@ public class CombatManager : MonoBehaviour
             starter.LastScene = "Combat";
             //_previousPosition = starter.PreviousPosition;
         }
-        SetMonsters(_monsterInfo);
+        SetMonster(_monsterInfo);
         DrawMap();
     }
     public TerrainIns GetTerrain(float x, float y, int key)
@@ -72,7 +72,7 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    private void SetMonsters(string monsterInfo)
+    private void SetMonster(string monsterInfo)
     {
         List<int> monsterData = monsterInfo.Split(',').Select(Int32.Parse).ToList();
         //monsterData[0]=CharacterId
@@ -90,7 +90,6 @@ public class CombatManager : MonoBehaviour
         var textLevelRenderer = monster.GetComponentInChildren<TextMeshPro>();
         textLevelRenderer.text = "Level " + active.MonsterType.Level;
     }
-
     public void BackToMainScene()
     {
         var starter = GameObject.FindObjectOfType<SceneStarter>();

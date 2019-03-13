@@ -61,7 +61,7 @@ public class Move : MonoBehaviour {
                 //Make go unDestroyable
                 GameObject.DontDestroyOnLoad(go);
                 var starter = go.AddComponent<SceneStarter>();
-                starter.Key = TerrainManager.Key;
+                starter.Key = _terrainManager.Key;
                 starter.MapPosition = mapPos;
                 starter.PreviousPosition = previousPosition;
                 starter.LastScene = "Terrain";
@@ -83,7 +83,7 @@ public class Move : MonoBehaviour {
 	                //Make go unDestroyable
 	                GameObject.DontDestroyOnLoad(go);
 	                var starter = go.AddComponent<SceneStarter>();
-	                starter.Key = TerrainManager.Key;
+	                starter.Key = _terrainManager.Key;
 	                starter.MapPosition = mapPos;
 	                starter.PreviousPosition = previousPosition;
 	                starter.LastScene = "Terrain";

@@ -6,15 +6,17 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Collections.Generic;
+using System.Security;
 
 public class ProfileHandler : MonoBehaviour {
 
     private FacebookHandler _facebook;
     private CharacterManager _characterManager;
-    private CharacterSetting _settings;
-    private Character _character; 
-    private UserPlayer _player;
+    private CharacterDatabase _characterDatabase;
 
+    private string _monsterInfo;
+    private Vector2 _monsterPosition;
     private BarHandler _health;
     private BarHandler _mana;
     private BarHandler _energy;
@@ -26,16 +28,11 @@ public class ProfileHandler : MonoBehaviour {
     private GameObject _profileStats;
     private TextMeshProUGUI _characterName;
 
-
-
-    //private bool _showStats = false;
-    //private bool _showTooltip = false;
-    //private string _tooltip = "";
-
     // Use this for initialization
     void Awake()
     {
         _characterManager = CharacterManager.Instance();
+        _characterDatabase = CharacterDatabase.Instance();
         if (_health == null)
             _health = GameObject.FindGameObjectWithTag("Health").GetComponent<BarHandler>();
         if (_mana == null)
@@ -60,54 +57,67 @@ public class ProfileHandler : MonoBehaviour {
 
     void Start()
     {
-        _settings = _characterManager.CharacterSetting;
-        _player = _characterManager.UserPlayer;
-        _character = _characterManager.MyCharacter;
-        if (_characterManager.UserPlayer.FBLoggedIn)
-            _facebook = FacebookHandler.Instance();
-
-        
-
+        var starter = GameObject.FindObjectOfType<SceneStarter>();
+        if (starter != null)
+        {
+            //starter.Print();
+            if (starter.Content.IndexOf(',') > 0)
+            {
+                var monsterInfo = starter.Content;
+                var monsterPosition = starter.MapPosition;
+                LoadMonsterProfile(monsterInfo, monsterPosition);
+            }
+            else
+            {
+                if (_characterManager.UserPlayer.FBLoggedIn)
+                    _facebook = FacebookHandler.Instance();
+                var settings = _characterManager.CharacterSetting;
+                var player = _characterManager.UserPlayer;
+                var character = _characterManager.MyCharacter;
+                LoadUserProfile(player, settings, character);
+            }
+        }
+    }
+    private void LoadUserProfile(UserPlayer player,CharacterSetting settings,Character character)
+    {
         //Set big Items in the profile 
-        _health.UpdateValues(_settings.Health, _settings.MaxHealth);
-        _mana.UpdateValues(_settings.Mana, _settings.MaxMana);
-        _energy.UpdateValues(_settings.Energy, _settings.MaxEnergy);
-        _experience.UpdateValues(_settings.Experience, _settings.MaxExperience, _settings.Level);
+        _health.UpdateValues(settings.Health, settings.MaxHealth);
+        _mana.UpdateValues(settings.Mana, settings.MaxMana);
+        _energy.UpdateValues(settings.Energy, settings.MaxEnergy);
+        _experience.UpdateValues(settings.Experience, settings.MaxExperience, settings.Level);
 
-        _coin.UpdateValue(_settings.Coin);
-        _gem.UpdateValue(_player.Gem);
+        _coin.UpdateValue(settings.Coin);
+        _gem.UpdateValue(player.Gem);
 
-        _characterPic.image.sprite = _characterManager.MyCharacter.GetSprite();
+        _characterPic.image.sprite = character.GetSprite();
         StartCoroutine("LoadProfilePicture");
-
         int i = 0;
-
-        _characterName.text = _settings.Name ;
+        _characterName.text = settings.Name;
         var profileTexts = _profileStats.GetComponentsInChildren<TextMeshProUGUI>();
-        profileTexts[i++].text = "Attack: " + 
-                                 _character.AttackR + " (A " + 
-                                 _settings.AbilityAttack + " /M " +
-                                 _settings.MagicAttack + " /P " +
-                                 _settings.PoisonAttack + ")" ;
-        profileTexts[i++].text = "Defense: " + 
-                                 _character.DefenseR + " (A " +
-                                 _settings.AbilityDefense + " /M " +
-                                 _settings.MagicDefense + " /P " +
-                                 _settings.PoisonDefense + ")" ;
+        profileTexts[i++].text = "Attack: " +
+                                 character.AttackR + " (A " +
+                                 settings.AbilityAttack + " /M " +
+                                 settings.MagicAttack + " /P " +
+                                 settings.PoisonAttack + ")";
+        profileTexts[i++].text = "Defense: " +
+                                 character.DefenseR + " (A " +
+                                 settings.AbilityDefense + " /M " +
+                                 settings.MagicDefense + " /P " +
+                                 settings.PoisonDefense + ")";
 
         //Row1
         profileTexts[i++].text = "Attack Speed: " + " (" +
-                                 _settings.SpeedAttack + ") ";
+                                 settings.SpeedAttack + ") ";
         profileTexts[i++].text = "Defense Speed: " + " (" +
-                                 _settings.SpeedDefense + ") ";
+                                 settings.SpeedDefense + ") ";
 
         //Row2
         profileTexts[i++].text = "Move: " +
-                                 _character.Move + " (" +
-                                 _settings.Speed + ") ";
+                                 character.Move + " (" +
+                                 settings.Speed + ") ";
         profileTexts[i++].text = "Carry: " +
-                                 _character.Carry + " (" +
-                                 _settings.CarryCnt + ") ";
+                                 character.Carry + " (" +
+                                 settings.CarryCnt + ") ";
 
         //Row3-6
         string[] settingStats = new string[] {
@@ -117,17 +127,72 @@ public class ProfileHandler : MonoBehaviour {
             "Bravery", "Charming"
              };
         foreach (var stat in settingStats)
-            profileTexts[i++].text = stat + " : "+ GetPropertyValue(_settings, stat) +"    ";
+            profileTexts[i++].text = stat + " : " + GetPropertyValue(settings, stat) + "    ";
         //Row7
         profileTexts[i++].text = "Clan: " +
-                                 (_player.ClanId==-1?"Solo": _player.ClanId.ToString());
+                                 (player.ClanId == -1 ? "Solo" : player.ClanId.ToString());
         profileTexts[i++].text = "Rank: " +
-                                 _player.ClanRank;
+                                 player.ClanRank;
         //Last Login
         profileTexts[i++].text = "Last Login: " +
-                                 (_player.LastLogin > DateTime.Now.AddMinutes(-30) ? "Now" : _player.LastLogin.ToString());
+                                 (player.LastLogin > DateTime.Now.AddMinutes(-30) ? "Now" : player.LastLogin.ToString());
     }
 
+    private void LoadMonsterProfile(string monsterInfo, Vector2 monsterLoc )
+    {
+        List<int> monsterData = monsterInfo.Split(',').Select(Int32.Parse).ToList();
+        //monsterData[0]=CharacterId
+        //monsterData[1]=Level
+        Character character = _characterDatabase.GetCharacterById(monsterData[0]);
+        var monster = _characterManager.GenerateMonster(character, monsterData[1]);
+        //Set big Items in the profile 
+        _health.UpdateValues(monster.Health, monster.MaxHealth);
+        _mana.gameObject.SetActive(false);
+        _energy.gameObject.SetActive(false);
+        _experience.gameObject.SetActive(false);
+        _coin.gameObject.SetActive(false);
+        _gem.gameObject.SetActive(false);
+        _characterPic.image.sprite = character.GetSprite();
+        _profilePic.gameObject.SetActive(false);
+        _characterName.text = character.Name + " Level " + monster.Level;
+        int i = 0;
+        var profileTexts = _profileStats.GetComponentsInChildren<TextMeshProUGUI>();
+        profileTexts[i++].text = "Attack: " +
+                                 character.AttackR + " (A " +
+                                 monster.AbilityAttack + " /M " +
+                                 monster.MagicAttack + " /P " +
+                                 monster.PoisonAttack + ")";
+        profileTexts[i++].text = "Defense: " +
+                                 character.DefenseR + " (A " +
+                                 monster.AbilityDefense + " /M " +
+                                 monster.MagicDefense + " /P " +
+                                 monster.PoisonDefense + ")";
+        //Row1
+        profileTexts[i++].text = "Attack Speed: " + " (" +
+                                 monster.SpeedAttack + ") ";
+        profileTexts[i++].text = "Defense Speed: " + " (" +
+                                 monster.SpeedDefense + ") ";
+        //Row2
+        profileTexts[i++].text = "Move: " +
+                                 character.Move + " (" +
+                                 monster.Speed + ") ";
+        profileTexts[i++].gameObject.SetActive(false);
+        //Row3-6
+        string[] settingStats = new string[] {
+            "Intellect","Agility",
+            "Strength","Stamina",
+            "Crafting","Researching",
+            "Bravery", "Charming"
+             };
+        foreach (var stat in settingStats)
+            profileTexts[i++].gameObject.SetActive(false);
+        //Row7
+        profileTexts[i++].gameObject.SetActive(false);
+        profileTexts[i++].gameObject.SetActive(false);
+        //Last Login
+        profileTexts[i++].text = "Location: " + monsterLoc;
+
+    }
     private IEnumerator LoadProfilePicture()
     {
         if (_facebook != null )

@@ -249,15 +249,5 @@ public class TerrainDatabase : MonoBehaviour {
                 _monsters.Add(monster);
             }
     }
-    //Being called by building Interior
-    //internal List<Character> GetMonstersByStoryId(InsideStory story)
-    //{
-    //    List<Character> storyActors = new List<Character>();
-    //    foreach (var monster in Monsters)
-    //    foreach (var actor in story.Actors)
-    //        if (actor.CharacterId == monster.Id)
-    //            storyActors.Add(monster);
-    //    return storyActors;
-    //}
     #endregion
 }

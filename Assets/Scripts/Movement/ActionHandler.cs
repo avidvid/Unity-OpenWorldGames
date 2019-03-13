@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ActionHandler : MonoBehaviour
@@ -78,6 +79,7 @@ public class ActionHandler : MonoBehaviour
                 ActionButton.onClick.RemoveAllListeners();
                 ActionButton.onClick.AddListener(CloseMe);
                 ActionButton.onClick.AddListener(SetStop);
+                ActionButton.onClick.AddListener(ShowDetail);
                 WalkButton.GetComponentsInChildren<Image>()[1].sprite = Attack;
                 break;
             case "Item":
@@ -103,6 +105,22 @@ public class ActionHandler : MonoBehaviour
                 ActionButton.GetComponentsInChildren<Image>()[1].sprite = Question;
                 break;
         }
+    }
+    private void ShowDetail()
+    {
+        //Preparing to return to terrain
+        GameObject go = new GameObject();
+        //Make go unDestroyable
+        GameObject.DontDestroyOnLoad(go);
+        var starter = go.AddComponent<SceneStarter>();
+        Transform player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        go.name = "Monster Starter";
+        starter.Key = _terrainManager.Key;
+        starter.PreviousPosition = player.position;
+        starter.MapPosition = _monster.Location;
+        starter.LastScene = "Terrain";
+        starter.Content = _monster.MonsterType.CharacterId + "," + _monster.MonsterType.Level;
+        SceneManager.LoadScene(SceneSettings.SceneIdForProfile);
     }
     public void CloseMe()
     {

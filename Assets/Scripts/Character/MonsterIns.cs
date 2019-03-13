@@ -50,9 +50,7 @@ public class MonsterIns
         Id = 0;
         CharacterId = monsterCharacter.Id;
         CharacterSettingId = -1;
-        if (level<3)
-            level += 2;
-        Level = RandomHelper.RangeMinMax(level - 2, level + 3);
+        Level = level;
         //#Health/Mana/Energy
         MaxHealth = ((int)monsterCharacter.Body + Level ) * 100;
         Health = MaxHealth;
@@ -83,7 +81,8 @@ public class MonsterIns
         Debug.Log(
             " Monster:" + Id +
             " CharacterSettingId:" + CharacterSettingId +
-            " CharacterId:" + CharacterId 
+            " CharacterId:" + CharacterId+
+            " Health:" + Health +"/"+MaxHealth
             );
     }
 

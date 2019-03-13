@@ -1,12 +1,2 @@
 <?xml version="1.0" encoding="Windows-1252"?>
-<ArrayOfCacheContent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <CacheContent>
-    <Location>
-      <x>-32</x>
-      <y>-110</y>
-      <z>0.01</z>
-    </Location>
-    <ObjectType>DeadMonster</ObjectType>
-    <ExpirationTime>2019-03-13T08:36:11.4803264-05:00</ExpirationTime>
-  </CacheContent>
-</ArrayOfCacheContent>
+<ArrayOfCacheContent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />

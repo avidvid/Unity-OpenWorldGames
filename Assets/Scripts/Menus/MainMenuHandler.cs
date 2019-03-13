@@ -105,10 +105,10 @@ public class MainMenuHandler : MonoBehaviour {
         _characterManager.SaveUserPlayer();
     }
 
-    public void GoToProfileScene()
-    {
-        SceneManager.LoadScene(SceneSettings.SceneIdForProfile);
-    }
+    //public void GoToProfileScene()
+    //{
+    //    SceneManager.LoadScene(SceneSettings.SceneIdForProfile);
+    //}
 
 
     public void PlayGame()

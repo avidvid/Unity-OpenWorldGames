@@ -15,7 +15,6 @@
     <DefenseT>Strength</DefenseT>
     <BasicAttack>1</BasicAttack>
     <BasicDefense>2</BasicDefense>
-    <BasicHealth>1000</BasicHealth>
     <Speed>Fast</Speed>
     <Body>Tiny</Body>
     <Carry>Light</Carry>
@@ -42,7 +41,6 @@
     <DefenseT>Magic</DefenseT>
     <BasicAttack>1</BasicAttack>
     <BasicDefense>3</BasicDefense>
-    <BasicHealth>2000</BasicHealth>
     <Speed>Regular</Speed>
     <Body>Slim</Body>
     <Carry>Light</Carry>
@@ -69,7 +67,6 @@
     <DefenseT>Strength</DefenseT>
     <BasicAttack>3</BasicAttack>
     <BasicDefense>2</BasicDefense>
-    <BasicHealth>1000</BasicHealth>
     <Speed>Fast</Speed>
     <Body>Tiny</Body>
     <Carry>Slight</Carry>
@@ -96,7 +93,6 @@
     <DefenseT>Strength</DefenseT>
     <BasicAttack>3</BasicAttack>
     <BasicDefense>2</BasicDefense>
-    <BasicHealth>1000</BasicHealth>
     <Speed>Fast</Speed>
     <Body>Tiny</Body>
     <Carry>Slight</Carry>
@@ -123,7 +119,6 @@
     <DefenseT>Strength</DefenseT>
     <BasicAttack>3</BasicAttack>
     <BasicDefense>2</BasicDefense>
-    <BasicHealth>1000</BasicHealth>
     <Speed>Fast</Speed>
     <Body>Tiny</Body>
     <Carry>Slight</Carry>
@@ -150,7 +145,6 @@
     <DefenseT>Strength</DefenseT>
     <BasicAttack>2000</BasicAttack>
     <BasicDefense>2000</BasicDefense>
-    <BasicHealth>2000</BasicHealth>
     <Speed>Slug</Speed>
     <Body>Slim</Body>
     <Carry>Slight</Carry>
@@ -177,7 +171,6 @@
     <DefenseT>Magic</DefenseT>
     <BasicAttack>20</BasicAttack>
     <BasicDefense>20</BasicDefense>
-    <BasicHealth>5000</BasicHealth>
     <Speed>None</Speed>
     <Body>Tank</Body>
     <Carry>Normal</Carry>

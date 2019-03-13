@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SceneStarter : MonoBehaviour
 {
@@ -10,4 +8,15 @@ public class SceneStarter : MonoBehaviour
     public bool ShowInventory = false;
     public string Content = "";
     public string LastScene = "Terrain";
+
+    internal void Print()
+    {
+        print("********** Starter "+this.gameObject.name+ 
+              " Key= " + Key + 
+              " ShowInventory= " + ShowInventory + 
+              " Content= " + Content +
+              " LastScene= " + LastScene +
+              " MapPosition= " + MapPosition +
+              " PreviousPosition= " + PreviousPosition);
+    }
 }
