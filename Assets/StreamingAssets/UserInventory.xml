@@ -35,6 +35,17 @@
   </UserItem>
   <UserItem>
     <UserId>22</UserId>
+    <ItemId>5</ItemId>
+    <StackCnt>1</StackCnt>
+    <Equipped>false</Equipped>
+    <Stored>false</Stored>
+    <Order>0</Order>
+    <TimeToUse>1</TimeToUse>
+    <Deleted>false</Deleted>
+    <Created>2019-03-13T09:36:17.9052448-05:00</Created>
+  </UserItem>
+  <UserItem>
+    <UserId>22</UserId>
     <ItemId>4</ItemId>
     <StackCnt>1</StackCnt>
     <Equipped>false</Equipped>

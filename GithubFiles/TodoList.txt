@@ -9,7 +9,6 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####comite#####
 ###############
-Fixed Bugs
 
 	
 ###############
@@ -19,6 +18,13 @@ Fixed Bugs
 ###############
 ####Office#####
 ###############	
+	
+	Travel scene back to the terrain and drop item 
+	add to cache 
+	use energy to go to combat 
+	
+	
+	monster profile page
 	
 	Add fog of war ch.ViewType
 	
@@ -75,6 +81,9 @@ null value:
   "Type": "Consumable",
   "Weight": 0
 }
+
+vAuto
+
 {
   "Coin": 0,
   "Cost": 0,

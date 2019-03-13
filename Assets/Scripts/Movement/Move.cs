@@ -76,21 +76,26 @@ public class Move : MonoBehaviour {
 	    {
 	        if (monster.Alive)
 	        {
-	            //Preparing to switch the scene
-	            GameObject go = new GameObject();
-	            //Make go unDestroyable
-	            GameObject.DontDestroyOnLoad(go);
-	            var starter = go.AddComponent<SceneStarter>();
-	            starter.Key = TerrainManager.Key;
-	            starter.MapPosition = mapPos;
-	            starter.PreviousPosition = previousPosition;
-	            starter.LastScene = "Terrain";
-	            starter.Content = monster.MonsterType.CharacterId+ ","+ monster.MonsterType.Level;
-                go.name = "Move SceneStarter";
-	            //switch the scene
-	            SceneManager.LoadScene(SceneSettings.SceneIdForFightMonster);
-	            return;
-	        }
+	            if (_characterManager.UseEnergy(monster.MonsterType.Health))
+	            {
+	                //Preparing to switch the scene
+	                GameObject go = new GameObject();
+	                //Make go unDestroyable
+	                GameObject.DontDestroyOnLoad(go);
+	                var starter = go.AddComponent<SceneStarter>();
+	                starter.Key = TerrainManager.Key;
+	                starter.MapPosition = mapPos;
+	                starter.PreviousPosition = previousPosition;
+	                starter.LastScene = "Terrain";
+	                starter.Content = monster.MonsterType.CharacterId + "," + monster.MonsterType.Level;
+	                go.name = "Move SceneStarter";
+	                //switch the scene
+	                SceneManager.LoadScene(SceneSettings.SceneIdForFightMonster);
+	            }
+	            else
+	                _GUIManager.PrintMessage("Not enough energy to attack", Color.yellow);
+                return;
+            }
         }
         if (IsBlocked(currentPos, element))
 	        transform.position =  previousPosition;

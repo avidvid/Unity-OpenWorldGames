@@ -48,15 +48,12 @@ public class MonsterMove : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (_active.AttackMode)
-            AttackTimeCheck();
-        else if (_active.SawTarget)
+        Vector3 targetPos = _player.position;
+        Vector3 monsterPos = transform.position;
+        float dist = Vector2.Distance(targetPos, monsterPos);
+        if (_active.SawTarget)
         {
-            Vector3 targetPos = _player.position;
-            Vector3 monsterPos = transform.position;
-            float dist = Vector2.Distance(targetPos, monsterPos);
-
-            if (dist> (int)_active.MonsterType.GetCharacter().AttackR)
+            if (dist > (int)_character.AttackR)
             {
                 if (_character.IsAnimated && _character.HasFightMode && _character.Speed == 0)
                     HandleFightMode(true);
@@ -71,14 +68,18 @@ public class MonsterMove : MonoBehaviour {
                 if (_character.Speed > 0)
                     DoMove(movement, (float)_character.Speed, dist);
             }
+            else if (_character.HasFightMode)
+                HandleFightMode(true);
             else
-                AttackTimeCheck();
+                _active.AttackMode = true;
             //Don't let the hurt monster to stop chasing the player
-            if (_active.MonsterType.Health==_active.MonsterType.MaxHealth)
-                _active.SawTarget = false;
+            //if (_active.MonsterType.Health == _active.MonsterType.MaxHealth)
+            //    _active.SawTarget = false;
         }
         else if (_character.IsAnimated && _character.HasFightMode)
-                HandleFightMode(false);
+            HandleFightMode(false);
+        if (_active.AttackMode)
+            AttackTimeCheck();
     }
     private void AttackTimeCheck()
     {
@@ -116,17 +117,16 @@ public class MonsterMove : MonoBehaviour {
     {
         movement = movement.normalized;
         //print("Monster Movement=" + movement + " " + movement.normalized + " " + distance+ " speed " + speed);
-
         //Old moving system
         //todo: if blocked do something logical
-        transform.Translate(movement * speed * Time.deltaTime);
-
+        transform.Translate(movement *  Time.deltaTime);
         _renderer.sortingOrder = _baseSortIndex + 7;
     }
 
 
     private void HandleFightMode(bool stat)
     {
+        _active.AttackMode = stat;
         _animator.SetBool("fight", stat);
     }
 

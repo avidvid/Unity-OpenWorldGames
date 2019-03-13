@@ -17,7 +17,9 @@ public class MoveManager : MonoBehaviour {
     private RuntimeAnimatorController _playerAnimeCtrl;
 
     private GameObject _player;
+    private GameObject _monster;
     private SpriteRenderer _renderer;
+    private ActionHandler _actionHandler;
     private Animator _animator;
     private Vector2 _movement;
     private Vector3 _destiny;
@@ -29,19 +31,19 @@ public class MoveManager : MonoBehaviour {
     private void Start ()
     {
         _characterManager = CharacterManager.Instance();
+        _playerCharacter = _characterManager.MyCharacter;
+        _playerCharacterSetting = _characterManager.CharacterSetting;
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _renderer = _player.GetComponent<SpriteRenderer>();
         var inCombat = GameObject.Find("Combat");
         if (inCombat != null)
         {
             _baseSortIndex = 10;
             _inCombat = true;
+            _monster = GameObject.FindGameObjectWithTag("Monster");
+            _actionHandler = _player.GetComponent<ActionHandler>();
+            _actionHandler.SetActiveMonster(_monster.GetComponent<ActiveMonsterType>(), _player.transform, "Combat");
         }
-
-        _playerCharacter = _characterManager.MyCharacter;
-        _playerCharacterSetting = _characterManager.CharacterSetting;
-
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _renderer = _player.GetComponent<SpriteRenderer>();
-
         _animator = _player.GetComponent<Animator>();
         if (_animator == null)
             _animator = _player.AddComponent<Animator>();
@@ -69,16 +71,16 @@ public class MoveManager : MonoBehaviour {
                 if (Input.GetMouseButtonDown(0))
                 {
                     var touchLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    SetMovement(touchLocation);
+                    if (Vector2.Distance(touchLocation,_monster.transform.position)<.7f)
+                        _actionHandler.AttackMonster();
+                    else
+                        SetMovement(touchLocation);
                 }
             }
-            else
-            {
-                //todo: Debug: Use keyboard 
-                Vector3 keyboardUse = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-                if (keyboardUse != Vector3.zero)
-                    _movement = keyboardUse;
-            }
+            //todo: Debug: Use keyboard 
+            Vector3 keyboardUse = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+            if (keyboardUse != Vector3.zero)
+                _movement = keyboardUse;
         }
         //Change Sprite or Animation according to the direction of moving
         if (_playerCharacter.IsAnimated)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,9 +26,9 @@ public class CombatManager : MonoBehaviour
             _mapPosition = starter.MapPosition;
             _key = starter.Key; 
             _monsterInfo = starter.Content;
+            starter.LastScene = "Combat";
             //_previousPosition = starter.PreviousPosition;
         }
-
         SetMonsters(_monsterInfo);
         DrawMap();
     }
@@ -73,7 +74,6 @@ public class CombatManager : MonoBehaviour
 
     private void SetMonsters(string monsterInfo)
     {
-        monsterInfo = "0,3";
         List<int> monsterData = monsterInfo.Split(',').Select(Int32.Parse).ToList();
         //monsterData[0]=CharacterId
         //monsterData[1]=Level
@@ -85,8 +85,10 @@ public class CombatManager : MonoBehaviour
         active.Alive = true;
         active.Hidden = false;
         active.SawTarget = true;
-        active.AttackMode = true; 
+        active.AttackMode = false; 
         active.MonsterType = new MonsterIns(monsterCharacter, monsterData[1]);
+        var textLevelRenderer = monster.GetComponentInChildren<TextMeshPro>();
+        textLevelRenderer.text = "Level " + active.MonsterType.Level;
     }
 
     public void BackToMainScene()

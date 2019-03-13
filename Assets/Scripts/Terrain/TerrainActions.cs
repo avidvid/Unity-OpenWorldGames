@@ -98,6 +98,4 @@ public class TerrainActions : MonoBehaviour {
         _popupAction.transform.position = screenPosition;
         _popupAction.GetComponent<ActionHandler>().SetAction(location,action);
     }
-
-
 }

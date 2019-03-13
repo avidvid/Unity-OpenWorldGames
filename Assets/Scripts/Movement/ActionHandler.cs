@@ -23,6 +23,8 @@ public class ActionHandler : MonoBehaviour
 
     [SerializeField]
     private bool _isInside;
+    [SerializeField]
+    private bool _inCombat;
 
     public Button ActionButton;
     public Button WalkButton;
@@ -36,18 +38,21 @@ public class ActionHandler : MonoBehaviour
 
     void Start()
     {
-        //Inside Building doesn't need these 
-        if (_isInside)
-            _building = GameObject.Find("Building Interior").GetComponent<BuildingInterior>();
-        else
-        {
-            _cache = Cache.Instance();
-            _terrainManager = TerrainManager.Instance();
-        }
-        _inv = InventoryHandler.Instance();
         _characterManager = CharacterManager.Instance();
-        _popupAction = GameObject.Find("Popup Action");
-        _toolSpriteList = Resources.LoadAll<Sprite>("Inventory/InventoryTools");
+        if (!_inCombat)
+        {
+            //Inside Building doesn't need these 
+            if (_isInside)
+                _building = GameObject.Find("Building Interior").GetComponent<BuildingInterior>();
+            else
+            {
+                _cache = Cache.Instance();
+                _terrainManager = TerrainManager.Instance();
+            }
+            _inv = InventoryHandler.Instance();
+            _popupAction = GameObject.Find("Popup Action");
+            _toolSpriteList = Resources.LoadAll<Sprite>("Inventory/InventoryTools");
+        }
     }
     public void SetAction(Vector3 location, string action)
     {
@@ -199,6 +204,7 @@ public class ActionHandler : MonoBehaviour
         _monster = monster;
         _player = player;
         _isInside = (environmentType == "Inside");
+        _inCombat = (environmentType == "Combat");
     }
     public void AttackMonster()
     {
@@ -216,11 +222,12 @@ public class ActionHandler : MonoBehaviour
               " = " + dealAtt + "/" + attAmount
               + " Critical =" + (dealAtt > attAmount));
         //4-A Use Energy
-        if (!_characterManager.UseEnergy((int)attAmount))
-        {
-            _inv.PrintMessage("Not enough energy to attack", Color.yellow);
-            return;
-        }
+        if(!_inCombat)
+            if (!_characterManager.UseEnergy((int)attAmount))
+            {
+                _inv.PrintMessage("Not enough energy to attack", Color.yellow);
+                return;
+            }
         //5-A Cast Spell (Lunch spell-Drop dealAtt hit- AttackDealing)
         CastSpell(_player.position, _monster, dealAtt);
         //6- Show Ray cast
@@ -240,6 +247,6 @@ public class ActionHandler : MonoBehaviour
         var spellManager = spell.AddComponent<SpellManager>();
         spellManager.Target = monster;
         spellManager.AttackValue = attackDealt;
-        spellManager.MonsterType = _isInside?"Inside":"Terrain";
+        spellManager.MonsterType = _isInside?"Inside": _inCombat ? "Combat" : "Terrain";
     }
 }
