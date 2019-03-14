@@ -3,11 +3,11 @@
   <Id>11</Id>
   <UserPlayerId>22</UserPlayerId>
   <CharacterId>1</CharacterId>
-  <Name>Silor dady</Name>
+  <Name>Sailor daddy</Name>
   <Level>6</Level>
   <Updated>true</Updated>
   <HealthCheck>244260</HealthCheck>
-  <LastUpdated>2019-03-13T15:45:50.961219-05:00</LastUpdated>
+  <LastUpdated>2019-03-14T12:02:45.9216479-05:00</LastUpdated>
   <IsEnable>true</IsEnable>
   <FightMode>false</FightMode>
   <Alive>true</Alive>
@@ -21,7 +21,7 @@
   <MaxMana>400</MaxMana>
   <Mana>400</Mana>
   <MaxEnergy>1600</MaxEnergy>
-  <Energy>999</Energy>
+  <Energy>1600</Energy>
   <SpeedAttack>6</SpeedAttack>
   <SpeedDefense>5</SpeedDefense>
   <AbilityAttack>10</AbilityAttack>

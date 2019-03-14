@@ -10,6 +10,8 @@ public class CharacterStats : MonoBehaviour {
     private CharacterSetting _settings;
     private UserPlayer _player;
 
+    private bool _inCombat;
+
     private BarHandler _health;
     private BarHandler _mana;
     private BarHandler _energy;
@@ -21,31 +23,40 @@ public class CharacterStats : MonoBehaviour {
     void Awake()
     {
         _characterManager = CharacterManager.Instance();
+        var combat = GameObject.Find("Combat");
+        if (combat != null)
+            _inCombat = true;
         if (_health == null)
             _health = GameObject.FindGameObjectWithTag("Health").GetComponent<BarHandler>();
         if (_mana == null)
             _mana = GameObject.FindGameObjectWithTag("Mana").GetComponent<BarHandler>();
-        if (_energy == null)
-            _energy = GameObject.FindGameObjectWithTag("Energy").GetComponent<BarHandler>();
-        if (_experience == null)
-            _experience = GameObject.FindGameObjectWithTag("Experience").GetComponent<BarHandler>();
-        if (_coin == null)
-            _coin = GameObject.FindGameObjectWithTag("Coin").GetComponent<ContainerValueHandler>();
-        if (_gem == null)
-            _gem = GameObject.FindGameObjectWithTag("Gem").GetComponent<ContainerValueHandler>();
+        if (!_inCombat)
+        {
+            if (_energy == null)
+                _energy = GameObject.FindGameObjectWithTag("Energy").GetComponent<BarHandler>();
+            if (_experience == null)
+                _experience = GameObject.FindGameObjectWithTag("Experience").GetComponent<BarHandler>();
+            if (_coin == null)
+                _coin = GameObject.FindGameObjectWithTag("Coin").GetComponent<ContainerValueHandler>();
+            if (_gem == null)
+                _gem = GameObject.FindGameObjectWithTag("Gem").GetComponent<ContainerValueHandler>();
+        }
     }
 
     void Start ()
     {
         _settings = _characterManager.CharacterSetting;
         _player = _characterManager.UserPlayer;
-        
+
         _health.UpdateValues(_settings.Health, _settings.MaxHealth);
         _mana.UpdateValues(_settings.Mana, _settings.MaxMana);
-        _energy.UpdateValues(_settings.Energy, _settings.MaxEnergy);
-        _experience.UpdateValues(_settings.Experience, _settings.MaxExperience, _settings.Level);
-        _coin.UpdateValue(_settings.Coin);
-        _gem.UpdateValue(_player.Gem);
+        if (!_inCombat)
+        {
+            _energy.UpdateValues(_settings.Energy, _settings.MaxEnergy);
+            _experience.UpdateValues(_settings.Experience, _settings.MaxExperience, _settings.Level);
+            _coin.UpdateValue(_settings.Coin);
+            _gem.UpdateValue(_player.Gem);
+        }
     }
 	
 	// Update is called once per frame
@@ -55,10 +66,13 @@ public class CharacterStats : MonoBehaviour {
             print("_settings.Updated");
             _health.UpdateValues(_settings.Health, _settings.MaxHealth);
             _mana.UpdateValues(_settings.Mana, _settings.MaxMana);
-            _energy.UpdateValues(_settings.Energy, _settings.MaxEnergy);
-            _experience.UpdateValues(_settings.Experience, _settings.MaxExperience, _settings.Level);
-            _coin.UpdateValue(_settings.Coin);
-            _gem.UpdateValue(_player.Gem);
+            if (!_inCombat)
+            {
+                _energy.UpdateValues(_settings.Energy, _settings.MaxEnergy);
+                _experience.UpdateValues(_settings.Experience, _settings.MaxExperience, _settings.Level);
+                _coin.UpdateValue(_settings.Coin);
+                _gem.UpdateValue(_player.Gem);
+            }
             _settings.Updated = false;
         }
     }

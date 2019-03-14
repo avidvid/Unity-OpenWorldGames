@@ -11,7 +11,7 @@ public class CombatManager : MonoBehaviour
     private int _horizontalTiles = 11;
     private int _verticalTiles = 7;
     private int _key;
-    private string _monsterInfo;
+    private string _monsterInfo = "5,2";
 
     //private Vector3 _previousPosition = Vector3.zero;
     private Vector2 _mapPosition = Vector2.zero;
@@ -71,7 +71,6 @@ public class CombatManager : MonoBehaviour
             }
         }
     }
-
     private void SetMonster(string monsterInfo)
     {
         List<int> monsterData = monsterInfo.Split(',').Select(Int32.Parse).ToList();
@@ -94,7 +93,14 @@ public class CombatManager : MonoBehaviour
     {
         var starter = GameObject.FindObjectOfType<SceneStarter>();
         if (starter != null)
-            starter.Content = "Exit from Fight";
+        {
+            var monster = GameObject.FindGameObjectWithTag("Monster");
+            var active = monster.GetComponent<ActiveMonsterType>();
+            if (active.Alive)
+                starter.Content = "FightRunAway";
+            else
+                starter.Content = "FightWin";
+        }
         //switch the scene
         SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
     }

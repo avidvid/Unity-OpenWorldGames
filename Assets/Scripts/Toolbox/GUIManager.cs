@@ -57,9 +57,14 @@ public class GUIManager : MonoBehaviour {
     }
     public void PrintMessage(string message, Color color)
     {
+        var newMessage = new MessageBoard(message, color);
         if (_messageBoardQueue.Count == _messageLength)
+        {
+            if (_messageBoardQueue.IndexOf(newMessage)>0)
+                return;
             _messageBoardQueue.RemoveAt(0);
-        _messageBoardQueue.Add(new MessageBoard(message, color));
+        }
+        _messageBoardQueue.Add(newMessage);
         _alertBox = BuildAlertBox();
     }
     private void RemoveMessage()

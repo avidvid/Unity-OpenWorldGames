@@ -48,6 +48,18 @@ public class MonsterMove : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!_characterManager.CharacterSetting.Alive)
+        {
+            if (_active.SawTarget)
+            {
+                if (_character.IsAnimated)
+                    HandleAnimation(Vector3.zero);
+                else
+                    HandleSprite(Vector3.zero);
+                _active.SawTarget = false;
+            }
+            return;
+        }
         Vector3 targetPos = _player.position;
         Vector3 monsterPos = transform.position;
         float dist = Vector2.Distance(targetPos, monsterPos);
@@ -112,7 +124,6 @@ public class MonsterMove : MonoBehaviour {
         //5-A Cast Spell (Lunch spell-Drop dealAtt hit- AttackDealing)
         CastSpell(dealAtt);
     }
-
     private void DoMove(Vector3 movement, float speed,float distance)
     {
         movement = movement.normalized;
@@ -122,14 +133,11 @@ public class MonsterMove : MonoBehaviour {
         transform.Translate(movement *  Time.deltaTime);
         _renderer.sortingOrder = _baseSortIndex + 7;
     }
-
-
     private void HandleFightMode(bool stat)
     {
         _active.AttackMode = stat;
         _animator.SetBool("fight", stat);
     }
-
     private void HandleAnimation(Vector3 movement)
     {
         if (_character.Move != Character.CharacterType.Fly && movement == Vector3.zero)
@@ -149,7 +157,6 @@ public class MonsterMove : MonoBehaviour {
         _animator.SetFloat("x", movement.x);
         _animator.SetFloat("y", movement.y);
     }
-
     private void HandleSprite(Vector3 movement)
     {
         if (movement.x > 0.1f && Mathf.Abs(movement.x) >= Mathf.Abs(movement.y))
@@ -174,7 +181,6 @@ public class MonsterMove : MonoBehaviour {
         // Load Animation Controllers
         return _character.GetAnimator();
     }
-
     // CastSpell Logic
     private void CastSpell(float attackDealt)
     {
@@ -182,12 +188,10 @@ public class MonsterMove : MonoBehaviour {
         spell.transform.position = _active.transform.position;
         spell.transform.parent = _active.transform.parent;
         spell.name = "Monster Spell";
-
         var spellRenderer = spell.AddComponent<SpriteRenderer>();
         spellRenderer.sortingOrder = _active.transform.GetComponent<SpriteRenderer>().sortingOrder + 1;
         spellRenderer.sprite = _active.MonsterType.GetSpellSprite(); ;
         spell.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-
         var spellManager = spell.AddComponent<MonsterSpellManager>();
         spellManager.Target = _player;
         spellManager.AttackValue = attackDealt;

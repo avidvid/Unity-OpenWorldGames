@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpellManager : MonoBehaviour {
-
-
     public ActiveMonsterType Target;
     public float AttackValue;
     public string MonsterType;

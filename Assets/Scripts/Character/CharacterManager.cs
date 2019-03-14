@@ -588,8 +588,8 @@ public class CharacterManager : MonoBehaviour
         StartCoroutine(GameOverFadeInOut());
         //Todo: Drop an item on other players screen 
         CharacterSetting.Alive = false;
-        //Goto Game over scene in 5 seconds 
-        Invoke("OpenGameOver", 5.0f);
+        //Goto Game over scene in 3 seconds 
+        Invoke("OpenGameOver", 3.0f);
     }
     private int CalculateXp(int level)
     {
@@ -618,7 +618,7 @@ public class CharacterManager : MonoBehaviour
     IEnumerator GameOverFadeInOut()
     {
         _gameOver.SetActive(true);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2.8f);
         _gameOver.SetActive(false);
     }
     internal Sprite GetSpellSprite()

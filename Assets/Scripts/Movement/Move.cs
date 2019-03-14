@@ -93,7 +93,12 @@ public class Move : MonoBehaviour {
 	                SceneManager.LoadScene(SceneSettings.SceneIdForFightMonster);
 	            }
 	            else
+	            {
 	                _GUIManager.PrintMessage("Not enough energy to attack", Color.yellow);
+                    //Push back the Player
+	                var direction = previousPosition - currentPos;
+                    transform.position = previousPosition + direction * 3;
+                }
                 return;
             }
         }
