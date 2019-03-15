@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Attack : MonoBehaviour {     
     private CharacterManager _characterManager;
@@ -28,15 +29,18 @@ public class Attack : MonoBehaviour { 
                   + monster.MonsterType.PoisonDefense + ")");
             return;
         }
-        monster.MonsterType.Health -= (int)dealAtt * 7; //Todo:Debug  remove this 50
+        monster.MonsterType.Health -= (int)dealAtt * 7; //Todo:Debug  remove this *#
         if (monster.MonsterType.Health <= 0)
         {
             _characterManager.AddCharacterSetting("Experience", monster.MonsterType.MaxHealth);
             monster.Alive = false;
             monster.gameObject.SetActive(false);
             var monsterCharacter = monster.MonsterType.GetCharacter();
-            if(environmentType == "Combat")
+            if (environmentType == "Combat")
             {
+                var images = GameObject.Find("Capture").GetComponentsInChildren<Image>();
+                if (images[1].enabled)
+                    _characterManager.CaptureMonsterById(monsterCharacter.Id);
                 SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
             }
             else

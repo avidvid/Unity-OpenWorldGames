@@ -8,18 +8,17 @@ using UnityEngine.SceneManagement;
 public class CombatManager : MonoBehaviour
 {
     private TerrainDatabase _terrainDatabase;
+    private AudioManager _audioManager;
     private int _horizontalTiles = 11;
     private int _verticalTiles = 7;
     private int _key;
-    private string _monsterInfo = "5,2";
-
-    //private Vector3 _previousPosition = Vector3.zero;
+    private string _monsterInfo = "3,2";
     private Vector2 _mapPosition = Vector2.zero;
     private GameObject _mapPanel;
-
     void Start()
     {
         _terrainDatabase = TerrainDatabase.Instance();
+        _audioManager = AudioManager.Instance();
         var starter = GameObject.FindObjectOfType<SceneStarter>();
         if (starter != null)
         {
@@ -27,10 +26,11 @@ public class CombatManager : MonoBehaviour
             _key = starter.Key; 
             _monsterInfo = starter.Content;
             starter.LastScene = "Combat";
-            //_previousPosition = starter.PreviousPosition;
         }
         SetMonster(_monsterInfo);
         DrawMap();
+        if (_audioManager != null)
+            _audioManager.PlayFightMusic(_mapPosition, _key);
     }
     public TerrainIns GetTerrain(float x, float y, int key)
     {

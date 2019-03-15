@@ -59,7 +59,7 @@ public class RandomHelper
     }
     public static float CriticalRange(float max)
     {
-        if (max<=1)
+        if (max<1)
             return 0;
         //x7 times 20% of the times
         var criticalValue = UnityEngine.Random.Range(0, 10) > 8 ? 7 : 1; 

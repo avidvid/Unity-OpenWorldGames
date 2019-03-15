@@ -9,7 +9,7 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####comite#####
 ###############
-
+	
 	
 ###############
 #### Home #####
@@ -18,11 +18,8 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####Office#####
 ###############	
-	
-	Travel scene back to the terrain and drop item 
-	add to cache 
-	use energy to go to combat 
-	
+	Add music to fight 
+	add capture mode 
 	
 	monster profile page
 	

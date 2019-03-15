@@ -6,8 +6,8 @@
   <Name>Sailor daddy</Name>
   <Level>6</Level>
   <Updated>true</Updated>
-  <HealthCheck>244260</HealthCheck>
-  <LastUpdated>2019-03-14T12:02:45.9216479-05:00</LastUpdated>
+  <HealthCheck>692070</HealthCheck>
+  <LastUpdated>2019-03-15T10:09:12.2272518-05:00</LastUpdated>
   <IsEnable>true</IsEnable>
   <FightMode>false</FightMode>
   <Alive>true</Alive>
@@ -21,7 +21,7 @@
   <MaxMana>400</MaxMana>
   <Mana>400</Mana>
   <MaxEnergy>1600</MaxEnergy>
-  <Energy>1600</Energy>
+  <Energy>200</Energy>
   <SpeedAttack>6</SpeedAttack>
   <SpeedDefense>5</SpeedDefense>
   <AbilityAttack>10</AbilityAttack>

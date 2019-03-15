@@ -36,6 +36,7 @@ public class ActionHandler : MonoBehaviour
     public Sprite Grab;
     public Sprite Enter;
     public Sprite Question;
+    private bool _captureMood;
 
     void Start()
     {
@@ -229,7 +230,9 @@ public class ActionHandler : MonoBehaviour
         //1-A Find Direction
         var direction = (_monster.transform.position - _player.position).normalized;
         //2-A calculate Att
-        var attAmount = RandomHelper.AbsZero(_characterManager.CharacterSetting.AbilityAttack  - _monster.MonsterType.AbilityDefense)
+        var attAmount = 1f;
+        if (!_captureMood)
+            attAmount = RandomHelper.AbsZero(_characterManager.CharacterSetting.AbilityAttack  - _monster.MonsterType.AbilityDefense)
                         + RandomHelper.AbsZero(_characterManager.CharacterSetting.MagicAttack  - _monster.MonsterType.MagicDefense)
                         + RandomHelper.AbsZero(_characterManager.CharacterSetting.PoisonAttack - _monster.MonsterType.PoisonDefense);
         //3-A calculate dealAtt
@@ -266,5 +269,11 @@ public class ActionHandler : MonoBehaviour
         spellManager.Target = monster;
         spellManager.AttackValue = attackDealt;
         spellManager.MonsterType = _isInside?"Inside": _inCombat ? "Combat" : "Terrain";
+    }
+    public void ActiveCaptureMood()
+    {
+        var images = GameObject.Find("Capture").GetComponentsInChildren<Image>();
+        _captureMood = !images[1].enabled;
+        images[1].enabled = _captureMood;
     }
 }

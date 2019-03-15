@@ -89,13 +89,10 @@ public class CharacterManager : MonoBehaviour
         CharacterMixture = _userDatabase.GetCharacterMixture();
         LoginCalculations();
     }
-
-
     internal bool ValidateRecipeCode(string recipeCode)
     {
         return _userDatabase.ValidateRecipeCode(recipeCode);
     }
-
     void Update()
     {
         //Refresh User stats Health Mana Energy Level
@@ -174,6 +171,10 @@ public class CharacterManager : MonoBehaviour
         int y =(int) (UserPlayer.Longitude * 1000 - regionLocation.y) ;
         var mapLocation = new Vector2(x,y);
         return mapLocation;
+    }
+    internal void CaptureMonsterById(int characterId)
+    {
+        _userDatabase.AddNewUserCharacters(characterId);
     }
     #region Inventory
     private void InitUserInventory()
@@ -282,7 +283,7 @@ public class CharacterManager : MonoBehaviour
                 }
                 if (itemIns.Item.Egg > 0)
                 {
-                    if (_userDatabase.AddNewRandomUserCharacters())
+                    if (_userDatabase.AddNewUserCharacters())
                         message = "You Hatched a New Character!!";
                     else return "The Egg you found is already rotten !! ";
                 }

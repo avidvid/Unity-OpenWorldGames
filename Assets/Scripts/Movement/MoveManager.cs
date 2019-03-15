@@ -68,7 +68,7 @@ public class MoveManager : MonoBehaviour {
         {
             if (_inCombat)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
                     var touchLocation = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     if (Vector2.Distance(touchLocation,_monster.transform.position)<.7f)

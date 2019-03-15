@@ -243,14 +243,21 @@ public class UserDatabase : MonoBehaviour
             return false;
         }
     }
-    internal bool AddNewRandomUserCharacters()
+    internal bool AddNewUserCharacters(int characterId=-1)
     {
+        //add a New specific Character
+        if (characterId != -1)
+        {
+            UserCharacter uc = new UserCharacter(characterId, _userPlayer.Id);
+            return AddUserCharacters(uc);
+        }
+        //add a New Random Character
         var characterDatabase = CharacterDatabase.Instance();
         var characters = characterDatabase.GetCharacters();
         List<int> availableCharacters = new List<int>();
         int key = DateTime.Now.DayOfYear;
         var rarity = RandomHelper.Range(key, (int)ItemContainer.ItemRarity.Common);
-        bool userOwnedRecipe = false;
+        bool userOwnedCharacter = false;
         for (int i = 0; i < characters.Count; i++)
             if (characters[i].IsEnable)
             {
@@ -259,12 +266,12 @@ public class UserDatabase : MonoBehaviour
                 for (int j = 0; j < _userCharacters.Count; j++)
                     if (characters[i].Id == _userCharacters[j].CharacterId && string.IsNullOrEmpty(_userCharacters[j].CharacterCode))
                     {
-                        userOwnedRecipe = true;
+                        userOwnedCharacter = true;
                         break;
                     }
-                if (!userOwnedRecipe)
+                if (!userOwnedCharacter)
                     availableCharacters.Add(characters[i].Id);
-                userOwnedRecipe = false;
+                userOwnedCharacter = false;
             }
         if (availableCharacters.Count > 0)
         {
