@@ -10,6 +10,7 @@ public class InsideStory {
         public int CharacterCnt;
         public int MinLevel;
         public int LocationIndex;
+        public int HealthCheck;
     }
     public enum InsideStoryRarity
     {

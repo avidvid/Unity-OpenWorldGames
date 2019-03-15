@@ -11,6 +11,7 @@ public class CharacterMixture
     public int ItemId { get; set; }
     public int StackCnt { get; set; }
     public DateTime MixTime { get; set; }
+    public int HealthCheck { get; set; }
 
     public CharacterMixture(int userId, int itemId, int stackCnt, DateTime time)
     {
@@ -19,12 +20,11 @@ public class CharacterMixture
         ItemId = itemId;
         StackCnt = stackCnt;
         MixTime = time;
+        HealthCheck = 0;
     }
     public CharacterMixture()
     {
     }
-
-
     internal string MyInfo()
     {
         var itemDatabase = ItemDatabase.Instance();
@@ -34,5 +34,4 @@ public class CharacterMixture
     {
         Debug.Log("CharacterMixture = " + MyInfo());
     }
-
 }

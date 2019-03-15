@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="Windows-1252"?>
-<ArrayOfCharacterResearch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <CharacterResearch>
+<ArrayOfUserResearch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UserResearch>
     <Id>0</Id>
     <UserPlayerId>22</UserPlayerId>
     <ResearchId>1</ResearchId>
     <Level>2</Level>
-  </CharacterResearch>
-  <CharacterResearch>
+  </UserResearch>
+  <UserResearch>
     <Id>0</Id>
     <UserPlayerId>22</UserPlayerId>
     <ResearchId>2</ResearchId>
     <Level>1</Level>
-  </CharacterResearch>
-</ArrayOfCharacterResearch>
+  </UserResearch>
+</ArrayOfUserResearch>

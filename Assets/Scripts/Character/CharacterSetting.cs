@@ -51,7 +51,6 @@ public class CharacterSetting {
     public float Researching { get; set; }
     public float Bravery { get; set; }
     public float Charming { get; set; }
-    //Todo: add the hashcode
 
     public CharacterSetting(int id = -1, int userPlayerId = -1, int characterId = -1, string name = null,
         int level = 0,  bool updated = true, int healthCheck = 0, bool isEnable = true, 
@@ -108,14 +107,10 @@ public class CharacterSetting {
         Stamina = stamina;
         Strength = strength;
     }
-
-
-
     public CharacterSetting()
     {
         Id = -1;
     }
-
     public CharacterSetting(CharacterSetting characterSetting)
     {
         Id = characterSetting.Id;
@@ -179,7 +174,6 @@ public class CharacterSetting {
             return spells[0];
         return spells[3];
     }
-
     internal string FieldValue(string field)
     {
         switch (field)
@@ -208,7 +202,6 @@ public class CharacterSetting {
                 return field +" Is Undefined in characterSetting";
         }
     }
-
     internal string GetInfo(string field)
     {
         switch (field)
@@ -221,7 +214,6 @@ public class CharacterSetting {
                 return "Undefined field in characterSetting GetInfo";
         }
     }
-
     #region HealthCheck
     internal int CalculateHealthCheck()
     {

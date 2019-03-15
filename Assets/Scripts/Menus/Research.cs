@@ -21,6 +21,7 @@ public class Research
     public int RequiredResearchLevel3 { get; set; }
     public int RequiredItem { get; set; }
     public bool IsEnable { get; set; }
+    public int HealthCheck { get; set; }
 
     public string GetTooltip()
     {

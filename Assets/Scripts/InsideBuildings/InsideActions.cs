@@ -61,7 +61,6 @@ public class InsideActions : MonoBehaviour {
             CreateFloatingAction(touchLocation, "Map");
         }
 	}
-
     public static void CreateFloatingAction(Vector3 location, string action)
     {
         _popupAction.SetActive(true);
@@ -69,5 +68,4 @@ public class InsideActions : MonoBehaviour {
         _popupAction.transform.position = screenPosition;
         _popupAction.GetComponent<ActionHandler>().SetAction(location, action);
     }
-
-    private void InLineOfSight(Vector3 pos)     {         //You are in the line of sight a monster          foreach (var monster in _building.GetMonster(pos,0))             monster.SawTarget = true;     } } 
+    private void InLineOfSight(Vector3 pos)     {         //You are in the line of sight a monster          foreach (var monster in _building.GetMonster(pos,0))             monster.SawTarget = true;     } }

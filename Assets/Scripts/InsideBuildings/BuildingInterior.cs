@@ -161,7 +161,6 @@ public class BuildingInterior : MonoBehaviour {
         lowestFloor.z = Player.position.z;
         Player.position = lowestFloor;
 
-        //todo: AddActors
         int actorCount = 1;
         for (int actorIndex = 1; actorIndex <= actorCount; actorIndex++)
         {
@@ -170,7 +169,6 @@ public class BuildingInterior : MonoBehaviour {
                 if (storyActor.CharacterCnt < actorIndex)
                     continue;
                 actorCount++;
-
                 var actorLocation = _floors[Random.Range(0, _floors.Count)];
                 _floors.Remove(actorLocation);
                 CreateMonsters(actorLocation, storyActor);

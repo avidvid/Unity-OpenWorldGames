@@ -14,10 +14,9 @@ public class BarHandler : MonoBehaviour
     private Image _content;
     private TextMeshProUGUI _text;
 
-    //todo: make these private 
-    public float MaxValue;
-    public float FillAmount;
-    public int Level; 
+    private float _maxValue;
+    private float _fillAmount;
+    private int _level; 
 
     public Color FullColor;
     public Color LowColor;
@@ -45,14 +44,14 @@ public class BarHandler : MonoBehaviour
 
     private void ShowBarStat()
     {
-        FillAmount = Mathf.Clamp(FillAmount, 0, MaxValue);
-        float mappedValue = MapConvert(FillAmount, MaxValue);
+        _fillAmount = Mathf.Clamp(_fillAmount, 0, _maxValue);
+        float mappedValue = MapConvert(_fillAmount, _maxValue);
         if (_content.fillAmount != mappedValue)
         {
-            if (Level == -1)
-                _text.text = String.Format(CultureInfo.InvariantCulture, "{0:0,0}", FillAmount);
+            if (_level == -1)
+                _text.text = String.Format(CultureInfo.InvariantCulture, "{0:0,0}", _fillAmount);
             else
-                _text.text = "Level: "+ Level;
+                _text.text = "Level: "+ _level;
             //Doing this with lerp Over time =>  _content.fillAmount = MapConvert(FillAmount, 100) 
             _content.fillAmount = Mathf.Lerp(_content.fillAmount, mappedValue, Time.deltaTime * _lerpSpeed);
             if (LerpColor)
@@ -64,7 +63,7 @@ public class BarHandler : MonoBehaviour
     {
         if (amount > 0)
         {
-            FillAmount += amount;
+            _fillAmount += amount;
             ShowBarStat();
         }
     }
@@ -83,9 +82,9 @@ public class BarHandler : MonoBehaviour
 
     public void UpdateValues(int fillAmount, int maxValue,int level = -1)
     {
-        FillAmount = fillAmount;
-        MaxValue = maxValue;
-        Level = level;
+        _fillAmount = fillAmount;
+        _maxValue = maxValue;
+        _level = level;
     }
 
 }

@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class GUIManager : MonoBehaviour {
     
-    //
     public GUISkin Skin;
 
     //Messaging board variables
@@ -17,15 +16,6 @@ public class GUIManager : MonoBehaviour {
     private Rect _alertBox;
     private bool _coRoutineExecuting = false;
 
-    //Stats box variables
-    //private int _coin;
-    //private int _gem;
-    //private int _live;
-    //private int _level;
-    //private int _experience;
-    //private int _rank;
-    //private string _name;
-    
     private static GUIManager _GUIManager;
 
     public static GUIManager Instance()
@@ -40,7 +30,7 @@ public class GUIManager : MonoBehaviour {
     }
     void Start()
     {
-        PrintMessage("Welcome To AUSTIN Map",Color.blue);
+        PrintMessage("Welcome To Once Upon Player", Color.blue);
     }
     void Update()
     {

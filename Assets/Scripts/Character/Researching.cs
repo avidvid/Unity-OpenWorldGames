@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class Researching
+public class ResearchingDelete
 {
     public int Id { get; set; }
     public int UserPlayerId { get; set; }

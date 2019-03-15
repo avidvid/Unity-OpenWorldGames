@@ -9,6 +9,7 @@ public class UserCharacter
     public int Count { get; set; }
     public string CharacterCode { get; set; }
     public DateTime Created { get; set; }
+    public int HealthCheck { get; set; }
     public UserCharacter()
     {
         CharacterId = -1;
@@ -16,6 +17,7 @@ public class UserCharacter
         Count = 0;
         CharacterCode = null;
         Created = DateTime.Now;
+        HealthCheck = 0;
     }
     public UserCharacter(int characterId, int playerId, int count=1, string characterCode = null)
     {

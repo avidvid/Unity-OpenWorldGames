@@ -22,6 +22,7 @@ public class Offer
     public int PayAmount;
     public bool IsSpecial;
     public bool IsEnable;
+    public int HealthCheck;
 
     internal string NameGenerator()
     {

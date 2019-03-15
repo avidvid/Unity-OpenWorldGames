@@ -100,6 +100,7 @@ public class ItemContainer
     //Tool
     public int MaxTimeToUse { get; set; }
     public ElementIns.ElementType FavoriteElement { get; set; }
+    public int HealthCheck { get; set; }
 
     protected ItemContainer(
         int id, string name, string desc,
@@ -142,8 +143,8 @@ public class ItemContainer
                 MaxTimeToUse = 0;
                 FavoriteElement = ElementIns.ElementType.Hole;
                 break;
-
         }
+        HealthCheck = 0;
     }
     protected ItemContainer()
     {

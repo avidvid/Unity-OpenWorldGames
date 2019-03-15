@@ -140,7 +140,6 @@ public class InventoryHandler : MonoBehaviour
                         break;
                     }
             }
-            //todo: lets user buy a slot 
             else
             {
                 if (i == _playerSlots)

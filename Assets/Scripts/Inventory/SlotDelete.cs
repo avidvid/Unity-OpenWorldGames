@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class SlotDelete : MonoBehaviour, IDropHandler
 {
-    
     private ModalPanel _modalPanel;
     private CharacterManager _characterManager;
     private InventoryHandler _inv;

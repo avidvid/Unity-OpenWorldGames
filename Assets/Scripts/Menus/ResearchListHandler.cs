@@ -14,7 +14,7 @@ public class ResearchListHandler : MonoBehaviour {
     private GameObject _contentPanel;
     private GameObject _clickedButton;
     private CharacterManager _characterManager;
-    private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
+    private List<UserResearch> _characterResearches = new List<UserResearch>();
     private List<Research> _researches ;  
 
     private string _backScene;
@@ -96,7 +96,7 @@ public class ResearchListHandler : MonoBehaviour {
         int researchId = Int32.Parse(buttonName);
         
         Research research = null;
-        CharacterResearch characterResearch = null;
+        UserResearch characterResearch = null;
         for (int i = 0; i < _researches.Count; i++)
             if (_researches[i].Id == researchId)
             {
@@ -213,10 +213,10 @@ public class ResearchListHandler : MonoBehaviour {
                 SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
                 return;
         }
-        //Todo: delete this part 
-        if (_characterManager.CharacterSetting.Alive)
-            SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
-        else
-            SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
+        //Todo: delete this part 2019-03-15 Give it 2 months
+        //if (_characterManager.CharacterSetting.Alive)
+        //    SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
+        //else
+        //    SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
     }
 }

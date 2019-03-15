@@ -18,12 +18,7 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####Office#####
 ###############	
-	Add music to fight 
-	add capture mode 
-	
-	monster profile page
-	
-	Add fog of war ch.ViewType
+	add health check to 
 	
 	change back up file for OUP to not go to drive one 
 	http://zikmund.me/blog/changing-default-project-directory-visual-studio-2017/

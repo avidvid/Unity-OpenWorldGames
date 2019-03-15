@@ -93,6 +93,10 @@ public class TerrainDatabase : MonoBehaviour {
     {
         return _region.Key;
     }
+    internal Region GetRegion()
+    {
+        return _region;
+    }
     public Region GetRegion(float latitude, float longitude)
     {
         for (int i = 0; i < _regions.Count; i++)

@@ -15,9 +15,18 @@ public class Region
     public string InsideStories { get; set; }
     public string Terrains { get; set; }
     public bool IsEnable { get; set; }
+    public int HealthCheck { get; set; }
 
     internal void Print()
     {
-        Debug.Log("Region = " + Id + "-" + Name + " (" + Key + ")");
+        Debug.Log("Region = " + MyInfo());
+    }
+    internal string MyInfo()
+    {
+        return Id + "-" + Name + " (" + Key + ")";
+    }
+    internal string MapInfo()
+    {
+        return Name + " (" + Description + ")";
     }
 }

@@ -65,11 +65,6 @@ public class MiniMapHandler : MonoBehaviour {
                 var terrain = _availableTerrainTypes[RandomHelper.Range(x + iX, y + iY, key, _availableTerrainTypes.Count)];
                 Vector2 location = new Vector2((int)(x + iX) << 4, (int)(y + iY) << 4);
                 markers.Add(new Marker(terrain, location, mIndex++));
-                //todo: delete
-                //if (iX== iY && iX== 0)
-                //    Debug.Log("Center-" + terrain.Name + " " + location);
-                //else
-                //Debug.Log(mIndex +"-"+ terrain.Name +" " + location );
             }
         }
         return markers;

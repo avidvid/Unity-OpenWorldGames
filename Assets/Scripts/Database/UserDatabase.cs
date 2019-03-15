@@ -17,7 +17,7 @@ public class UserDatabase : MonoBehaviour
     private List<UserCharacter> _userCharacters = new List<UserCharacter>();
     private List<Character> _myCharacters = new List<Character>();
     private CharacterMixture _characterMixture;
-    private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
+    private List<UserResearch> _characterResearches = new List<UserResearch>();
     private CharacterResearching _characterResearching;
     private CharacterSetting _characterSetting;
     private List<Recipe> _myRecipes;
@@ -349,26 +349,26 @@ public class UserDatabase : MonoBehaviour
         fs.Close();
         return characterResearching;
     }
-    internal List<CharacterResearch> GetCharacterResearches()
+    internal List<UserResearch> GetCharacterResearches()
     {
         return _characterResearches;
     }
-    private List<CharacterResearch> LoadCharacterResearches()
+    private List<UserResearch> LoadCharacterResearches()
     {
         //Empty the Items DB
         _characterResearches.Clear();
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearch.xml");
         //Read the CharacterResearch from CharacterResearch.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(List<CharacterResearch>));
+        XmlSerializer serializer = new XmlSerializer(typeof(List<UserResearch>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        var characterResearches = (List<CharacterResearch>)serializer.Deserialize(fs);
+        var characterResearches = (List<UserResearch>)serializer.Deserialize(fs);
         fs.Close();
         return characterResearches;
     }
     public void SaveCharacterResearches()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearch.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<CharacterResearch>));
+        XmlSerializer serializer = new XmlSerializer(typeof(List<UserResearch>));
         FileStream fs = new FileStream(path, FileMode.Create);
         serializer.Serialize(fs, _characterResearches);
         fs.Close();
@@ -388,7 +388,7 @@ public class UserDatabase : MonoBehaviour
                 break;
             }
         if (!updated)
-            _characterResearches.Add(new CharacterResearch(research.Id,_userPlayer.Id ,level));
+            _characterResearches.Add(new UserResearch(research.Id,_userPlayer.Id ,level));
         SaveCharacterResearches();
     }
     #endregion

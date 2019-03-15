@@ -111,6 +111,7 @@ public class Character {
     public float DropChance { get; set; }
     public bool IsEnable { get; set; }
     public string Slug { get; set; }
+    public int HealthCheck { get; set; }
 
     public Character(int id, string name, string desc, 
         CharacterType moveT, AttackRange attackR, DefenseRange defenseR, AttackType attackT, AttackType defenseT,
@@ -142,6 +143,7 @@ public class Character {
         FavoriteTerrainTypes = favoriteTerrainTypes;
         IsEnable = true;
         Slug = name.Replace(" ", "");
+        HealthCheck = 0;
     }
     public Character()
     {
@@ -173,6 +175,7 @@ public class Character {
         FavoriteTerrainTypes = character.FavoriteTerrainTypes;
         IsEnable = enable;
         Slug = character.Slug;
+        HealthCheck = character.HealthCheck;
     }
     public Sprite GetSprite()
     {

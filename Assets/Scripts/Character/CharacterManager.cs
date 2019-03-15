@@ -21,7 +21,7 @@ public class CharacterManager : MonoBehaviour
     internal List<Character> UserCharacters ;
     //Research
     internal List<Research> Researches;
-    internal List<CharacterResearch> CharacterResearches = new List<CharacterResearch>();
+    internal List<UserResearch> CharacterResearches = new List<UserResearch>();
     internal CharacterResearching CharacterResearching;
     //Recipes
     internal List<Recipe> UserRecipes;
@@ -104,9 +104,7 @@ public class CharacterManager : MonoBehaviour
             _nextActionTime += period;
             print("Executed Increase Health Mana Energy next time =" + _nextActionTime);
             if (CharacterSetting.Energy < CharacterSetting.MaxEnergy)
-                //todo: CharacterSetting.Energy += 100;
-                CharacterSetting.Energy = CharacterSetting.MaxEnergy;
-
+                CharacterSetting.Energy += 100;
             if (CharacterSetting.Health < CharacterSetting.MaxHealth)
                 CharacterSetting.Health += 1;
             if (CharacterSetting.Mana < CharacterSetting.MaxMana)
@@ -119,13 +117,9 @@ public class CharacterManager : MonoBehaviour
         {
             StartCoroutine(LevelUpFadeInOut());
             CharacterSetting.Experience -= CharacterSetting.MaxExperience;
-            //Todo: Level upgrade is limited to 10
-            if (CharacterSetting.Level < 10)
-            {
-                CharacterSetting.Level += 1;
-                //Calculate all the values based on the new level
-                LevelCalculations();
-            }
+            CharacterSetting.Level += 1;
+            //Calculate all the values based on the new level
+            LevelCalculations();
         }
     }
     private bool CharacterSettingHealthCheck()
@@ -349,18 +343,9 @@ public class CharacterManager : MonoBehaviour
         return message;
     }
     #endregion
-    //############################# OLD CODE
-    internal void CharacterSettingApplyResearch(Research research, int level)
-    {
-        if (research == null)
-            return;
-        float value = research.CalculateValue(level);
-        _userDatabase.AddCharacterResearch(research, level);
-        _userDatabase.EmptyCharacterResearching();
-        CharacterResearching = _userDatabase.GetCharacterResearching();
-        AddCharacterSetting(research.Target, value);
-    }
-
+    #region ItemUse
+    #endregion
+    #region UpdateSetting
     internal bool UseEnergy(int amount)
     {
         if (amount <= 0)
@@ -372,7 +357,7 @@ public class CharacterManager : MonoBehaviour
         }
         return false;
     }
-    public void AddCharacterSetting(string field, float value,bool save =true)
+    public void AddCharacterSetting(string field, float value, bool save = true)
     {
         print("CharacterSetting." + field + "=" + CharacterSetting.FieldValue(field) + " + " + value);
         switch (field)
@@ -395,7 +380,7 @@ public class CharacterManager : MonoBehaviour
                 CharacterSetting.Energy += (int)value;
                 if (CharacterSetting.Energy > CharacterSetting.MaxEnergy)
                     CharacterSetting.Energy = CharacterSetting.MaxEnergy;
-        CharacterSetting.Updated = true;
+                CharacterSetting.Updated = true;
                 break;
             case "Experience":
                 CharacterSetting.Experience += (int)value;
@@ -416,11 +401,11 @@ public class CharacterManager : MonoBehaviour
                 CharacterSetting.Life += (int)value;
                 break;
             case "Alive":
-                CharacterSetting.Alive = (value > 0) ;  
+                CharacterSetting.Alive = (value > 0);
                 break;
             //Research
             case "MaxHealth":
-                CharacterSetting.MaxHealth += (int) value;
+                CharacterSetting.MaxHealth += (int)value;
                 break;
             case "MaxMana":
                 CharacterSetting.MaxMana += (int)value;
@@ -493,7 +478,6 @@ public class CharacterManager : MonoBehaviour
         if (save)
             SaveCharacterSetting();
     }
-
     //Calculations
     private void LoginCalculations()
     {
@@ -561,16 +545,59 @@ public class CharacterManager : MonoBehaviour
                 CharacterSetting.Charming = CharacterSetting.Intellect =
                     CharacterSetting.Crafting = CharacterSetting.Researching =
                         CharacterSetting.Stamina = CharacterSetting.Strength = 0;
-        //todo: Get values from research too
+        //Add Equipped Item
         foreach (var itemIns in CharacterInventory)
         {
             if (itemIns.UserItem.Equipped)
                 CharacterSettingUseItem(itemIns, false);
         }
+        //Add Researched
+        foreach (var chResearch in CharacterResearches)
+        {
+            var research = _characterDatabase.GetResearchById(chResearch.ResearchId);
+            CharacterSettingApplyFullResearch(research, chResearch.Level);
+        }
         CharacterSetting.Updated = true;
         SaveCharacterSetting();
     }
-
+    //Start Ups
+    internal void ReviveCharacter()
+    {
+        CharacterSetting.Alive = true;
+        CharacterSetting.Life = 0;
+        CharacterSetting.Health = CharacterSetting.MaxHealth;
+        CharacterSetting.Updated = true;
+        SetLockTill(DateTime.Now.AddMinutes(Mathf.Pow(CharacterSetting.Level, 3) + 3));
+        SaveCharacterSetting();
+    }
+    private void GameOverCalculations()
+    {
+        StartCoroutine(GameOverFadeInOut());
+        //Todo: Drop an item on other players screen 
+        CharacterSetting.Alive = false;
+        //Goto Game over scene in 3 seconds 
+        Invoke("OpenGameOver", 3.0f);
+    }
+    #endregion
+    #region ResearchUse
+    internal void CharacterSettingApplyResearch(Research research, int level)
+    {
+        if (research == null)
+            return;
+        float value = research.CalculateValue(level) - research.CalculateValue(level-1);
+        _userDatabase.AddCharacterResearch(research, level);
+        _userDatabase.EmptyCharacterResearching();
+        CharacterResearching = _userDatabase.GetCharacterResearching();
+        AddCharacterSetting(research.Target, value);
+    }
+    internal void CharacterSettingApplyFullResearch(Research research, int level)
+    {
+        if (research == null)
+            return;
+        float value = research.CalculateValue(level);
+        AddCharacterSetting(research.Target, value,false);
+    }
+    #endregion
     internal float GetCharacterAttribute(string field)
     {
         //Return the value saved in CharacterSetting in 1*1000
@@ -584,14 +611,6 @@ public class CharacterManager : MonoBehaviour
                 return 0;
         }
     }
-    private void GameOverCalculations()
-    {
-        StartCoroutine(GameOverFadeInOut());
-        //Todo: Drop an item on other players screen 
-        CharacterSetting.Alive = false;
-        //Goto Game over scene in 3 seconds 
-        Invoke("OpenGameOver", 3.0f);
-    }
     private int CalculateXp(int level)
     {
         if (level == 0)
@@ -599,16 +618,6 @@ public class CharacterManager : MonoBehaviour
         if (level == 1)
             return 1000;
         return CalculateXp(level - 1) + CalculateXp(level - 2);
-    }
-    //Start Ups
-    internal void ReviveCharacter()
-    {
-        CharacterSetting.Alive = true;
-        CharacterSetting.Life = 0;
-        CharacterSetting.Health = CharacterSetting.MaxHealth;
-        CharacterSetting.Updated = true;
-        SetLockTill(DateTime.Now.AddMinutes(Mathf.Pow(CharacterSetting.Level, 3) + 3) );
-        SaveCharacterSetting();
     }
     IEnumerator LevelUpFadeInOut()
     {
@@ -677,5 +686,4 @@ public class CharacterManager : MonoBehaviour
         CharacterResearching.ResearchTime = time;
         _userDatabase.SaveCharacterResearching(CharacterResearching);
     }
-
 }

@@ -215,7 +215,7 @@ public class ActionHandler : MonoBehaviour
     }
     public void ShowMapInfo()
     {
-         _inv.PrintMessage("Austin", Color.black); //todo:fix this 
+         _inv.PrintMessage(_terrainManager.Region.MapInfo(), Color.black);
     }
     //Monster
     public void SetActiveMonster(ActiveMonsterType monster,Transform player, string environmentType)

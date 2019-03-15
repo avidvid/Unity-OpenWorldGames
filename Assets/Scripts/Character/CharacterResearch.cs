@@ -4,32 +4,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//Todo Rename to user research
+//Todo Rename to CharacterResearch
 [Serializable]
-public class CharacterResearch
+public class UserResearch
 {
     public int Id { get; set; }
     public int UserPlayerId { get; set; }
     public int ResearchId { get; set; }
     public int Level { get; set; }
+    public int HealthCheck { get; set; }
 
-    public CharacterResearch(int researchId, int userPlayerId, int nextLevel)
+    public UserResearch(int researchId, int userPlayerId, int nextLevel)
     {
         Id = 0;
         ResearchId = researchId;
         UserPlayerId = userPlayerId;
         Level = nextLevel;
+        HealthCheck = 0;
     }
-    public CharacterResearch()
+    public UserResearch()
     {
         Id = -1;
     }
-
     internal void Print()
     {
         Debug.Log("CharacterResearch = " + Id + "-" + ResearchId + " (" + Level + ")");
     }
-
     internal void SetEmpty()
     {
         Id = -1;

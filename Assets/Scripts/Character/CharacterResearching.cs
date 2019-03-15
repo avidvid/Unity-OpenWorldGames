@@ -12,6 +12,7 @@ public class CharacterResearching
     public int ResearchId { get; set; }
     public int Level { get; set; }
     public DateTime ResearchTime { get; set; }
+    public int HealthCheck { get; set; }
 
     public CharacterResearching(int userId, int researchId, int level, DateTime time)
     {
@@ -20,11 +21,11 @@ public class CharacterResearching
         ResearchId = researchId;
         Level = level;
         ResearchTime = time;
+        HealthCheck = 0;
     }
     public CharacterResearching()
     {
     }
-
     internal string MyInfo()
     {
         var characterDatabase = CharacterDatabase.Instance();
@@ -34,5 +35,4 @@ public class CharacterResearching
     {
         Debug.Log("CharacterResearching = " + MyInfo());
     }
-
 }

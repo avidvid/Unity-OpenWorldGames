@@ -27,29 +27,30 @@ public class Recipe{
     public int Energy { get; set; }
     public bool IsPublic { get; set; }
     public bool IsEnable { get; set; }
+    public int HealthCheck { get; set; }
 
     public virtual string GetDescription()
     {
         ItemDatabase itemDatabase = ItemDatabase.Instance();
         try
         {
-            return "Ready to mix " + Rarity + " Recipe" +
-                   FirstItemCnt + " of "+
-                   itemDatabase.GetItemById(FirstItemId).Name+
-                   " with " + SecondItemCnt + " of " +
-                   itemDatabase.GetItemById(SecondItemId).Name +
-                   " to make " + FinalItemCnt + " of " +
-                   itemDatabase.GetItemById(FinalItemId).Name +
-                   " for " + Energy + " energy ? ";
-            //todo: current font doesn't support ( ) 
-            //return "Ready to mix " +
-            //       _itemDatabase.FindItem(FirstItemId).Name
-            //       + "(" + FirstItemCnt + ") +" +
-            //       _itemDatabase.FindItem(SecondItemId).Name
-            //       + "(" + SecondItemCnt + ") and make " +
-            //       _itemDatabase.FindItem(FinalItemId).Name
-            //       + "(" + FinalItemCnt + ") for " +
-            //       Energy + " energy ? ";
+            //todo: current font doesn't support ( ) now it support so changed 2019-03-15 delete this part  
+            //return "Ready to mix " + Rarity + " Recipe" +
+            //       FirstItemCnt + " of "+
+            //       itemDatabase.GetItemById(FirstItemId).Name+
+            //       " with " + SecondItemCnt + " of " +
+            //       itemDatabase.GetItemById(SecondItemId).Name +
+            //       " to make " + FinalItemCnt + " of " +
+            //       itemDatabase.GetItemById(FinalItemId).Name +
+            //       " for " + Energy + " energy ? ";
+            return "Ready to mix " +
+                   itemDatabase.GetItemById(FirstItemId).Name
+                   + "(" + FirstItemCnt + ") +" +
+                   itemDatabase.GetItemById(SecondItemId).Name
+                   + "(" + SecondItemCnt + ") and make " +
+                   itemDatabase.GetItemById(FinalItemId).Name
+                   + "(" + FinalItemCnt + ") for " +
+                   Energy + " energy ? ";
         }
         catch (Exception e)
         {

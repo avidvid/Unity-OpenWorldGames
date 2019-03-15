@@ -8,7 +8,7 @@ public class UserRecipe
     public int UserId { get; set; }
     public string RecipeCode { get; set; }
     public DateTime Created { get; set; }
-
+    public int HealthCheck { get; set; }
 
     public UserRecipe()
     {
@@ -16,8 +16,8 @@ public class UserRecipe
         UserId = -1;
         RecipeCode = null;
         Created = DateTime.Now;
+        HealthCheck = 0;
     }
-
     public UserRecipe(int recipeId, int playerId, string recipeCode = null)
     {
         RecipeId = recipeId;

@@ -102,30 +102,6 @@ public class Cache : MonoBehaviour {
             foreach (var c in toDelete)
                 _contents.Remove(c);
     }
-    //todo: delete 2018-10-15 ?? Error around here keep it longer 
-    //public void SyncItems(string objectType, List<ActiveItemType> items)
-    //{
-    //    List<CacheContent> toDelete = new List<CacheContent>();
-    //    foreach (var c in _contents)
-    //    {
-    //        if (c.ObjectType != objectType)
-    //            continue;
-    //        bool objectExists = false;
-    //        for (int i = 0; i < items.Count; i++)
-    //        {
-    //            if (items[i].ItemTypeInUse.Id == Int32.Parse(c.Content)
-    //                && items[i].Location == c.Location)
-    //            {
-    //                objectExists = true;
-    //                break;
-    //            }
-    //        }
-    //        if (!objectExists)
-    //            toDelete.Add(c);
-    //    }
-    //    foreach (var c in toDelete)
-    //        _contents.Remove(c);
-    //}
     public string SerializeCache()
     {
         List<string> cacheArray = new List<string>();

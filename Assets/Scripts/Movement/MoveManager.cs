@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MoveManager : MonoBehaviour {
-    public KeyCode EnableFastSpeedWithKey = KeyCode.LeftShift;
-    //public Transform TurnWithMovement;
-
+public class MoveManager : MonoBehaviour
+{
     private int _baseSortIndex = 0;
     private CharacterManager _characterManager;
     private Character _playerCharacter;
@@ -106,9 +104,6 @@ public class MoveManager : MonoBehaviour {
     private void DoMove(Vector3 movement)
     {
         var currentSpeed = _playerCharacterSetting.Speed;
-        //todo:delete
-        if (Input.GetKey(EnableFastSpeedWithKey))
-            currentSpeed += 2;
         //Old moving system
         transform.Translate(movement * currentSpeed * Time.deltaTime );
         //transform.position = Vector3.Lerp(transform.position, _destiny, Time.deltaTime * currentSpeed);
