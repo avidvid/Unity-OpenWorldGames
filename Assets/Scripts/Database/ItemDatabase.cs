@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using UnityEngine;
 
 public class ItemDatabase : MonoBehaviour {
 
@@ -40,19 +39,31 @@ public class ItemDatabase : MonoBehaviour {
     {
         return _recipes;
     }
-    public List<ItemContainer> RecipeItems(Recipe r)
-    {
-        return new List<ItemContainer> { GetItemById(r.FirstItemId), GetItemById(r.SecondItemId), GetItemById(r.FinalItemId) };
-    }
     private List<Recipe> LoadRecipes()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "Recipe.xml");
-        //Read the Recipes from Recipe.xml file in the streamingAssets folder
         XmlSerializer serializer = new XmlSerializer(typeof(List<Recipe>));
         FileStream fs = new FileStream(path, FileMode.Open);
         var recipes = (List<Recipe>)serializer.Deserialize(fs);
         fs.Close();
         return recipes;
+    }
+    private void SaveRecipes()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "Recipe.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Recipe>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _recipes);
+        fs.Close();
+    }
+    internal void UpdateRecipes(List<Recipe> recipes)
+    {
+        _recipes = recipes;
+        SaveRecipes();
+    }
+    public List<ItemContainer> RecipeItems(Recipe r)
+    {
+        return new List<ItemContainer> { GetItemById(r.FirstItemId), GetItemById(r.SecondItemId), GetItemById(r.FinalItemId) };
     }
     public Recipe FindRecipe(int recipeId)
     {
@@ -72,14 +83,6 @@ public class ItemDatabase : MonoBehaviour {
                 return _items[i];
         return null;
     }
-    private void SaveItems()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<ItemContainer>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _items);
-        fs.Close();
-    }
     private List<ItemContainer> LoadItems()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
@@ -89,6 +92,19 @@ public class ItemDatabase : MonoBehaviour {
         var items = (List<ItemContainer>)serializer.Deserialize(fs);
         fs.Close();
         return items;
+    }
+    private void SaveItems()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<ItemContainer>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _items);
+        fs.Close();
+    }
+    internal void UpdateItems(List<ItemContainer> items)
+    {
+        _items = items;
+        SaveItems();
     }
     internal int GetItemIdBasedOnRarity(Vector3 position, string dropItems=null)
     {   
@@ -109,9 +125,7 @@ public class ItemDatabase : MonoBehaviour {
     public List<Offer> GetOffers()
     {
         if (_offers==null )
-        {
             _offers = LoadOffers();
-        }
         return _offers;
     }
     private List<Offer> LoadOffers()
@@ -122,6 +136,19 @@ public class ItemDatabase : MonoBehaviour {
         var offers = (List<Offer>)serializer.Deserialize(fs);
         fs.Close();
         return offers;
+    }
+    internal void SaveOffers()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "Offer.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Offer>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _offers);
+        fs.Close();
+    }
+    internal void UpdateOffers(List<Offer> offers)
+    {
+        _offers = offers;
+        SaveOffers();
     }
     //Json try
     //private void SaveOffersJson()

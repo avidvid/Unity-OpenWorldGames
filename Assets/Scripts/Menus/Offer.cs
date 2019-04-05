@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 [Serializable]
-public class Offers
+public class JsonOfferList
 {
-    public List<Offer> OfferList;
-    public Offers() {}
-    public Offers(List<Offer> list)
+    public List<Offer> List;
+    public JsonOfferList() {}
+    public JsonOfferList(List<Offer> list)
     {
-        OfferList = list;
+        List = list;
     }
 }
 

@@ -7010,7 +7010,7 @@ Behaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580306287}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1580306291
 Camera:
   m_ObjectHideFlags: 0
@@ -7918,7 +7918,6 @@ GameObject:
   - component: {fileID: 1954072673}
   - component: {fileID: 1954072672}
   - component: {fileID: 1954072674}
-  - component: {fileID: 1954072675}
   - component: {fileID: 1954072676}
   - component: {fileID: 1954072678}
   - component: {fileID: 1954072677}
@@ -7969,18 +7968,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f14213d70330e4696ca34d71784a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1954072675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954072671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfd9e4f383def494d8f5f8062ad2665d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1954072676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7993,7 +7980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd08a168605e874896f31de95325dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnableFastSpeedWithKey: 304
 --- !u!114 &1954072677
 MonoBehaviour:
   m_ObjectHideFlags: 0

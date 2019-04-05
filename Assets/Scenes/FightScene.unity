@@ -1564,7 +1564,7 @@ Behaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682642132}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1682642137
 Camera:
   m_ObjectHideFlags: 0
@@ -1749,7 +1749,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd08a168605e874896f31de95325dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnableFastSpeedWithKey: 304
 --- !u!114 &2140013783
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,21 +7,21 @@
   <Level>6</Level>
   <Updated>true</Updated>
   <HealthCheck>692070</HealthCheck>
-  <LastUpdated>2019-03-15T10:09:12.2272518-05:00</LastUpdated>
+  <LastUpdated>2019-03-20T08:27:27.55283-05:00</LastUpdated>
   <IsEnable>true</IsEnable>
   <FightMode>false</FightMode>
   <Alive>true</Alive>
   <Life>1</Life>
   <Coin>8142</Coin>
-  <Experience>4624</Experience>
+  <Experience>5324</Experience>
   <MaxExperience>10500</MaxExperience>
   <HandsCnt>2</HandsCnt>
   <MaxHealth>1200</MaxHealth>
-  <Health>1075</Health>
+  <Health>1034</Health>
   <MaxMana>400</MaxMana>
   <Mana>400</Mana>
   <MaxEnergy>1600</MaxEnergy>
-  <Energy>1600</Energy>
+  <Energy>1297</Energy>
   <SpeedAttack>6</SpeedAttack>
   <SpeedDefense>5</SpeedDefense>
   <AbilityAttack>10</AbilityAttack>
