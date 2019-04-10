@@ -56,7 +56,11 @@ public class CharacterDatabase : MonoBehaviour {
         serializer.Serialize(fs, _characters);
         fs.Close();
     }
-
+    internal void UpdateCharacters(List<Character> characters)
+    {
+        _characters = characters;
+        SaveCharacters();
+    }
     #endregion
     #region Research
     public List<Research> LoadResearches()
@@ -68,6 +72,19 @@ public class CharacterDatabase : MonoBehaviour {
         List<Research> researches = (List<Research>)serializer.Deserialize(fs);
         fs.Close();
         return researches;
+    }
+    private void SaveResearches()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "Research.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Research>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _researches);
+        fs.Close();
+    }
+    internal void UpdateResearches(List<Research> researches)
+    {
+        _researches = researches;
+        SaveResearches();
     }
     internal List<Research> GetResearches()
     {

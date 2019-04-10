@@ -127,6 +127,11 @@ public class UserDatabase : MonoBehaviour
         serializer.Serialize(fs, _userPlayer);
         fs.Close();
     }
+    public void UpdateUserPlayer(UserPlayer userPlayer)
+    {
+        _userPlayer = userPlayer;
+        SaveUserPlayer();
+    }
     private void HealthCheckUserPlayer()
     {
         var healthCheck = _userPlayer.CalculateHealthCheck();
@@ -152,6 +157,11 @@ public class UserDatabase : MonoBehaviour
         serializer.Serialize(fs, _userInventory);
         fs.Close();
     }
+    public void UpdateUserInventory(List<UserItem> userInventory)
+    {
+        _userInventory = userInventory;
+        SaveUserInventory();
+    }
     internal void UpdateUserInventory(List<ItemIns> invCarry, List<ItemIns> invEquipment = null)
     {
         _userInventory.Clear();
@@ -170,9 +180,13 @@ public class UserDatabase : MonoBehaviour
     }
     #endregion
     #region UserCharacters
-    public List<Character> GetUserCharacters()
+    public List<Character> GetMyCharacters()
     {
         return _myCharacters;
+    }
+    public List<UserCharacter> GetUserCharacters()
+    {
+        return _userCharacters;
     }
     internal bool ValidateCharacterCode(string characterCode)
     {
@@ -202,6 +216,11 @@ public class UserDatabase : MonoBehaviour
         FileStream fs = new FileStream(path, FileMode.Create);
         serializer.Serialize(fs, _userCharacters);
         fs.Close();
+    }
+    public void UpdateUserCharacters(List<UserCharacter> userCharacters)
+    {
+        _userCharacters = userCharacters;
+        SaveUserCharacters();
     }
     private List<Character> BuildUserCharacters()
     {
@@ -312,6 +331,11 @@ public class UserDatabase : MonoBehaviour
         serializer.Serialize(fs, _characterMixture);
         fs.Close();
     }
+    public void UpdateCharacterMixture(CharacterMixture characterMixture)
+    {
+        _characterMixture = characterMixture;
+        SaveCharacterMixture();
+    }
     #endregion
     #region CharacterResearch
     internal CharacterResearching GetCharacterResearching()
@@ -332,14 +356,6 @@ public class UserDatabase : MonoBehaviour
         _characterResearching = null;
         SaveCharacterResearching();
     }
-    private void SaveCharacterResearching()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearching.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(CharacterResearching));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _characterResearching);
-        fs.Close();
-    }
     private CharacterResearching LoadCharacterResearching()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearching.xml");
@@ -348,6 +364,19 @@ public class UserDatabase : MonoBehaviour
         var characterResearching = (CharacterResearching)serializer.Deserialize(fs);
         fs.Close();
         return characterResearching;
+    }
+    private void SaveCharacterResearching()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearching.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(CharacterResearching));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _characterResearching);
+        fs.Close();
+    }
+    public void UpdateCharacterResearching(CharacterResearching characterResearching)
+    {
+        _characterResearching = characterResearching;
+        SaveCharacterResearching();
     }
     internal List<UserResearch> GetCharacterResearches()
     {
@@ -373,6 +402,11 @@ public class UserDatabase : MonoBehaviour
         serializer.Serialize(fs, _characterResearches);
         fs.Close();
     }
+    public void UpdateCharacterResearches(List<UserResearch> userResearches)
+    {
+        _characterResearches = userResearches;
+        SaveCharacterResearches();
+    }
     internal void AddCharacterResearch(Research research, int level)
     {
         bool updated = false;
@@ -393,7 +427,7 @@ public class UserDatabase : MonoBehaviour
     }
     #endregion
     #region CharacterSetting
-    public CharacterSetting GetCharacterSetting(int userPlayerId)
+    public CharacterSetting GetCharacterSetting()
     {
         return _characterSetting;
     }
@@ -420,6 +454,11 @@ public class UserDatabase : MonoBehaviour
         FileStream fs = new FileStream(path, FileMode.Create);
         serializer.Serialize(fs, _characterSetting);
         fs.Close();
+    }
+    public void UpdateCharacterSetting(CharacterSetting characterSetting)
+    {
+        _characterSetting = characterSetting;
+        SaveCharacterSetting();
     }
     private void HealthCheckCharacterSetting()
     {
@@ -531,6 +570,11 @@ public class UserDatabase : MonoBehaviour
         serializer.Serialize(fs, _userRecipes);
         fs.Close();
     }
+    public void UpdateUserRecipes(List<UserRecipe> userRecipes)
+    {
+        _userRecipes = userRecipes;
+        SaveUserRecipes();
+    }
     internal bool ValidateRecipeCode(string recipeCode)
     {
         for (int j = 0; j < _userRecipes.Count; j++)
@@ -543,7 +587,6 @@ public class UserDatabase : MonoBehaviour
                 }
         return false;
     }
-
     #endregion
     private void GoToStartScene()
     {

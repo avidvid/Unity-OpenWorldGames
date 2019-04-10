@@ -77,7 +77,11 @@ public class TerrainDatabase : MonoBehaviour {
         Debug.Log("TDB-RegionMonsters.Count = " + _monsters.Count);
         Debug.Log("***TDB*** Success!");
     }
-    #region Regions
+    #region Regions    
+    internal List<Region> GetRegions()
+    {
+        return _regions;
+    }
     private void LoadRegions()
     {
         //Empty the Characters DB
@@ -89,6 +93,22 @@ public class TerrainDatabase : MonoBehaviour {
         _regions = (List<Region>)serializer.Deserialize(fs);
         fs.Close();
     }
+    private void SaveRegions()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "Region.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Region>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _regions);
+        fs.Close();
+    }
+    internal void UpdateRegions(List<Region> regions)
+    {
+        _regions = regions;
+        SaveRegions();
+    }
+
+
+
     internal int GetRegionKey()
     {
         return _region.Key;
@@ -124,6 +144,19 @@ public class TerrainDatabase : MonoBehaviour {
         fs.Close();
         return terrains;
     }
+    private void SaveTerrains()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "Terrain.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<TerrainIns>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _terrains);
+        fs.Close();
+    }
+    internal void UpdateTerrains(List<TerrainIns> terrains)
+    {
+        _terrains = terrains;
+        SaveTerrains();
+    }
     private void SetRegionTerrainTypes()
     {
         List<int> regionTerrains = _region.Terrains.Split(',').Select(Int32.Parse).ToList();
@@ -146,6 +179,19 @@ public class TerrainDatabase : MonoBehaviour {
         var elements = (List<ElementIns>)serializer.Deserialize(fs);
         fs.Close();
         return elements;
+    }
+    private void SaveElements()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "Element.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<ElementIns>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _elements);
+        fs.Close();
+    }
+    internal void UpdateElements(List<ElementIns> elements)
+    {
+        _elements = elements;
+        SaveElements();
     }
     private void SetRegionElementTypes()
     {
@@ -175,8 +221,12 @@ public class TerrainDatabase : MonoBehaviour {
         return _myElements;
     }
     #endregion
-    #region InsideStories
-    private List<InsideStory> LoadInsideStories()
+    #region InsideStories    
+    internal List<InsideStory> GetInsideStories()
+    {
+        return _insideStories;
+    }
+private List<InsideStory> LoadInsideStories()
     {
         //Empty the InsideStory DB
         string path = Path.Combine(Application.streamingAssetsPath, "InsideStory.xml");
@@ -186,6 +236,19 @@ public class TerrainDatabase : MonoBehaviour {
         var insideStories = (List<InsideStory>)serializer.Deserialize(fs);
         fs.Close();
         return insideStories;
+    }
+    private void SaveInsideStories()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "InsideStory.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<InsideStory>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _insideStories);
+        fs.Close();
+    }
+    internal void UpdateInsideStories(List<InsideStory> insideStories)
+    {
+        _insideStories = insideStories;
+        SaveInsideStories();
     }
     private void SetRegionInsideStoryTypes()
     {

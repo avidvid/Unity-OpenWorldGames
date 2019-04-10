@@ -8,8 +8,8 @@ using UnityEngine;
 public class ItemDatabase : MonoBehaviour {
 
     private static ItemDatabase _itemDatabase;
-    private List<ItemContainer> _items = new List<ItemContainer>();
-    private List<Recipe> _recipes = new List<Recipe>();
+    private List<ItemContainer> _items ;
+    private List<Recipe> _recipes;
     private List<Offer> _offers ;
 
     #region ItemDatabase Instance
@@ -34,6 +34,56 @@ public class ItemDatabase : MonoBehaviour {
         Debug.Log("IDB-Recipes.Count = " + _recipes.Count);
         Debug.Log("***IDB*** Success!");
     }
+    #region Item
+    public List<ItemContainer> GetItems()
+    {
+        return _items;
+    }
+    internal ItemContainer GetItemById(int id)
+    {
+        for (int i = 0; i < _items.Count; i++)
+            if (_items[i].Id == id)
+                return _items[i];
+        return null;
+    }
+    private List<ItemContainer> LoadItems()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
+        //Read the items from Item.xml file in the streamingAssets folder
+        XmlSerializer serializer = new XmlSerializer(typeof(List<ItemContainer>));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        var items = (List<ItemContainer>)serializer.Deserialize(fs);
+        fs.Close();
+        return items;
+    }
+    private void SaveItems()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<ItemContainer>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _items);
+        fs.Close();
+    }
+    internal void UpdateItems(List<ItemContainer> items)
+    {
+        _items = items;
+        SaveItems();
+    }
+    internal int GetItemIdBasedOnRarity(Vector3 position, string dropItems = null)
+    {
+        if (dropItems == null) //Drop coin/Gem/Recipe 
+            dropItems = "8,9,10";
+        List<int> items = dropItems.Split(',').Select(Int32.Parse).ToList();
+        List<int> availableItems = new List<int>();
+        var rarity = RandomHelper.Range(position, DateTime.Now.DayOfYear, (int)ItemContainer.ItemRarity.Common);
+        for (int i = 0; i < items.Count; i++)
+            if ((int)GetItemById(items[i]).Rarity >= rarity)
+                availableItems.Add(items[i]);
+        if (availableItems.Count > 0)
+            return availableItems[RandomHelper.Range(position, 1, availableItems.Count)];
+        return -1;
+    }
+    #endregion
     #region Recipe
     internal List<Recipe> GetRecipes()
     {
@@ -73,52 +123,6 @@ public class ItemDatabase : MonoBehaviour {
                 return _recipes[i];
         }
         return null;
-    }
-    #endregion
-    #region Item
-    internal ItemContainer GetItemById(int id)
-    {
-        for (int i = 0; i < _items.Count; i++)
-            if (_items[i].Id == id)
-                return _items[i];
-        return null;
-    }
-    private List<ItemContainer> LoadItems()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
-        //Read the items from Item.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(List<ItemContainer>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var items = (List<ItemContainer>)serializer.Deserialize(fs);
-        fs.Close();
-        return items;
-    }
-    private void SaveItems()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<ItemContainer>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _items);
-        fs.Close();
-    }
-    internal void UpdateItems(List<ItemContainer> items)
-    {
-        _items = items;
-        SaveItems();
-    }
-    internal int GetItemIdBasedOnRarity(Vector3 position, string dropItems=null)
-    {   
-        if (dropItems == null) //Drop coin/Gem/Recipe 
-            dropItems = "8,9,10";
-        List<int> items = dropItems.Split(',').Select(Int32.Parse).ToList();
-        List<int> availableItems = new List<int>();
-        var rarity = RandomHelper.Range(position, DateTime.Now.DayOfYear, (int)ItemContainer.ItemRarity.Common);
-        for (int i = 0; i < items.Count; i++)
-            if ((int)GetItemById(items[i]).Rarity >= rarity)
-                availableItems.Add(items[i]);
-        if (availableItems.Count > 0)
-            return availableItems[RandomHelper.Range(position, 1, availableItems.Count)];
-        return -1;
     }
     #endregion
     #region Offers

@@ -69,12 +69,12 @@ public class CharacterManager : MonoBehaviour
         UserPlayer = _userDatabase.GetUserPlayer();
         Debug.Log("CM-UserPlayer = " + UserPlayer.MyInfo());
         //CharacterSetting
-        CharacterSetting = _userDatabase.GetCharacterSetting(UserPlayer.Id);
+        CharacterSetting = _userDatabase.GetCharacterSetting();
         Debug.Log("CM-CharacterSetting = " + CharacterSetting.MyInfo());
         //Character
         MyCharacter = _characterDatabase.GetCharacterById(CharacterSetting.CharacterId);
         Debug.Log("CM-MyCharacter = " + MyCharacter.MyInfo());
-        UserCharacters = _userDatabase.GetUserCharacters();
+        UserCharacters = _userDatabase.GetMyCharacters();
         Debug.Log("CM-UserCharacters.Count = " + UserCharacters.Count);
         //Research
         Researches = _characterDatabase.GetResearches();
