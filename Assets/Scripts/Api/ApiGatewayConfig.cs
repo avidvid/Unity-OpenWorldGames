@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -17,7 +16,8 @@ public class ApiGatewayConfig : MonoBehaviour
     private const string ApiKey = "4OguhEhkYy3dFBRw7oaIK6Q5WEzVZLGa23DXeJet";
     private const string ApiPath = "https://c34irxibui.execute-api.us-west-2.amazonaws.com/";
     private const string ApiStage = "default/";
-    private string _random ;
+    private int _random;
+    private int _userId;
 
     private int _loading = 0;
     private const int Targets = 1;
@@ -29,17 +29,85 @@ public class ApiGatewayConfig : MonoBehaviour
         _userDatabase =UserDatabase.Instance();
         _characterDatabase=CharacterDatabase.Instance();
         _terrainDatabase=TerrainDatabase.Instance();
-        //Todo: get user id  from the device info 
+        
         string apiGate = "";
         string uri="";
         //Call Random
         apiGate = "TestRandomNumber";
         uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
         StartCoroutine(GetRequest(uri, ReadRandomJson));
+        //Call Items
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        StartCoroutine(GetRequest(uri, ReadItemsJson));
+        //Call Recipe
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        StartCoroutine(GetRequest(uri, ReadRecipesJson));
         //Call Offer
         apiGate = "TestRandomNumber";
         uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
         StartCoroutine(GetRequest(uri, ReadOffersJson));
+
+        //Call Characters
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        StartCoroutine(GetRequest(uri, ReadCharactersJson));
+        //Call Researches
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        StartCoroutine(GetRequest(uri, ReadResearchesJson));
+
+        //Call Regions
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        StartCoroutine(GetRequest(uri, ReadRegionsJson));
+        //Call Terrains
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        StartCoroutine(GetRequest(uri, ReadTerrainsJson));
+        //Call Elements
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        StartCoroutine(GetRequest(uri, ReadElementsJson));
+        //Call InsideStories
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        StartCoroutine(GetRequest(uri, ReadInsideStoriesJson));
+
+        //Call UserPlayer
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        StartCoroutine(GetRequest(uri, ReadUserPlayerJson));
+        //Call CharacterSetting
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        StartCoroutine(GetRequest(uri, ReadCharacterSettingJson));
+        //Call CharacterMixture
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        StartCoroutine(GetRequest(uri, ReadCharacterMixtureJson));
+        //Call CharacterResearching
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        StartCoroutine(GetRequest(uri, ReadCharacterResearchingJson));
+        //Call UserInventory
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        StartCoroutine(GetRequest(uri, ReadUserInventoryJson));
+        //Call UserCharacters
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        StartCoroutine(GetRequest(uri, ReadUserCharactersJson));
+        //Call CharacterResearches
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        StartCoroutine(GetRequest(uri, ReadCharacterResearchesJson));
+        //Call UserRecipes
+        apiGate = "TestRandomNumber";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        StartCoroutine(GetRequest(uri, ReadUserRecipesJson));
+
     }
     // Update is called once per frame
     void Update()
@@ -54,8 +122,10 @@ public class ApiGatewayConfig : MonoBehaviour
     private void ReadRandomJson(string result)
     {
         var response = TranslateResponse(result);
+        _random = response.Body.RandomNum;
+         //Todo: get the userid
+         _userId = 1;
     }
-
     #region PublicRequests
     //ItemDatabase
     private void ReadItemsJson(string result)
@@ -161,8 +231,6 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     #endregion
     #region UserRequests
-    //public CharacterMixture CharacterMixture;
-    //public CharacterResearching ;
     private void ReadUserPlayerJson(string result)
     {
         UserPlayer userPlayer = _userDatabase.GetUserPlayer();
@@ -240,7 +308,6 @@ public class ApiGatewayConfig : MonoBehaviour
         }
         LoadingThumbsUp();
     }
-    //public List<UserRecipe> UserRecipes;
     private void ReadUserRecipesJson(string result)
     {
         List<UserRecipe> recipes = _userDatabase.GetUserRecipes();

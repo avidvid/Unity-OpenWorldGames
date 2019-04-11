@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Facebook.MiniJSON;
 using UnityEngine;
 
 [Serializable]
@@ -13,7 +12,6 @@ public class Headers
         return "Header1=" + Header1 ;
     }
 }
-
 [Serializable]
 public class BodyResponse
 {
@@ -98,3 +96,23 @@ public class ApiResponse
                   " Body: " + Body.MyInfo());
     }
 }
+//Items
+//Recipes
+//Offers
+
+//Characters
+//Researches
+
+//Regions
+//Terrains
+//Elements
+//InsideStories
+
+//UserPlayer
+//CharacterSetting
+//CharacterMixture
+//CharacterResearching
+//UserInventory
+//UserCharacters
+//CharacterResearches
+//UserRecipes
