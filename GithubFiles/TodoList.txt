@@ -16,8 +16,6 @@ Users Want to do what they want, not what you want them to do
 ###############
 https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019
 
-
-
 ###############
 ####Office#####
 ###############	
@@ -139,7 +137,6 @@ vAuto
   "Type": "Weapon",
   "Weight": 3
 }
-
 
 	
 	

@@ -115,7 +115,6 @@ public class UserPlayer  {
     public UserPlayer()
     {
     }
-
     #region Print
     internal void Print()
     {

@@ -41,50 +41,32 @@ public class BodyResponse
     internal string MyInfo()
     {
         string info = " Message=" +  Message;
-        if (RandomNum!=0)
-            info += " RandomNum=" + RandomNum;
+        if (RandomNum!=0) info += " RandomNum=" + RandomNum;
 
-        if (Items != null)
-            info += " Items=" + Items.Count;
-        if (Recipes != null)
-            info += " Recipes=" + Recipes.Count;
-        if (Offers != null)
-            info += " Offers=" + Offers.Count;
+        if (Items.Count!=0) info += " Items=" + Items.Count;
+        if (Recipes.Count != 0) info += " Recipes=" + Recipes.Count;
+        if (Offers.Count != 0) info += " Offers=" + Offers.Count;
 
-        if (Characters != null)
-            info += " Characters=" + Characters.Count;
-        if (Researches != null)
-            info += " Researches=" + Researches.Count;
+        if (Characters.Count != 0) info += " Characters=" + Characters.Count;
+        if (Researches.Count != 0) info += " Researches=" + Researches.Count;
 
-        if (Regions != null)
-            info += " Regions=" + Regions.Count;
-        if (Terrains != null)
-            info += " Terrains=" + Terrains.Count;
-        if (Elements != null)
-            info += " Elements=" + Elements.Count;
-        if (InsideStories != null)
-            info += " InsideStories=" + InsideStories.Count;
+        if (Regions.Count != 0) info += " Regions=" + Regions.Count;
+        if (Terrains.Count != 0) info += " Terrains=" + Terrains.Count;
+        if (Elements.Count != 0) info += " Elements=" + Elements.Count;
+        if (InsideStories.Count != 0) info += " InsideStories=" + InsideStories.Count;
         
-        if (UserPlayer != null)
-            info += " UserPlayer=" + UserPlayer.MyInfo();
-        if (UserInventory != null)
-            info += " UserInventory=" + UserInventory.Count;
-        if (UserCharacters != null)
-            info += " UserCharacters=" + UserCharacters.Count;
-        if (CharacterMixture != null)
-            info += " CharacterMixture=" + CharacterMixture.MyInfo();
-        if (CharacterResearches != null)
-            info += " CharacterResearches=" + CharacterResearches.Count;
-        if (CharacterResearching != null)
-            info += " CharacterResearching=" + CharacterResearching.MyInfo();
-        if (CharacterSetting != null)
-            info += " CharacterSetting=" + CharacterSetting.MyInfo();
-        if (UserRecipes != null)
-            info += " UserRecipes=" + UserRecipes.Count;
+        if (UserPlayer.Id != 0) info += " UserPlayer=" + UserPlayer.MyInfo();
+        if (UserInventory.Count != 0) info += " UserInventory=" + UserInventory.Count;
+        if (UserCharacters.Count != 0) info += " UserCharacters=" + UserCharacters.Count;
+        if (CharacterMixture.Id != 0 ) info += " CharacterMixture=" + CharacterMixture.MyInfo();
+        if (CharacterResearches.Count != 0) info += " CharacterResearches=" + CharacterResearches.Count;
+        if (CharacterResearching.Id != 0) info += " CharacterResearching=" + CharacterResearching.MyInfo();
+        if (CharacterSetting.Id != -1) info += " CharacterSetting=" + CharacterSetting.MyInfo();
+        if (UserRecipes.Count != 0) info += " UserRecipes=" + UserRecipes.Count;
         return info;
     }
 }
-[Serializable]
+[Serializable] 
 public class ApiResponse 
 {
     public string StatusCode;
