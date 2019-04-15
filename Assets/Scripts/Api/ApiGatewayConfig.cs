@@ -76,10 +76,10 @@ public class ApiGatewayConfig : MonoBehaviour
         //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
         //StartCoroutine(GetRequest(uri, ReadInsideStoriesJson));
 
-        //Call UserPlayer
-        apiGate = "TestRandomNumber";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
-        StartCoroutine(GetRequest(uri, ReadUserPlayerJson));
+        ////Call UserPlayer
+        //apiGate = "TestRandomNumber";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        //StartCoroutine(GetRequest(uri, ReadUserPlayerJson));
         ////Call CharacterSetting
         //apiGate = "TestRandomNumber";
         //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
@@ -258,7 +258,7 @@ public class ApiGatewayConfig : MonoBehaviour
     private void ReadUserPlayerJson(string result)
     {
         var response = TranslateResponse(result);
-        if (response.Body.UserPlayer.Id != 0)
+        if (response.Body.UserPlayer.Id == 0)
             return;
         //throw new Exception("API-UserPlayer Failed!!!");
         UserPlayer userPlayer = _userDatabase.GetUserPlayer();
@@ -272,7 +272,7 @@ public class ApiGatewayConfig : MonoBehaviour
     private void ReadCharacterSettingJson(string result)
     {
         var response = TranslateResponse(result);
-        if (response.Body.CharacterSetting.Id != -1)
+        if (response.Body.CharacterSetting.Id == -1)
             return;
         //throw new Exception("API-CharacterSetting Failed!!!");
         CharacterSetting characterSetting = _userDatabase.GetCharacterSetting();
@@ -286,7 +286,7 @@ public class ApiGatewayConfig : MonoBehaviour
     private void ReadCharacterMixtureJson(string result)
     {
         var response = TranslateResponse(result);
-        if (response.Body.CharacterMixture.Id != 0)
+        if (response.Body.CharacterMixture.Id == 0)
             return;
         //throw new Exception("API-CharacterMixture Failed!!!");
         CharacterMixture characterMixture = _userDatabase.GetCharacterMixture();
@@ -300,7 +300,7 @@ public class ApiGatewayConfig : MonoBehaviour
     private void ReadCharacterResearchingJson(string result)
     {
         var response = TranslateResponse(result);
-        if (response.Body.CharacterResearching.Id != 0)
+        if (response.Body.CharacterResearching.Id == 0)
             return;
         //throw new Exception("API-CharacterResearching Failed!!!");
         CharacterResearching characterResearching = _userDatabase.GetCharacterResearching();

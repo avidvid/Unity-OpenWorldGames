@@ -1,23 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameLoadHelper : MonoBehaviour
 {
-    private const int Targets = 20;
-    private int _loading = 0;
+    private const int Targets = 3;
+    private Slider _slider;
     // Start is called before the first frame update
     void Start()
     {
+        _slider = GameObject.Find("LoadingSlider").GetComponent<Slider>();
+        _slider.value =0;
     }
     // Update is called once per frame
     void Update()
     {
-        if (_loading >= 100)
+        if (_slider.value >= _slider.maxValue)
             SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
     }
     internal void LoadingThumbsUp()
     {
-        _loading += (int)Mathf.Ceil(100 / (float)Targets);
-        print("_loading = "+ _loading);
+        _slider.value += _slider.maxValue / Targets;
+        
+         print("_loading = "+ _slider.value);
     }
 }

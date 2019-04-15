@@ -14,49 +14,46 @@ Users Want to do what they want, not what you want them to do
 ###############
 #### Home #####
 ###############
-https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019
 
 ###############
 ####Office#####
 ###############	
-
-watch 
-https://www.youtube.com/watch?v=UUQydC0IimI
-
-APi contact
-https://www.red-gate.com/simple-talk/dotnet/c-programming/calling-restful-apis-unity3d/
-
-
-
-	add health check to 
-	
-	change back up file for OUP to not go to drive one 
-	http://zikmund.me/blog/changing-default-project-directory-visual-studio-2017/
-
-	Aws api server lambda 
-	use jason file to save data 
-	
-	https://www.youtube.com/watch?v=DSrg7hG-jV4
-	
-	
-	Getting started with AWS Lambda, part 1
-	https://www.youtube.com/watch?v=fSUEk6iMW88
-	
-	
-	https://www.youtube.com/watch?v=u7spDymJqmc
+	Start MongoDb Database and reading from it and lambda functions 
+		DynamoDB:
+	Reading data from DynamoDB tables (Getting started with AWS Lambda, part 8)
+	https://www.youtube.com/watch?v=P8okmPWIAcQ
 	
 	
 	Lambda + Gateway 
 	https://www.youtube.com/channel/UCRthRrv06q1iOl86-tTKJhg/videos
+	
+	
+	device id or email to be saved in userplayer
+	
+	RSVP: https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019
+
+
+	APi Weather: https://www.red-gate.com/simple-talk/dotnet/c-programming/calling-restful-apis-unity3d/
+
+
+	
+	change back up file for OUP to not go to drive one 
+	http://zikmund.me/blog/changing-default-project-directory-visual-studio-2017/
+
+
+	
+
+
+	
+	
+
 
 
 null value:	
 	<?xml version="1.0" encoding="Windows-1252"?>
 <CharacterResearching xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:nil="true" />
 	
-	DynamoDB:
-	Reading data from DynamoDB tables (Getting started with AWS Lambda, part 8)
-	https://www.youtube.com/watch?v=P8okmPWIAcQ
+
 	
 {
   "Coin": 0,
@@ -139,21 +136,17 @@ vAuto
 }
 
 	
+For jobScheduler : Crown generator	http://www.cronmaker.com/
+	 
 	
-	http://www.cronmaker.com/
-	Crown generator 
-	
-	
-	device id or email to be saved in userplayer
 	
 
 	inside monster on walk not passing the walls
 	ScriptTextHandler ????
 	
 	
-	Gift phase 
-	Gift recepie and characters 
-	
+	Gift phase : 	Gift recepie and characters 
+	Story writing phase
 	
 Before lunch part:
 	Fb phase
