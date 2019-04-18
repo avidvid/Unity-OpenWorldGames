@@ -35,7 +35,7 @@ public class UserDatabase : MonoBehaviour
         return _userDatabase;
     }
     #endregion
-    void Awake()
+    void Start()
     {
         _userDatabase = Instance();
         Debug.Log("***UDB*** Start!");

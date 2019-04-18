@@ -156,14 +156,14 @@ public class ItemContainer
     }
     internal void Print()
     {
-        Debug.Log("UserPlayer = " + MyInfo());
+        Debug.Log("Item = " + MyInfo());
     }
     internal string MyInfo()
     {
         if (Id == -1)
             return "Empty Item";
         return Id + " Name:" + Name +
-                " Sprite:" + GetSprite().name +
+                //" Sprite:" + GetSprite().name +
                " Type:" + Type +
                " Rarity:" + Rarity+
                 (Unique?" Unique":"")

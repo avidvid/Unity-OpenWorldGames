@@ -52,7 +52,7 @@
     <SellProd>Coin</SellProd>
     <SellAmount>10000</SellAmount>
     <PayProd>Gem</PayProd>
-    <PayAmount>1</PayAmount>
+    <PayAmount>100</PayAmount>
     <IsSpecial>false</IsSpecial>
     <IsEnable>true</IsEnable>
   </Offer>

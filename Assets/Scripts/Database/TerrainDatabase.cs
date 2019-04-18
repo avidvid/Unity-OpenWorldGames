@@ -41,7 +41,7 @@ public class TerrainDatabase : MonoBehaviour {
     }
     #endregion
 
-    void Awake()
+    void Start()
     {
         _terrainDatabase = TerrainDatabase.Instance(); 
          _characterDatabase = CharacterDatabase.Instance();

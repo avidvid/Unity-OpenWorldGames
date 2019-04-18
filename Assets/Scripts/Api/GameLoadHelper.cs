@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameLoadHelper : MonoBehaviour
 {
-    private const int Targets = 3;
+    private const int Targets = 4;
     private Slider _slider;
     // Start is called before the first frame update
     void Start()

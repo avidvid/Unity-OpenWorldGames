@@ -18,6 +18,9 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####Office#####
 ###############	
+
+	Read the items correctly 
+
 	Start MongoDb Database and reading from it and lambda functions 
 		DynamoDB:
 	Reading data from DynamoDB tables (Getting started with AWS Lambda, part 8)

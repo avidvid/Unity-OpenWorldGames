@@ -16,6 +16,7 @@ public class JsonOfferList
 [Serializable]
 public class Offer
 {
+    public int id;
     public string SellProd;
     public int SellAmount;
     public string PayProd;

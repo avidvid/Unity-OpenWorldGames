@@ -5,11 +5,13 @@ using UnityEngine;
 [Serializable]
 public class Headers
 {
-    public string Header1;
+    public string Header;
+    public int ResultCount = 0;
+    public int ScannedCount=0;
 
     internal string MyInfo()
     {
-        return "Header1=" + Header1 ;
+        return "Header=" + Header + " Count=" + ResultCount + " ScannedCount=" + ScannedCount ;
     }
 }
 [Serializable]

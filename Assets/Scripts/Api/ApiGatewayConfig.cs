@@ -15,15 +15,16 @@ public class ApiGatewayConfig : MonoBehaviour
 
     private GameLoadHelper _gameLoadHelper;
 
-    private const string ApiKey = "4OguhEhkYy3dFBRw7oaIK6Q5WEzVZLGa23DXeJet";
-    private const string ApiPath = "https://c34irxibui.execute-api.us-west-2.amazonaws.com/";
-    private const string ApiStage = "default/";
+    private  string ApiKey = "AOlOnm2C4394k8QZHqkLl8xYcCEWRSND5WtAclWq";
+    private  string ApiPath = "https://h28ve9pjh5.execute-api.us-west-2.amazonaws.com/";
+    private  string ApiStage = "prod/";
     private int _userId;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("***API*** Start!");
         _itemDatabase = ItemDatabase.Instance();
         _userDatabase =UserDatabase.Instance();
         _characterDatabase=CharacterDatabase.Instance();
@@ -34,20 +35,20 @@ public class ApiGatewayConfig : MonoBehaviour
         string apiGate = "";
         string uri="";
         //Call Random
-        apiGate = "TestRandomNumber";
+        apiGate = "GetRandom";
         uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
         StartCoroutine(GetRequest(uri, ReadRandomJson));
-        ////Call Items
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
-        //StartCoroutine(GetRequest(uri, ReadItemsJson));
+        //Call Items
+        apiGate = "GetItems";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
+        StartCoroutine(GetRequest(uri, ReadItemsJson));
         ////Call Recipe
         //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadRecipesJson));
         //Call Offer
-        apiGate = "TestRandomNumber";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        apiGate = "GetOffers";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadOffersJson));
 
         ////Call Characters
@@ -129,14 +130,9 @@ public class ApiGatewayConfig : MonoBehaviour
     {
         var response = TranslateResponse(result);
         if (response.Body.Items.Count == 0)
-            return;
-            //throw new Exception("API-Items Failed!!!");
-        List<ItemContainer> items = _itemDatabase.GetItems();
-        if (response.Body.Items.Count != items.Count)
-        {
-            print("Updating Items");
-            //_itemDatabase.UpdateItems(response.Body.Items);
-        }
+            throw new Exception("API-Items Failed!!!");
+        print("Updating Items");
+        _itemDatabase.UpdateItems(response.Body.Items);
         _gameLoadHelper.LoadingThumbsUp();
     }
     private void ReadRecipesJson(string result)
@@ -155,16 +151,13 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     private void ReadOffersJson(string result)
     {
+        //todo: move it out of loading  
         var response = TranslateResponse(result);
         if (response.Body.Offers.Count == 0)
-            return;
-        //throw new Exception("API-Offers Failed!!!");
-        List<Offer> offers = _itemDatabase.GetOffers();
-        if (response.Body.Offers.Count != offers.Count)
-        {
-            print("Updating Offers");
-            //_itemDatabase.UpdateOffers(response.Body.Offers);
-        }
+          throw new Exception("API-Offers Failed!!!");
+        print("Updating Offers");
+        _itemDatabase.UpdateOffers(response.Body.Offers);
+
         _gameLoadHelper.LoadingThumbsUp();
     }
     //CharacterDatabase

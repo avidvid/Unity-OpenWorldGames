@@ -24,12 +24,10 @@ public class ItemDatabase : MonoBehaviour {
         return _itemDatabase;
     }
     #endregion
-    void Awake()
+    void Start()
     {
         _itemDatabase = ItemDatabase.Instance();
         Debug.Log("***IDB*** Start!");
-        _items = LoadItems();
-        Debug.Log("IDB-Items.Count = " + _items.Count);
         _recipes = LoadRecipes();
         Debug.Log("IDB-Recipes.Count = " + _recipes.Count);
         Debug.Log("***IDB*** Success!");
@@ -46,28 +44,16 @@ public class ItemDatabase : MonoBehaviour {
                 return _items[i];
         return null;
     }
-    private List<ItemContainer> LoadItems()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
-        //Read the items from Item.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(List<ItemContainer>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var items = (List<ItemContainer>)serializer.Deserialize(fs);
-        fs.Close();
-        return items;
-    }
-    private void SaveItems()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Item.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<ItemContainer>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _items);
-        fs.Close();
-    }
     internal void UpdateItems(List<ItemContainer> items)
     {
-        _items = items;
-        SaveItems();
+        Debug.Log("IDB-Items.Count = " + items.Count);
+        foreach (var i in items)
+        {
+            i.Print();
+        }
+        Debug.Log("IDB-Items.Count = " + items.FindAll(s => s.IsEnable).Count);
+        _items = new List<ItemContainer>(items.FindAll(s => s.IsEnable));
+        Debug.Log("IDB-Items.Count = " + _items.Count);
     }
     internal int GetItemIdBasedOnRarity(Vector3 position, string dropItems = null)
     {
@@ -128,64 +114,11 @@ public class ItemDatabase : MonoBehaviour {
     #region Offers
     public List<Offer> GetOffers()
     {
-        if (_offers==null )
-            _offers = LoadOffers();
         return _offers;
-    }
-    private List<Offer> LoadOffers()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Offer.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Offer>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var offers = (List<Offer>)serializer.Deserialize(fs);
-        fs.Close();
-        return offers;
-    }
-    internal void SaveOffers()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Offer.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Offer>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _offers);
-        fs.Close();
     }
     internal void UpdateOffers(List<Offer> offers)
     {
         _offers = offers;
-        SaveOffers();
     }
-    //Json try
-    //private void SaveOffersJson()
-    //{
-    //    string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
-    //    Offers offers = new Offers(LoadOffers());
-    //    using (StreamWriter stream = new StreamWriter(path))
-    //    {
-    //        string jsonData = JsonUtility.ToJson(offers);
-    //        print(offers.OfferList.Count + jsonData);
-    //        stream.Write(jsonData);
-    //    }
-    //}
-    //public List<Offer> LoadOffersJson()
-    //{
-    //    Offers offers = new Offers();
-    //    string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
-    //    try
-    //    {
-    //        if (File.Exists(path))
-    //        {
-    //            string jsonData = File.ReadAllText(path);
-    //            offers = JsonUtility.FromJson<Offers>(jsonData);
-    //        }
-    //        else
-    //            Debug.LogError("Error in Load Data");
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        Debug.LogError(e);
-    //        throw;
-    //    }
-    //    return offers.OfferList;
-    //}
     #endregion
 }
