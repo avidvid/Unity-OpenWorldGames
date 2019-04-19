@@ -2,11 +2,11 @@
 <ArrayOfRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Recipe>
     <Id>1</Id>
-    <FirstItemId>1</FirstItemId>
+    <FirstItemId>2001</FirstItemId>
     <FirstItemCnt>1</FirstItemCnt>
-    <SecondItemId>2</SecondItemId>
+    <SecondItemId>1001</SecondItemId>
     <SecondItemCnt>1</SecondItemCnt>
-    <FinalItemId>3</FinalItemId>
+    <FinalItemId>5001</FinalItemId>
     <FinalItemCnt>1</FinalItemCnt>
     <DurationMinutes>10</DurationMinutes>
     <Rarity>Common</Rarity>
@@ -16,11 +16,11 @@
   </Recipe>
   <Recipe>
     <Id>2</Id>
-    <FirstItemId>1</FirstItemId>
+    <FirstItemId>2001</FirstItemId>
     <FirstItemCnt>1</FirstItemCnt>
-    <SecondItemId>3</SecondItemId>
+    <SecondItemId>5001</SecondItemId>
     <SecondItemCnt>1</SecondItemCnt>
-    <FinalItemId>4</FinalItemId>
+    <FinalItemId>3001</FinalItemId>
     <FinalItemCnt>1</FinalItemCnt>
     <DurationMinutes>10</DurationMinutes>
     <Rarity>Common</Rarity>
@@ -30,11 +30,11 @@
   </Recipe>
   <Recipe>
     <Id>3</Id>
-    <FirstItemId>1</FirstItemId>
+    <FirstItemId>2001</FirstItemId>
     <FirstItemCnt>5</FirstItemCnt>
-    <SecondItemId>4</SecondItemId>
+    <SecondItemId>3001</SecondItemId>
     <SecondItemCnt>1</SecondItemCnt>
-    <FinalItemId>4</FinalItemId>
+    <FinalItemId>3001</FinalItemId>
     <FinalItemCnt>2</FinalItemCnt>
     <DurationMinutes>10</DurationMinutes>
     <Rarity>Common</Rarity>
@@ -44,11 +44,11 @@
   </Recipe>
   <Recipe>
     <Id>4</Id>
-    <FirstItemId>4</FirstItemId>
+    <FirstItemId>3001</FirstItemId>
     <FirstItemCnt>2</FirstItemCnt>
-    <SecondItemId>3</SecondItemId>
+    <SecondItemId>5001</SecondItemId>
     <SecondItemCnt>2</SecondItemCnt>
-    <FinalItemId>5</FinalItemId>
+    <FinalItemId>3002</FinalItemId>
     <FinalItemCnt>2</FinalItemCnt>
     <DurationMinutes>10</DurationMinutes>
     <Rarity>Common</Rarity>

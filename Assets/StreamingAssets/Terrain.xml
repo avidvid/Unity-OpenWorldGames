@@ -9,7 +9,7 @@
     <Swimable>false</Swimable>
     <HasElement>true</HasElement>
     <HasMonster>true</HasMonster>
-    <DropItems>1,2,3</DropItems>
+    <DropItems>1001,2001,5001</DropItems>
     <DropChance>0.5</DropChance>
     <Type>Land</Type>
     <Tiles>4</Tiles>
@@ -25,7 +25,7 @@
     <Swimable>false</Swimable>
     <HasElement>true</HasElement>
     <HasMonster>true</HasMonster>
-    <DropItems>1,2,3</DropItems>
+    <DropItems>1001,2001,5001</DropItems>
     <DropChance>0.7</DropChance>
     <Type>Land</Type>
     <Tiles>3</Tiles>

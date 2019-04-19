@@ -47,18 +47,17 @@ public class ItemDatabase : MonoBehaviour {
     internal void UpdateItems(List<ItemContainer> items)
     {
         Debug.Log("IDB-Items.Count = " + items.Count);
-        foreach (var i in items)
+        _items = new List<ItemContainer>(items.FindAll(s => s.IsEnable));
+        Debug.Log("IDB-Items.Count = " + _items.Count);
+        foreach (var i in _items)
         {
             i.Print();
         }
-        Debug.Log("IDB-Items.Count = " + items.FindAll(s => s.IsEnable).Count);
-        _items = new List<ItemContainer>(items.FindAll(s => s.IsEnable));
-        Debug.Log("IDB-Items.Count = " + _items.Count);
     }
     internal int GetItemIdBasedOnRarity(Vector3 position, string dropItems = null)
     {
         if (dropItems == null) //Drop coin/Gem/Recipe 
-            dropItems = "8,9,10";
+            dropItems = "1,2,3";
         List<int> items = dropItems.Split(',').Select(Int32.Parse).ToList();
         List<int> availableItems = new List<int>();
         var rarity = RandomHelper.Range(position, DateTime.Now.DayOfYear, (int)ItemContainer.ItemRarity.Common);

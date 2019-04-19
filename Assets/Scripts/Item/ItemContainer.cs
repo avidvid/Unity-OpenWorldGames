@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Remoting;
 using UnityEngine;
 
 [Serializable]
@@ -17,12 +18,12 @@ public class ItemContainer
     }
     public enum ItemRarity
     {
-        Sacred = 0,
-        Artifact = 1,
-        Legendary = 2,
-        Saga = 3,
-        Rare = 10,
-        Uncommon = 40,
+        Sacred = 1,
+        Artifact = 3,
+        Legendary = 5,
+        Saga = 10,
+        Rare = 20,
+        Uncommon = 60,
         Common = 100
     }
 
@@ -51,56 +52,56 @@ public class ItemContainer
         ThreeHands,
         FourHands
     }
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public string IconPath { get; set; }
-    public int IconId { get; set; }
-    public int Cost { get; set; }
-    public int Weight { get; set; }
-    public int MaxStackCnt { get; set; }
-    public bool Unique { get; set; }
-    public int ExpirationDays { get; set; }
-    public ItemType Type { get; set; }
-    public ItemRarity Rarity { get; set; }
-    public bool IsEnable { get; set; }
+
+    public int Id;
+    public string Name ;
+    public string Description ;
+    public string IconPath ;
+    public int IconId ;
+    public int Cost ;
+    public int Weight ;
+    public int MaxStackCnt ;
+    public bool Unique ;
+    public int ExpirationDays ;
+    public ItemType Type ;
+    public ItemRarity Rarity ;
+    public bool IsEnable ;
     //Consumable
-    public int Health { get; set; }
-    public int Mana { get; set; }
-    public int Energy { get; set; }
-    public int Coin { get; set; }
-    public int Gem { get; set; }
-    public int Recipe { get; set; }
-    public int Egg { get; set; }
+    public int Health ;
+    public int Mana ;
+    public int Energy ;
+    public int Coin ;
+    public int Gem ;
+    public int Recipe ;
+    public int Egg ;
     //Equipment
-    public PlaceType PlaceHolder { get; set; }
-    public int Agility { get; set; }
-    public int Bravery { get; set; }
+    public PlaceType PlaceHolder ;
+    public int Agility ;
+    public int Bravery ;
     //todo: remove Carry 
-    public int Carry { get; set; }
-    public int CarryCnt { get; set; }
-    public int Charming { get; set; }
-    public int Intellect { get; set; }
-    public int Crafting { get; set; }
-    public int Researching { get; set; }
+    public int Carry ;
+    public int CarryCnt ;
+    public int Charming ;
+    public int Intellect ;
+    public int Crafting ;
+    public int Researching ;
     //todo: remove Speed 
-    public int Speed { get; set; }
-    public int Stamina { get; set; }
-    public int Strength { get; set; }
+    public int Speed ;
+    public int Stamina ;
+    public int Strength ;
     //Weapon
-    public Hands CarryType { get; set; }
-    public int SpeedAttack { get; set; }
-    public int SpeedDefense { get; set; }
-    public int AbilityAttack { get; set; }
-    public int AbilityDefense { get; set; }
-    public int MagicAttack { get; set; }
-    public int MagicDefense { get; set; }
-    public int PoisonAttack { get; set; }
-    public int PoisonDefense { get; set; }
+    public Hands CarryType ;
+    public int SpeedAttack ;
+    public int SpeedDefense ;
+    public int AbilityAttack ;
+    public int AbilityDefense ;
+    public int MagicAttack ;
+    public int MagicDefense ;
+    public int PoisonAttack ;
+    public int PoisonDefense ;
     //Tool
-    public int MaxTimeToUse { get; set; }
-    public ElementIns.ElementType FavoriteElement { get; set; }
-    public int HealthCheck { get; set; }
+    public int MaxTimeToUse ;
+    public ElementIns.ElementType FavoriteElement ;
 
     protected ItemContainer(
         int id, string name, string desc,
@@ -144,7 +145,6 @@ public class ItemContainer
                 FavoriteElement = ElementIns.ElementType.Hole;
                 break;
         }
-        HealthCheck = 0;
     }
     protected ItemContainer()
     {
@@ -163,10 +163,33 @@ public class ItemContainer
         if (Id == -1)
             return "Empty Item";
         return Id + " Name:" + Name +
-                //" Sprite:" + GetSprite().name +
+               //" Des:" + Description +
+               " Rarity:" + Rarity +
                " Type:" + Type +
-               " Rarity:" + Rarity+
+               " =>" + TypeInfo() +
+               " Sprite:" + GetSprite().name +
                 (Unique?" Unique":"")
             ;
+    }
+
+    private string TypeInfo()
+    {
+        switch (Type)
+        {
+            case ItemType.Consumable:
+                return Health + "/" + Mana + "/" + Energy + "/" + Coin + "/" + Gem + "/" + Recipe + "/" + Egg;
+            case ItemType.Equipment:
+                return PlaceHolder + "/" + Agility + "/" + Bravery + "/" + Carry + "/" + CarryCnt + "/" + Charming +
+                       "/" + Intellect
+                       + Crafting + "/" + Researching + "/" + Speed + "/" + Stamina + "/" + Strength;
+            case ItemType.Weapon:
+                return CarryType + "/" + SpeedAttack + "/" + SpeedDefense + "/" + AbilityAttack + "/" + AbilityDefense +
+                       "/" + MagicAttack
+                       + MagicDefense + "/" + PoisonAttack + "/" + PoisonDefense;
+            case ItemType.Tool:
+                return CarryType + "/" + MaxTimeToUse + "/" + FavoriteElement + "/" + Egg;
+            default:
+                return "";
+        }
     }
 }

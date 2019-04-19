@@ -21,7 +21,7 @@
     <View>Medium</View>
     <Rarity>Uncommon</Rarity>
     <FavoriteTerrainTypes>Land</FavoriteTerrainTypes>
-    <DropItems>1,2,4</DropItems>
+    <DropItems>2001,1001,3001</DropItems>
     <DropChance>0.5</DropChance>
     <IsEnable>true</IsEnable>
     <Slug>Phoenix</Slug>
@@ -47,7 +47,7 @@
     <View>Medium</View>
     <Rarity>Uncommon</Rarity>
     <FavoriteTerrainTypes>Land</FavoriteTerrainTypes>
-    <DropItems>3,4,5</DropItems>
+    <DropItems>5001,3001,3002</DropItems>
     <DropChance>0.5</DropChance>
     <IsEnable>true</IsEnable>
     <Slug>SailorMoon</Slug>
@@ -73,7 +73,7 @@
     <View>Small</View>
     <Rarity>Common</Rarity>
     <FavoriteTerrainTypes>Land</FavoriteTerrainTypes>
-    <DropItems>3,4,5</DropItems>
+    <DropItems>5001,3001,3002</DropItems>
     <DropChance>0.7</DropChance>
     <IsEnable>true</IsEnable>
     <Slug>GoldenBat</Slug>
@@ -99,7 +99,7 @@
     <View>Small</View>
     <Rarity>Common</Rarity>
     <FavoriteTerrainTypes>Land</FavoriteTerrainTypes>
-    <DropItems>3,4,5</DropItems>
+    <DropItems>5001,3001,3002</DropItems>
     <DropChance>0.7</DropChance>
     <IsEnable>true</IsEnable>
     <Slug>SilverBat</Slug>
@@ -125,7 +125,7 @@
     <View>Small</View>
     <Rarity>Common</Rarity>
     <FavoriteTerrainTypes>Land</FavoriteTerrainTypes>
-    <DropItems>3,4,5</DropItems>
+    <DropItems>5001,3001,3002</DropItems>
     <DropChance>0.7</DropChance>
     <IsEnable>true</IsEnable>
     <Slug>RedBat</Slug>
@@ -151,7 +151,7 @@
     <View>ELarge</View>
     <Rarity>Saint</Rarity>
     <FavoriteTerrainTypes>Land</FavoriteTerrainTypes>
-    <DropItems>0</DropItems>
+    <DropItems>1001</DropItems>
     <DropChance>0.1</DropChance>
     <IsEnable>true</IsEnable>
     <Slug>RingSadako</Slug>
@@ -177,7 +177,7 @@
     <View>Medium</View>
     <Rarity>Saint</Rarity>
     <FavoriteTerrainTypes>Land</FavoriteTerrainTypes>
-    <DropItems>0</DropItems>
+    <DropItems>1001</DropItems>
     <DropChance>0.7</DropChance>
     <IsEnable>true</IsEnable>
     <Slug>RingTV</Slug>
