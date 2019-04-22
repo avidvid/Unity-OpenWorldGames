@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
 using UnityEngine;
 
 [Serializable]
 public class ElementIns {
-
     public enum ElementType
     {
         Hole,
@@ -36,7 +33,6 @@ public class ElementIns {
             BuildSprite();
         return _tile;
     }
-
     public void BuildSprite()
     {
         if (MultipleId!=-1)
@@ -44,13 +40,10 @@ public class ElementIns {
             Sprite[] sprites = Resources.LoadAll<Sprite>("Elements/" + MultipleName);
             // Get specific sprite
             _tile = sprites[MultipleId];
-
         }
         else
             _tile = Resources.Load<Sprite>("Elements/"+ Name);
     }
-
-
     internal void Print()
     {
         Debug.Log(
@@ -63,5 +56,4 @@ public class ElementIns {
             " FavoriteTerrainTypes:" + FavoriteTerrainTypes
             );
     }
-
 }

@@ -2,47 +2,28 @@
 using UnityEngine;
 
 [Serializable]
-public class Recipe{
+public class Recipe
+{
 
-    public enum RecipeRarity
-    {
-        Sacred = 0,
-        Artifact = 1,
-        Legendary = 2,
-        Saga = 3,
-        Rare = 10,
-        Uncommon = 40,
-        Common = 100
-    }
-
-    public int Id { get; set; }
-    public int FirstItemId { get; set; }
-    public int FirstItemCnt { get; set; }
-    public int SecondItemId { get; set; }
-    public int SecondItemCnt { get; set; }
-    public int FinalItemId { get; set; }
-    public int FinalItemCnt { get; set; }
-    public int DurationMinutes { get; set; }
-    public RecipeRarity Rarity { get; set; }
-    public int Energy { get; set; }
-    public bool IsPublic { get; set; }
-    public bool IsEnable { get; set; }
-    public int HealthCheck { get; set; }
+    public int Id;
+    public int FirstItemId;
+    public int FirstItemCnt;
+    public int SecondItemId;
+    public int SecondItemCnt;
+    public int FinalItemId;
+    public int FinalItemCnt;
+    public int DurationMinutes;
+    public DataTypes.Rarity Rarity;
+    public int Energy;
+    public bool IsPublic;
+    public bool IsEnable;
+    public int HealthCheck;
 
     public virtual string GetDescription()
     {
         ItemDatabase itemDatabase = ItemDatabase.Instance();
         try
         {
-            //todo: current font doesn't support ( ) now it support so changed 2019-03-15 delete this part  
-            //return "Ready to mix " + Rarity + " Recipe" +
-            //       FirstItemCnt + " of "+
-            //       itemDatabase.GetItemById(FirstItemId).Name+
-            //       " with " + SecondItemCnt + " of " +
-            //       itemDatabase.GetItemById(SecondItemId).Name +
-            //       " to make " + FinalItemCnt + " of " +
-            //       itemDatabase.GetItemById(FinalItemId).Name +
-            //       " for " + Energy + " energy ? ";
             return "Ready to mix " +
                    itemDatabase.GetItemById(FirstItemId).Name
                    + "(" + FirstItemCnt + ") +" +

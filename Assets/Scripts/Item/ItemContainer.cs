@@ -16,16 +16,6 @@ public class ItemContainer
         Quest,
         Empty
     }
-    public enum ItemRarity
-    {
-        Sacred = 1,
-        Artifact = 3,
-        Legendary = 5,
-        Saga = 10,
-        Rare = 20,
-        Uncommon = 60,
-        Common = 100
-    }
 
     public enum PlaceType
     {
@@ -64,7 +54,7 @@ public class ItemContainer
     public bool Unique ;
     public int ExpirationDays ;
     public ItemType Type ;
-    public ItemRarity Rarity ;
+    public DataTypes.Rarity Rarity ;
     public bool IsEnable ;
     //Consumable
     public int Health ;
@@ -107,7 +97,7 @@ public class ItemContainer
         int id, string name, string desc,
         string iconPath, int iconId, int cost,
         int weight, int maxStackCnt,bool unique, int expirationDays,
-        ItemType type, ItemRarity rarity)
+        ItemType type, DataTypes.Rarity rarity)
     {
         Id = id;
         Name = name;

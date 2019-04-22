@@ -72,6 +72,9 @@ public class TerrainDatabase : MonoBehaviour {
         SetRegionInsideStoryTypes();
         Debug.Log("TDB-RegionInsideStories.Count = " + _myInsideStories.Count);
         Debug.Log("TDB-RegionInsideMonsters.Count = " + _insideMonsters.Count);
+        //Set Monsters based on the user region
+        SetRegionMonsterTypes();
+        Debug.Log("TDB-RegionMonsters.Count = " + _monsters.Count);
         Debug.Log("***TDB*** Success!");
     }
     #region Regions    
@@ -290,9 +293,8 @@ private List<InsideStory> LoadInsideStories()
     {
         return _monsters;
     }
-    internal void SetRegionMonsterTypes()
+    private void SetRegionMonsterTypes()
     {
-        //Set Monsters based on the user region
         List<int> regionMonsters = _region.Monsters.Split(',').Select(Int32.Parse).ToList();
         foreach (var monster in _characterDatabase.GetCharacters())
             if (regionMonsters.IndexOf(monster.Id) != -1 && monster.IsEnable)
@@ -313,7 +315,6 @@ private List<InsideStory> LoadInsideStories()
                     throw new Exception("Terrain with no available monster");
                 _monsters.Add(monster);
             }
-        Debug.Log("TDB-RegionMonsters.Count = " + _monsters.Count);
     }
     #endregion
 }

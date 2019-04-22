@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public static class JsonHelper
+public static class DeleteJsonHelper
 {
     public static T[] FromJson<T>(string json)
     {

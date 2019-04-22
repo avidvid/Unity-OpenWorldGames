@@ -11,18 +11,6 @@ public class Character {
         Fly,
         Swim
     }
-    public enum AttackRange
-    {
-        Short = 1,
-        Medium,
-        Long
-    }
-    public enum DefenseRange
-    {
-        Short = 1,
-        Medium,
-        Long
-    }
     public enum AttackType
     {
         Strength, 
@@ -75,48 +63,35 @@ public class Character {
         Large,
         ELarge = 6
     }
-    public enum CharRarity
-    {
-        None = -1,
-        Saint =0,
-        Legendary=2,
-        Saga=3,
-        Rare=10,
-        Uncommon=40,
-        Common=100
-    }
-
     //todo: make all set private to not screw db ?? 
-    public int Id { get; private set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public string IconPath { get; set; }
-    public int IconId { get; set; }
-    public bool IsAnimated { get; set; }
-    public bool HasFightMode { get; set; }
-    public CharacterType Move { get; set; }
-    public AttackRange AttackR { get; set; }
-    public DefenseRange DefenseR { get; set; }
-    public AttackType AttackT { get; set; }
-    public AttackType DefenseT { get; set; }
-    public float BasicAttack { get; set; }
-    public float BasicDefense { get; set; }
-    public SpeedType Speed { get; set; }
-    public BodyType Body { get; set; }
-    public CarryType Carry { get; set; }
-    public ViewType View { get; set; }
-    public CharRarity Rarity { get; set; }
-    public TerrainIns.TerrainType FavoriteTerrainTypes { get; set; }
-    public string DropItems { get; set; }
-    public float DropChance { get; set; }
-    public bool IsEnable { get; set; }
-    public string Slug { get; set; }
-    public int HealthCheck { get; set; }
+    public int Id;
+    public string Name;
+    public string Description;
+    public string IconPath;
+    public int IconId;
+    public bool IsAnimated;
+    public bool HasFightMode;
+    public CharacterType Move;
+    public DataTypes.Range AttackR;
+    public DataTypes.Range DefenseR;
+    public AttackType AttackT;
+    public AttackType DefenseT;
+    public float BasicAttack;
+    public float BasicDefense;
+    public SpeedType Speed;
+    public BodyType Body;
+    public CarryType Carry;
+    public ViewType View;
+    public DataTypes.Rarity Rarity;
+    public TerrainIns.TerrainType FavoriteTerrainTypes;
+    public string DropItems;
+    public float DropChance;
+    public bool IsEnable;
 
     public Character(int id, string name, string desc, 
-        CharacterType moveT, AttackRange attackR, DefenseRange defenseR, AttackType attackT, AttackType defenseT,
+        CharacterType moveT, DataTypes.Range attackR, DataTypes.Range defenseR, AttackType attackT, AttackType defenseT,
         int basicAttack, int basicDefense, 
-        SpeedType speedT, BodyType bodyT, CarryType carryT, ViewType viewT, CharRarity rarity,
+        SpeedType speedT, BodyType bodyT, CarryType carryT, ViewType viewT, DataTypes.Rarity rarity,
         TerrainIns.TerrainType favoriteTerrainTypes, string dropItems,float dropChance)
     {
         Id = id;
@@ -142,8 +117,6 @@ public class Character {
         DropChance = dropChance;
         FavoriteTerrainTypes = favoriteTerrainTypes;
         IsEnable = true;
-        Slug = name.Replace(" ", "");
-        HealthCheck = 0;
     }
     public Character()
     {
@@ -174,12 +147,10 @@ public class Character {
         DropChance = character.DropChance;
         FavoriteTerrainTypes = character.FavoriteTerrainTypes;
         IsEnable = enable;
-        Slug = character.Slug;
-        HealthCheck = character.HealthCheck;
     }
     public Sprite GetSprite()
     {
-        Sprite[] characterSprites = Resources.LoadAll<Sprite>("Characters/" + Slug);
+        Sprite[] characterSprites = Resources.LoadAll<Sprite>("Characters/" + Name.Replace(" ", ""));
         // Get specific sprite
         return characterSprites.Single(s => s.name == "down_3");
     }
@@ -187,7 +158,7 @@ public class Character {
     {
         List<Sprite> moveSprites = new List<Sprite>();
         // Load all sprites in atlas
-        Sprite[] abilityIconsAtlas = Resources.LoadAll<Sprite>("Characters/" + Slug);
+        Sprite[] abilityIconsAtlas = Resources.LoadAll<Sprite>("Characters/" + Name.Replace(" ", ""));
         // Get specific sprite
         moveSprites.Add(abilityIconsAtlas.Single(s => s.name == "right_3"));
         moveSprites.Add(abilityIconsAtlas.Single(s => s.name == "left_3"));
@@ -199,7 +170,7 @@ public class Character {
     {
         // Load Animation Controllers
         string animationPath = "Characters/Animations/";
-        return (RuntimeAnimatorController)Resources.Load(animationPath + Slug + "Controller");
+        return (RuntimeAnimatorController)Resources.Load(animationPath + Name.Replace(" ", "") + "Controller");
     }
     internal bool CheckAttackType(AttackType attackT, string checkSum)
     {

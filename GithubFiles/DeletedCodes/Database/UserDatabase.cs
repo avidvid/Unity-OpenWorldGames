@@ -76,6 +76,8 @@ public class UserDatabase : MonoBehaviour
             //UserCharacters
             _userCharacters = LoadUserCharacters();
             Debug.Log("UDB-UserCharacters.Count = " + _userCharacters.Count);
+            _myCharacters =  BuildUserCharacters();
+            Debug.Log("UDB-BuiltUserCharacters.Count = " + _myCharacters.Count);
             //CharacterMixture
             _characterMixture = LoadCharacterMixture();
             Debug.Log("UDB-CharacterMixture = " +  (_characterMixture == null ? "Empty" : _characterMixture.MyInfo()) );
@@ -218,7 +220,7 @@ public class UserDatabase : MonoBehaviour
         _userCharacters = userCharacters;
         SaveUserCharacters();
     }
-    internal void BuildUserCharacters()
+    private List<Character> BuildUserCharacters()
     {
         var characterDatabase = CharacterDatabase.Instance();
         var characters = characterDatabase.GetCharacters();
@@ -238,9 +240,7 @@ public class UserDatabase : MonoBehaviour
                     break;
                 }
         }
-        _myCharacters = myCharacters;
-        Debug.Log("UDB-BuiltUserCharacters.Count = " + _myCharacters.Count);
-
+        return myCharacters;
     }
     public bool AddUserCharacters(UserCharacter uc)
     {

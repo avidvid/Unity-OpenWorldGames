@@ -15,6 +15,8 @@ public class CharacterDatabase : MonoBehaviour {
     {
         _characterDatabase = CharacterDatabase.Instance();
         Debug.Log("***CDB*** Start!");
+        _characters = LoadCharacters();
+        Debug.Log("CDB-Characters.Count = " + _characters.Count);
         _researches = LoadResearches();
         Debug.Log("CDB-Researches.Count = " + _researches.Count);
         Debug.Log("***CDB*** Success!");
@@ -34,10 +36,30 @@ public class CharacterDatabase : MonoBehaviour {
     {
         return _characters;
     }
+    private List<Character> LoadCharacters()
+    {
+        //Empty the Characters DB
+        _characters.Clear();
+        string path = Path.Combine(Application.streamingAssetsPath, "Character.xml");
+        //Read the Characters from Character.xml file in the streamingAssets folder
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Character>));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        var characters = (List<Character>)serializer.Deserialize(fs);
+        fs.Close();
+        return characters;
+    }
+    private void SaveCharacters()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "Character.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Character>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, _characters);
+        fs.Close();
+    }
     internal void UpdateCharacters(List<Character> characters)
     {
-        _characters = new List<Character>(characters.FindAll(s => s.IsEnable));
-        Debug.Log("CDB-Characters.Count = " + _characters.Count);
+        _characters = characters;
+        SaveCharacters();
     }
     #endregion
     #region Research

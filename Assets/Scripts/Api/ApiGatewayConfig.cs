@@ -15,9 +15,9 @@ public class ApiGatewayConfig : MonoBehaviour
 
     private GameLoadHelper _gameLoadHelper;
 
-    private  string ApiKey = "AOlOnm2C4394k8QZHqkLl8xYcCEWRSND5WtAclWq";
-    private  string ApiPath = "https://h28ve9pjh5.execute-api.us-west-2.amazonaws.com/";
-    private  string ApiStage = "prod/";
+    private const string ApiKey = "AOlOnm2C4394k8QZHqkLl8xYcCEWRSND5WtAclWq";
+    private const string ApiPath = "https://h28ve9pjh5.execute-api.us-west-2.amazonaws.com/";
+    private const string ApiStage = "prod/";
     private int _userId;
 
 
@@ -42,72 +42,72 @@ public class ApiGatewayConfig : MonoBehaviour
         apiGate = "GetItems";
         uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadItemsJson));
-        ////Call Recipe
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
-        //StartCoroutine(GetRequest(uri, ReadRecipesJson));
+        //Call Recipe
+        apiGate = "GetRecipes";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
+        StartCoroutine(GetRequest(uri, ReadRecipesJson));
         //Call Offer
         apiGate = "GetOffers";
         uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadOffersJson));
 
-        ////Call Characters
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
-        //StartCoroutine(GetRequest(uri, ReadCharactersJson));
+        //Call Characters
+        apiGate = "GetCharacters";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
+        StartCoroutine(GetRequest(uri, ReadCharactersJson));
         ////Call Researches
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadResearchesJson));
 
         ////Call Regions
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadRegionsJson));
         ////Call Terrains
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadTerrainsJson));
         ////Call Elements
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadElementsJson));
         ////Call InsideStories
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadInsideStoriesJson));
 
         ////Call UserPlayer
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadUserPlayerJson));
         ////Call CharacterSetting
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadCharacterSettingJson));
         ////Call CharacterMixture
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadCharacterMixtureJson));
         ////Call CharacterResearching
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadCharacterResearchingJson));
         ////Call UserInventory
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", _userId.ToString(), "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadUserInventoryJson));
         ////Call UserCharacters
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadUserCharactersJson));
         ////Call CharacterResearches
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadCharacterResearchesJson));
         ////Call UserRecipes
-        //apiGate = "TestRandomNumber";
-        //uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        //apiGate = "GetCharacters";
+        //uri = String.Format(ApiPath + ApiStage + apiGate + "?userId={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, ReadUserRecipesJson));
     }
     // Update is called once per frame
@@ -121,7 +121,7 @@ public class ApiGatewayConfig : MonoBehaviour
             return;
         print("Updating RandomNum");
          //Todo: get the userid
-        _userId = 1;
+        _userId =22;
         _gameLoadHelper.LoadingThumbsUp();
     }
     #region PublicRequests
@@ -139,14 +139,10 @@ public class ApiGatewayConfig : MonoBehaviour
     {
         var response = TranslateResponse(result);
         if (response.Body.Recipes.Count == 0)
-            return;
-        //throw new Exception("API-Recipes Failed!!!");
-        List<Recipe> recipes = _itemDatabase.GetRecipes();
-        if (response.Body.Recipes.Count != recipes.Count)
-        {
-            print("Updating Recipes");
-            //_itemDatabase.UpdateRecipes(response.Body.Recipes);
-        }
+             throw new Exception("API-Recipes Failed!!!");
+        print("Updating Recipes");
+        _itemDatabase.UpdateRecipes(response.Body.Recipes);
+        _userDatabase.BuildUserRecipes();
         _gameLoadHelper.LoadingThumbsUp();
     }
     private void ReadOffersJson(string result)
@@ -157,7 +153,6 @@ public class ApiGatewayConfig : MonoBehaviour
           throw new Exception("API-Offers Failed!!!");
         print("Updating Offers");
         _itemDatabase.UpdateOffers(response.Body.Offers);
-
         _gameLoadHelper.LoadingThumbsUp();
     }
     //CharacterDatabase
@@ -165,14 +160,11 @@ public class ApiGatewayConfig : MonoBehaviour
     {
         var response = TranslateResponse(result);
         if (response.Body.Characters.Count == 0)
-            return;
-        //throw new Exception("API-Characters Failed!!!");
-        List<Character> characters = _characterDatabase.GetCharacters();
-        if (response.Body.Characters.Count != characters.Count)
-        {
-            print("Updating Characters");
-            //_characterDatabase.UpdateCharacters(response.Body.Characters);
-        }
+            throw new Exception("API-Characters Failed!!!");
+        print("Updating Characters");
+        _characterDatabase.UpdateCharacters(response.Body.Characters);
+        _terrainDatabase.SetRegionMonsterTypes();
+        _userDatabase.BuildUserCharacters();
         _gameLoadHelper.LoadingThumbsUp();
     }
     private void ReadResearchesJson(string result)
