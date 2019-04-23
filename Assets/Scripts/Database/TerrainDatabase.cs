@@ -12,7 +12,6 @@ public class TerrainDatabase : MonoBehaviour {
     private CharacterDatabase _characterDatabase;
     private UserDatabase _userDatabase;
 
-    private List<Region> _regions = new List<Region>();
     private Region _region;
 
     private List<TerrainIns> _terrains = new List<TerrainIns>();
@@ -47,24 +46,10 @@ public class TerrainDatabase : MonoBehaviour {
          _characterDatabase = CharacterDatabase.Instance();
         _userDatabase = UserDatabase.Instance();
         Debug.Log("***TDB*** Start!");
-        //Load Regions from database 
-        LoadRegions();
-        //Set Region based on the user
-        _region = GetRegion(_userDatabase.GetUserPlayer().Latitude, _userDatabase.GetUserPlayer().Longitude);
-        _region.Print();
 
-        //Load Terrains from database 
-        _terrains=LoadTerrains();
-        Debug.Log("TDB-Terrains.Count = " + _terrains.Count);
         //Set Terrains based on the user region
         SetRegionTerrainTypes();
         Debug.Log("TDB-RegionTerrains.Count = " + _myTerrains.Count);
-        //Load Elements from database 
-        _elements = LoadElements();
-        Debug.Log("TDB-Elements.Count = " + _elements.Count);
-        //Set Elements based on the user region
-        SetRegionElementTypes();
-        Debug.Log("TDB-RegionElements.Count = " + _myElements.Count);
         //Load InsideStories from database 
         _insideStories = LoadInsideStories();
         Debug.Log("TDB-InsideStories.Count = " + _insideStories.Count);
@@ -75,37 +60,12 @@ public class TerrainDatabase : MonoBehaviour {
         Debug.Log("***TDB*** Success!");
     }
     #region Regions    
-    internal List<Region> GetRegions()
+    internal void UpdateRegions(Region region)
     {
-        return _regions;
+        _region = region;
+        //Set Region based on the user
+        _region.Print();
     }
-    private void LoadRegions()
-    {
-        //Empty the Characters DB
-        _regions.Clear();
-        string path = Path.Combine(Application.streamingAssetsPath, "Region.xml");
-        //Read the Characters from Character.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Region>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        _regions = (List<Region>)serializer.Deserialize(fs);
-        fs.Close();
-    }
-    private void SaveRegions()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Region.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Region>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _regions);
-        fs.Close();
-    }
-    internal void UpdateRegions(List<Region> regions)
-    {
-        _regions = regions;
-        SaveRegions();
-    }
-
-
-
     internal int GetRegionKey()
     {
         return _region.Key;
@@ -114,20 +74,9 @@ public class TerrainDatabase : MonoBehaviour {
     {
         return _region;
     }
-    public Region GetRegion(float latitude, float longitude)
-    {
-        for (int i = 0; i < _regions.Count; i++)
-            if (Mathf.Abs(_regions[i].Latitude - latitude) < 10 && Mathf.Abs(_regions[i].Longitude - longitude) < 10)
-                return _regions[i];
-        return _regions[0];
-    }
     internal Vector2 GetRegionLocation(int key)
     {
-        for (int i = 0; i < _regions.Count; i++)
-            if (_regions[i].Key == key)
-                return new Vector2(_regions[i].Latitude*1000, _regions[i].Longitude * 1000);
-                // Vector2 only accept 2 decimal points
-        return Vector2.zero;
+        return new Vector2(_region.Latitude*1000, _region.Longitude * 1000);
     }
     #endregion
     #region Terrains
@@ -141,18 +90,11 @@ public class TerrainDatabase : MonoBehaviour {
         fs.Close();
         return terrains;
     }
-    private void SaveTerrains()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Terrain.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<TerrainIns>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _terrains);
-        fs.Close();
-    }
     internal void UpdateTerrains(List<TerrainIns> terrains)
     {
+        //Load Terrains from database 
         _terrains = terrains;
-        SaveTerrains();
+        Debug.Log("TDB-Terrains.Count = " + _terrains.Count);
     }
     private void SetRegionTerrainTypes()
     {
@@ -167,28 +109,14 @@ public class TerrainDatabase : MonoBehaviour {
     }
     #endregion
     #region Elements
-    private List<ElementIns> LoadElements()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Element.xml");
-        //Read the Recipes from Element.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(List<ElementIns>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var elements = (List<ElementIns>)serializer.Deserialize(fs);
-        fs.Close();
-        return elements;
-    }
-    private void SaveElements()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Element.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<ElementIns>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _elements);
-        fs.Close();
-    }
     internal void UpdateElements(List<ElementIns> elements)
     {
+        //Load Elements from database 
         _elements = elements;
-        SaveElements();
+        Debug.Log("TDB-Elements.Count = " + _elements.Count);
+        //Set Elements based on the user region
+        SetRegionElementTypes();
+        Debug.Log("TDB-RegionElements.Count = " + _myElements.Count);
     }
     private void SetRegionElementTypes()
     {

@@ -28,7 +28,6 @@ public class ItemDatabase : MonoBehaviour {
     {
         _itemDatabase = ItemDatabase.Instance();
         Debug.Log("***IDB*** Start!");
-        Debug.Log("***IDB*** Success!");
     }
     #region Item
     public List<ItemContainer> GetItems()

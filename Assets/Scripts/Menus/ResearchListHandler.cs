@@ -209,14 +209,9 @@ public class ResearchListHandler : MonoBehaviour {
             case "GameOver":
                 SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
                 return;
-            case "Terrain":
+            default: // "Terrain"
                 SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
                 return;
         }
-        //Todo: delete this part 2019-03-15 Give it 2 months
-        //if (_characterManager.CharacterSetting.Alive)
-        //    SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
-        //else
-        //    SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
     }
 }

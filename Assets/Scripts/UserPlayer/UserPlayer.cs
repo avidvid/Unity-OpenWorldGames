@@ -41,25 +41,24 @@ public class UserPlayer  {
         Saint
     }
 
-    public int Id { get; private set; }
-    public string UserName { get; set; }
-    public string Description { get; set; }
-    public float SoundVolume { get; set; }
-    public float Latitude { get; set; }
-    public float Longitude { get; set; }
-    public int Gem { get; set; }
-    public int HealthCheck { get; set; }
-    public DateTime LastLogin { get; set; }
-    public DateTime LockUntil { get; set; }
-    public UserPlayer.PlayerRanks Rank { get; set; }
-    public int PRank { get; set; }
-    public int ClanId { get; set; }
-    public UserPlayer.ClanRanks ClanRank { get; set; }
-    public string CharacterList { get; set; }
-    public bool FBLoggedIn { get; set; }
-    public string FBid { get; set; }
-    public bool GLoggedIn { get; set; }
-    public bool IsEnable { get; set; }
+    public int Id;
+    public string UserName;
+    public string Description;
+    public float SoundVolume;
+    public float Latitude;
+    public float Longitude;
+    public int Gem;
+    public int HealthCheck;
+    public DateTime LastLogin;
+    public DateTime LockUntil;
+    public UserPlayer.PlayerRanks Rank;
+    public int PRank;
+    public int ClanId;
+    public UserPlayer.ClanRanks ClanRank;
+    public bool FBLoggedIn;
+    public string FBid;
+    public bool GLoggedIn;
+    public bool IsEnable;
 
     public UserPlayer(int id = -1, 
                 string userName = null, string description = null, float soundVolume =0,

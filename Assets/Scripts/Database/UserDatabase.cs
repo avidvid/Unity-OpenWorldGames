@@ -78,12 +78,12 @@ public class UserDatabase : MonoBehaviour
             Debug.Log("UDB-UserCharacters.Count = " + _userCharacters.Count);
             //CharacterMixture
             _characterMixture = LoadCharacterMixture();
-            Debug.Log("UDB-CharacterMixture = " +  (_characterMixture == null ? "Empty" : _characterMixture.MyInfo()) );
+            //todo: Active this=> Debug.Log("UDB-CharacterMixture = " +  (_characterMixture == null ? "Empty" : _characterMixture.MyInfo()) );
             //CharacterResearch
-            _characterResearches=LoadCharacterResearches();
+            _characterResearches = LoadCharacterResearches();
             Debug.Log("UDB-CharacterResearch.Count = " + _characterResearches.Count);
             _characterResearching = LoadCharacterResearching();
-            Debug.Log("UDB-CharacterResearch = " + (_characterResearching == null ? "Empty" : _characterResearching.MyInfo()));
+            //todo: Active this=> Debug.Log("UDB-CharacterResearch = " + (_characterResearching == null ? "Empty" : _characterResearching.MyInfo()));
             //UserRecipe
             _userRecipes =LoadUserRecipes();
             Debug.Log("UDB-UserRecipes.Count = " + _userRecipes.Count);
@@ -126,7 +126,7 @@ public class UserDatabase : MonoBehaviour
     public void UpdateUserPlayer(UserPlayer userPlayer)
     {
         _userPlayer = userPlayer;
-        SaveUserPlayer();
+        _userPlayer.Print();
     }
     private void HealthCheckUserPlayer()
     {

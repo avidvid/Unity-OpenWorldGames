@@ -18,20 +18,20 @@ public class TerrainIns
         Death,
         Lava
     }
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public bool Digable { get; set; }
-    public bool Walkable { get; set; }
-    public bool Flyable { get; set; }
-    public bool Swimable { get; set; }
-    public bool HasElement { get; set; }
-    public bool HasMonster { get; set; }
-    public string DropItems { get; set; }
-    public float DropChance { get; set; }
-    public TerrainType Type { get; set; }
-    public int Tiles { get; set; }
-    public int AnimationController { get; set; }
-    public bool IsEnable { get; set; }
+    public int Id;
+    public string Name;
+    public bool Digable;
+    public bool Walkable;
+    public bool Flyable;
+    public bool Swimable;
+    public bool HasElement;
+    public bool HasMonster;
+    public string DropItems;
+    public float DropChance;
+    public TerrainType Type;
+    public int Tiles;
+    public int AnimationController;
+    public bool IsEnable;
     private List<Sprite> _tiles = new List<Sprite>();
     private List<RuntimeAnimatorController> _rac = new List<RuntimeAnimatorController>();
     public Sprite GetTile (float x,float y,int key)

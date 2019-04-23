@@ -15,9 +15,6 @@ public class CharacterDatabase : MonoBehaviour {
     {
         _characterDatabase = CharacterDatabase.Instance();
         Debug.Log("***CDB*** Start!");
-        _researches = LoadResearches();
-        Debug.Log("CDB-Researches.Count = " + _researches.Count);
-        Debug.Log("***CDB*** Success!");
     }
 
     #region Characters
@@ -41,28 +38,10 @@ public class CharacterDatabase : MonoBehaviour {
     }
     #endregion
     #region Research
-    public List<Research> LoadResearches()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Research.xml");
-        //Read the Recipes from Recipe.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Research>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        List<Research> researches = (List<Research>)serializer.Deserialize(fs);
-        fs.Close();
-        return researches;
-    }
-    private void SaveResearches()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Research.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Research>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _researches);
-        fs.Close();
-    }
     internal void UpdateResearches(List<Research> researches)
     {
-        _researches = researches;
-        SaveResearches();
+        _researches = new List<Research>(researches.FindAll(s => s.IsEnable));
+        Debug.Log("CDB-Researches.Count = " + _researches.Count);
     }
     internal List<Research> GetResearches()
     {

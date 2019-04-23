@@ -4,33 +4,29 @@ using UnityEngine;
 [Serializable]
 public class Research
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public string IconPath { get; set; }
-    public int IconId { get; set; }
-    public int Value { get; set; }
-    public string Target { get; set; }
-    public int MaxLevel { get; set; }
-    public int DurationMinutes { get; set; }
-    public int RequiredResearchId1 { get; set; }
-    public int RequiredResearchLevel1 { get; set; }
-    public int RequiredResearchId2 { get; set; }
-    public int RequiredResearchLevel2 { get; set; }
-    public int RequiredResearchId3 { get; set; }
-    public int RequiredResearchLevel3 { get; set; }
-    public int RequiredItem { get; set; }
-    public bool IsEnable { get; set; }
-    public int HealthCheck { get; set; }
+    public int Id;
+    public string Name;
+    public string Description;
+    public string IconPath;
+    public int IconId;
+    public int Value;
+    public string Target;
+    public int MaxLevel;
+    public int DurationMinutes;
+    public int RequiredResearchId1;
+    public int RequiredResearchLevel1;
+    public int RequiredResearchId2;
+    public int RequiredResearchLevel2;
+    public int RequiredResearchId3;
+    public int RequiredResearchLevel3;
+    public int RequiredItem;
+    public bool IsEnable;
 
     public string GetTooltip()
     {
         var tooltip = "<color=green>  " + this.Id + "  -" + this.Name + "</color>\n\n" + this.Description ;
         return tooltip;
     }
-
-
-
     public Sprite GetSprite()
     {
         Sprite[] spriteList = Resources.LoadAll<Sprite>(IconPath);
