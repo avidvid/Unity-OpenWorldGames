@@ -2,20 +2,19 @@
 using UnityEngine;
 
 [Serializable]
-public class UserCharacter 
+public class UserCharacter
 {
-    public int CharacterId { get; set; }
-    public int UserId { get; set; }
-    public string CharacterCode { get; set; }
-    public DateTime Created { get; set; }
-    public int HealthCheck { get; set; }
+    public int Id;
+    public int CharacterId;
+    public int UserId;
+    public string CharacterCode;
+    public DateTime Created;
     public UserCharacter()
     {
         CharacterId = -1;
         UserId = -1;
         CharacterCode = null;
         Created = DateTime.Now;
-        HealthCheck = 0;
     }
     public UserCharacter(int characterId, int playerId, string characterCode = null)
     {

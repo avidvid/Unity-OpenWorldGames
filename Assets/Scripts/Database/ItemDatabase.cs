@@ -92,7 +92,8 @@ public class ItemDatabase : MonoBehaviour {
     }
     internal void UpdateOffers(List<Offer> offers)
     {
-        _offers = offers;
+        _offers = new List<Offer>(offers.FindAll(s => s.IsEnable));
+        Debug.Log("IDB-Offers.Count = " + _offers.Count);
     }
     #endregion
 }

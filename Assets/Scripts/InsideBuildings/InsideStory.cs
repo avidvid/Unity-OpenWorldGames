@@ -12,19 +12,11 @@ public class InsideStory {
         public int LocationIndex;
         public int HealthCheck;
     }
-    public enum InsideStoryRarity
-    {
-        Sacred = 0,
-        Legendary = 1,
-        Saga = 3,
-        Rare = 10,
-        Uncommon = 40,
-        Common = 100
-    }
+
     public int Id { get; private set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public InsideStoryRarity Rarity { get; set; }
+    public DataTypes.Rarity Rarity { get; set; }
     public bool IsEnable { get; set; }
     public List<Actor> Actors { get; set; }
 

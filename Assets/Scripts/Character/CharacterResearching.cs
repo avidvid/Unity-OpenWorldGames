@@ -7,12 +7,11 @@ using UnityEngine;
 
 public class CharacterResearching 
 {
-    public int Id { get; set; }
-    public int UserId { get; set; }
-    public int ResearchId { get; set; }
-    public int Level { get; set; }
-    public DateTime ResearchTime { get; set; }
-    public int HealthCheck { get; set; }
+    public int Id;
+    public int UserId;
+    public int ResearchId;
+    public int Level;
+    public DateTime ResearchTime;
 
     public CharacterResearching(int userId, int researchId, int level, DateTime time)
     {
@@ -21,7 +20,6 @@ public class CharacterResearching
         ResearchId = researchId;
         Level = level;
         ResearchTime = time;
-        HealthCheck = 0;
     }
     public CharacterResearching()
     {

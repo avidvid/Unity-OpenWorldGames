@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <CharacterSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Id>11</Id>
-  <UserPlayerId>22</UserPlayerId>
+  <UserId>22</UserId>
   <CharacterId>1</CharacterId>
   <Name>Sailor daddy</Name>
   <Level>6</Level>
@@ -42,4 +42,5 @@
   <Researching>0</Researching>
   <Bravery>0</Bravery>
   <Charming>0</Charming>
+
 </CharacterSetting>

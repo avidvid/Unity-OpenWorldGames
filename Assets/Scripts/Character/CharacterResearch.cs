@@ -8,17 +8,17 @@ using UnityEngine;
 [Serializable]
 public class UserResearch
 {
-    public int Id { get; set; }
-    public int UserPlayerId { get; set; }
-    public int ResearchId { get; set; }
-    public int Level { get; set; }
-    public int HealthCheck { get; set; }
+    public int Id;
+    public int UserId;
+    public int ResearchId;
+    public int Level;
+    public int HealthCheck;
 
-    public UserResearch(int researchId, int userPlayerId, int nextLevel)
+    public UserResearch(int researchId, int userId, int nextLevel)
     {
         Id = 0;
         ResearchId = researchId;
-        UserPlayerId = userPlayerId;
+        UserId = userId;
         Level = nextLevel;
         HealthCheck = 0;
     }

@@ -26,7 +26,7 @@ public class BodyResponse
     public List<Character> Characters;
     public List<Research> Researches;
 
-    public Region Region;
+    public List<Region>  Regions;
     public List<TerrainIns> Terrains;
     public List<ElementIns> Elements;
     public List<InsideStory> InsideStories;
@@ -52,7 +52,7 @@ public class BodyResponse
         if (Characters.Count != 0) info += " Characters=" + Characters.Count;
         if (Researches.Count != 0) info += " Researches=" + Researches.Count;
 
-        if (Region.Id != 0) info += " Region=" + Region.MyInfo();
+        if (Regions.Count != 0) info += " Terrains=" + Regions.Count;
         if (Terrains.Count != 0) info += " Terrains=" + Terrains.Count;
         if (Elements.Count != 0) info += " Elements=" + Elements.Count;
         if (InsideStories.Count != 0) info += " InsideStories=" + InsideStories.Count;

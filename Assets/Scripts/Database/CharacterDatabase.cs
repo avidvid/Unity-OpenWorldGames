@@ -11,7 +11,7 @@ public class CharacterDatabase : MonoBehaviour {
     private List<Character> _characters = new List<Character>();
     private List<Research> _researches = new List<Research>();
 
-    void Awake()
+    void Start()
     {
         _characterDatabase = CharacterDatabase.Instance();
         Debug.Log("***CDB*** Start!");

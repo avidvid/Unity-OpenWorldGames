@@ -4,12 +4,11 @@ using UnityEngine;
 [Serializable]
 public class CharacterMixture
 {
-    public int Id { get; set; }
-    public int UserId { get; set; }
-    public int ItemId { get; set; }
-    public int StackCnt { get; set; }
-    public DateTime MixTime { get; set; }
-    public int HealthCheck { get; set; }
+    public int Id;
+    public int UserId;
+    public int ItemId;
+    public int StackCnt;
+    public DateTime MixTime;
 
     public CharacterMixture(int userId, int itemId, int stackCnt, DateTime time)
     {
@@ -18,7 +17,6 @@ public class CharacterMixture
         ItemId = itemId;
         StackCnt = stackCnt;
         MixTime = time;
-        HealthCheck = 0;
     }
     public CharacterMixture()
     {

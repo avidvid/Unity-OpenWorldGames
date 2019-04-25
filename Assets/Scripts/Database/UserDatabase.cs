@@ -11,6 +11,9 @@ public class UserDatabase : MonoBehaviour
 {
 
     private static UserDatabase _userDatabase;
+    private ItemDatabase _itemDatabase;
+    private CharacterDatabase _characterDatabase;
+    private TerrainDatabase _terrainDatabase;
 
     private UserPlayer _userPlayer;
     private List<UserItem> _userInventory = new List<UserItem>();
@@ -38,57 +41,10 @@ public class UserDatabase : MonoBehaviour
     void Start()
     {
         _userDatabase = Instance();
+        _itemDatabase = ItemDatabase.Instance();
+        _characterDatabase = CharacterDatabase.Instance();
+        _terrainDatabase = TerrainDatabase.Instance();
         Debug.Log("***UDB*** Start!");
-        //UserPlayer
-        _userPlayer = LoadUserPlayer();
-        if (_userPlayer == null)
-        {
-            print("UserPlayer is empty");
-            GoToStartScene();
-            return;
-            //throw new Exception("UDB-User Player doesn't Exists!!!");
-        }
-        _userPlayer.Print();
-        _userPlayer.HealthCheck = _userPlayer.CalculateHealthCheck();
-        _userPlayer.LastLogin = DateTime.Now;
-        SaveUserPlayer();
-        if (DateTime.Now < _userPlayer.LockUntil)
-        {
-            GoToWaitScene();
-            return;
-        }
-        //CharacterSetting
-        _characterSetting = LoadCharacterSetting();
-        if (_characterSetting == null)
-        {
-            print("CharacterSetting is empty");
-            GoToStartScene();
-            return;
-            //throw new Exception("UDB-Character Setting doesn't Exists!!!");
-        }
-        _characterSetting.HealthCheck = _characterSetting.CalculateHealthCheck();
-        _characterSetting.Print();
-        if (_characterSetting != null)
-        {        
-            //UserInventory
-            _userInventory = LoadUserInventory();
-            Debug.Log("UDB-UserInventory.Count = " + _userInventory.Count);
-            //UserCharacters
-            _userCharacters = LoadUserCharacters();
-            Debug.Log("UDB-UserCharacters.Count = " + _userCharacters.Count);
-            //CharacterMixture
-            _characterMixture = LoadCharacterMixture();
-            //todo: Active this=> Debug.Log("UDB-CharacterMixture = " +  (_characterMixture == null ? "Empty" : _characterMixture.MyInfo()) );
-            //CharacterResearch
-            _characterResearches = LoadCharacterResearches();
-            Debug.Log("UDB-CharacterResearch.Count = " + _characterResearches.Count);
-            _characterResearching = LoadCharacterResearching();
-            //todo: Active this=> Debug.Log("UDB-CharacterResearch = " + (_characterResearching == null ? "Empty" : _characterResearching.MyInfo()));
-            //UserRecipe
-            _userRecipes =LoadUserRecipes();
-            Debug.Log("UDB-UserRecipes.Count = " + _userRecipes.Count);
-        }
-        Debug.Log("***UDB*** Success!");
     }
     // Update is called once per frame
     void Update()
@@ -102,31 +58,28 @@ public class UserDatabase : MonoBehaviour
     public void SaveUserPlayer(UserPlayer userPlayer)
     {
         _userPlayer = new UserPlayer(userPlayer);
-        SaveUserPlayer();
     }
-    private UserPlayer LoadUserPlayer()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "UserPlayer.xml");
-        //Read the UserPlayer from UserPlayer.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(UserPlayer));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var userPlayer = (UserPlayer)serializer.Deserialize(fs);
-        fs.Close();
-        return userPlayer;
-    }
-    public void SaveUserPlayer()
-    {
-        HealthCheckUserPlayer();
-        string path = Path.Combine(Application.streamingAssetsPath, "UserPlayer.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(UserPlayer));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _userPlayer);
-        fs.Close();
-    }
-    public void UpdateUserPlayer(UserPlayer userPlayer)
+    public bool UpdateUserPlayer(UserPlayer userPlayer)
     {
         _userPlayer = userPlayer;
+        if (_userPlayer == null)
+        {
+            //todo: Unknown path
+            print("UserPlayer is empty");
+            GoToStartScene();
+            return false;
+            //throw new Exception("UDB-User Player doesn't Exists!!!");
+        }
         _userPlayer.Print();
+        _terrainDatabase.SetRegion(_userPlayer.Latitude, _userPlayer.Longitude);
+        _userPlayer.HealthCheck = _userPlayer.CalculateHealthCheck();
+        _userPlayer.LastLogin = DateTime.Now;
+        //SaveUserPlayer();
+        if (DateTime.Now < _userPlayer.LockUntil)
+        {
+            GoToWaitScene();
+        }
+        return true;
     }
     private void HealthCheckUserPlayer()
     {
@@ -136,27 +89,10 @@ public class UserDatabase : MonoBehaviour
     }
     #endregion
     #region UserInventory
-    private List<UserItem> LoadUserInventory()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "UserInventory.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<UserItem>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var userInv = (List<UserItem>)serializer.Deserialize(fs);
-        fs.Close();
-        return userInv;
-    }
-    public void SaveUserInventory()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "UserInventory.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<UserItem>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _userInventory);
-        fs.Close();
-    }
     public void UpdateUserInventory(List<UserItem> userInventory)
     {
         _userInventory = userInventory;
-        SaveUserInventory();
+        Debug.Log("UDB-UserInventory.Count = " + _userInventory.Count);
     }
     internal void UpdateUserInventory(List<ItemIns> invCarry, List<ItemIns> invEquipment = null)
     {
@@ -168,7 +104,7 @@ public class UserDatabase : MonoBehaviour
             foreach (var userItem in invEquipment)
                 _userInventory.Add(userItem.UserItem);
         _userInventory = _userInventory.OrderBy(x => !x.Equipped).ThenBy(x => !x.Stored).ThenBy(x => x.Order).ToList();
-        SaveUserInventory();
+        //SaveUserInventory();
     }
     internal List<UserItem> GetUserInventory()
     {
@@ -180,10 +116,6 @@ public class UserDatabase : MonoBehaviour
     {
         return _myCharacters;
     }
-    public List<UserCharacter> GetUserCharacters()
-    {
-        return _userCharacters;
-    }
     internal bool ValidateCharacterCode(string characterCode)
     {
         for (int j = 0; j < (_userCharacters).Count; j++)
@@ -191,32 +123,16 @@ public class UserDatabase : MonoBehaviour
                 if (_userCharacters[j].CharacterCode == characterCode)
                 {
                     _userCharacters[j].CharacterCode = "";
-                    SaveUserCharacters();
+                    //SaveUserCharacters();
                     return true;
                 }
         return false;
     }
-    private List<UserCharacter> LoadUserCharacters()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "UserCharacter.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<UserCharacter>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var userCharacters = (List<UserCharacter>)serializer.Deserialize(fs);
-        fs.Close();
-        return userCharacters;
-    }
-    private void SaveUserCharacters()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "UserCharacter.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<UserCharacter>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _userCharacters);
-        fs.Close();
-    }
     public void UpdateUserCharacters(List<UserCharacter> userCharacters)
     {
         _userCharacters = userCharacters;
-        SaveUserCharacters();
+        Debug.Log("UDB-UserCharacters.Count = " + _userCharacters.Count);
+        _userDatabase.BuildUserCharacters();
     }
     internal void BuildUserCharacters()
     {
@@ -240,7 +156,6 @@ public class UserDatabase : MonoBehaviour
         }
         _myCharacters = myCharacters;
         Debug.Log("UDB-BuiltUserCharacters.Count = " + _myCharacters.Count);
-
     }
     public bool AddUserCharacters(UserCharacter uc)
     {
@@ -251,7 +166,7 @@ public class UserDatabase : MonoBehaviour
                 _userCharacters.Add(uc);
             else
                 owned.CharacterCode = "";
-            SaveUserCharacters();
+            //SaveUserCharacters();
             return true;
         }
         catch (Exception e)
@@ -309,30 +224,12 @@ public class UserDatabase : MonoBehaviour
             _characterMixture = null;
         else
             _characterMixture = new CharacterMixture(_userPlayer.Id, itemId, stackCnt, durationMinutes);
-        SaveCharacterMixture();
-    }
-    private CharacterMixture LoadCharacterMixture()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "CharacterMixture.xml");
-        //Read the CharacterMixture from CharacterMixture.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(CharacterMixture));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var characterMixture = (CharacterMixture)serializer.Deserialize(fs);
-        fs.Close();
-        return characterMixture;
-    }
-    public void SaveCharacterMixture()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "CharacterMixture.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(CharacterMixture));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _characterMixture);
-        fs.Close();
+        //SaveCharacterMixture();
     }
     public void UpdateCharacterMixture(CharacterMixture characterMixture)
     {
         _characterMixture = characterMixture;
-        SaveCharacterMixture();
+        Debug.Log("UDB-CharacterMixture = " +  (_characterMixture == null ? "Empty" : _characterMixture.MyInfo()) );
     }
     #endregion
     #region CharacterResearch
@@ -343,7 +240,7 @@ public class UserDatabase : MonoBehaviour
     internal void SaveCharacterResearching(int researchId, int level, DateTime durationMinutes)
     {
         _characterResearching = new CharacterResearching(_userPlayer.Id,researchId, level, durationMinutes);
-        SaveCharacterResearching();
+        //SaveCharacterResearching();
     }
     internal void SaveCharacterResearching(CharacterResearching characterResearching)
     {
@@ -352,58 +249,20 @@ public class UserDatabase : MonoBehaviour
     public void EmptyCharacterResearching()
     {
         _characterResearching = null;
-        SaveCharacterResearching();
-    }
-    private CharacterResearching LoadCharacterResearching()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearching.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(CharacterResearching));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var characterResearching = (CharacterResearching)serializer.Deserialize(fs);
-        fs.Close();
-        return characterResearching;
-    }
-    private void SaveCharacterResearching()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearching.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(CharacterResearching));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _characterResearching);
-        fs.Close();
     }
     public void UpdateCharacterResearching(CharacterResearching characterResearching)
     {
-        _characterResearching = characterResearching;
-        SaveCharacterResearching();
+        _characterResearching = characterResearching; 
+        Debug.Log("UDB-CharacterResearch = " + (_characterResearching == null ? "Empty" : _characterResearching.MyInfo()));
     }
     internal List<UserResearch> GetCharacterResearches()
     {
         return _characterResearches;
     }
-    private List<UserResearch> LoadCharacterResearches()
-    {
-        //Empty the Items DB
-        _characterResearches.Clear();
-        string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearch.xml");
-        //Read the CharacterResearch from CharacterResearch.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(List<UserResearch>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var characterResearches = (List<UserResearch>)serializer.Deserialize(fs);
-        fs.Close();
-        return characterResearches;
-    }
-    public void SaveCharacterResearches()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearch.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<UserResearch>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _characterResearches);
-        fs.Close();
-    }
     public void UpdateCharacterResearches(List<UserResearch> userResearches)
     {
         _characterResearches = userResearches;
-        SaveCharacterResearches();
+        Debug.Log("UDB-CharacterResearch.Count = " + _characterResearches.Count);
     }
     internal void AddCharacterResearch(Research research, int level)
     {
@@ -421,7 +280,7 @@ public class UserDatabase : MonoBehaviour
             }
         if (!updated)
             _characterResearches.Add(new UserResearch(research.Id,_userPlayer.Id ,level));
-        SaveCharacterResearches();
+        //SaveCharacterResearches();
     }
     #endregion
     #region CharacterSetting
@@ -432,31 +291,20 @@ public class UserDatabase : MonoBehaviour
     public void SaveCharacterSetting(CharacterSetting characterSetting)
     {
         _characterSetting = new CharacterSetting(characterSetting);
-        SaveCharacterSetting();
-    }
-    private CharacterSetting LoadCharacterSetting()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "CharacterSetting.xml");
-        //Read the CharacterSetting from CharacterSetting.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(CharacterSetting));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var characterSetting = (CharacterSetting)serializer.Deserialize(fs);
-        fs.Close();
-        return characterSetting;
-    }
-    public void SaveCharacterSetting()
-    {
-        HealthCheckCharacterSetting();
-        string path = Path.Combine(Application.streamingAssetsPath, "CharacterSetting.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(CharacterSetting));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _characterSetting);
-        fs.Close();
+        //SaveCharacterSetting();
     }
     public void UpdateCharacterSetting(CharacterSetting characterSetting)
     {
         _characterSetting = characterSetting;
-        SaveCharacterSetting();
+        if (_characterSetting == null)
+        {
+            //Unknown path
+            print("CharacterSetting is empty");
+            GoToStartScene();
+            return;
+            //throw new Exception("UDB-Character Setting doesn't Exists!!!");
+        }
+        _characterSetting.Print();
     }
     private void HealthCheckCharacterSetting()
     {
@@ -513,7 +361,7 @@ public class UserDatabase : MonoBehaviour
                 _userRecipes.Add(ur);
             else
                 owned.RecipeCode = "";
-            SaveUserRecipes();
+            //SaveUserRecipes();
             return true;
         }
         catch (Exception e)
@@ -552,27 +400,11 @@ public class UserDatabase : MonoBehaviour
         }
         return false;
     }
-    private List<UserRecipe> LoadUserRecipes()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "UserRecipe.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<UserRecipe>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var userRecipes = (List<UserRecipe>)serializer.Deserialize(fs);
-        fs.Close();
-        return userRecipes;
-    }
-    public void SaveUserRecipes()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "UserRecipe.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<UserRecipe>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _userRecipes);
-        fs.Close();
-    }
     public void UpdateUserRecipes(List<UserRecipe> userRecipes)
     {
         _userRecipes = userRecipes;
-        SaveUserRecipes();
+        Debug.Log("UDB-UserRecipes.Count = " + _userRecipes.Count);
+        BuildUserRecipes();
     }
     internal bool ValidateRecipeCode(string recipeCode)
     {
@@ -581,7 +413,7 @@ public class UserDatabase : MonoBehaviour
                 if (_userRecipes[j].RecipeCode == recipeCode)
                 {
                     _userRecipes[j].RecipeCode = "";
-                    _userDatabase.SaveUserRecipes();
+                    //SaveUserRecipes();
                     return true;
                 }
         return false;

@@ -10,8 +10,8 @@ public class TerrainDatabase : MonoBehaviour {
 
     private static TerrainDatabase _terrainDatabase;
     private CharacterDatabase _characterDatabase;
-    private UserDatabase _userDatabase;
 
+    private List<Region> _regions;
     private Region _region;
 
     private List<TerrainIns> _terrains = new List<TerrainIns>();
@@ -44,27 +44,17 @@ public class TerrainDatabase : MonoBehaviour {
     {
         _terrainDatabase = TerrainDatabase.Instance(); 
          _characterDatabase = CharacterDatabase.Instance();
-        _userDatabase = UserDatabase.Instance();
         Debug.Log("***TDB*** Start!");
-
-        //Set Terrains based on the user region
-        SetRegionTerrainTypes();
-        Debug.Log("TDB-RegionTerrains.Count = " + _myTerrains.Count);
-        //Load InsideStories from database 
-        _insideStories = LoadInsideStories();
-        Debug.Log("TDB-InsideStories.Count = " + _insideStories.Count);
-        //Set InsideStories based on the user region
-        SetRegionInsideStoryTypes();
-        Debug.Log("TDB-RegionInsideStories.Count = " + _myInsideStories.Count);
-        Debug.Log("TDB-RegionInsideMonsters.Count = " + _insideMonsters.Count);
-        Debug.Log("***TDB*** Success!");
     }
     #region Regions    
-    internal void UpdateRegions(Region region)
+    internal void UpdateRegions(List<Region> regions)
     {
-        _region = region;
-        //Set Region based on the user
-        _region.Print();
+        _regions = new List<Region>(regions.FindAll(s => s.IsEnable));
+        Debug.Log("TDB-Regions.Count = " + _regions.Count);
+    }
+    internal List<Region> GetRegions()
+    {
+        return _regions;
     }
     internal int GetRegionKey()
     {
@@ -74,9 +64,30 @@ public class TerrainDatabase : MonoBehaviour {
     {
         return _region;
     }
+    internal void SetRegion(float latitude, float longitude)
+    {
+        for (int i = 0; i < _regions.Count; i++)
+            if (Mathf.Abs(_regions[i].Latitude - latitude) < 10 && Mathf.Abs(_regions[i].Longitude - longitude) < 10)
+                _region= _regions[i];
+        _region = _regions[0];
+        _region.Print();
+        //Set Terrains based on the user region
+        SetRegionTerrainTypes();
+        Debug.Log("TDB-RegionTerrains.Count = " + _myTerrains.Count);
+        SetRegionMonsterTypes();
+        Debug.Log("TDB-RegionMonsters.Count = " + _monsters.Count);
+        //Set InsideStories based on the user region
+        SetRegionInsideStoryTypes();
+        Debug.Log("TDB-RegionInsideStories.Count = " + _myInsideStories.Count);
+        Debug.Log("TDB-RegionInsideMonsters.Count = " + _insideMonsters.Count);
+    }
     internal Vector2 GetRegionLocation(int key)
     {
-        return new Vector2(_region.Latitude*1000, _region.Longitude * 1000);
+        for (int i = 0; i < _regions.Count; i++)
+            if (_regions[i].Key == key)
+                return new Vector2(_regions[i].Latitude * 1000, _regions[i].Longitude * 1000);
+        // Vector2 only accept 2 decimal points
+        return Vector2.zero;
     }
     #endregion
     #region Terrains
@@ -151,29 +162,11 @@ public class TerrainDatabase : MonoBehaviour {
     {
         return _insideStories;
     }
-private List<InsideStory> LoadInsideStories()
-    {
-        //Empty the InsideStory DB
-        string path = Path.Combine(Application.streamingAssetsPath, "InsideStory.xml");
-        //Read the InsideStories from InsideStory.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(List<InsideStory>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var insideStories = (List<InsideStory>)serializer.Deserialize(fs);
-        fs.Close();
-        return insideStories;
-    }
-    private void SaveInsideStories()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "InsideStory.xml");
-        XmlSerializer serializer = new XmlSerializer(typeof(List<InsideStory>));
-        FileStream fs = new FileStream(path, FileMode.Create);
-        serializer.Serialize(fs, _insideStories);
-        fs.Close();
-    }
     internal void UpdateInsideStories(List<InsideStory> insideStories)
     {
+        //Load InsideStories from database 
         _insideStories = insideStories;
-        SaveInsideStories();
+        Debug.Log("TDB-InsideStories.Count = " + _insideStories.Count);
     }
     private void SetRegionInsideStoryTypes()
     {
@@ -188,7 +181,7 @@ private List<InsideStory> LoadInsideStories()
     }
     internal InsideStory GetStoryBasedOnRarity(Vector2 position, int key)
     {
-        var rarity = RandomHelper.Range(position, DateTime.Now.DayOfYear, (int)InsideStory.InsideStoryRarity.Common);
+        var rarity = RandomHelper.Range(position, DateTime.Now.DayOfYear, (int)DataTypes.Rarity.Common);
         List<InsideStory> insideStories = new List<InsideStory>();
         foreach (var inStory in _myInsideStories)
         {
@@ -227,7 +220,7 @@ private List<InsideStory> LoadInsideStories()
             {
                 //Terrain Monster HealthCheck 
                 var healthCheck = false;
-                foreach (var terrain in _terrains)
+                foreach (var terrain in _myTerrains)
                 {
                     if (!terrain.HasMonster)
                         continue;
@@ -241,7 +234,6 @@ private List<InsideStory> LoadInsideStories()
                     throw new Exception("Terrain with no available monster");
                 _monsters.Add(monster);
             }
-        Debug.Log("TDB-RegionMonsters.Count = " + _monsters.Count);
     }
     #endregion
 }

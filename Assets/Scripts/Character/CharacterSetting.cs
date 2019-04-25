@@ -9,50 +9,50 @@ using UnityEngine;
 //#### Any update here need to be align with MonsterSetting
 [Serializable]
 public class CharacterSetting {
-    public int Id { get; set; }
-    public int UserPlayerId { get; set; }
-    public int CharacterId { get; set; }
-    public string Name { get; set; }
-    public int Level { get; set; }
-    public bool Updated { get; set; }
-    public int HealthCheck { get; set; }
-    public DateTime LastUpdated { get; set; }
-    public bool IsEnable { get; set; }
-    public bool FightMode { get; set; }
-    public bool Alive { get; set; }
-    public int Life { get; set; }
-    public int Coin { get; set; }
-    public int Experience { get; set; }
-    public int MaxExperience { get; set; }
-    public int HandsCnt { get; set; }
-    public int MaxHealth { get; set; }
-    public int Health { get; set; }
-    public int MaxMana { get; set; }
-    public int Mana { get; set; }
-    public int MaxEnergy { get; set; }
-    public int Energy { get; set; }
-    public float SpeedAttack { get; set; }
-    public float SpeedDefense { get; set; }
-    public float AbilityAttack { get; set; }
-    public float AbilityDefense { get; set; }
-    public float MagicAttack { get; set; }
-    public float MagicDefense { get; set; }
-    public float PoisonAttack { get; set; }
-    public float PoisonDefense { get; set; }
-    public Character.Elements Element { get; set; }
-    public float Carry { get; set; }
-    public int CarryCnt { get; set; }
-    public float Speed { get; set; }
-    public float Intellect { get; set; }
-    public float Agility { get; set; }
-    public float Strength { get; set; }
-    public float Stamina { get; set; }
-    public float Crafting { get; set; }
-    public float Researching { get; set; }
-    public float Bravery { get; set; }
-    public float Charming { get; set; }
+    public int Id;
+    public int UserId;
+    public int CharacterId;
+    public string Name;
+    public int Level;
+    public bool Updated;
+    public int HealthCheck;
+    public DateTime LastUpdated;
+    public bool IsEnable;
+    public bool FightMode;
+    public bool Alive;
+    public int Life;
+    public int Coin;
+    public int Experience;
+    public int MaxExperience;
+    public int HandsCnt;
+    public int MaxHealth;
+    public int Health;
+    public int MaxMana;
+    public int Mana;
+    public int MaxEnergy;
+    public int Energy;
+    public float SpeedAttack;
+    public float SpeedDefense;
+    public float AbilityAttack;
+    public float AbilityDefense;
+    public float MagicAttack;
+    public float MagicDefense;
+    public float PoisonAttack;
+    public float PoisonDefense;
+    public Character.Elements Element;
+    public float Carry;
+    public int CarryCnt;
+    public float Speed;
+    public float Intellect;
+    public float Agility;
+    public float Strength;
+    public float Stamina;
+    public float Crafting;
+    public float Researching;
+    public float Bravery;
+    public float Charming;
 
-    public CharacterSetting(int id = -1, int userPlayerId = -1, int characterId = -1, string name = null,
+    public CharacterSetting(int id = -1, int userId = -1, int characterId = -1, string name = null,
         int level = 0,  bool updated = true, int healthCheck = 0, bool isEnable = true, 
         bool fightMode = false, bool alive = true,
         int life = 0, int coin = 100,
@@ -65,7 +65,7 @@ public class CharacterSetting {
         float crafting = 0, float researching = 0, float bravery = 0, float charming = 0)
     {
         Id = id;
-        UserPlayerId = userPlayerId;
+        UserId = userId;
         CharacterId = characterId;
         Name = name;
         Level = level;
@@ -114,7 +114,7 @@ public class CharacterSetting {
     public CharacterSetting(CharacterSetting characterSetting)
     {
         Id = characterSetting.Id;
-        UserPlayerId = characterSetting.UserPlayerId;
+        UserId = characterSetting.UserId;
         CharacterId = characterSetting.CharacterId;
         Name = characterSetting.Name;
         Level = characterSetting.Level;
