@@ -21,7 +21,7 @@ public class CharacterManager : MonoBehaviour
     internal List<Character> UserCharacters ;
     //Research
     internal List<Research> Researches;
-    internal List<UserResearch> CharacterResearches = new List<UserResearch>();
+    internal List<CharacterResearch> CharacterResearches = new List<CharacterResearch>();
     internal CharacterResearching CharacterResearching;
     //Recipes
     internal List<Recipe> UserRecipes;
@@ -65,6 +65,7 @@ public class CharacterManager : MonoBehaviour
     }
     void Start()
     {
+        Debug.Log("***CM*** Start!");
         //UserPlayer
         UserPlayer = _userDatabase.GetUserPlayer();
         Debug.Log("CM-UserPlayer = " + UserPlayer.MyInfo());

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GameLoadHelper : MonoBehaviour
 {
-    private const int Targets = 8;
+    private const int Targets = 18;
     private Slider _slider;
     // Start is called before the first frame update
     void Start()
@@ -16,11 +16,13 @@ public class GameLoadHelper : MonoBehaviour
     void Update()
     {
         if (_slider.value >= _slider.maxValue)
+        {
             SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
+            print("***###*** Welcome ***###***");
+        }
     }
     internal void LoadingThumbsUp()
     {
         _slider.value += _slider.maxValue / Targets;
-         print("_loading = "+ _slider.value);
     }
 }

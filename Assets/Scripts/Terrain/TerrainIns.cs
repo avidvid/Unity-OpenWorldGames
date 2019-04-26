@@ -73,6 +73,7 @@ public class TerrainIns
                " Tiles:" + Tiles +
                " HasElement:" + HasElement +
                " IsEnable:" + IsEnable +
+               " Digable:" + Digable +
                " AnimationController:" + AnimationController;
     }
 }

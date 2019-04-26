@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="Windows-1252"?>
-<ArrayOfCacheContent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfCacheContent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CacheContent>
+    <Location>
+      <x>0</x>
+      <y>-95</y>
+      <z>0.01</z>
+    </Location>
+    <ObjectType>VacantElement</ObjectType>
+    <ExpirationTime>2019-04-28T12:41:22.8225781-05:00</ExpirationTime>
+  </CacheContent>
+</ArrayOfCacheContent>

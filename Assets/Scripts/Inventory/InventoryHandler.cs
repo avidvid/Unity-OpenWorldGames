@@ -39,10 +39,11 @@ public class InventoryHandler : MonoBehaviour
 
     private int _slotAmount =30;
     public bool ShowInventory;
-    
+
     // Use this for initialization
-    void Awake()
+    void Start()
     {
+        Debug.Log("***IH*** Start!");
         //Instance
         _inv = InventoryHandler.Instance();
         _itemDatabase = ItemDatabase.Instance();
@@ -56,15 +57,10 @@ public class InventoryHandler : MonoBehaviour
         _inventoryPanel = GameObject.Find("Inventory Panel");
         _slotPanel = _inventoryPanel.transform.Find("Slot Panel").gameObject;
 
-
         _inventorySlotBroken = Resources.Load<GameObject>("Prefabs/SlotInventoryBroken");
         _inventorySlot = Resources.Load<GameObject>("Prefabs/SlotInventory");
         _inventoryItem = Resources.Load<GameObject>("Prefabs/Item");
-
-    }
-
-    void Start()
-    {        
+      
         //Disable All buttons inside building 
         var insideBuilding = GameObject.Find("Building Interior");
         if (insideBuilding != null)
@@ -155,16 +151,13 @@ public class InventoryHandler : MonoBehaviour
         }
         _inventoryManager.PrintInventory();
     }
-
     void Update()
     {
-        if (ShowInventory)
+        if (ShowInventory )
         {
             _inventoryPanel.SetActive(true);
             ShowInventory = false;
         }
-
-
         if (_updateInventory || _updateEquipments)
         {
             //Save new inventory 
@@ -179,7 +172,6 @@ public class InventoryHandler : MonoBehaviour
             }
             _inventoryManager.UpdateInventory = true;
         }
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (_inventoryPanel.activeSelf)

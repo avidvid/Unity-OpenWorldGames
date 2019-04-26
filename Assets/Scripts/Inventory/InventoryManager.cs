@@ -14,7 +14,6 @@ public class InventoryManager : MonoBehaviour
     internal List<ItemIns> InvEquipment = new List<ItemIns>();
     internal List<ItemIns> InvBank = new List<ItemIns>();
 
-
     internal bool UpdateInventory;
 
     #region InventoryManager Instance
@@ -30,15 +29,13 @@ public class InventoryManager : MonoBehaviour
     }
     #endregion
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
+        Debug.Log("***IM*** Start!");
         _inventoryManager = InventoryManager.Instance();
         _characterManager = CharacterManager.Instance();
         _userDatabase = UserDatabase.Instance();
-    }
 
-    void Start()
-    {
         RefreshInventory();
 
         ValidateInventory();
@@ -46,7 +43,6 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("IM-InvEquipment.Count = " + InvEquipment.Count);
         Debug.Log("IM-InvBank.Count = " + InvBank.Count);
     }
-
     private void RefreshInventory()
     {
         var userInvItems = _characterManager.CharacterInventory;
@@ -63,7 +59,6 @@ public class InventoryManager : MonoBehaviour
                 InvCarry.Add(itemIns);
         }
     }
-
     private void ValidateInventory()
     {
         for (int i = 0; i < InvCarry.Count; i++)
@@ -89,7 +84,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (UpdateInventory)
         {
-            RefreshInventory();
+            ValidateInventory();
             _userDatabase.UpdateUserInventory(InvCarry, InvEquipment);
             UpdateInventory = false;
         }

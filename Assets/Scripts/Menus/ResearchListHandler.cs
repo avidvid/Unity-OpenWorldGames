@@ -14,7 +14,7 @@ public class ResearchListHandler : MonoBehaviour {
     private GameObject _contentPanel;
     private GameObject _clickedButton;
     private CharacterManager _characterManager;
-    private List<UserResearch> _characterResearches = new List<UserResearch>();
+    private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
     private List<Research> _researches ;  
 
     private string _backScene;
@@ -96,7 +96,7 @@ public class ResearchListHandler : MonoBehaviour {
         int researchId = Int32.Parse(buttonName);
         
         Research research = null;
-        UserResearch characterResearch = null;
+        CharacterResearch characterResearch = null;
         for (int i = 0; i < _researches.Count; i++)
             if (_researches[i].Id == researchId)
             {

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class SlotConsume: MonoBehaviour, IDropHandler
 {
-
     private FacebookHandler _facebook;
     private InventoryHandler _inv;
     private static ModalPanel _modalPanel;
@@ -49,7 +48,6 @@ public class SlotConsume: MonoBehaviour, IDropHandler
         ResearchSlot draggedResearch = eventData.pointerDrag.GetComponent<ResearchSlot>();
         if (draggedItem == null && draggedResearch == null)
             return;
-
         if (draggedResearch != null)
         {
             if (draggedResearch.ReadyToUse())
@@ -60,8 +58,7 @@ public class SlotConsume: MonoBehaviour, IDropHandler
             }
             return;
         }
-        if (draggedItem != null)
-            ConsumeItem(draggedItem);
+        ConsumeItem(draggedItem);
     }
     private void ConsumeItem(ItemData draggedItem)
     {

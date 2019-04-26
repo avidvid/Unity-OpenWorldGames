@@ -265,10 +265,5 @@ public class OfferListHandler : MonoBehaviour {
                 SceneManager.LoadScene(SceneSettings.SceneIdForInsideBuilding);
                 return;
         }
-        //Todo: delete this part 2019-03-15 Give it 2 months
-        //if (_characterManager.CharacterSetting.Alive)
-        //    SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
-        //else
-        //    SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
     }
 }

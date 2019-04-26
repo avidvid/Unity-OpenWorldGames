@@ -13,7 +13,7 @@ public class CharacterDatabase : MonoBehaviour {
 
     void Start()
     {
-        _characterDatabase = CharacterDatabase.Instance();
+        _characterDatabase = Instance();
         Debug.Log("***CDB*** Start!");
     }
 

@@ -68,12 +68,20 @@ public class TerrainDatabase : MonoBehaviour {
     {
         for (int i = 0; i < _regions.Count; i++)
             if (Mathf.Abs(_regions[i].Latitude - latitude) < 10 && Mathf.Abs(_regions[i].Longitude - longitude) < 10)
-                _region= _regions[i];
-        _region = _regions[0];
-        _region.Print();
+            {
+                _region = _regions[i];
+                Debug.Log("TDB - Region = " + _region.MyInfo()+"Distance (" + Mathf.Abs(_regions[i].Latitude - latitude)+","+ Mathf.Abs(_regions[i].Longitude - longitude));
+                break;
+            }
+        if (_region == null)
+            throw new Exception("Region didn't get set correctly " );
         //Set Terrains based on the user region
         SetRegionTerrainTypes();
         Debug.Log("TDB-RegionTerrains.Count = " + _myTerrains.Count);
+        //Set Elements based on the user region
+        SetRegionElementTypes();
+        Debug.Log("TDB-RegionElements.Count = " + _myElements.Count);
+        //Set Monsters based on the user region
         SetRegionMonsterTypes();
         Debug.Log("TDB-RegionMonsters.Count = " + _monsters.Count);
         //Set InsideStories based on the user region
@@ -91,20 +99,9 @@ public class TerrainDatabase : MonoBehaviour {
     }
     #endregion
     #region Terrains
-    private List<TerrainIns> LoadTerrains()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "Terrain.xml");
-        //Read the Recipes from Terrain.xml file in the streamingAssets folder
-        XmlSerializer serializer = new XmlSerializer(typeof(List<TerrainIns>));
-        FileStream fs = new FileStream(path, FileMode.Open);
-        var terrains = (List<TerrainIns>)serializer.Deserialize(fs);
-        fs.Close();
-        return terrains;
-    }
     internal void UpdateTerrains(List<TerrainIns> terrains)
     {
-        //Load Terrains from database 
-        _terrains = terrains;
+        _terrains = new List<TerrainIns>(terrains.FindAll(s => s.IsEnable));
         Debug.Log("TDB-Terrains.Count = " + _terrains.Count);
     }
     private void SetRegionTerrainTypes()
@@ -122,12 +119,8 @@ public class TerrainDatabase : MonoBehaviour {
     #region Elements
     internal void UpdateElements(List<ElementIns> elements)
     {
-        //Load Elements from database 
-        _elements = elements;
+        _elements = new List<ElementIns>(elements.FindAll(s => s.IsEnable));
         Debug.Log("TDB-Elements.Count = " + _elements.Count);
-        //Set Elements based on the user region
-        SetRegionElementTypes();
-        Debug.Log("TDB-RegionElements.Count = " + _myElements.Count);
     }
     private void SetRegionElementTypes()
     {
@@ -137,7 +130,7 @@ public class TerrainDatabase : MonoBehaviour {
             {
                 //Terrain Element HealthCheck 
                 var healthCheck = false;
-                foreach (var terrain in _terrains)
+                foreach (var terrain in _myTerrains)
                 {
                     if (!terrain.HasElement)
                         continue;
@@ -164,8 +157,7 @@ public class TerrainDatabase : MonoBehaviour {
     }
     internal void UpdateInsideStories(List<InsideStory> insideStories)
     {
-        //Load InsideStories from database 
-        _insideStories = insideStories;
+        _insideStories = new List<InsideStory>(insideStories.FindAll(s => s.IsEnable));
         Debug.Log("TDB-InsideStories.Count = " + _insideStories.Count);
     }
     private void SetRegionInsideStoryTypes()

@@ -68,14 +68,12 @@ public class ItemContainer
     public PlaceType PlaceHolder ;
     public int Agility ;
     public int Bravery ;
-    //todo: remove Carry 
     public int Carry ;
     public int CarryCnt ;
     public int Charming ;
     public int Intellect ;
     public int Crafting ;
     public int Researching ;
-    //todo: remove Speed 
     public int Speed ;
     public int Stamina ;
     public int Strength ;

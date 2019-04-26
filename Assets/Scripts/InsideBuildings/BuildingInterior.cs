@@ -198,7 +198,7 @@ public class BuildingInterior : MonoBehaviour {
         return RandomHelper.Range(_mapPosition, _key + _randomIndex++, max);
     }
     //Monster
-    private void CreateMonsters(Vector3 location, InsideStory.Actor storyActor)
+    private void CreateMonsters(Vector3 location, Actor storyActor)
     {
         GameObject monster = Instantiate(_monsterObj);
         Character monsterCharacter = _terrainDatabase.GetInsMonsterById(storyActor.CharacterId);

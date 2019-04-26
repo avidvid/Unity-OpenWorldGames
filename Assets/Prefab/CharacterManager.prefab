@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 114880835581555012}
   - component: {fileID: 6122043511439164674}
   - component: {fileID: 3227114268351577902}
+  - component: {fileID: 5030996859374901976}
   m_Layer: 0
-  m_Name: CharacterDB
+  m_Name: CharacterManager
   m_TagString: Character Database
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,5 +68,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f0d23b46cc56b347b531e657fa7c1f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5030996859374901976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637177003799884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33925d19b3250d5449555abb80d98b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -35,7 +35,7 @@ public class BodyResponse
     public List<UserItem> UserInventory;
     public List<UserCharacter> UserCharacters;
     public CharacterMixture CharacterMixture;
-    public List<UserResearch> CharacterResearches;
+    public List<CharacterResearch> CharacterResearches;
     public CharacterResearching CharacterResearching;
     public CharacterSetting CharacterSetting;
     public List<UserRecipe> UserRecipes;

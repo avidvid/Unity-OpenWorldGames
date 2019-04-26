@@ -22,16 +22,15 @@ public class FacebookHandler : MonoBehaviour
 
     internal bool LoggedIn ;
 
-    void Awake()
+    void Start()
     {
+        Debug.Log("***FB*** Start!");
         _facebook = FacebookHandler.Instance();
         _characterManager = CharacterManager.Instance();
         if (!FB.IsInitialized)
             FB.Init(SetInit, OnHideUnity);
         else
             FB.ActivateApp();
-        GameObject.DontDestroyOnLoad(this);
-
     }
 
     private void SetInit()

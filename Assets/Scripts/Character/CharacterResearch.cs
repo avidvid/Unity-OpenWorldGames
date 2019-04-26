@@ -6,7 +6,7 @@ using UnityEngine;
 
 //Todo Rename to CharacterResearch
 [Serializable]
-public class UserResearch
+public class CharacterResearch
 {
     public int Id;
     public int UserId;
@@ -14,7 +14,7 @@ public class UserResearch
     public int Level;
     public int HealthCheck;
 
-    public UserResearch(int researchId, int userId, int nextLevel)
+    public CharacterResearch(int researchId, int userId, int nextLevel)
     {
         Id = 0;
         ResearchId = researchId;
@@ -22,7 +22,7 @@ public class UserResearch
         Level = nextLevel;
         HealthCheck = 0;
     }
-    public UserResearch()
+    public CharacterResearch()
     {
         Id = -1;
     }

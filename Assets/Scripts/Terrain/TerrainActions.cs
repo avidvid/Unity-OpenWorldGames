@@ -58,7 +58,7 @@ public class TerrainActions : MonoBehaviour {
                 {
                     _popupAction.GetComponent<ActionHandler>().SetActiveItem(currentItem,"Terrain");
                     _popupAction.GetComponent<ActionHandler>().GrabItem();
-                    //Less click approach 
+                    //Performance: Less click approach 
                     //CreateFloatingAction(touchLocation, "Item");
                 }
                 else
@@ -69,19 +69,16 @@ public class TerrainActions : MonoBehaviour {
             if (distance < 1)
             {
                 TerrainIns currentTerrain = _terrainManager.SelectTerrain(touchLocation);
-                if (currentTerrain != null)
+                //print("TerrainIns distance < 1" +currentTerrain.MyInfo());
+                if (currentTerrain.Digable)
                 {
-                    if (currentTerrain.Digable)
-                    {
-                        touchLocation.z = pos.z;
-                        _popupAction.GetComponent<ActionHandler>().SetActiveTerrain(currentTerrain);
-                        CreateFloatingAction(touchLocation, "Dig");
-                    }
+                    touchLocation.z = pos.z;
+                    _popupAction.GetComponent<ActionHandler>().SetActiveTerrain(currentTerrain);
+                    CreateFloatingAction(touchLocation, "Dig");
                     return;
                 }
             }
-            else
-                CreateFloatingAction(touchLocation, "Map");
+            CreateFloatingAction(touchLocation, "Map");
         }
     }
     private void InLineOfSight()

@@ -9,8 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class UserDatabase : MonoBehaviour
 {
-
     private static UserDatabase _userDatabase;
+    private ApiGatewayConfig _apiGatewayConfig;
     private ItemDatabase _itemDatabase;
     private CharacterDatabase _characterDatabase;
     private TerrainDatabase _terrainDatabase;
@@ -20,7 +20,7 @@ public class UserDatabase : MonoBehaviour
     private List<UserCharacter> _userCharacters = new List<UserCharacter>();
     private List<Character> _myCharacters = new List<Character>();
     private CharacterMixture _characterMixture;
-    private List<UserResearch> _characterResearches = new List<UserResearch>();
+    private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
     private CharacterResearching _characterResearching;
     private CharacterSetting _characterSetting;
     private List<Recipe> _myRecipes;
@@ -255,11 +255,11 @@ public class UserDatabase : MonoBehaviour
         _characterResearching = characterResearching; 
         Debug.Log("UDB-CharacterResearch = " + (_characterResearching == null ? "Empty" : _characterResearching.MyInfo()));
     }
-    internal List<UserResearch> GetCharacterResearches()
+    internal List<CharacterResearch> GetCharacterResearches()
     {
         return _characterResearches;
     }
-    public void UpdateCharacterResearches(List<UserResearch> userResearches)
+    public void UpdateCharacterResearches(List<CharacterResearch> userResearches)
     {
         _characterResearches = userResearches;
         Debug.Log("UDB-CharacterResearch.Count = " + _characterResearches.Count);
@@ -279,7 +279,7 @@ public class UserDatabase : MonoBehaviour
                 break;
             }
         if (!updated)
-            _characterResearches.Add(new UserResearch(research.Id,_userPlayer.Id ,level));
+            _characterResearches.Add(new CharacterResearch(research.Id,_userPlayer.Id ,level));
         //SaveCharacterResearches();
     }
     #endregion

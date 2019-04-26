@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
         _insideAudioClips = Resources.LoadAll<AudioClip>("Audio/Inside");
         _fightAudioClips = Resources.LoadAll<AudioClip>("Audio/Inside");
         _audioSource = gameObject.GetComponent<AudioSource>();
-        print("Music : Main=" + _bgAudioClips.Length + " Inside=" + _insideAudioClips.Length);
+        //print("Music : Main=" + _bgAudioClips.Length + " Inside=" + _insideAudioClips.Length);
     }
     public void UpdateSoundVolume(float value)
     {

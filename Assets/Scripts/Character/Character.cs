@@ -63,7 +63,7 @@ public class Character {
         Large,
         ELarge = 6
     }
-    //todo: make all set private to not screw db ?? 
+
     public int Id;
     public string Name;
     public string Description;
