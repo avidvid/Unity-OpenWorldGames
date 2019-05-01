@@ -79,6 +79,8 @@ public class RandomHelper
     }
     internal static int StringToRandomNumber(string myString, int range=20)
     {
+        //should match with API Side (UpdateUserPlayer/)
+        return 543;
         MD5 md5Hasher = MD5.Create();
         var hashed = md5Hasher.ComputeHash(Encoding.UTF8.GetBytes(myString));
         var iValue = Math.Abs(BitConverter.ToInt32(hashed, 0))% range;

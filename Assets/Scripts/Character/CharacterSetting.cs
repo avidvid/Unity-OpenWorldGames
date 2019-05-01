@@ -161,7 +161,9 @@ public class CharacterSetting {
     }
     internal string MyInfo()
     {
-        return Id + "-" + Name + " (" + Level + ") HC:" +HealthCheck;
+        return Id + "-" + Name + " (" + Level + ") HC:" + HealthCheck 
+               + " Intellect:" + Intellect
+            ;
     }
     internal Sprite GetSpellSprite()
     {

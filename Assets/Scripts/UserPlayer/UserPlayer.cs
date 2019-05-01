@@ -121,7 +121,7 @@ public class UserPlayer  {
     }
     internal string MyInfo()
     {
-        return Id + "-" + UserName + " " + Rank + " " + LastLogin + ": (" + Latitude + "," + Longitude + ") " + " HC:" + HealthCheck + LockUntil; 
+        return Id + "-" + UserName + " " + Rank + " " + LastLogin + ": (" + Latitude + "," + Longitude + ") Gem:" + Gem + " =>" + LockUntil; 
     }
     #endregion
     #region HealthCheck
@@ -150,6 +150,7 @@ public class UserPlayer  {
     }
     public enum FieldCode
     {
+        //should match with API Side
         None = 0,
         Gem = 1,
     }

@@ -19,6 +19,10 @@ Users Want to do what they want, not what you want them to do
 ####Office#####
 ###############	
 
+Start Save Part in nodejs projects
+
+Req body :
+{"header":"OUP","UserPlayer":{"Id":22,"UserName":"Avid30","Description":"Developer Tested","SoundVolume":0.01216695737093687,"Latitude":30.267200469970704,"Longitude":-97.84310150146485,"Gem":1530,"HealthCheck":6172,"Rank":0,"PRank":0,"ClanId":-1,"ClanRank":0,"FBLoggedIn":true,"FBid":"10213815927848642","GLoggedIn":false,"IsEnable":true}}
 
 
 Items: 

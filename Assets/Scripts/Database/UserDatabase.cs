@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -72,11 +69,9 @@ public class UserDatabase : MonoBehaviour
         }
         _userPlayer.Print();
         _terrainDatabase.SetRegion(_userPlayer.Latitude, _userPlayer.Longitude);
-        _userPlayer.HealthCheck = _userPlayer.CalculateHealthCheck();
-        _userPlayer.LastLogin = DateTime.Now;
-        //SaveUserPlayer();
-        if (DateTime.Now < _userPlayer.LockUntil)
+        if (_userPlayer.LastLogin < _userPlayer.LockUntil)
         {
+            print("UserPlayer is Locked");
             GoToWaitScene();
         }
         return true;

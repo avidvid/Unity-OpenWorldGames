@@ -43,13 +43,6 @@ public class CharacterManager : MonoBehaviour
             if (!_characterManager)
                 Debug.LogError("There needs to be one active ItemDatabase script on a GameObject in your scene.");
         }
-        //CheckDBAvailability
-        var database = GameObject.FindGameObjectWithTag("Database");
-        if (database == null)
-        {
-            database = Resources.Load<GameObject>("Prefabs/Database");
-            Instantiate(database);
-        }
         return _characterManager;
     }
     #endregion
@@ -657,9 +650,11 @@ public class CharacterManager : MonoBehaviour
     internal void SetFacebookLoggedIn(bool Status,string id=null)
     {
         UserPlayer.FBLoggedIn = Status;
-        if (id!=null)
+        if (id != null)
+        {
             UserPlayer.FBid = id;
-        SaveUserPlayer();
+            SaveUserPlayer();
+        }
     }
     public void SaveCharacterMixture(int itemId, int stackCnt, DateTime time)
     {

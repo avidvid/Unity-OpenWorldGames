@@ -97,3 +97,37 @@ public class ItemDatabase : MonoBehaviour {
     }
     #endregion
 }
+
+//Json try
+//private void SaveOffersJson()
+//{
+//    string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
+//    Offers offers = new Offers(LoadOffers());
+//    using (StreamWriter stream = new StreamWriter(path))
+//    {
+//        string jsonData = JsonUtility.ToJson(offers);
+//        print(offers.OfferList.Count + jsonData);
+//        stream.Write(jsonData);
+//    }
+//}
+//public List<Offer> LoadOffersJson()
+//{
+//    Offers offers = new Offers();
+//    string path = Path.Combine(Application.streamingAssetsPath, "Offer.json");
+//    try
+//    {
+//        if (File.Exists(path))
+//        {
+//            string jsonData = File.ReadAllText(path);
+//            offers = JsonUtility.FromJson<Offers>(jsonData);
+//        }
+//        else
+//            Debug.LogError("Error in Load Data");
+//    }
+//    catch (Exception e)
+//    {
+//        Debug.LogError(e);
+//        throw;
+//    }
+//    return offers.OfferList;
+//}

@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Xml.Serialization;
 using System.IO;
 using System;
-using System.Linq;
 
 public class Cache : MonoBehaviour {
 
@@ -61,9 +60,7 @@ public class Cache : MonoBehaviour {
         serializer.Serialize(fs, PersistContents);
         fs.Close();
     }
-    internal IEnumerable<CacheContent> FindPersist(
-                                string objectType
-                            )
+    internal IEnumerable<CacheContent> FindPersist(string objectType )
     {
         foreach (var c in PersistContents)
         {
@@ -72,7 +69,6 @@ public class Cache : MonoBehaviour {
             yield return c;
         }
     }
-
     public IEnumerable<CacheContent> Find(
                         string objectType, 
                         Vector3 near, // Location

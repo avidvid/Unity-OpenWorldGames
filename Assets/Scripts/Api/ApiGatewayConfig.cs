@@ -21,7 +21,6 @@ public class ApiGatewayConfig : MonoBehaviour
     private int _userId=22;
     private int _firstWaveTarget;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -31,9 +30,60 @@ public class ApiGatewayConfig : MonoBehaviour
         _characterDatabase=CharacterDatabase.Instance();
         _terrainDatabase=TerrainDatabase.Instance();
         _gameLoadHelper = GameObject.Find("GameStarter").GetComponent<GameLoadHelper>();
+
+        //todo: delete ##############################
+        //Call UserPlayer
+        var apiGate = "GetUserPlayer";
+        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(uri, TestUserPlayer));
+        //###########################################u
+
         FirstWave();
         StartCoroutine(SecondWave());
     }
+
+
+    //todo: delete ##############################
+    private void TestUserPlayer(string result)
+    {
+        StartCoroutine(TestUserPlayer2(result));
+    }
+    IEnumerator TestUserPlayer2(string result)
+    {
+        var response = TranslateResponse(result);
+        if (response.Body.UserPlayer.Id == 0)
+            throw new Exception("API-UserPlayer Failed!!!");
+        UserPlayer up = response.Body.UserPlayer;
+        up.Print();
+        up.Gem += 1000;
+        up.Print();
+
+        var apiGate = "GetUserPlayer";
+        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
+
+        ApiRequest ap = new ApiRequest ();
+        ap.Action = "UpdateUserPlayer";
+        ap.UserPlayer = up;
+        string json = JsonUtility.ToJson(ap);
+        Debug.Log("json: " + json);
+        using (UnityWebRequest request = UnityWebRequest.Put(uri, json))
+        {
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("x-api-key", ApiKey);
+            yield return request.SendWebRequest();
+
+            if (request.isNetworkError)
+            {
+                Debug.Log(request.error);
+            }
+            else
+            {
+                Debug.Log("request.downloadHandler.text = "+ request.downloadHandler.text);
+            }
+        }
+    }
+    //###########################################
+
 
     // Update is called once per frame
     void Update()

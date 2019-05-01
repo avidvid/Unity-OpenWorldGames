@@ -2,7 +2,7 @@
 
 public class DontDestroy : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
         GameObject.DontDestroyOnLoad(this);
     }

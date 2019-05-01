@@ -120,14 +120,14 @@ public class ProfileHandler : MonoBehaviour {
                                  settings.CarryCnt + ") ";
 
         //Row3-6
-        string[] settingStats = new string[] {
-            "Intellect","Agility",
-            "Strength","Stamina",
-            "Crafting","Researching",
-            "Bravery", "Charming"
-             };
-        foreach (var stat in settingStats)
-            profileTexts[i++].text = stat + " : " + GetPropertyValue(settings, stat) + "    ";
+        profileTexts[i++].text = "Intellect: " + settings.Intellect;
+        profileTexts[i++].text = "Agility: " + settings.Agility;
+        profileTexts[i++].text = "Strength: " + settings.Strength;
+        profileTexts[i++].text = "Stamina: " + settings.Stamina;
+        profileTexts[i++].text = "Crafting: " + settings.Crafting;
+        profileTexts[i++].text = "Researching: " + settings.Researching;
+        profileTexts[i++].text = "Bravery: " + settings.Bravery;
+        profileTexts[i++].text = "Charming: " + settings.Charming;
         //Row7
         profileTexts[i++].text = "Clan: " +
                                  (player.ClanId == -1 ? "Solo" : player.ClanId.ToString());
@@ -203,6 +203,11 @@ public class ProfileHandler : MonoBehaviour {
 
     private object GetPropertyValue(object obj, string propertyName)
     {
+        print("obj Type= " +obj.GetType()+ " property= " + propertyName+ " GetProperties() " + obj.GetType().GetProperties());
+        foreach (var pt in obj.GetType().GetProperties())
+        {
+            print("-" + pt.Name);
+        }
         return obj.GetType().GetProperties()
             .Single(pi => pi.Name == propertyName)
             .GetValue(obj, null);
