@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -331,7 +332,6 @@ public class CharacterManager : MonoBehaviour
             case ItemContainer.ItemType.Tool:
                 return message;
         }
-        CharacterSetting.HealthCheck = CharacterSetting.CalculateHealthCheck();
         if (save)
             SaveCharacterSetting();
         return message;
@@ -353,7 +353,7 @@ public class CharacterManager : MonoBehaviour
     }
     public void AddCharacterSetting(string field, float value, bool save = true)
     {
-        print("CharacterSetting." + field + "=" + CharacterSetting.FieldValue(field) + " + " + value);
+        print("CharacterSetting." + field +(save ? " (save)" : "")+ "=" + CharacterSetting.FieldValue(field) + " + " + value);
         switch (field)
         {
             case "Health":
@@ -382,13 +382,11 @@ public class CharacterManager : MonoBehaviour
                 break;
             case "Gem":
                 UserPlayer.Gem += (int)value;
-                UserPlayer.HealthCheck += UserPlayer.CalculateHealthCheck((int)value, "Gem");
                 CharacterSetting.Updated = true;
                 SaveUserPlayer();
                 return;
             case "Coin":
                 CharacterSetting.Coin += (int)value;
-                CharacterSetting.HealthCheck += CharacterSetting.CalculateHealthCheckByField((int)value, "Coin");
                 CharacterSetting.Updated = true;
                 break;
             case "Life":
@@ -475,7 +473,7 @@ public class CharacterManager : MonoBehaviour
     //Calculations
     private void LoginCalculations()
     {
-        var diffInSeconds = (CharacterSetting.LastUpdated - DateTime.Now).TotalSeconds;
+        var diffInSeconds = (Convert.ToDateTime(UserPlayer.LastLogin) - DateTime.Now).TotalSeconds;
         if (diffInSeconds > 200)
         {
             var period = diffInSeconds / (100f / CharacterSetting.Level);
@@ -561,7 +559,7 @@ public class CharacterManager : MonoBehaviour
         CharacterSetting.Life = 0;
         CharacterSetting.Health = CharacterSetting.MaxHealth;
         CharacterSetting.Updated = true;
-        SetLockTill(DateTime.Now.AddMinutes(Mathf.Pow(CharacterSetting.Level, 3) + 3));
+        SetLockTill((int) Mathf.Pow(CharacterSetting.Level, 3) + 3);
         SaveCharacterSetting();
     }
     private void GameOverCalculations()
@@ -580,9 +578,9 @@ public class CharacterManager : MonoBehaviour
             return;
         float value = research.CalculateValue(level) - research.CalculateValue(level-1);
         _userDatabase.AddCharacterResearch(research, level);
-        _userDatabase.EmptyCharacterResearching();
-        CharacterResearching = _userDatabase.GetCharacterResearching();
         AddCharacterSetting(research.Target, value);
+        CharacterResearching.Level = 0;
+        _userDatabase.SaveCharacterResearching();
     }
     internal void CharacterSettingApplyFullResearch(Research research, int level)
     {
@@ -636,20 +634,18 @@ public class CharacterManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
     }
-
     //Middle man to CharacterDatabase
     internal bool ValidateCharacterCode(string characterCode)
     {
         return _userDatabase.ValidateCharacterCode(characterCode);
     }
-    internal void SetLockTill(DateTime time )
+    internal void SetLockTill(int minutes=0)
     {
-        UserPlayer.LockUntil = time;
-        SaveUserPlayer();
+        SaveUserPlayer(minutes);
     }
-    internal void SetFacebookLoggedIn(bool Status,string id=null)
+    internal void SetFacebookLoggedIn(bool status,string id=null)
     {
-        UserPlayer.FBLoggedIn = Status;
+        UserPlayer.FBLoggedIn = status;
         if (id != null)
         {
             UserPlayer.FBid = id;
@@ -660,26 +656,26 @@ public class CharacterManager : MonoBehaviour
     {
         _userDatabase.SaveCharacterMixture(itemId, stackCnt, time);
     }
-    internal void SetCharacterMixtureTime(DateTime time)
+    internal void SetCharacterMixtureTime()
     {
-        CharacterMixture.MixTime = time;
-        _userDatabase.SaveCharacterMixture(CharacterMixture.ItemId, CharacterMixture.StackCnt, time);
+        CharacterMixture.MixTime = "Now";
+        _userDatabase.SaveCharacterMixture();
     }
     public void SaveCharacterSetting()
     {
-        _userDatabase.SaveCharacterSetting(CharacterSetting);
+        _userDatabase.SaveCharacterSetting();
     }
-    public void SaveUserPlayer()
+    public void SaveUserPlayer(int days = 0)
     {
-        _userDatabase.SaveUserPlayer(UserPlayer);
+        _userDatabase.SaveUserPlayer(UserPlayer,days);
     }
     public void SaveCharacterResearching(int researchId, int level, DateTime durationMinutes)
     {
-        _userDatabase.SaveCharacterResearching( researchId,  level , durationMinutes);
+        _userDatabase.SaveCharacterResearching(researchId, level, durationMinutes);
     }
-    internal void SetCharacterResearchingTime(DateTime time)
+    internal void SetCharacterResearchingTime()
     {
-        CharacterResearching.ResearchTime = time;
-        _userDatabase.SaveCharacterResearching(CharacterResearching);
+        CharacterResearching.ResearchTime = "Now";
+        _userDatabase.SaveCharacterResearching();
     }
 }

@@ -8,10 +8,11 @@ public class Headers
     public string Header;
     public int ResultCount = 0;
     public int ScannedCount=0;
+    public int HealthCheck;
 
     internal string MyInfo()
     {
-        return "Header=" + Header + " Count=" + ResultCount + " ScannedCount=" + ScannedCount ;
+        return "Header=" + Header + " HealthCheck=" + HealthCheck + " Count=" + ResultCount + " ScannedCount=" + ScannedCount ;
     }
 }
 [Serializable]
@@ -19,6 +20,7 @@ public class BodyResponse
 {
     public string Message;
     public int RandomNum=0;
+    public int HealthCheck;
     public List<ItemContainer> Items;
     public List<Recipe> Recipes;
     public List<Offer> Offers;

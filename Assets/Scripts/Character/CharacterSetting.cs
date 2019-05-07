@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -15,8 +16,7 @@ public class CharacterSetting {
     public string Name;
     public int Level;
     public bool Updated;
-    public int HealthCheck;
-    public DateTime LastUpdated;
+    public string LastUpdated;
     public bool IsEnable;
     public bool FightMode;
     public bool Alive;
@@ -53,7 +53,7 @@ public class CharacterSetting {
     public float Charming;
 
     public CharacterSetting(int id = -1, int userId = -1, int characterId = -1, string name = null,
-        int level = 0,  bool updated = true, int healthCheck = 0, bool isEnable = true, 
+        int level = 0,  bool updated = true,  bool isEnable = true, 
         bool fightMode = false, bool alive = true,
         int life = 0, int coin = 100,
         int experience = 0, int maxExperience = 0, int handsCnt = 2, 
@@ -71,8 +71,7 @@ public class CharacterSetting {
         Level = level;
         Life = life;
         Updated = updated;
-        HealthCheck = healthCheck;
-        LastUpdated = DateTime.Now;
+        LastUpdated = DateTime.Now.ToString(CultureInfo.InvariantCulture);
         IsEnable = isEnable;
         FightMode = fightMode;
         Alive = alive;
@@ -120,8 +119,7 @@ public class CharacterSetting {
         Level = characterSetting.Level;
         Life = characterSetting.Life;
         Updated = characterSetting.Updated;
-        HealthCheck = characterSetting.HealthCheck;
-        LastUpdated = DateTime.Now;
+        LastUpdated = characterSetting.LastUpdated;
         IsEnable = characterSetting.IsEnable;
         FightMode = characterSetting.FightMode;
         Alive = characterSetting.Alive;
@@ -161,7 +159,11 @@ public class CharacterSetting {
     }
     internal string MyInfo()
     {
-        return Id + "-" + Name + " (" + Level + ") HC:" + HealthCheck 
+        return Id + "-" + Name + " (" + Level + ")"
+               + " Energy:" + Energy
+               + " Health:" + Health
+               + " Coin:" + Coin
+               + " Mana:" + Mana
                + " Intellect:" + Intellect
             ;
     }

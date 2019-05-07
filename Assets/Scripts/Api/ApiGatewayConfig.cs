@@ -36,54 +36,29 @@ public class ApiGatewayConfig : MonoBehaviour
         var apiGate = "GetUserPlayer";
         var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
         //StartCoroutine(GetRequest(uri, TestUserPlayer));
-        //###########################################u
+        //###########################################
 
         FirstWave();
         StartCoroutine(SecondWave());
     }
 
-
     //todo: delete ##############################
     private void TestUserPlayer(string result)
-    {
-        StartCoroutine(TestUserPlayer2(result));
-    }
-    IEnumerator TestUserPlayer2(string result)
     {
         var response = TranslateResponse(result);
         if (response.Body.UserPlayer.Id == 0)
             throw new Exception("API-UserPlayer Failed!!!");
         UserPlayer up = response.Body.UserPlayer;
         up.Print();
-        up.Gem += 1000;
+        up.Gem += 70;
+        up.Description +=  up.Gem;
+        up.FBLoggedIn = !up.FBLoggedIn;
+        up.SoundVolume *= 2;
         up.Print();
-
-        var apiGate = "GetUserPlayer";
-        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-
-        ApiRequest ap = new ApiRequest ();
-        ap.Action = "UpdateUserPlayer";
-        ap.UserPlayer = up;
-        string json = JsonUtility.ToJson(ap);
-        Debug.Log("json: " + json);
-        using (UnityWebRequest request = UnityWebRequest.Put(uri, json))
-        {
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("x-api-key", ApiKey);
-            yield return request.SendWebRequest();
-
-            if (request.isNetworkError)
-            {
-                Debug.Log(request.error);
-            }
-            else
-            {
-                Debug.Log("request.downloadHandler.text = "+ request.downloadHandler.text);
-            }
-        }
+        int days = 10;
+        SaveUserPlayer(up, days);
     }
     //###########################################
-
 
     // Update is called once per frame
     void Update()
@@ -293,7 +268,7 @@ public class ApiGatewayConfig : MonoBehaviour
     {
         var response = TranslateResponse(result);
         if (response.Body.CharacterMixture.Id == 0)
-            throw new Exception("API-CharacterMixture Failed!!!");
+            Debug.LogWarning("####API-CharacterMixture Is Empty!!!");
         _userDatabase.UpdateCharacterMixture(response.Body.CharacterMixture);
         _gameLoadHelper.LoadingThumbsUp();
     }
@@ -301,7 +276,7 @@ public class ApiGatewayConfig : MonoBehaviour
     {
         var response = TranslateResponse(result);
         if (response.Body.CharacterResearching.Id == 0)
-            throw new Exception("API-CharacterResearching Failed!!!");
+            Debug.LogWarning("####API-CharacterResearching Is Empty!!!");
         _userDatabase.UpdateCharacterResearching(response.Body.CharacterResearching);
         _gameLoadHelper.LoadingThumbsUp();
     }
@@ -348,6 +323,81 @@ public class ApiGatewayConfig : MonoBehaviour
         StartCoroutine(GetRequest(uri, ReadCharacterSettingJson));
     }
     #endregion
+    #region Updates
+    internal void SaveUserPlayer(UserPlayer userPlayer, int days)
+    {
+        var healthCheck =userPlayer.CalculateHealthCheck();
+        var apiGate = "GetUserPlayer";
+        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", userPlayer.Id.ToString());
+        ApiRequest ap = new ApiRequest
+        {
+            Action = "UpdateUserPlayer",
+            HealthCheck = healthCheck,
+            Time = days,
+            UserPlayer = userPlayer
+        };
+        StartCoroutine(PutRequest(uri, ap));
+    }
+    internal void SaveCharacterSetting(CharacterSetting characterSetting)
+    {
+        var healthCheck = characterSetting.CalculateHealthCheck();
+        var apiGate = "GetCharacterSetting";
+        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", characterSetting.Id.ToString());
+        ApiRequest ap = new ApiRequest
+        {
+            Action = "UpdateCharacterSetting",
+            HealthCheck = healthCheck,
+            CharacterSetting = characterSetting
+        };
+        StartCoroutine(PutRequest(uri, ap));
+    }
+    internal void PutCharacterMixture(CharacterMixture characterMixture)
+    {
+        var apiGate = "GetCharacterMixture";
+        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", characterMixture.Id.ToString());
+        int time = -1;
+        string action;
+        if (characterMixture.StackCnt == 0)
+            action = "Delete";
+        else if (characterMixture.MixTime == "Now")
+        {
+            action = "Update";
+            time = 0;
+        }
+        else
+            action = "Insert";
+        ApiRequest ap = new ApiRequest
+        {
+            Action = action,
+            Time = time,
+            CharacterMixture = characterMixture 
+        };
+        StartCoroutine(PutRequest(uri, ap));
+    }
+    internal void PutCharacterResearching(CharacterResearching characterResearching)
+    {
+        var apiGate = "GetCharacterResearching";
+        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", characterResearching.Id.ToString());
+        int time = -1;
+        string action;
+        if (characterResearching.Level == 0)
+            action = "Delete";
+        else if (characterResearching.ResearchTime == "Now")
+        {
+            action = "Update";
+            time = 0;
+        }
+        else
+            action = "Insert";
+        ApiRequest ap = new ApiRequest
+        {
+            Action = action,
+            Time = time,
+            CharacterResearching = characterResearching
+        };
+        StartCoroutine(PutRequest(uri, ap));
+    }
+    #endregion
     #region ApiRequest
     private ApiResponse TranslateResponse(string result)
     {
@@ -369,6 +419,25 @@ public class ApiGatewayConfig : MonoBehaviour
             else
                 result = request.downloadHandler.text;
             callback(result);
+        }
+    }
+    private IEnumerator PutRequest(string uri, ApiRequest apiRequest)
+    {
+        string json = JsonUtility.ToJson(apiRequest);
+        Debug.Log("json: " + json);
+        using (UnityWebRequest request = UnityWebRequest.Put(uri, json))
+        {
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("x-api-key", ApiKey);
+            yield return request.SendWebRequest();
+            if (request.isNetworkError)
+            {
+                Debug.Log(request.error);
+            }
+            else
+            {
+                Debug.Log("request.downloadHandler.text = " + request.downloadHandler.text);
+            }
         }
     }
     #endregion

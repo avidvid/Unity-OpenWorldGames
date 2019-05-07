@@ -110,7 +110,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             SceneSettings.GoToShopScene("Gem");
             return;
         }
-        _characterManager.SetCharacterMixtureTime(DateTime.Now);
+        _characterManager.SetCharacterMixtureTime();
         _time = DateTime.Now;
     }
 
@@ -152,7 +152,10 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         _inv.SaveCharacterMixture(itemId, stackCnt, _time);
         LoadItem(itemId,stackCnt, _time);
     }
-
+    internal void LoadItem(int itemId, int stackCnt, string time)
+    {
+        LoadItem(itemId, stackCnt, Convert.ToDateTime(time));
+    }
     internal void LoadItem(int itemId,int stackCnt, DateTime time)
     {
         var itemDatabase = ItemDatabase.Instance();

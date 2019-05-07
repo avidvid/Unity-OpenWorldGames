@@ -165,7 +165,7 @@ public class InventoryHandler : MonoBehaviour
             {
                 _updateInventory = false;
             }
-            ////Save new Equipments 
+            //Save new Equipments 
             if (_updateEquipments)
             {
                 _updateEquipments = false;
@@ -403,21 +403,21 @@ public class InventoryHandler : MonoBehaviour
     }
     private void InitResearching(CharacterResearching researching)
     {
-        if (researching == null)
+        if (researching.Id==0)
             _researchingSlot.LoadEmpty();
         else 
             _researchingSlot.LoadResearch(researching);
     }
     private void InitMixture(CharacterMixture playerMixture)
     {
-        if (playerMixture == null)
+        if (playerMixture.Id == 0)
             _itemMixture.LoadEmpty();
         else
             _itemMixture.LoadItem(playerMixture);
     }
     public void SaveCharacterMixture(int itemId, int stackCnt, DateTime time)
     {
-        _characterManager.SaveCharacterMixture(itemId,  stackCnt, time);
+        _characterManager.SaveCharacterMixture(itemId, stackCnt, time);
     }
     public Recipe CheckRecipes(int first, int second)
     {

@@ -117,7 +117,8 @@ public class StartGameHandler : MonoBehaviour {
             return;
         Debug.Log("Create New UserPlayer");
         _characterManager.UserPlayer = new UserPlayer(22, _name.text, _desc.text);
-        _characterManager.SaveUserPlayer();
+        //Save
+        //_characterManager.SaveUserPlayer();
 
         SceneManager.LoadScene(SceneSettings.SceneIdForStart );
     }

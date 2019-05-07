@@ -8,8 +8,6 @@ public class UserDatabase : MonoBehaviour
 {
     private static UserDatabase _userDatabase;
     private ApiGatewayConfig _apiGatewayConfig;
-    private ItemDatabase _itemDatabase;
-    private CharacterDatabase _characterDatabase;
     private TerrainDatabase _terrainDatabase;
 
     private UserPlayer _userPlayer;
@@ -38,9 +36,8 @@ public class UserDatabase : MonoBehaviour
     void Start()
     {
         _userDatabase = Instance();
-        _itemDatabase = ItemDatabase.Instance();
-        _characterDatabase = CharacterDatabase.Instance();
         _terrainDatabase = TerrainDatabase.Instance();
+        _apiGatewayConfig =ApiGatewayConfig.Instance();
         Debug.Log("***UDB*** Start!");
     }
     // Update is called once per frame
@@ -52,9 +49,9 @@ public class UserDatabase : MonoBehaviour
     {
         return _userPlayer;
     }
-    public void SaveUserPlayer(UserPlayer userPlayer)
+    public void SaveUserPlayer(UserPlayer userPlayer, int days)
     {
-        _userPlayer = new UserPlayer(userPlayer);
+        _apiGatewayConfig.SaveUserPlayer(userPlayer, days);
     }
     public bool UpdateUserPlayer(UserPlayer userPlayer)
     {
@@ -69,18 +66,13 @@ public class UserDatabase : MonoBehaviour
         }
         _userPlayer.Print();
         _terrainDatabase.SetRegion(_userPlayer.Latitude, _userPlayer.Longitude);
-        if (_userPlayer.LastLogin < _userPlayer.LockUntil)
+        if (Convert.ToDateTime(_userPlayer.LastLogin) < Convert.ToDateTime(_userPlayer.LockUntil))
         {
-            print("UserPlayer is Locked");
+            //todo: Unknown path
+            print("UserPlayer is Locked now = " + Convert.ToDateTime(_userPlayer.LastLogin) + "now = " + Convert.ToDateTime(_userPlayer.LockUntil)  );
             GoToWaitScene();
         }
         return true;
-    }
-    private void HealthCheckUserPlayer()
-    {
-        var healthCheck = _userPlayer.CalculateHealthCheck();
-        if (healthCheck != _userPlayer.HealthCheck)
-            throw new Exception("Health Check User Player Failed. It is off by " + (healthCheck - _userPlayer.HealthCheck));
     }
     #endregion
     #region UserInventory
@@ -213,13 +205,19 @@ public class UserDatabase : MonoBehaviour
     {
         return _characterMixture;
     }
-    public void SaveCharacterMixture(int itemId, int stackCnt, DateTime durationMinutes)
+    internal void SaveCharacterMixture(int itemId, int stackCnt, DateTime time)
     {
         if (stackCnt == 0)
-            _characterMixture = null;
+            _characterMixture.StackCnt = 0;
         else
-            _characterMixture = new CharacterMixture(_userPlayer.Id, itemId, stackCnt, durationMinutes);
-        //SaveCharacterMixture();
+            _characterMixture.SetValues(_userPlayer.Id, itemId, stackCnt, time);
+        SaveCharacterMixture();
+    }
+    internal void SaveCharacterMixture()
+    {
+        _apiGatewayConfig.PutCharacterMixture(_characterMixture);
+        if (_characterMixture.StackCnt==0)
+            _characterMixture.SetEmpty();
     }
     public void UpdateCharacterMixture(CharacterMixture characterMixture)
     {
@@ -227,29 +225,33 @@ public class UserDatabase : MonoBehaviour
         Debug.Log("UDB-CharacterMixture = " +  (_characterMixture == null ? "Empty" : _characterMixture.MyInfo()) );
     }
     #endregion
-    #region CharacterResearch
+    #region CharacterResearching
     internal CharacterResearching GetCharacterResearching()
     {
         return _characterResearching;
     }
-    internal void SaveCharacterResearching(int researchId, int level, DateTime durationMinutes)
+    internal void SaveCharacterResearching(int researchId, int level, DateTime time)
     {
-        _characterResearching = new CharacterResearching(_userPlayer.Id,researchId, level, durationMinutes);
-        //SaveCharacterResearching();
+        if (level == 0)
+            _characterResearching.Level = 0;
+        else
+            _characterResearching.SetValues(_userPlayer.Id, researchId, level, time);
+        SaveCharacterResearching();
     }
-    internal void SaveCharacterResearching(CharacterResearching characterResearching)
+    internal void SaveCharacterResearching()
     {
-        SaveCharacterResearching( characterResearching.ResearchId,characterResearching.Level, characterResearching.ResearchTime);
+        _apiGatewayConfig.PutCharacterResearching(_characterResearching);
+        if (_characterResearching.Level == 0)
+            _characterResearching.SetEmpty();
     }
-    public void EmptyCharacterResearching()
-    {
-        _characterResearching = null;
-    }
+
     public void UpdateCharacterResearching(CharacterResearching characterResearching)
     {
-        _characterResearching = characterResearching; 
+        _characterResearching = characterResearching;
         Debug.Log("UDB-CharacterResearch = " + (_characterResearching == null ? "Empty" : _characterResearching.MyInfo()));
     }
+    #endregion
+    #region CharacterResearch
     internal List<CharacterResearch> GetCharacterResearches()
     {
         return _characterResearches;
@@ -283,10 +285,9 @@ public class UserDatabase : MonoBehaviour
     {
         return _characterSetting;
     }
-    public void SaveCharacterSetting(CharacterSetting characterSetting)
+    public void SaveCharacterSetting()
     {
-        _characterSetting = new CharacterSetting(characterSetting);
-        //SaveCharacterSetting();
+        _apiGatewayConfig.SaveCharacterSetting(_characterSetting);
     }
     public void UpdateCharacterSetting(CharacterSetting characterSetting)
     {
@@ -300,12 +301,6 @@ public class UserDatabase : MonoBehaviour
             //throw new Exception("UDB-Character Setting doesn't Exists!!!");
         }
         _characterSetting.Print();
-    }
-    private void HealthCheckCharacterSetting()
-    {
-        var healthCheck = _characterSetting.CalculateHealthCheck();
-        if (healthCheck != _characterSetting.HealthCheck)
-            throw new Exception("Health Check CharacterSetting Failed. It is off by " + (healthCheck - _characterSetting.HealthCheck));
     }
     #endregion
     #region UserRecipe
@@ -430,4 +425,6 @@ public class UserDatabase : MonoBehaviour
             return;
         SceneManager.LoadScene(SceneSettings.SceneIdForWait);
     }
+
+
 }

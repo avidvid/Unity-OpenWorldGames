@@ -48,9 +48,8 @@ public class UserPlayer  {
     public float Latitude;
     public float Longitude;
     public int Gem;
-    public int HealthCheck;
-    public DateTime LastLogin;
-    public DateTime LockUntil;
+    public string LastLogin;
+    public string LockUntil;
     public UserPlayer.PlayerRanks Rank;
     public int PRank;
     public int ClanId;
@@ -64,9 +63,9 @@ public class UserPlayer  {
                 string userName = null, string description = null, float soundVolume =0,
                 float latitude = 0, float longitude = 0,
                 float baseLatitude = 0, float baseLongitude = 0, 
-                int gem = 0, int healthCheck = 0,
-                DateTime lastLogin = new DateTime(),
-                DateTime lockUntil = new DateTime(),
+                int gem = 0,
+                string lastLogin = "",
+                string lockUntil = "",
                 UserPlayer.PlayerRanks rank = 0, int pRank = 0, int clanId = 0, UserPlayer.ClanRanks clanRank = 0,
                 bool fb = false, string fbId = null,
                 bool g = false, bool isEnable = true)
@@ -78,7 +77,6 @@ public class UserPlayer  {
         Latitude = latitude;
         Longitude = longitude;
         Gem = gem;
-        HealthCheck = healthCheck;
         LastLogin = lastLogin;
         LockUntil = lockUntil;
         Rank = rank;
@@ -99,7 +97,6 @@ public class UserPlayer  {
         Latitude = userPlayer.Latitude;
         Longitude = userPlayer.Longitude;
         Gem = userPlayer.Gem;
-        HealthCheck = userPlayer.HealthCheck;
         LastLogin = userPlayer.LastLogin;
         LockUntil = userPlayer.LockUntil;
         Rank = userPlayer.Rank;
@@ -121,7 +118,16 @@ public class UserPlayer  {
     }
     internal string MyInfo()
     {
-        return Id + "-" + UserName + " " + Rank + " " + LastLogin + ": (" + Latitude + "," + Longitude + ") Gem:" + Gem + " =>" + LockUntil; 
+        return Id + "-" + UserName + 
+               " Rank =" + Rank + 
+               "(" + Latitude + "," + Longitude + ")"+
+               " Gem=" + Gem +
+               " FBLoggedIn=" + FBLoggedIn +
+               " FBid=" + FBid +
+               " Description=" + Description +
+               " SoundVolume=" + SoundVolume +
+               " LastLogin=" + LastLogin +
+               " LockUntil=" + LockUntil; 
     }
     #endregion
     #region HealthCheck

@@ -116,7 +116,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
             SceneSettings.GoToShopScene("Gem");
             return;
         }
-        _characterManager.SetCharacterResearchingTime(DateTime.Now);
+        _characterManager.SetCharacterResearchingTime();
         _time = DateTime.Now;
     }
 
@@ -156,6 +156,10 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     internal void LoadResearch(CharacterResearching researching)
     {
         LoadResearch(researching.ResearchId, researching.Level, researching.ResearchTime);
+    }
+    internal void LoadResearch(int researchId, int level, string time)
+    {
+        LoadResearch(researchId, level, Convert.ToDateTime(time));
     }
     internal void LoadResearch(int researchId,int level, DateTime time)
     {

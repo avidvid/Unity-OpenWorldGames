@@ -135,7 +135,7 @@ public class ProfileHandler : MonoBehaviour {
                                  player.ClanRank;
         //Last Login
         profileTexts[i++].text = "Last Login: " +
-                                 (player.LastLogin > DateTime.Now.AddMinutes(-30) ? "Now" : player.LastLogin.ToString());
+                                 (Convert.ToDateTime(player.LastLogin) > DateTime.Now.AddMinutes(-30) ? "Now" : player.LastLogin);
     }
 
     private void LoadMonsterProfile(string monsterInfo, Vector2 monsterLoc )
