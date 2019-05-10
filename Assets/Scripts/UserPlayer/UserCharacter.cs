@@ -11,17 +11,15 @@ public class UserCharacter
     public DateTime Created;
     public UserCharacter()
     {
-        CharacterId = -1;
-        UserId = -1;
-        CharacterCode = null;
-        Created = DateTime.Now;
+        CharacterId = 0;
+        UserId = 0;
+        CharacterCode = "";
     }
     public UserCharacter(int characterId, int playerId, string characterCode = null)
     {
         CharacterId = characterId;
         UserId = playerId;
         CharacterCode = characterCode;
-        Created = DateTime.Now;
     }
     public void Print()
     {

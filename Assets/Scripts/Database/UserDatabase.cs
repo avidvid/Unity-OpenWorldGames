@@ -222,7 +222,7 @@ public class UserDatabase : MonoBehaviour
     public void UpdateCharacterMixture(CharacterMixture characterMixture)
     {
         _characterMixture = characterMixture;
-        Debug.Log("UDB-CharacterMixture = " +  (_characterMixture == null ? "Empty" : _characterMixture.MyInfo()) );
+        Debug.Log("UDB-CharacterMixture = " + _characterMixture.MyInfo());
     }
     #endregion
     #region CharacterResearching
@@ -248,7 +248,7 @@ public class UserDatabase : MonoBehaviour
     public void UpdateCharacterResearching(CharacterResearching characterResearching)
     {
         _characterResearching = characterResearching;
-        Debug.Log("UDB-CharacterResearch = " + (_characterResearching == null ? "Empty" : _characterResearching.MyInfo()));
+        Debug.Log("UDB-CharacterResearch = " +_characterResearching.MyInfo());
     }
     #endregion
     #region CharacterResearch
@@ -263,7 +263,6 @@ public class UserDatabase : MonoBehaviour
     }
     internal void AddCharacterResearch(Research research, int level)
     {
-        bool updated = false;
         foreach (var chResearch in _characterResearches)
             if (chResearch.ResearchId == research.Id)
             {
@@ -271,13 +270,18 @@ public class UserDatabase : MonoBehaviour
                     throw new Exception("CharacterResearch Invalid <= ");
                 if (chResearch.Level + 1 != level)
                     throw new Exception("CharacterResearch Invalid != ");
-                chResearch.Level = level;
-                updated = true;
-                break;
+                chResearch.Level += 1;
+                SaveCharacterResearch(chResearch);
+                return;
             }
-        if (!updated)
-            _characterResearches.Add(new CharacterResearch(research.Id,_userPlayer.Id ,level));
-        //SaveCharacterResearches();
+        var newResearch = new CharacterResearch(research.Id, _userPlayer.Id);
+        _characterResearches.Add(newResearch);
+        SaveCharacterResearch(newResearch);
+    }
+    private void SaveCharacterResearch(CharacterResearch characterResearch)
+    {
+        Debug.Log("UDB-characterResearch = " + characterResearch.MyInfo());
+        _apiGatewayConfig.PutCharacterResearch(characterResearch);
     }
     #endregion
     #region CharacterSetting

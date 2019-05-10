@@ -17,8 +17,12 @@ public class CharacterResearching
     }
     internal string MyInfo()
     {
-        var characterDatabase = CharacterDatabase.Instance();
-        return Id + "-" + characterDatabase.GetResearchById(ResearchId).Name + " (" + Level + ") in " + ResearchTime;
+        if (ResearchId != 0)
+        {
+            var characterDatabase = CharacterDatabase.Instance();
+            return Id + "-" + characterDatabase.GetResearchById(ResearchId).Name + " (" + Level + ") in " + ResearchTime;
+        }
+        return Id + "-Empty";
     }
     internal void Print()
     {

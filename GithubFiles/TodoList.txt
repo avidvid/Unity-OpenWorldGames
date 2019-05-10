@@ -19,11 +19,48 @@ Users Want to do what they want, not what you want them to do
 ####Office#####
 ###############	
 
+	RSVP: https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019
 Start Save Part in nodejs projects
 
+	device id or email to be saved in userplayer
+	
+	
+	
+	
+	change back up file for OUP to not go to drive one 
+	http://zikmund.me/blog/changing-default-project-directory-visual-studio-2017/
+	
+	
+###############
+#### Data #####
+###############	
+
+Mixure
+{
+  "Id": 1,
+  "ItemId": 1001,
+  "MixTime": "2019-03-04T12:10:51.227442-06:00",
+  "StackCnt": 1,
+  "UserId": 22
+}
+CharacterResearching
+{
+  "Id": 1,
+  "Level": 3,
+  "ResearchId": 1,
+  "ResearchTime": "2019-03-04T12:10:51.227442-06:00",
+  "UserId": 22
+}
 Req body :
 {"header":"OUP","UserPlayer":{"Id":22,"UserName":"Avid30","Description":"Developer Tested","SoundVolume":0.01216695737093687,"Latitude":30.267200469970704,"Longitude":-97.84310150146485,"Gem":1530,"HealthCheck":6172,"Rank":0,"PRank":0,"ClanId":-1,"ClanRank":0,"FBLoggedIn":true,"FBid":"10213815927848642","GLoggedIn":false,"IsEnable":true}}
 
+
+
+{
+    "id" : "$input.params('id')",
+    "all-params": "$input.params()",
+    "body": $input.json('$')
+}
 
 Items: 
       <Id>1</Id> 2001
@@ -39,27 +76,15 @@ Items:
       <Id>11</Id> 4
 
 
-	Start MongoDb Database and reading from it and lambda functions 
-		DynamoDB:
-	Reading data from DynamoDB tables (Getting started with AWS Lambda, part 8)
-	https://www.youtube.com/watch?v=P8okmPWIAcQ
 	
 	
-	Lambda + Gateway 
-	https://www.youtube.com/channel/UCRthRrv06q1iOl86-tTKJhg/videos
 	
 	
-	device id or email to be saved in userplayer
-	
-	RSVP: https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019
 
 
 	APi Weather: https://www.red-gate.com/simple-talk/dotnet/c-programming/calling-restful-apis-unity3d/
 
 
-	
-	change back up file for OUP to not go to drive one 
-	http://zikmund.me/blog/changing-default-project-directory-visual-studio-2017/
 
 
 	

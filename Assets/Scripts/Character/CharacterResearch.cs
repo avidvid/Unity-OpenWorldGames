@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//Todo Rename to CharacterResearch
 [Serializable]
 public class CharacterResearch
 {
@@ -12,27 +11,34 @@ public class CharacterResearch
     public int UserId;
     public int ResearchId;
     public int Level;
-    public int HealthCheck;
 
-    public CharacterResearch(int researchId, int userId, int nextLevel)
+    public CharacterResearch(int researchId, int userId)
     {
-        Id = 0;
+        Id = UnityEngine.Random.Range(0, 1999999999);
         ResearchId = researchId;
         UserId = userId;
-        Level = nextLevel;
-        HealthCheck = 0;
+        Level = 1;
     }
     public CharacterResearch()
     {
-        Id = -1;
+        Id = 0;
+    }
+    public void SetLevel(int level)
+    {
+        Level = level;
+    }
+    internal string MyInfo()
+    {
+        if (ResearchId != 0)
+        {
+            var characterDatabase = CharacterDatabase.Instance();
+            return Id + "-" + characterDatabase.GetResearchById(ResearchId).Name + " (" + Level + ") UserId=" + UserId;
+        }
+        return Id + "-Empty";
     }
     internal void Print()
     {
-        Debug.Log("CharacterResearch = " + Id + "-" + ResearchId + " (" + Level + ")");
+        Debug.Log("CharacterResearch = " + MyInfo());
     }
-    internal void SetEmpty()
-    {
-        Id = -1;
-        Print();
-    }
+
 }

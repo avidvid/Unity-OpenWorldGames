@@ -280,6 +280,9 @@ public class ApiGatewayConfig : MonoBehaviour
         _userDatabase.UpdateCharacterResearching(response.Body.CharacterResearching);
         _gameLoadHelper.LoadingThumbsUp();
     }
+
+
+
     private void ReadUserInventoryJson(string result)
     {
         var response = TranslateResponse(result);
@@ -394,6 +397,20 @@ public class ApiGatewayConfig : MonoBehaviour
             Action = action,
             Time = time,
             CharacterResearching = characterResearching
+        };
+        StartCoroutine(PutRequest(uri, ap));
+    }
+    internal void PutCharacterResearch(CharacterResearch characterResearch)
+    {
+        var apiGate = "GetCharacterResearches";
+        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", characterResearch.Id.ToString());
+        string action = "Insert";
+        if (characterResearch.Level != 1)
+            action = "Update";
+        ApiRequest ap = new ApiRequest
+        {
+            Action = action,
+            CharacterResearch = characterResearch
         };
         StartCoroutine(PutRequest(uri, ap));
     }

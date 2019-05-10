@@ -50,7 +50,9 @@ public class Research
 
     internal float CalculateValue(int level)
     {
-        if (level <= 1)
+        if (level <= 0)
+            return 0;
+        if (level == 1)
             return Value;
         //todo:have a better logic here 
         return level * Value;
