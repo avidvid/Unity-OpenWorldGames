@@ -17,7 +17,7 @@ public class ApiRequest
     //public List<UserItem> UserInventory;
 
     public int Time;
-    public int Code;
+    public string Code;
     public int HealthCheck;
 
     internal string MyInfo()
@@ -28,6 +28,7 @@ public class ApiRequest
         if (CharacterMixture.Id != 0) info += " CharacterMixture=" + CharacterMixture.MyInfo();
         if (CharacterResearching.Id != 0) info += " CharacterResearching=" + CharacterResearching.MyInfo();
         if (CharacterResearch.Id != 0) info += " CharacterResearch=" + CharacterResearch.MyInfo();
+        if (UserRecipe.Id != 0) info += " UserRecipe=" + UserRecipe.MyInfo();
         return info;
     }
 }

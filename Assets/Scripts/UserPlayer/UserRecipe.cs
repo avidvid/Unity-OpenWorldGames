@@ -9,30 +9,38 @@ public class UserRecipe
     public int UserId;
     public string RecipeCode;
 
-    public UserRecipe()
+    public UserRecipe(int recipeId)
     {
         RecipeId = 0;
         UserId = 0;
         RecipeCode = "";
     }
-    public UserRecipe(int recipeId, int playerId, string recipeCode = null)
+    public UserRecipe(int recipeId, int userId, string recipeCode = null)
     {
+        Id = UnityEngine.Random.Range(0, 1999999999);
         RecipeId = recipeId;
-        UserId = playerId;
-        RecipeCode = recipeCode;
+        UserId = userId;
+        if (recipeCode != null)
+            RecipeCode = recipeCode;
     }
 
-    public void Print()
+    internal void Print()
     {
-        ItemDatabase itemDatabase= ItemDatabase.Instance();
+        Debug.Log("UserRecipe: " + MyInfo());
+    }
+
+    internal string MyInfo()
+    {
+        ItemDatabase itemDatabase = ItemDatabase.Instance();
         try
         {
             var recipe = itemDatabase.FindRecipe(RecipeId);
-            recipe.Print();
+            return Id + "-" + recipe.MyInfo() + " RecipeCode= " + RecipeCode;
         }
         catch (Exception e)
         {
-            Debug.LogError(e.Message);
+            return "Empty";
         }
     }
+
 }

@@ -40,22 +40,6 @@ public class Recipe
         }
     }
 
-    internal void Print()
-    {
-        ItemDatabase itemDatabase = ItemDatabase.Instance();
-        try
-        {
-            Debug.Log("Recipe(" + Id + "): " + itemDatabase.GetItemById(FirstItemId).Name +
-                   " with " + itemDatabase.GetItemById(SecondItemId).Name +
-                   " to " + itemDatabase.GetItemById(FinalItemId).Name +
-                   " Enable " + IsEnable +
-                   " Public " + IsPublic);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e.Message);
-        }
-    }
 
     internal Recipe Reverse()
     {
@@ -66,5 +50,26 @@ public class Recipe
         FirstItemCnt = SecondItemCnt;
         SecondItemCnt = temp;
         return this;
+    }
+
+    internal void Print()
+    {
+        Debug.Log("Recipe: " + MyInfo());
+    }
+    internal string MyInfo()
+    {
+        ItemDatabase itemDatabase = ItemDatabase.Instance();
+        try
+        {
+            return Id + "-" + itemDatabase.GetItemById(FirstItemId).Name +
+                   " with " + itemDatabase.GetItemById(SecondItemId).Name +
+                   " to " + itemDatabase.GetItemById(FinalItemId).Name +
+                   " Enable " + IsEnable +
+                   " Public " + IsPublic;
+        }
+        catch (Exception e)
+        {
+            return "Empty" ;
+        }
     }
 }

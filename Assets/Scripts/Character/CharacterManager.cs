@@ -26,6 +26,7 @@ public class CharacterManager : MonoBehaviour
     internal CharacterResearching CharacterResearching;
     //Recipes
     internal List<Recipe> UserRecipes;
+    internal List<UserRecipe> MyUserRecipes;
     //Inventory
     internal List<ItemIns> CharacterInventory = new List<ItemIns>();
     internal CharacterMixture CharacterMixture;
@@ -34,6 +35,7 @@ public class CharacterManager : MonoBehaviour
     private Sprite _spellSprite;
     private GameObject _levelUp;
     private GameObject _gameOver;
+
 
     #region CharacterManager Instance
     public static CharacterManager Instance()
@@ -77,16 +79,14 @@ public class CharacterManager : MonoBehaviour
         CharacterResearching = _userDatabase.GetCharacterResearching();
         //Recipes
         UserRecipes = _userDatabase.GetMyRecipes();
+        MyUserRecipes = _userDatabase.GetMyUserRecipes();
         Debug.Log("CM-UserRecipes.Count = " + UserRecipes.Count);
+        Debug.Log("CM-MyUserRecipes.Count = " + MyUserRecipes.Count);
         //Inventory
         InitUserInventory();
         Debug.Log("CharacterInventory.Count = " + CharacterInventory.Count);
         CharacterMixture = _userDatabase.GetCharacterMixture();
         LoginCalculations();
-    }
-    internal bool ValidateRecipeCode(string recipeCode)
-    {
-        return _userDatabase.ValidateRecipeCode(recipeCode);
     }
     void Update()
     {

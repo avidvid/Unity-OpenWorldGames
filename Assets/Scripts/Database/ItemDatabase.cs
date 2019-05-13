@@ -64,6 +64,13 @@ public class ItemDatabase : MonoBehaviour {
     {
         return _recipes;
     }
+    internal Recipe GetRecipeById(int id)
+    {
+        for (int i = 0; i < _recipes.Count; i++)
+            if (_recipes[i].Id == id)
+                return _recipes[i];
+        return null;
+    }
     internal void UpdateRecipes(List<Recipe> recipes)
     {
         _recipes = new List<Recipe>(recipes.FindAll(s => s.IsEnable));
@@ -93,5 +100,7 @@ public class ItemDatabase : MonoBehaviour {
         _offers = new List<Offer>(offers.FindAll(s => s.IsEnable));
         Debug.Log("IDB-Offers.Count = " + _offers.Count);
     }
+
+
     #endregion
 }

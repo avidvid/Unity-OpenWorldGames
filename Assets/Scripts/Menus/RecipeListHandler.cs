@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -9,19 +10,18 @@ public class RecipeListHandler : MonoBehaviour {
 
     private CharacterManager _characterManager;
     private ItemDatabase _itemDatabase;
-    private ModalPanel _modalPanel;
 
     //Recipe Prefab
     public GameObject RecipeContent;
 
     private List<Recipe> _recipes ;
     private GameObject _addRecipePanel;
+    internal bool SceneRefresh;
 
     void Awake()
     {
         _itemDatabase = ItemDatabase.Instance();
         _characterManager = CharacterManager.Instance();
-        _modalPanel = ModalPanel.Instance();
         _addRecipePanel = GameObject.Find("AddRecipePanel");
     }
     // Use this for initialization
@@ -63,14 +63,29 @@ public class RecipeListHandler : MonoBehaviour {
             }
         }
     }
+
+    void Update()
+    {
+        if (SceneRefresh)
+            RefreshTheScene();
+    }
     public void ValidateRecipeCode()
     {
         var recipeCode = _addRecipePanel.GetComponentInChildren<TMP_InputField>().text;
         if (!string.IsNullOrEmpty(recipeCode))
-            if (_characterManager.ValidateRecipeCode(recipeCode))
-                _modalPanel.Choice("Your New Recipe is ready! ", ModalPanel.ModalPanelType.Ok, RefreshTheScene);
-            else
-                _modalPanel.Choice("The Recipe Code is Wrong! ", ModalPanel.ModalPanelType.Ok);
+            ValidateRecipeCode(recipeCode);
+    }
+
+    internal void ValidateRecipeCode(string recipeCode)
+    {
+        var apiGatewayConfig = ApiGatewayConfig.Instance();
+        if (apiGatewayConfig!= null)
+        {
+            var userRecipes = _characterManager.MyUserRecipes;
+            for (int i = 0; i < userRecipes.Count; i++)
+                if (userRecipes[i].RecipeCode == "0000")
+                    apiGatewayConfig.PutUserRecipe(userRecipes[i], recipeCode);
+        }
     }
 
     public void RefreshTheScene()

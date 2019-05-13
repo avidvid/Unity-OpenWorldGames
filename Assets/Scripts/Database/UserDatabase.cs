@@ -93,6 +93,7 @@ public class UserDatabase : MonoBehaviour
         _userInventory = _userInventory.OrderBy(x => !x.Equipped).ThenBy(x => !x.Stored).ThenBy(x => x.Order).ToList();
         //SaveUserInventory();
     }
+
     internal List<UserItem> GetUserInventory()
     {
         return _userInventory;
@@ -342,27 +343,13 @@ public class UserDatabase : MonoBehaviour
         _myRecipes = myRecipes;
         Debug.Log("UDB-BuiltUserRecipes.Count = " + _myRecipes.Count);
     }
+    internal List<UserRecipe> GetMyUserRecipes()
+    {
+        return _userRecipes;
+    }
     public List<Recipe> GetMyRecipes()
     {
         return _myRecipes;
-    }
-    public bool AddUserRecipe(UserRecipe ur)
-    {
-        try
-        {
-            var owned = _userRecipes.Find(c => c.RecipeId == ur.RecipeId && c.UserId == ur.UserId && !string.IsNullOrEmpty(c.RecipeCode));
-            if (owned == null)
-                _userRecipes.Add(ur);
-            else
-                owned.RecipeCode = "";
-            //SaveUserRecipes();
-            return true;
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e.Message);
-            return false;
-        }
     }
     internal bool AddNewRandomUserRecipe(int playerId)
     {
@@ -389,8 +376,12 @@ public class UserDatabase : MonoBehaviour
             }
         if (availableRecipe.Count > 0)
         {
-            UserRecipe ur = new UserRecipe(availableRecipe[RandomHelper.Range(key, availableRecipe.Count)], playerId);
-            return AddUserRecipe(ur);
+            var recipeId = availableRecipe[RandomHelper.Range(key, availableRecipe.Count)];
+            var ur = _userRecipes.Find(c => c.RecipeId == recipeId && !string.IsNullOrEmpty(c.RecipeCode));
+            if (ur == null)
+                ur = new UserRecipe(recipeId, playerId);
+            _apiGatewayConfig.PutUserRecipe(ur);
+            return true;
         }
         return false;
     }
@@ -400,18 +391,29 @@ public class UserDatabase : MonoBehaviour
         Debug.Log("UDB-UserRecipes.Count = " + _userRecipes.Count);
         BuildUserRecipes();
     }
-    internal bool ValidateRecipeCode(string recipeCode)
+    internal void UpdateUserRecipe(UserRecipe userRecipe)
     {
-        for (int j = 0; j < _userRecipes.Count; j++)
-            if (_userRecipes[j].RecipeCode != null)
-                if (_userRecipes[j].RecipeCode == recipeCode)
-                {
-                    _userRecipes[j].RecipeCode = "";
-                    //SaveUserRecipes();
-                    return true;
-                }
-        return false;
+        Debug.Log("UpdateUserRecipe" + userRecipe.MyInfo());
+        for (int i = 0; i < _userRecipes.Count; i++)
+            if (_userRecipes[i].Id == userRecipe.Id)
+            {
+                _userRecipes[i].RecipeCode = "";
+                for (int j = 0; j < _myRecipes.Count; j++)
+                    if (_myRecipes[j].Id == _userRecipes[i].RecipeId)
+                    {
+                        _myRecipes[j].IsEnable = true;
+                        var recipeHandler = FindObjectOfType(typeof(RecipeListHandler)) as RecipeListHandler;
+                        if (recipeHandler != null)
+                            recipeHandler.SceneRefresh = true;
+                        return;
+                    }
+            }
+        _userRecipes.Add(userRecipe);
+        var itemDatabase = ItemDatabase.Instance();
+        Recipe recipe = itemDatabase.GetRecipeById(userRecipe.RecipeId);
+        _myRecipes.Add(recipe);
     }
+
     #endregion
     private void GoToStartScene()
     {

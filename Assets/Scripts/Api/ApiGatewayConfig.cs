@@ -377,6 +377,23 @@ public class ApiGatewayConfig : MonoBehaviour
         };
         StartCoroutine(PutRequest(uri, ap));
     }
+    internal void PutUserRecipe(UserRecipe userRecipe,string code=null)
+    {
+        var apiGate = "GetUserRecipes";
+        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", userRecipe.Id.ToString());
+        ApiRequest ap = new ApiRequest
+        {
+            Action = "Insert",
+            UserRecipe = userRecipe
+        };
+        if (code != null)
+        {
+            ap.Action = "Update";
+            ap.Code = code;
+        }
+        Debug.Log(ap.Action + " UserRecipe : " + userRecipe.MyInfo());
+        StartCoroutine(PutRequest(uri, ap, true));
+    }
     internal void PutCharacterResearching(CharacterResearching characterResearching)
     {
         var apiGate = "GetCharacterResearching";
@@ -438,7 +455,7 @@ public class ApiGatewayConfig : MonoBehaviour
             callback(result);
         }
     }
-    private IEnumerator PutRequest(string uri, ApiRequest apiRequest)
+    private IEnumerator PutRequest(string uri, ApiRequest apiRequest, bool refresh=false)
     {
         string json = JsonUtility.ToJson(apiRequest);
         Debug.Log("json: " + json);
@@ -454,7 +471,40 @@ public class ApiGatewayConfig : MonoBehaviour
             else
             {
                 Debug.Log("request.downloadHandler.text = " + request.downloadHandler.text);
+                if (refresh)
+                {
+                    var response = TranslateResponse(request.downloadHandler.text);
+                    Refresh(apiRequest, response);
+                }
             }
+        }
+    }
+    private void Refresh(ApiRequest apiRequest, ApiResponse apiResponse)
+    {
+        Debug.Log("apiRequest="+ apiRequest.MyInfo());
+        if (apiRequest.UserRecipe.Id != 0)
+        {
+            if (apiResponse.Body.UserRecipe==null)
+            {
+                if (apiRequest.Action == "Update")
+                {
+                    Debug.Log("Update UserRecipe==null");
+                    return;
+                }
+                else if (apiRequest.Action == "Insert")
+                {
+                    apiRequest.UserRecipe.Print();
+                    _userDatabase.UpdateUserRecipe(apiRequest.UserRecipe);
+                }
+                return;
+            }
+            if (apiResponse.Body.UserRecipe.Id == 0)
+            {
+                Debug.Log("UserRecipe.Id == 0");
+                return;
+            }
+            apiResponse.Body.UserRecipe.Print();
+            _userDatabase.UpdateUserRecipe(apiResponse.Body.UserRecipe);
         }
     }
     #endregion
