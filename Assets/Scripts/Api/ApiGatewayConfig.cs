@@ -312,7 +312,7 @@ public class ApiGatewayConfig : MonoBehaviour
     {
         var response = TranslateResponse(result);
         if (response.Body.UserRecipes.Count == 0)
-            throw new Exception("API-UserRecipes Failed!!!");
+            Debug.LogWarning("####API--UserRecipes Is Empty!!!");
         _userDatabase.UpdateUserRecipes(response.Body.UserRecipes);
         _gameLoadHelper.LoadingThumbsUp();
     }
@@ -439,8 +439,6 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response == null) throw new ArgumentNullException("Api Response is null");
         return response;
     }
-    //https://www.youtube.com/watch?v=UUQydC0IimI
-    //you can make start function IEnumerator
     private IEnumerator GetRequest(string uri,System.Action<string> callback)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(uri))
@@ -481,30 +479,26 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     private void Refresh(ApiRequest apiRequest, ApiResponse apiResponse)
     {
-        Debug.Log("apiRequest="+ apiRequest.MyInfo());
+        //UserRecipe
         if (apiRequest.UserRecipe.Id != 0)
         {
-            if (apiResponse.Body.UserRecipe==null)
+            if (apiResponse.Body.UserRecipe!=null)
             {
-                if (apiRequest.Action == "Update")
+                //Response Item has value && (Insert/Update)
+                if (apiResponse.Body.UserRecipe.Id != 0)
                 {
-                    Debug.Log("Update UserRecipe==null");
+                    _userDatabase.UpdateUserRecipe(apiResponse.Body.UserRecipe);
                     return;
                 }
-                else if (apiRequest.Action == "Insert")
-                {
-                    apiRequest.UserRecipe.Print();
-                    _userDatabase.UpdateUserRecipe(apiRequest.UserRecipe);
-                }
-                return;
             }
-            if (apiResponse.Body.UserRecipe.Id == 0)
+            //Update && Response Item has 0 value or not 
+            if (apiRequest.Action == "Update")
             {
-                Debug.Log("UserRecipe.Id == 0");
+                Debug.Log("Update UserRecipe==null");
                 return;
             }
-            apiResponse.Body.UserRecipe.Print();
-            _userDatabase.UpdateUserRecipe(apiResponse.Body.UserRecipe);
+            //Insert && Response empty
+            _userDatabase.UpdateUserRecipe(apiRequest.UserRecipe);
         }
     }
     #endregion

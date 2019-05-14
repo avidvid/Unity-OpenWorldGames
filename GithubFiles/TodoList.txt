@@ -18,7 +18,28 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####Office#####
 ###############	
-when isnert recipe it doesn't show up right away 
+
+OUP - Add navigate to character list scene 
+Fix Put js for user character
+Add lambda 
+Add the API 
+Test API 
+{"Action":"Insert",
+"UserRecipe":{"Id":22,"UserId":22,"RecipeId":104,"RecipeCode": "1111"},"HealthCheck":0}
+{
+  "Id": 3,
+  "RecipeCode": "123456",
+  "RecipeId": 101,
+  "UserId": 22
+}
+  ,"RecipeCode": "123456",
+  
+Add put function in OUP and clear thepath of saving usercharacter 
+if empty error should be warning make sure there are public ccharcters 
+Test all 
+-----
+User inventory is next 
+
 
 
 	RSVP: https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019

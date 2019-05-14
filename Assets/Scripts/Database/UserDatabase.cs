@@ -393,7 +393,6 @@ public class UserDatabase : MonoBehaviour
     }
     internal void UpdateUserRecipe(UserRecipe userRecipe)
     {
-        Debug.Log("UpdateUserRecipe" + userRecipe.MyInfo());
         for (int i = 0; i < _userRecipes.Count; i++)
             if (_userRecipes[i].Id == userRecipe.Id)
             {
