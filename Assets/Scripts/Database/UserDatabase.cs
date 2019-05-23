@@ -18,8 +18,8 @@ public class UserDatabase : MonoBehaviour
     private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
     private CharacterResearching _characterResearching;
     private CharacterSetting _characterSetting;
-    private List<Recipe> _myRecipes;
     private List<UserRecipe> _userRecipes = new List<UserRecipe>();
+    private List<Recipe> _myRecipes;
 
     #region UserDatabase Instance
     public static UserDatabase Instance()
@@ -93,34 +93,19 @@ public class UserDatabase : MonoBehaviour
         _userInventory = _userInventory.OrderBy(x => !x.Equipped).ThenBy(x => !x.Stored).ThenBy(x => x.Order).ToList();
         //SaveUserInventory();
     }
-
     internal List<UserItem> GetUserInventory()
     {
         return _userInventory;
     }
     #endregion
-    #region UserCharacters
+    #region UserCharacters    
+    public List<UserCharacter> GetMyUserCharacters()
+    {
+        return _userCharacters;
+    }
     public List<Character> GetMyCharacters()
     {
         return _myCharacters;
-    }
-    internal bool ValidateCharacterCode(string characterCode)
-    {
-        for (int j = 0; j < (_userCharacters).Count; j++)
-            if (_userCharacters[j].CharacterCode != null)
-                if (_userCharacters[j].CharacterCode == characterCode)
-                {
-                    _userCharacters[j].CharacterCode = "";
-                    //SaveUserCharacters();
-                    return true;
-                }
-        return false;
-    }
-    public void UpdateUserCharacters(List<UserCharacter> userCharacters)
-    {
-        _userCharacters = userCharacters;
-        Debug.Log("UDB-UserCharacters.Count = " + _userCharacters.Count);
-        _userDatabase.BuildUserCharacters();
     }
     internal void BuildUserCharacters()
     {
@@ -131,47 +116,28 @@ public class UserDatabase : MonoBehaviour
         {
             if (!characters[i].IsEnable)
                 continue;
+            if (characters[i].IsPublic)
+            {
+                myCharacters.Add(characters[i]);
+                continue;
+            }
             for (int j = 0; j < _userCharacters.Count; j++)
                 if (characters[i].Id == _userCharacters[j].CharacterId)
                 {
                     if (string.IsNullOrEmpty(_userCharacters[j].CharacterCode))
                         myCharacters.Add(characters[i]);
-                    else
-                        //if not purchased yet :This might cause problem later because all of the other items are by reference and this  one is by value 
-                        myCharacters.Add(new Character(characters[i], false));
+                    else{
+                        characters[i].IsEnable = false;
+                        myCharacters.Add(characters[i]);
+                    }
                     break;
                 }
         }
         _myCharacters = myCharacters;
         Debug.Log("UDB-BuiltUserCharacters.Count = " + _myCharacters.Count);
     }
-    public bool AddUserCharacters(UserCharacter uc)
+    internal bool AddNewRandomUserCharacters()
     {
-        try
-        {
-            var owned = _userCharacters.Find(c => c.CharacterId == uc.CharacterId && c.UserId == uc.UserId && !string.IsNullOrEmpty(c.CharacterCode));
-            if (owned == null)
-                _userCharacters.Add(uc);
-            else
-                owned.CharacterCode = "";
-            //SaveUserCharacters();
-            return true;
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e.Message);
-            return false;
-        }
-    }
-    internal bool AddNewUserCharacters(int characterId=-1)
-    {
-        //add a New specific Character
-        if (characterId != -1)
-        {
-            UserCharacter uc = new UserCharacter(characterId, _userPlayer.Id);
-            return AddUserCharacters(uc);
-        }
-        //add a New Random Character
         var characterDatabase = CharacterDatabase.Instance();
         var characters = characterDatabase.GetCharacters();
         List<int> availableCharacters = new List<int>();
@@ -179,7 +145,7 @@ public class UserDatabase : MonoBehaviour
         var rarity = RandomHelper.Range(key, (int)DataTypes.Rarity.Common);
         bool userOwnedCharacter = false;
         for (int i = 0; i < characters.Count; i++)
-            if (characters[i].IsEnable)
+            if (characters[i].IsEnable && !characters[i].IsPublic)
             {
                 if ((int)characters[i].Rarity < rarity)
                     continue;
@@ -195,10 +161,54 @@ public class UserDatabase : MonoBehaviour
             }
         if (availableCharacters.Count > 0)
         {
-            UserCharacter uc = new UserCharacter(availableCharacters[RandomHelper.Range(key, availableCharacters.Count)], _userPlayer.Id);
-            return AddUserCharacters(uc);
+            var characterId = availableCharacters[RandomHelper.Range(key, availableCharacters.Count)];
+            if (AddUserCharacters(characterId))
+                return true;
         }
         return false;
+    }
+    public bool AddUserCharacters(int characterId)
+    {
+        try
+        {
+            var uc = _userCharacters.Find(c => c.CharacterId == characterId && !string.IsNullOrEmpty(c.CharacterCode));
+            if (uc == null)
+                uc = new UserCharacter(characterId, _userPlayer.Id);
+            _apiGatewayConfig.PutUserCharacter(uc);
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+            return false;
+        }
+    }
+    public void UpdateUserCharacters(List<UserCharacter> userCharacters)
+    {
+        _userCharacters = userCharacters;
+        Debug.Log("UDB-UserCharacters.Count = " + _userCharacters.Count);
+        _userDatabase.BuildUserCharacters();
+    }
+    internal void UpdateUserCharacter(UserCharacter userCharacter)
+    {
+        for (int i = 0; i < _userCharacters.Count; i++)
+            if (_userCharacters[i].Id == userCharacter.Id)
+            {
+                _userCharacters[i].CharacterCode = "";
+                for (int j = 0; j < _myCharacters.Count; j++)
+                    if (_myCharacters[j].Id == _userCharacters[i].CharacterId)
+                    {
+                        _myCharacters[j].IsEnable = true;
+                        var characterHandler = FindObjectOfType(typeof(CharacterListHandler)) as CharacterListHandler;
+                        if (characterHandler != null)
+                            characterHandler.SceneRefresh = true;
+                        return;
+                    }
+            }
+        _userCharacters.Add(userCharacter);
+        var characterDatabase = CharacterDatabase.Instance();
+        Character character = characterDatabase.GetCharacterById(userCharacter.CharacterId);
+        _myCharacters.Add(character);
     }
     #endregion
     #region CharacterMixture
@@ -309,9 +319,13 @@ public class UserDatabase : MonoBehaviour
     }
     #endregion
     #region UserRecipe
-    public List<UserRecipe> GetUserRecipes()
+    internal List<UserRecipe> GetMyUserRecipes()
     {
         return _userRecipes;
+    }
+    public List<Recipe> GetMyRecipes()
+    {
+        return _myRecipes;
     }
     public void BuildUserRecipes()
     {
@@ -332,8 +346,7 @@ public class UserDatabase : MonoBehaviour
                 {
                     if (string.IsNullOrEmpty(_userRecipes[j].RecipeCode))
                         myRecipes.Add(recipes[i]);
-                    else
-                    {
+                    else{
                         recipes[i].IsEnable = false;
                         myRecipes.Add(recipes[i]);
                     }
@@ -343,15 +356,7 @@ public class UserDatabase : MonoBehaviour
         _myRecipes = myRecipes;
         Debug.Log("UDB-BuiltUserRecipes.Count = " + _myRecipes.Count);
     }
-    internal List<UserRecipe> GetMyUserRecipes()
-    {
-        return _userRecipes;
-    }
-    public List<Recipe> GetMyRecipes()
-    {
-        return _myRecipes;
-    }
-    internal bool AddNewRandomUserRecipe(int playerId)
+    internal bool AddNewRandomUserRecipe()
     {
         var itemDatabase = ItemDatabase.Instance();
         var recipes = itemDatabase.GetRecipes();
@@ -379,7 +384,7 @@ public class UserDatabase : MonoBehaviour
             var recipeId = availableRecipe[RandomHelper.Range(key, availableRecipe.Count)];
             var ur = _userRecipes.Find(c => c.RecipeId == recipeId && !string.IsNullOrEmpty(c.RecipeCode));
             if (ur == null)
-                ur = new UserRecipe(recipeId, playerId);
+                ur = new UserRecipe(recipeId, _userPlayer.Id);
             _apiGatewayConfig.PutUserRecipe(ur);
             return true;
         }
@@ -412,7 +417,6 @@ public class UserDatabase : MonoBehaviour
         Recipe recipe = itemDatabase.GetRecipeById(userRecipe.RecipeId);
         _myRecipes.Add(recipe);
     }
-
     #endregion
     private void GoToStartScene()
     {
@@ -430,6 +434,4 @@ public class UserDatabase : MonoBehaviour
             return;
         SceneManager.LoadScene(SceneSettings.SceneIdForWait);
     }
-
-
 }

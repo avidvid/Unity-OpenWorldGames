@@ -23,12 +23,10 @@ public class UserRecipe
         if (recipeCode != null)
             RecipeCode = recipeCode;
     }
-
     internal void Print()
     {
         Debug.Log("UserRecipe: " + MyInfo());
     }
-
     internal string MyInfo()
     {
         ItemDatabase itemDatabase = ItemDatabase.Instance();
@@ -42,5 +40,4 @@ public class UserRecipe
             return "Empty";
         }
     }
-
 }

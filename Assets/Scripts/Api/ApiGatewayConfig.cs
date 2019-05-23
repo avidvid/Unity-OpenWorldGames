@@ -394,6 +394,23 @@ public class ApiGatewayConfig : MonoBehaviour
         Debug.Log(ap.Action + " UserRecipe : " + userRecipe.MyInfo());
         StartCoroutine(PutRequest(uri, ap, true));
     }
+    internal void PutUserCharacter(UserCharacter userCharacter, string code = null)
+    {
+        var apiGate = "GetUserCharacters";
+        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", userCharacter.Id.ToString());
+        ApiRequest ap = new ApiRequest
+        {
+            Action = "Insert",
+            UserCharacter = userCharacter
+        };
+        if (code != null)
+        {
+            ap.Action = "Update";
+            ap.Code = code;
+        }
+        Debug.Log(ap.Action + " UserCharacter : " + userCharacter.MyInfo());
+        StartCoroutine(PutRequest(uri, ap, true));
+    }
     internal void PutCharacterResearching(CharacterResearching characterResearching)
     {
         var apiGate = "GetCharacterResearching";
@@ -499,6 +516,26 @@ public class ApiGatewayConfig : MonoBehaviour
             }
             //Insert && Response empty
             _userDatabase.UpdateUserRecipe(apiRequest.UserRecipe);
+        }
+        if (apiRequest.UserCharacter.Id != 0)
+        {
+            if (apiResponse.Body.UserCharacter != null)
+            {
+                //Response Item has value && (Insert/Update)
+                if (apiResponse.Body.UserCharacter.Id != 0)
+                {
+                    _userDatabase.UpdateUserCharacter(apiResponse.Body.UserCharacter);
+                    return;
+                }
+            }
+            //Update && Response Item has 0 value or not 
+            if (apiRequest.Action == "Update")
+            {
+                Debug.Log("Update UserCharacter==null");
+                return;
+            }
+            //Insert && Response empty
+            _userDatabase.UpdateUserCharacter(apiRequest.UserCharacter);
         }
     }
     #endregion

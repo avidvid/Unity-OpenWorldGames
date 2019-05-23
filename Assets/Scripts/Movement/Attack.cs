@@ -40,8 +40,9 @@ public class Attack : MonoBehaviour { 
             {
                 var images = GameObject.Find("Capture").GetComponentsInChildren<Image>();
                 if (images[1].enabled)
-                    _characterManager.CaptureMonsterById(monsterCharacter.Id);
-                SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
+                    if (_characterManager.CaptureMonsterById(monsterCharacter.Id))
+                        _GUIManager.PrintMessage("The monster Got captured", Color.green);
+                //SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
             }
             else
                 _building.BuildingDropItem(monster.transform.position, monsterCharacter.DropChance, monsterCharacter.DropItems);

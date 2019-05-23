@@ -8,7 +8,6 @@ public class UserCharacter
     public int CharacterId;
     public int UserId;
     public string CharacterCode;
-    public DateTime Created;
     public UserCharacter()
     {
         CharacterId = 0;
@@ -21,17 +20,21 @@ public class UserCharacter
         UserId = playerId;
         CharacterCode = characterCode;
     }
-    public void Print()
+    internal void Print()
+    {
+        Debug.Log("UserCharacter: " + MyInfo());
+    }
+    internal string MyInfo()
     {
         CharacterDatabase characterDatabase = CharacterDatabase.Instance();
         try
         {
-            Character character  = characterDatabase.GetCharacterById(CharacterId);
-            character.Print();
+            var character = characterDatabase.GetCharacterById(CharacterId);
+            return Id + "-" + character.MyInfo() + " CharacterCode= " + CharacterCode;
         }
         catch (Exception e)
         {
-            Debug.LogError(e.Message);
+            return "Empty";
         }
     }
 }

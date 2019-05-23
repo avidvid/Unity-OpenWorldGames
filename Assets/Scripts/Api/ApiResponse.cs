@@ -42,6 +42,7 @@ public class BodyResponse
     public CharacterSetting CharacterSetting;
     public List<UserRecipe> UserRecipes;
     public UserRecipe UserRecipe;
+    public UserCharacter UserCharacter;
 
     internal string MyInfo()
     {

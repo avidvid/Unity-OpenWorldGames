@@ -86,42 +86,43 @@ public class Character {
     public TerrainIns.TerrainType FavoriteTerrainTypes;
     public string DropItems;
     public float DropChance;
+    public bool IsPublic;
     public bool IsEnable;
 
-    public Character(int id, string name, string desc, 
-        CharacterType moveT, DataTypes.Range attackR, DataTypes.Range defenseR, AttackType attackT, AttackType defenseT,
-        int basicAttack, int basicDefense, 
-        SpeedType speedT, BodyType bodyT, CarryType carryT, ViewType viewT, DataTypes.Rarity rarity,
-        TerrainIns.TerrainType favoriteTerrainTypes, string dropItems,float dropChance)
-    {
-        Id = id;
-        Name = name;
-        Description = desc;
-        IconPath = "Somewhere";
-        IconId = id;
-        IsAnimated = true;
-        HasFightMode = false;
-        Move = moveT;
-        AttackR = attackR;
-        DefenseR = defenseR;
-        AttackT = attackT;
-        DefenseT = defenseT;
-        BasicAttack = basicAttack;
-        BasicDefense = basicDefense;
-        Speed = speedT;
-        Body = bodyT;
-        Carry = carryT;
-        View = viewT;
-        Rarity = rarity;
-        DropItems = dropItems;
-        DropChance = dropChance;
-        FavoriteTerrainTypes = favoriteTerrainTypes;
-        IsEnable = true;
-    }
-    public Character()
-    {
-        Id = -1;
-    }
+    //public Character(int id, string name, string desc, 
+    //    CharacterType moveT, DataTypes.Range attackR, DataTypes.Range defenseR, AttackType attackT, AttackType defenseT,
+    //    int basicAttack, int basicDefense, 
+    //    SpeedType speedT, BodyType bodyT, CarryType carryT, ViewType viewT, DataTypes.Rarity rarity,
+    //    TerrainIns.TerrainType favoriteTerrainTypes, string dropItems,float dropChance)
+    //{
+    //    Id = id;
+    //    Name = name;
+    //    Description = desc;
+    //    IconPath = "Somewhere";
+    //    IconId = id;
+    //    IsAnimated = true;
+    //    HasFightMode = false;
+    //    Move = moveT;
+    //    AttackR = attackR;
+    //    DefenseR = defenseR;
+    //    AttackT = attackT;
+    //    DefenseT = defenseT;
+    //    BasicAttack = basicAttack;
+    //    BasicDefense = basicDefense;
+    //    Speed = speedT;
+    //    Body = bodyT;
+    //    Carry = carryT;
+    //    View = viewT;
+    //    Rarity = rarity;
+    //    DropItems = dropItems;
+    //    DropChance = dropChance;
+    //    FavoriteTerrainTypes = favoriteTerrainTypes;
+    //    IsEnable = true;
+    //}
+    //public Character()
+    //{
+    //    Id = -1;
+    //}
     public Character(Character character,bool enable = true)
     {
         Id = character.Id;
@@ -211,6 +212,7 @@ public class Character {
     }
     internal string MyInfo()
     {
-        return Id + "-" + Name + " (" + Description + ")";
+        return Id + "-" + Name + " (" + Description + ")" +
+               " Public " + IsPublic;
     }
 }

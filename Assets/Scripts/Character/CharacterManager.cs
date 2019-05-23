@@ -19,7 +19,8 @@ public class CharacterManager : MonoBehaviour
     internal CharacterSetting CharacterSetting;
     //Character
     internal Character MyCharacter;
-    internal List<Character> UserCharacters ;
+    internal List<Character> MyCharacters;
+    internal List<UserCharacter> MyUserCharacters;
     //Research
     internal List<Research> Researches;
     internal List<CharacterResearch> CharacterResearches = new List<CharacterResearch>();
@@ -71,8 +72,10 @@ public class CharacterManager : MonoBehaviour
         //Character
         MyCharacter = _characterDatabase.GetCharacterById(CharacterSetting.CharacterId);
         Debug.Log("CM-MyCharacter = " + MyCharacter.MyInfo());
-        UserCharacters = _userDatabase.GetMyCharacters();
-        Debug.Log("CM-UserCharacters.Count = " + UserCharacters.Count);
+        MyCharacters = _userDatabase.GetMyCharacters();
+        MyUserCharacters = _userDatabase.GetMyUserCharacters();
+        Debug.Log("CM-UserCharacters.Count = " + MyCharacters.Count);
+        Debug.Log("CM-MyUserCharacters.Count = " + MyUserCharacters.Count);
         //Research
         Researches = _characterDatabase.GetResearches();
         CharacterResearches = _userDatabase.GetCharacterResearches();
@@ -161,9 +164,9 @@ public class CharacterManager : MonoBehaviour
         var mapLocation = new Vector2(x,y);
         return mapLocation;
     }
-    internal void CaptureMonsterById(int characterId)
+    internal bool CaptureMonsterById(int characterId)
     {
-        _userDatabase.AddNewUserCharacters(characterId);
+        return _userDatabase.AddUserCharacters(characterId);
     }
     #region Inventory
     private void InitUserInventory()
@@ -266,13 +269,13 @@ public class CharacterManager : MonoBehaviour
             case ItemContainer.ItemType.Consumable:
                 if (item.Recipe > 0)
                 {
-                    if (_userDatabase.AddNewRandomUserRecipe(UserPlayer.Id))
+                    if (_userDatabase.AddNewRandomUserRecipe())
                         message = "You found a Recipe!!";
                     else return "Recipe you found is not readable!! ";
                 }
                 if (itemIns.Item.Egg > 0)
                 {
-                    if (_userDatabase.AddNewUserCharacters())
+                    if (_userDatabase.AddNewRandomUserCharacters())
                         message = "You Hatched a New Character!!";
                     else return "The Egg you found is already rotten !! ";
                 }
@@ -635,10 +638,6 @@ public class CharacterManager : MonoBehaviour
         SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
     }
     //Middle man to CharacterDatabase
-    internal bool ValidateCharacterCode(string characterCode)
-    {
-        return _userDatabase.ValidateCharacterCode(characterCode);
-    }
     internal void SetLockTill(int minutes=0)
     {
         SaveUserPlayer(minutes);

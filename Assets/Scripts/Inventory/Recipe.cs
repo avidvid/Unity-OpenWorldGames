@@ -4,7 +4,6 @@ using UnityEngine;
 [Serializable]
 public class Recipe
 {
-
     public int Id;
     public int FirstItemId;
     public int FirstItemCnt;
@@ -17,8 +16,6 @@ public class Recipe
     public int Energy;
     public bool IsPublic;
     public bool IsEnable;
-    public int HealthCheck;
-
     public virtual string GetDescription()
     {
         ItemDatabase itemDatabase = ItemDatabase.Instance();
@@ -39,8 +36,6 @@ public class Recipe
             return "Ready to mix items?";
         }
     }
-
-
     internal Recipe Reverse()
     {
         int temp = FirstItemId;

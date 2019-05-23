@@ -16,6 +16,7 @@ public class CharacterListHandler : MonoBehaviour
 
     private List<Character> _characters = new List<Character>();
     private GameObject _addCharacterPanel;
+    internal bool SceneRefresh;
 
     void Awake()
     {
@@ -28,7 +29,7 @@ public class CharacterListHandler : MonoBehaviour
         var contentPanel = GameObject.Find("ContentPanel");
         var characterInfo = GameObject.Find("CharacterInfo").GetComponent<TextMeshProUGUI>();
         _addCharacterPanel.SetActive(false);
-        _characters = _characterManager.UserCharacters;
+        _characters = _characterManager.MyCharacters;
         characterInfo.text = "Your Characters: " + _characters.Count(p => p.IsEnable);
         for (int i = 0; i < _characters.Count; i++)
         {
@@ -46,15 +47,27 @@ public class CharacterListHandler : MonoBehaviour
             characterObject.GetComponentInChildren<TextMeshProUGUI>().text = _characters[i].Name;
         }
     }
-
-    public void ValidateRecipeCode()
+    void Update()
+    {
+        if (SceneRefresh)
+            RefreshTheScene();
+    }
+    public void ValidateCharacterCode()
     {
         var characterCode = _addCharacterPanel.GetComponentInChildren<TMP_InputField>().text;
         if (!string.IsNullOrEmpty(characterCode))
-            if (_characterManager.ValidateCharacterCode(characterCode))
-                _modalPanel.Choice("New Character added to your list!", ModalPanel.ModalPanelType.Ok, RefreshTheScene);
-            else
-                _modalPanel.Choice("The Character Code is Wrong! ", ModalPanel.ModalPanelType.Ok);
+            ValidateCharacterCode(characterCode);
+    }
+    internal void ValidateCharacterCode(string characterCode)
+    {
+        var apiGatewayConfig = ApiGatewayConfig.Instance();
+        if (apiGatewayConfig != null)
+        {
+            var userCharacters = _characterManager.MyUserCharacters;
+            for (int i = 0; i < userCharacters.Count; i++)
+                if (userCharacters[i].CharacterCode == "0000")
+                    apiGatewayConfig.PutUserCharacter(userCharacters[i], characterCode);
+        }
     }
 
     public void RefreshTheScene()

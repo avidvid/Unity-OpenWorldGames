@@ -58,7 +58,7 @@ public class StartGameHandler : MonoBehaviour {
         _characterImage = GameObject.Find("SelectingCharacter").GetComponent<Image>();
         _right = GameObject.Find("RightButton").GetComponent<Button>();
         _left = GameObject.Find("LeftButton").GetComponent<Button>();
-        _characters = _characterManager.UserCharacters;
+        _characters = _characterManager.MyCharacters;
         if (_characters.Count == 0)
             throw new Exception("Character count is ZERO");
         _name = GameObject.Find("InputField").GetComponent<TMP_InputField>();
