@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -20,6 +21,8 @@ public class ApiGatewayConfig : MonoBehaviour
     private const string ApiStage = "prod/";
     private int _userId=22;
     private int _firstWaveTarget;
+
+    private List<UserItem> _oldUserInventory =new List<UserItem>();
 
     // Start is called before the first frame update
     void Start()
@@ -280,22 +283,28 @@ public class ApiGatewayConfig : MonoBehaviour
         _userDatabase.UpdateCharacterResearching(response.Body.CharacterResearching);
         _gameLoadHelper.LoadingThumbsUp();
     }
-
-
-
     private void ReadUserInventoryJson(string result)
     {
         var response = TranslateResponse(result);
         if (response.Body.UserInventory.Count == 0)
             throw new Exception("API-UserInventory Failed!!!");
-        _userDatabase.UpdateUserInventory(response.Body.UserInventory);
+        SavedUserInventory(response.Body.UserInventory);
+        _userDatabase.APIUpdateUserInventory(response.Body.UserInventory);
         _gameLoadHelper.LoadingThumbsUp();
+    }
+    private void SavedUserInventory(List<UserItem> userInventory)
+    {
+        _oldUserInventory.Clear();
+        userInventory.ForEach((item) =>
+        {
+            _oldUserInventory.Add(new UserItem(item));
+        });
     }
     private void ReadUserCharactersJson(string result)
     {
         var response = TranslateResponse(result);
         if (response.Body.UserCharacters.Count == 0)
-            throw new Exception("API-UserCharacters Failed!!!");
+            Debug.LogWarning("####API--UserCharacters Is Empty!!!");
         _userDatabase.UpdateUserCharacters(response.Body.UserCharacters);
         _gameLoadHelper.LoadingThumbsUp();
         ForthWave();
@@ -353,6 +362,44 @@ public class ApiGatewayConfig : MonoBehaviour
             CharacterSetting = characterSetting
         };
         StartCoroutine(PutRequest(uri, ap));
+    }
+    internal void PutUserInventory(List<UserItem> userInventory)
+    {
+        Debug.Log("PutUserInventory   _oldUserInventory=" + _oldUserInventory.Count + " userInventory = "+ userInventory.Count);
+        //foreach (var item in _oldUserInventory) item.Print();
+        //foreach (var item in userInventory) item.Print();
+        foreach (var dbItem in _oldUserInventory)
+        {
+            bool delete = true;
+            foreach (var item in userInventory)
+            {
+                if (dbItem.Id == item.Id)
+                {
+                    delete = false;
+                    if (!dbItem.Equals(item))
+                        UpdateUserInventory(item, "Update");
+                    break;
+                }
+                bool newItem = true;
+                foreach (var exItem in _oldUserInventory)
+                {
+                    if (exItem.Id == item.Id)
+                    {
+                        newItem = false;
+                        break;
+                    }
+                }
+                if (newItem)
+                    UpdateUserInventory(item, "Insert");
+            }
+            if (delete)
+                UpdateUserInventory(dbItem, "Delete");
+        }
+        SavedUserInventory(userInventory);
+    }
+    private void UpdateUserInventory(UserItem item, string action)
+    {
+        Debug.Log(action + " UserItem = " + item.MyInfo());
     }
     internal void PutCharacterMixture(CharacterMixture characterMixture)
     {

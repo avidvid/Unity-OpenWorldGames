@@ -10,9 +10,10 @@ public class InventoryManager : MonoBehaviour
     private CharacterManager _characterManager;
     private UserDatabase _userDatabase;
 
-    internal List<ItemIns> InvCarry = new List<ItemIns>();
-    internal List<ItemIns> InvEquipment = new List<ItemIns>();
-    internal List<ItemIns> InvBank = new List<ItemIns>();
+    internal List<ItemIns> UserInvItems = new List<ItemIns>();
+    //internal List<ItemIns> InvCarry = new List<ItemIns>();
+    //internal List<ItemIns> InvEquipment = new List<ItemIns>();
+    //internal List<ItemIns> InvBank = new List<ItemIns>();
 
     internal bool UpdateInventory;
 
@@ -39,44 +40,31 @@ public class InventoryManager : MonoBehaviour
         RefreshInventory();
 
         ValidateInventory();
-        Debug.Log("IM-InvCarry.Count = " + InvCarry.Count);
-        Debug.Log("IM-InvEquipment.Count = " + InvEquipment.Count);
-        Debug.Log("IM-InvBank.Count = " + InvBank.Count);
+        Debug.Log("IM-UserInvItems.Count = " + UserInvItems.Count);
     }
     private void RefreshInventory()
     {
-        var userInvItems = _characterManager.CharacterInventory;
-        InvEquipment.Clear();
-        InvBank.Clear();
-        InvCarry.Clear();
-        foreach (var itemIns in userInvItems)
-        {
-            if (itemIns.UserItem.Equipped)
-                InvEquipment.Add(itemIns);
-            else if (itemIns.UserItem.Stored)
-                InvBank.Add(itemIns);
-            else
-                InvCarry.Add(itemIns);
-        }
+        UserInvItems = _characterManager.CharacterInventory;
     }
     private void ValidateInventory()
     {
-        for (int i = 0; i < InvCarry.Count; i++)
-            for (int j = 0; j < InvCarry.Count; j++)
-                if (i != j && InvCarry[i].UserItem.Order == InvCarry[j].UserItem.Order)
-                    throw new Exception("IM-InvCarry Invalid!!!");
-        for (int i = 0; i < InvEquipment.Count; i++)
+        for (int i = 0; i < UserInvItems.Count; i++)
         {
-            for (int j = 0; j < InvEquipment.Count; j++)
-                if (i != j && InvEquipment[i].UserItem.Order == InvEquipment[j].UserItem.Order)
-                    throw new Exception("IM-InvEquipment Invalid!!!");
-            if (InvEquipment[i].Item.Type == ItemContainer.ItemType.Equipment)
-                if ((int) InvEquipment[i].Item.PlaceHolder != InvEquipment[i].UserItem.Order)
-                    throw new Exception("IM-InvEquipment Invalid Equipment Order!!!");
-            if (InvEquipment[i].Item.Type == ItemContainer.ItemType.Tool || InvEquipment[i].Item.Type == ItemContainer.ItemType.Weapon)
-                if (InvEquipment[i].UserItem.Order != (int)ItemContainer.PlaceType.Left 
-                        && InvEquipment[i].UserItem.Order != (int)ItemContainer.PlaceType.Right)
-                    throw new Exception("IM-InvEquipment Invalid Weapon/Tool Order!!!");
+            for (int j = 0; j < UserInvItems.Count; j++)
+                if (i != j 
+                    && UserInvItems[i].UserItem.Order == UserInvItems[j].UserItem.Order 
+                    && UserInvItems[i].UserItem.Equipped == UserInvItems[j].UserItem.Equipped
+                    && UserInvItems[i].UserItem.Stored == UserInvItems[j].UserItem.Stored)
+                    throw new Exception("IM-UserInvItems Invalid Order!!!" + UserInvItems[i].UserItem.MyInfo() +" && "+ UserInvItems[j].UserItem.MyInfo());
+            if (UserInvItems[i].Item.Type == ItemContainer.ItemType.Equipment && UserInvItems[i].UserItem.Equipped)
+                if ((int)UserInvItems[i].Item.PlaceHolder != UserInvItems[i].UserItem.Order)
+                    throw new Exception("IM-UserInvItems Invalid Equipment PlaceHolder!!! " + UserInvItems[i].UserItem.MyInfo());
+            if ((UserInvItems[i].Item.Type == ItemContainer.ItemType.Tool 
+                || UserInvItems[i].Item.Type == ItemContainer.ItemType.Weapon) 
+                && UserInvItems[i].UserItem.Equipped
+                && UserInvItems[i].UserItem.Order != (int)ItemContainer.PlaceType.Left 
+                && UserInvItems[i].UserItem.Order != (int)ItemContainer.PlaceType.Right)
+                    throw new Exception("IM-UserInvItems Invalid Weapon/Tool Hand!!! "+ UserInvItems[i].UserItem.MyInfo());
         }
     }
     // Update is called once per frame
@@ -85,28 +73,29 @@ public class InventoryManager : MonoBehaviour
         if (UpdateInventory)
         {
             ValidateInventory();
-            _userDatabase.UpdateUserInventory(InvCarry, InvEquipment);
+            _userDatabase.UpdateUserInventory();
             UpdateInventory = false;
         }
     }
     internal bool HaveAvailableSlot()
     {
-        return _characterManager.CharacterSetting.CarryCnt > InvCarry.Count;
+        var carryItems = UserInvItems.FindAll(l => !l.UserItem.Equipped && !l.UserItem.Stored).Count;
+        return _characterManager.CharacterSetting.CarryCnt > carryItems;
     }
 
     internal void PrintInventory()
     {
-        var carry = "";
-        var equipment = "";
-        foreach (var itemIns in InvCarry)
-            carry += itemIns.UserItem.Order + "-" + itemIns.Item.Name + "(" + itemIns.UserItem.StackCnt + ")#";
-        foreach (var itemIns in InvEquipment)
-            equipment += itemIns.UserItem.Order + "-" + itemIns.Item.Name + "(" + itemIns.UserItem.StackCnt + ")#";
-        Debug.Log("IM-PrintInventory InvCarry=" + InvCarry.Count +":"+ carry+ " InvEquipment= " + InvEquipment.Count + ":" + equipment);
+        var userInv = "";
+        foreach (var itemIns in UserInvItems)
+            userInv += itemIns.UserItem.Order +
+                    (itemIns.UserItem.Stored ? " (S)-" : "-") +
+                    (itemIns.UserItem.Equipped ? " (E)-" : "-") +
+                     itemIns.Item.Name + "(" + itemIns.UserItem.StackCnt + ")#";
+        Debug.Log("IM-PrintInventory =" + userInv);
     }
-
     internal void AddItemToInventory(ItemIns itemIns)
     {
         _characterManager.CharacterInventory.Add(itemIns);
+        _userDatabase.UpdateUserInventory(itemIns.UserItem);
     }
 }

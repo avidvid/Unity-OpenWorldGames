@@ -156,7 +156,7 @@ public class ActionHandler : MonoBehaviour
     {
         if (_inv.AddItemToInventory(_item.ItemTypeInUse))
         {
-            _inv.UpdateInventory(true);
+            _inv.UpdateInventory();
             if (_isInside)
                 _building.DestroyItem(_item);
             else

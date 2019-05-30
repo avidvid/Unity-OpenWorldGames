@@ -32,7 +32,7 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         if (ItemIns.UserItem.StackCnt == 0)
         {
             LoadItem(null);
-            _inv.UpdateEquipments(true);
+            _inv.UpdateInventory();
         }
     }
 
@@ -96,7 +96,7 @@ public class ItemEquipment : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             GetComponent<Image>().sprite = itemSprite != null ? itemSprite : EmptySprite;
             this.transform.name = ItemIns.Item.Name;
         }
-        _inv.UpdateEquipments(true);
+        _inv.UpdateInventory();
 
     }
     internal void LoadItem(ItemIns itemIns)

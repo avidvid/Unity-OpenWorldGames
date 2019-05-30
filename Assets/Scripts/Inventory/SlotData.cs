@@ -65,7 +65,7 @@ public class SlotData : MonoBehaviour,IDropHandler{
                     {
                         //Delete mixedItem Item
                         mixedItem.LoadEmpty();
-                        _inv.UpdateInventory(true);
+                        _inv.UpdateInventory();
                     }
                 }
                 return;
@@ -90,8 +90,7 @@ public class SlotData : MonoBehaviour,IDropHandler{
                     existingItem.ItemIns.UserItem.Equipped = false;
                     //unload new Item to equipments
                     equipedItem.LoadItem(null);
-                    _inv.UpdateInventory(true);
-                    _inv.UpdateEquipments(true);
+                    _inv.UpdateInventory();
                 }
                 return;
             }
@@ -115,7 +114,7 @@ public class SlotData : MonoBehaviour,IDropHandler{
                     //Swapping names
                     existingItem.transform.parent.name = "Empty";
                     draggedItem.transform.parent.name = draggedItem.ItemIns.Item.Name;
-                    _inv.UpdateInventory(true);
+                    _inv.UpdateInventory();
                 }
                 //#################################### Stacking: Same items Stack them together
                 else if (existingItem.ItemIns.Item.Id == draggedItem.ItemIns.Item.Id )
@@ -133,7 +132,7 @@ public class SlotData : MonoBehaviour,IDropHandler{
                     var stackCntText = existingItem.transform.GetComponentInChildren<TextMeshProUGUI>();
                     if (existingItem.ItemIns.UserItem.StackCnt > 1)
                         stackCntText.text = existingItem.ItemIns.UserItem.StackCnt.ToString();
-                    _inv.UpdateInventory(true);
+                    _inv.UpdateInventory();
                 }
                 else
                 {
@@ -176,7 +175,7 @@ public class SlotData : MonoBehaviour,IDropHandler{
                         existingItem.transform.parent.name = existingItem.ItemIns.Item.Name;
                         draggedItem.transform.parent.name = draggedItem.ItemIns.Item.Name;
 
-                        _inv.UpdateInventory(true);
+                        _inv.UpdateInventory();
                     }
                 }
             }
@@ -204,6 +203,6 @@ public class SlotData : MonoBehaviour,IDropHandler{
         stackCntText = draggedItem.transform.GetComponentInChildren<TextMeshProUGUI>();
         stackCntText.text = draggedItem.ItemIns.UserItem.StackCnt > 1 ? draggedItem.ItemIns.UserItem.StackCnt.ToString() : "";
 
-        _inv.UpdateInventory(true);
+        _inv.UpdateInventory();
     }
 }

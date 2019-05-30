@@ -42,7 +42,7 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
             //Update Text
             this.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
             _inv.InvSlots[SlotIndex].transform.name = this.transform.name;
-            _inv.UpdateInventory(true);
+            _inv.UpdateInventory();
         }
         else
         {
@@ -121,7 +121,7 @@ public class ItemData : MonoBehaviour,IPointerDownHandler,IBeginDragHandler,IDra
             GetComponent<Image>().sprite = ItemIns.Item.GetSprite();
             this.transform.GetComponentInChildren<TextMeshProUGUI>().text = ItemIns.UserItem.StackCnt > 1 ? ItemIns.UserItem.StackCnt.ToString() : "";
         }
-        _inv.UpdateInventory(true);
+        _inv.UpdateInventory();
     }
 
     internal void LoadItem(ItemIns itemIns)

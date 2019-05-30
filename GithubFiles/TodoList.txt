@@ -18,16 +18,15 @@ Users Want to do what they want, not what you want them to do
 ###############
 ####Office#####
 ###############	
-
-Test user character API in the app 
-
-if empty error should be warning make sure there are public charcters 
-after finishing characret user replace the lambda of character recipts from local machine because i made some changes while doing character user 
-
-
+https://chicagophotos.shutterbooth.com/May-2019
+http://leatherbonding.com/
 
 -----
 User inventory is next 
+
+
+ReadUserInventoryJson should accept zero and nor error => warning 
+
 
 
 

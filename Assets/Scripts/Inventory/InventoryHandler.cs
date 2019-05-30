@@ -17,8 +17,7 @@ public class InventoryHandler : MonoBehaviour
     private ItemDatabase _itemDatabase;
     //private ModalPanel _modalPanel; 
 
-    private bool _updateInventory;
-    private bool _updateEquipments;
+    //private bool _updateInventory;
     private bool _inTerrain = true;
     private ItemMixture _itemMixture;
     private ResearchSlot _researchingSlot;
@@ -32,8 +31,7 @@ public class InventoryHandler : MonoBehaviour
 
     public Sprite LockSprite;
 
-    private List<ItemIns> _invCarry = new List<ItemIns>();
-    private List<ItemIns> _invEquipment = new List<ItemIns>();
+    private List<ItemIns> _userInventory ;
     internal List<GameObject> InvSlots = new List<GameObject>();
     internal SlotEquipment[] EquiSlots = new SlotEquipment[14];
 
@@ -75,8 +73,7 @@ public class InventoryHandler : MonoBehaviour
             GameObject.Find("CharacterPic").GetComponent<Button>().interactable = false;
         }
         _playerSlots = _characterManager.CharacterSetting.CarryCnt;
-        _invCarry = _inventoryManager.InvCarry;
-        _invEquipment = _inventoryManager.InvEquipment;
+        _userInventory = _inventoryManager.UserInvItems;
         //Equipment
         EquiSlots = _inventoryPanel.GetComponentsInChildren<SlotEquipment>();
         for (int i = 0; i < EquiSlots.Length; i++)
@@ -86,8 +83,10 @@ public class InventoryHandler : MonoBehaviour
             ItemEquipment equipmentItem = EquiSlots[i].GetComponentInChildren<ItemEquipment>();
             equipmentItem.ItemIns = null;
             equipmentItem.name = "Empty";
-            foreach (var equipmentIns in _invEquipment)
+            foreach (var equipmentIns in _userInventory)
             {
+                if (!equipmentIns.UserItem.Equipped)
+                    continue;
                 if ( ( (equipmentIns.Item.Type == ItemContainer.ItemType.Weapon || equipmentIns.Item.Type == ItemContainer.ItemType.Tool)
                       &&
                        ( (EquiSlots[i].EquType == ItemContainer.PlaceType.Right && equipmentIns.UserItem.Order == (int)ItemContainer.PlaceType.Right) || 
@@ -125,7 +124,10 @@ public class InventoryHandler : MonoBehaviour
                 itemObject.transform.SetParent(InvSlots[i].transform);
                 data.SlotIndex = i;
 
-                foreach (var itemIns in _invCarry)
+                foreach (var itemIns in _userInventory)
+                {
+                    if (itemIns.UserItem.Equipped || itemIns.UserItem.Stored)
+                        continue;
                     if (itemIns.UserItem.Order == i)
                     {
                         data.ItemIns = itemIns;
@@ -135,6 +137,8 @@ public class InventoryHandler : MonoBehaviour
                         itemObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = itemIns.UserItem.StackCnt > 1 ? itemIns.UserItem.ToString() : "";
                         break;
                     }
+
+                }
             }
             else
             {
@@ -157,20 +161,6 @@ public class InventoryHandler : MonoBehaviour
         {
             _inventoryPanel.SetActive(true);
             ShowInventory = false;
-        }
-        if (_updateInventory || _updateEquipments)
-        {
-            //Save new inventory 
-            if (_updateInventory)
-            {
-                _updateInventory = false;
-            }
-            //Save new Equipments 
-            if (_updateEquipments)
-            {
-                _updateEquipments = false;
-            }
-            _inventoryManager.UpdateInventory = true;
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -207,7 +197,8 @@ public class InventoryHandler : MonoBehaviour
 
     internal bool HaveAvailableSlot()
     {
-        if (_invCarry.Count< _playerSlots)
+        var carryItems = _userInventory.FindAll(l => !l.UserItem.Equipped && !l.UserItem.Stored).Count;
+        if (carryItems < _playerSlots)
             return true;
         return false;
     }
@@ -220,12 +211,17 @@ public class InventoryHandler : MonoBehaviour
         for (int i = 0; i < _playerSlots; i++)
         {
             availableSlot = i;
-            foreach (var itemIns in _invCarry)
+            foreach (var itemIns in _userInventory)
+            {
+                if (itemIns.UserItem.Equipped || itemIns.UserItem.Stored)
+                    continue;
                 if (itemIns.UserItem.Order == i)
                 {
                     availableSlot = -1;
                     break;
                 }
+
+            }
             if (availableSlot == i)
                 break;
         }
@@ -237,14 +233,10 @@ public class InventoryHandler : MonoBehaviour
         return _characterManager.UseEnergy(amount);
     }
 
-    public void UpdateEquipments(bool value)
+    public void UpdateInventory()
     {
-        _updateEquipments = value;
-    }
-
-    public void UpdateInventory(bool value)
-    {
-        _updateInventory = value;
+        Debug.Log("IH-Lets Save Inv at" + DateTime.Now);
+        _inventoryManager.UpdateInventory = true;
     }
 
     //Should match with the AddItemToInventory in CharacterManager
@@ -262,11 +254,6 @@ public class InventoryHandler : MonoBehaviour
                     PrintMessage("You Can Only Carry one of this item!", Color.yellow);
                     return false;
                 }
-                //if (order!=-1)
-                //{
-                //    PrintMessage("You Can not stack this item here!", Color.yellow);
-                //    return false;
-                //}
             }
             else
                 return true;
@@ -281,36 +268,49 @@ public class InventoryHandler : MonoBehaviour
             }
         }
         var itemData = InvSlots[order].transform.GetComponentInChildren<ItemData>();
-        itemData.ItemIns = new ItemIns(item, new UserItem(item, stackCnt, order));
+        itemData.ItemIns = new ItemIns(item, new UserItem(item,_characterManager.UserPlayer.Id, stackCnt, order));
         itemData.LoadItem();
+        Debug.Log("IH-Item " + itemData.ItemIns.MyInfo() + " Will be added to order " + order);
         _inventoryManager.AddItemToInventory(itemData.ItemIns);
         return true;
     }
     private int ItemIndexInInventory(int itemId)
     {
-        foreach (var itemIns in _invCarry)
+        foreach (var itemIns in _userInventory)
+        {
+            if (itemIns.UserItem.Equipped|| itemIns.UserItem.Stored)
+                continue;
             if (itemIns.Item.Id == itemId)
                 return itemIns.UserItem.Order;
+        }
         return -1;
     }
     private bool TryStackInInventory(int itemId, int stackCnt,int order)
     {
-        foreach (var itemIns in _invCarry)
+        foreach (var itemIns in _userInventory)
+        {
+            if (itemIns.UserItem.Equipped || itemIns.UserItem.Stored)
+                continue;
             if (itemIns.Item.Id == itemId && itemIns.Item.MaxStackCnt >= stackCnt + itemIns.UserItem.StackCnt)
             {
-                if (order==-1 || itemIns.UserItem.Order == order)
+                if (order == -1 || itemIns.UserItem.Order == order)
                 {
                     itemIns.UserItem.StackCnt += stackCnt;
                     return true;
                 }
             }
+        }
         return false;
     }
     private ItemIns GetItemInInventory(int itemId)
     {
-        foreach (var itemIns in _invCarry)
+        foreach (var itemIns in _userInventory)
+        {
+            if (itemIns.UserItem.Equipped || itemIns.UserItem.Stored)
+                continue;
             if (itemIns.Item.Id == itemId)
                 return itemIns;
+        }
         return null;
     }
     public void OpenInventoryPanel()
@@ -453,7 +453,7 @@ public class InventoryHandler : MonoBehaviour
                     )
                 {
                     toolEquipment.UseItem(1);
-                    _updateEquipments = true;
+                    UpdateInventory();
                     return true;
                 }
         }

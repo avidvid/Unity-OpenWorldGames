@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 [Serializable]
 public class UserItem
@@ -13,19 +14,75 @@ public class UserItem
     public int TimeToUse;
     public DateTime Created;
 
-    public UserItem(ItemContainer item, int stackCnt=1, int order = -1)
+    public UserItem(ItemContainer item, int userId, int stackCnt=1, int order = -1)
     {
-        Id = 0;
-        UserId = 22;
+        Id = UnityEngine.Random.Range(0, 1999999999);
+        UserId = userId;
         ItemId = item.Id;
         StackCnt = stackCnt;
         Equipped = false;
         Stored = false;
         Order = order;
         TimeToUse = 1;
-        Created = DateTime.Now;
     }
+    public UserItem(UserItem item)
+    {
+        Id = item.Id;
+        UserId = item.UserId;
+        ItemId = item.ItemId;
+        StackCnt = item.StackCnt;
+        Equipped = item.Equipped;
+        Stored = item.Stored;
+        Order = item.Order;
+        TimeToUse = item.TimeToUse;
+    }
+
     public UserItem()
     {
+    }
+
+
+    internal void Print()
+    {
+        Debug.Log("UserItem = " + MyInfo());
+    }
+    internal string MyInfo()
+    {
+        if (Id == -1)
+            return "Empty Item";
+        ItemDatabase itemDatabase = ItemDatabase.Instance();
+        try
+        {
+            var item = itemDatabase.GetItemById(ItemId);
+            return "UserItem (" + Id + ")" +
+                   " UserId:" + UserId +
+                   " Item:" + item.Name +
+                   " StackCnt:" + StackCnt +
+                   (Stored ? " Stored " : " ") +
+                   (Equipped ? " Equipped " : " ") +
+                   " Order" + Order +
+                   " TimeToUse:" + TimeToUse
+                ;
+        }
+        catch (Exception e)
+        {
+            return "Empty Item";
+        }
+    }
+    public override bool Equals(object obj)
+    {
+        //Check for null and compare run-time types.
+        if (obj == null || this.GetType() != obj.GetType())
+            return false;
+        UserItem item = (UserItem)obj;
+        return (Id == item.Id) 
+               && (UserId == item.UserId)
+               && (ItemId == item.ItemId)
+               && (StackCnt == item.StackCnt)
+               && (Stored == item.Stored)
+               && (Equipped == item.Equipped)
+               && (Order == item.Order)
+               && (TimeToUse == item.TimeToUse)
+            ;
     }
 }

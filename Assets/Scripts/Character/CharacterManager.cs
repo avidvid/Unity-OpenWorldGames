@@ -203,16 +203,16 @@ public class CharacterManager : MonoBehaviour
             if (existingItem.UserItem.StackCnt + stcCnt <= item.MaxStackCnt)
             {
                 existingItem.UserItem.StackCnt++;
-                _userDatabase.UpdateUserInventory(CharacterInventory);
+                _userDatabase.UpdateUserInventory();
                 return true;
             }
         }
-        var userItem = new UserItem(item);
+        var userItem = new UserItem(item,UserPlayer.Id);
         var newItem = new ItemIns(item, userItem);
         newItem.UserItem.StackCnt = stcCnt;
         newItem.Print();
         CharacterInventory.Add(newItem);
-        _userDatabase.UpdateUserInventory(CharacterInventory);
+        _userDatabase.UpdateUserInventory(userItem);
         return true;
     }
     #endregion

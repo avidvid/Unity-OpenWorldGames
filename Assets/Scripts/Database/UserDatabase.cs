@@ -76,26 +76,28 @@ public class UserDatabase : MonoBehaviour
     }
     #endregion
     #region UserInventory
-    public void UpdateUserInventory(List<UserItem> userInventory)
+    public void APIUpdateUserInventory(List<UserItem> userInventory)
     {
         _userInventory = userInventory;
         Debug.Log("UDB-UserInventory.Count = " + _userInventory.Count);
     }
-    internal void UpdateUserInventory(List<ItemIns> invCarry, List<ItemIns> invEquipment = null)
+    internal void UpdateUserInventory(UserItem userItem=null)
     {
-        _userInventory.Clear();
-        foreach (var userItem in invCarry)
-            if (userItem.UserItem.StackCnt!=0)
-                _userInventory.Add(userItem.UserItem);
-        if (invEquipment!=null)
-            foreach (var userItem in invEquipment)
-                _userInventory.Add(userItem.UserItem);
+        if (userItem != null)
+        {
+            Debug.Log("UDB-Add item = " + userItem.MyInfo());
+            _userInventory.Add(userItem);
+        }
         _userInventory = _userInventory.OrderBy(x => !x.Equipped).ThenBy(x => !x.Stored).ThenBy(x => x.Order).ToList();
-        //SaveUserInventory();
+        SaveUserInventory();
     }
     internal List<UserItem> GetUserInventory()
     {
         return _userInventory;
+    }
+    public void SaveUserInventory()
+    {
+        _apiGatewayConfig.PutUserInventory(_userInventory);
     }
     #endregion
     #region UserCharacters    

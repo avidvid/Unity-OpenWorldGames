@@ -33,7 +33,7 @@ public class SlotDelete : MonoBehaviour, IDropHandler
     {
         _characterManager.AddCharacterSetting("Coin", (int) (itemIns.UserItem.StackCnt * itemIns.Item.Cost /2));
         itemIns.UserItem.StackCnt = 0;
-        _inv.UpdateInventory(true);
+        _inv.UpdateInventory();
     }
 
 }

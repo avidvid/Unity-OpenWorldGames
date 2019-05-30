@@ -70,7 +70,7 @@ public class SlotConsume: MonoBehaviour, IDropHandler
                 //Use all the stack
                 if (_inv.UseItem(draggedItem.ItemIns))
                 {
-                    _inv.UpdateInventory(true);
+                    _inv.UpdateInventory();
                     draggedItem.ItemIns.UserItem.StackCnt = 0;
                 }
                 break;

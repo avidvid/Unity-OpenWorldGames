@@ -160,7 +160,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         var itemDatabase = ItemDatabase.Instance();
         var item = itemDatabase.GetItemById(itemId);
-        ItemIns = new ItemIns(item,new UserItem(item, stackCnt));
+        ItemIns = new ItemIns(item,new UserItem(item, _characterManager.UserPlayer.Id, stackCnt));
         _stackCnt = stackCnt;
         GetComponent<Image>().sprite = item.GetSprite();
         _time = time;
