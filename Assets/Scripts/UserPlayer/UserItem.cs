@@ -12,7 +12,6 @@ public class UserItem
     public bool Stored;
     public int Order;
     public int TimeToUse;
-    public DateTime Created;
 
     public UserItem(ItemContainer item, int userId, int stackCnt=1, int order = -1)
     {

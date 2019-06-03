@@ -97,4 +97,11 @@ public class InventoryManager : MonoBehaviour
         _userDatabase.UpdateUserInventory(itemIns.UserItem);
         RefreshInventory();
     }
+    internal void DeleteItemFromInventory(ItemIns itemIns)
+    {
+        Debug.Log("IM-Item " + itemIns.MyInfo() + " Will be Deleted from Order " + itemIns.UserItem.Order);
+        _characterManager.CharacterInventory.Remove(itemIns);
+        _userDatabase.DeleteItemFromInventory(itemIns.UserItem);
+        RefreshInventory();
+    }
 }

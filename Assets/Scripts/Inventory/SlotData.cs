@@ -19,18 +19,11 @@ public class SlotData : MonoBehaviour,IDropHandler{
         _itemMixture = ItemMixture.Instance();
         _messagePanelHandler = MessagePanelHandler.Instance();
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
-
     public void OnDrop(PointerEventData eventData)
     {
         ItemData draggedItem = eventData.pointerDrag.GetComponent<ItemData>();
         ItemMixture mixedItem = eventData.pointerDrag.GetComponent<ItemMixture>();
         ItemEquipment equipedItem = eventData.pointerDrag.GetComponent<ItemEquipment>();
-
         if (mixedItem == null && draggedItem == null && equipedItem == null)
             return;
         if (mixedItem != null)
@@ -49,7 +42,6 @@ public class SlotData : MonoBehaviour,IDropHandler{
         ItemData existingItem = this.transform.GetComponentInChildren<ItemData>();
         if (existingItem == null)
             return;
-
         //Item from Mixture Area
         if (mixedItem != null)
             if (mixedItem.ItemIns != null)

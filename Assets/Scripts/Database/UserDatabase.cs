@@ -90,6 +90,12 @@ public class UserDatabase : MonoBehaviour
         }
         SaveUserInventory();
     }
+    internal void DeleteItemFromInventory(UserItem userItem)
+    {
+        Debug.Log("UDB-Remove item = " + userItem.MyInfo());
+        _userInventory.Remove(userItem);
+        SaveUserInventory();
+    }
     internal List<UserItem> GetUserInventory()
     {
         return _userInventory;

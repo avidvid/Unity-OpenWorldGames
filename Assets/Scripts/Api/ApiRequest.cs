@@ -9,12 +9,10 @@ public class ApiRequest
     public CharacterSetting CharacterSetting;
     public CharacterMixture CharacterMixture;
     public CharacterResearching CharacterResearching;
-
     public CharacterResearch CharacterResearch;
     public UserCharacter UserCharacter;
     public UserRecipe UserRecipe;
-
-    //public List<UserItem> UserInventory;
+    public UserItem UserInventory;
 
     public int Time;
     public string Code;
@@ -29,6 +27,7 @@ public class ApiRequest
         if (CharacterResearching.Id != 0) info += " CharacterResearching=" + CharacterResearching.MyInfo();
         if (CharacterResearch.Id != 0) info += " CharacterResearch=" + CharacterResearch.MyInfo();
         if (UserRecipe.Id != 0) info += " UserRecipe=" + UserRecipe.MyInfo();
+        if (UserInventory.Id != 0) info += " UserInventory=" + UserInventory.MyInfo();
         return info;
     }
 }

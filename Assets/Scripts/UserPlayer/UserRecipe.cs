@@ -9,12 +9,6 @@ public class UserRecipe
     public int UserId;
     public string RecipeCode;
 
-    public UserRecipe(int recipeId)
-    {
-        RecipeId = 0;
-        UserId = 0;
-        RecipeCode = "";
-    }
     public UserRecipe(int recipeId, int userId, string recipeCode = null)
     {
         Id = UnityEngine.Random.Range(0, 1999999999);

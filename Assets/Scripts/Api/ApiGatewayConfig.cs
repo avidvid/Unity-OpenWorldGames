@@ -366,6 +366,7 @@ public class ApiGatewayConfig : MonoBehaviour
     internal void PutUserInventory(List<UserItem> userInventory)
     {
         Debug.Log("PutUserInventory   _oldUserInventory=" + _oldUserInventory.Count + " userInventory = "+ userInventory.Count);
+        //Todo: delete
         //foreach (var item in _oldUserInventory) item.Print();
         //foreach (var item in userInventory) item.Print();
         foreach (var dbItem in _oldUserInventory)
@@ -377,12 +378,12 @@ public class ApiGatewayConfig : MonoBehaviour
                 {
                     delete = false;
                     if (!dbItem.Equals(item))
-                        UpdateUserInventory(item, "Update");
+                        PutUserInventory(item, "Update");
                     break;
                 }
             }
             if (delete)
-                UpdateUserInventory(dbItem, "Delete");
+                PutUserInventory(dbItem, "Delete");
         }
         foreach (var item in userInventory)
         {
@@ -396,13 +397,21 @@ public class ApiGatewayConfig : MonoBehaviour
                 }
             }
             if (newItem)
-                UpdateUserInventory(item, "Insert");
+                PutUserInventory(item, "Insert");
         }
         SavedUserInventory(userInventory);
     }
-    private void UpdateUserInventory(UserItem item, string action)
+    private void PutUserInventory(UserItem item, string action)
     {
-        Debug.Log(action + " UserItem = " + item.MyInfo());
+        var apiGate = "GetUserInventory";
+        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", item.UserId.ToString());
+        ApiRequest ap = new ApiRequest
+        {
+            Action = action,
+            UserInventory = item
+        };
+        Debug.Log(ap.Action + " UserInventory : " + ap.UserInventory.MyInfo());
+        StartCoroutine(PutRequest(uri, ap, true));
     }
     internal void PutCharacterMixture(CharacterMixture characterMixture)
     {

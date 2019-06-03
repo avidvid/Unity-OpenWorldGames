@@ -293,7 +293,7 @@ public class CharacterManager : MonoBehaviour
                         message = "You found a Recipe!!";
                     else return "Recipe you found is not readable!! ";
                 }
-                if (itemIns.Item.Egg > 0)
+                if (item.Egg > 0)
                 {
                     if (_userDatabase.AddNewRandomUserCharacters())
                         message = "You Hatched a New Character!!";

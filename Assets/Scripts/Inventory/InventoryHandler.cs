@@ -181,10 +181,10 @@ public class InventoryHandler : MonoBehaviour
         {
             string itemStatus = _characterManager.CharacterSettingUseItem(item, true);
             if (itemStatus != "")
-                _inv.PrintMessage(itemStatus, Color.yellow);
+                PrintMessage(itemStatus, Color.yellow);
             return true;
         }
-        _inv.PrintMessage("Not enough energy to use this item", Color.yellow);
+        PrintMessage("Not enough energy to use this item", Color.yellow);
         return false;
     }
 
@@ -238,6 +238,10 @@ public class InventoryHandler : MonoBehaviour
     {
         Debug.Log("IH-Lets Save Inv at" + DateTime.Now);
         _inventoryManager.UpdateInventory = true;
+    }
+    public void DeleteFromInventory(ItemIns itemIns)
+    {
+        _inventoryManager.DeleteItemFromInventory(itemIns);
     }
 
     //Should match with the AddItemToInventory in CharacterManager
