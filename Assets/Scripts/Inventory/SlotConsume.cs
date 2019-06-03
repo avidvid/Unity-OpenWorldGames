@@ -9,7 +9,6 @@ public class SlotConsume: MonoBehaviour, IDropHandler
 {
     private FacebookHandler _facebook;
     private InventoryHandler _inv;
-    private static ModalPanel _modalPanel;
     private static GUIManager _GUIManager;
     private CharacterManager _characterManager;
 

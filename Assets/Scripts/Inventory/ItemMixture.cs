@@ -9,7 +9,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     private static ItemMixture _itemMixture;
     private CharacterManager _characterManager;
     private InventoryHandler _inv;
-    private ModalPanel _modalPanel;
+    private MessagePanelHandler _messagePanelHandler;
 
     private Vector2 _offset;
     private Tooltip _tooltip;
@@ -27,7 +27,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         _inv = InventoryHandler.Instance();
         _tooltip = Tooltip.Instance();
         _characterManager = CharacterManager.Instance();
-        _modalPanel = ModalPanel.Instance();
+        _messagePanelHandler = MessagePanelHandler.Instance();
     }
     // Update is called once per frame
     void Update()
@@ -92,8 +92,8 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         if (_time < DateTime.Now)
             SceneSettings.GoToRecipeScene();
         else
-            _modalPanel.Warning("Are you sure you want to buy out your wait time for " + TimeHandler.GemTimeValue(_time - DateTime.Now) + " gem(s)?",
-                ModalPanel.ModalPanelType.YesNo,
+            _messagePanelHandler.ShowMessage("Are you sure you want to buy out your wait time for " + TimeHandler.GemTimeValue(_time - DateTime.Now) + " gem(s)?",
+                MessagePanel.PanelType.YesNo,
                 SpendGem,
                 SceneSettings.GoToRecipeScene);
     }
@@ -106,7 +106,7 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             _characterManager.AddCharacterSetting("Gem", -gem);
         else
         {
-            _modalPanel.Choice("You don't have enough Gem ! ", ModalPanel.ModalPanelType.Ok);
+            _messagePanelHandler.ShowMessage("You don't have enough Gem ! ", MessagePanel.PanelType.Ok);
             SceneSettings.GoToShopScene("Gem");
             return;
         }

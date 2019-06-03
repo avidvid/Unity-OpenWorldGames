@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class WaitHandler : MonoBehaviour {
 
     private CharacterManager _characterManager;
-    private ModalPanel _modalPanel;
+    private MessagePanelHandler _messagePanelHandler;
 
     private Button _startButton;
     private TextMeshProUGUI _startText;
@@ -20,7 +20,7 @@ public class WaitHandler : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _characterManager = CharacterManager.Instance();
-        _modalPanel = ModalPanel.Instance();
+        _messagePanelHandler = MessagePanelHandler.Instance();
 
         _startButton = GameObject.Find("ButtonStart").GetComponent<Button>();
         _startButton.interactable = false;
@@ -52,8 +52,8 @@ public class WaitHandler : MonoBehaviour {
 
     public void BuyTime()
     {
-        _modalPanel.Warning("Are you sure you want to buy out your wait time " + _buyText.text + " gem(s)?", 
-                ModalPanel.ModalPanelType.YesNo, 
+        _messagePanelHandler.ShowMessage("Are you sure you want to buy out your wait time " + _buyText.text + " gem(s)?", 
+                MessagePanel.PanelType.YesNo, 
                 () => { SpendGem();
         });
     }
@@ -67,7 +67,7 @@ public class WaitHandler : MonoBehaviour {
             _characterManager.AddCharacterSetting("Gem", -gem);
         else
         {
-            _modalPanel.Choice("You don't have enough Gem ! ", ModalPanel.ModalPanelType.Ok);
+            _messagePanelHandler.ShowMessage("You don't have enough Gem ! ", MessagePanel.PanelType.Ok);
             _storeButton.SetActive(true);
             _buyButton.SetActive(false);
             return;

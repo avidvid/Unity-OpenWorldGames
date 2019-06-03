@@ -15,7 +15,6 @@ public class InventoryHandler : MonoBehaviour
     private GUIManager _GUIManager;
 
     private ItemDatabase _itemDatabase;
-    //private ModalPanel _modalPanel; 
 
     //private bool _updateInventory;
     private bool _inTerrain = true;

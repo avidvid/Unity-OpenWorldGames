@@ -10,7 +10,7 @@ using System.Linq;
 
 public class ResearchListHandler : MonoBehaviour {
 
-    private ModalPanel _modalPanel;
+    private MessagePanelHandler _messagePanelHandler;
     private GameObject _contentPanel;
     private GameObject _clickedButton;
     private CharacterManager _characterManager;
@@ -21,7 +21,7 @@ public class ResearchListHandler : MonoBehaviour {
 
     void Awake()
     {
-        _modalPanel = ModalPanel.Instance();
+        _messagePanelHandler = MessagePanelHandler.Instance();
         _characterManager =CharacterManager.Instance();
         _contentPanel = GameObject.Find("ContentPanel");
     }
@@ -116,20 +116,20 @@ public class ResearchListHandler : MonoBehaviour {
         //Check criteria
         if (!ResearchUpgradeIsValid(research))
         {
-            _modalPanel.Choice("Invalid Research!", ModalPanel.ModalPanelType.Ok);
+            _messagePanelHandler.ShowMessage("Invalid Research!", MessagePanel.PanelType.Ok);
             return;
         }
         //Process the pay 
         var payAmount = research.CalculatePrice(nextLevel);
         if (_characterManager.CharacterSetting.Coin < payAmount) 
         {
-            _modalPanel.Choice("You don't have enough Coin ! ", ModalPanel.ModalPanelType.Ok);
+            _messagePanelHandler.ShowMessage("You don't have enough Coin ! ", MessagePanel.PanelType.Ok);
             return;
         }
         _characterManager.AddCharacterSetting("Coin", -payAmount);
         MakeResearching(research, nextLevel );
         NewResearchInProgress(researchId);
-        _modalPanel.Choice(research.Name + " is in progress ! ", ModalPanel.ModalPanelType.Ok);
+        _messagePanelHandler.ShowMessage(research.Name + " is in progress ! ", MessagePanel.PanelType.Ok);
     }
 
     private void NewResearchInProgress(int researchId)

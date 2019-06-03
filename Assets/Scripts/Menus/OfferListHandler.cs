@@ -11,6 +11,8 @@ using TMPro;
 
 public class OfferListHandler : MonoBehaviour {
     private ItemDatabase _itemDatabase;
+    private MessagePanelHandler _messagePanelHandler;
+
     public GameObject OfferContent;
     public Sprite CoinSprite;
     public Sprite GemSprite;
@@ -18,7 +20,6 @@ public class OfferListHandler : MonoBehaviour {
     public Sprite CarryCntSprite;
     public Sprite Life;
 
-    private ModalPanel _modalPanel;
     private GameObject _contentPanel;
     private GameObject _clickedButton;
     private CharacterManager _characterManager;
@@ -30,7 +31,7 @@ public class OfferListHandler : MonoBehaviour {
     void Awake()
     {
         _itemDatabase = ItemDatabase.Instance();
-        _modalPanel = ModalPanel.Instance();
+        _messagePanelHandler = MessagePanelHandler.Instance();
         _characterManager =CharacterManager.Instance();
         _inventoryManager = InventoryManager.Instance();
         _contentPanel = GameObject.Find("ContentPanel");
@@ -111,20 +112,20 @@ public class OfferListHandler : MonoBehaviour {
         switch (offer.SellProd)
         {
             case "CarryCnt":
-                _modalPanel.Warning("Are you sure you want to acquire this slot at this level for " + offer.PayAmount +" " + offer.PayProd + "(s)?", ModalPanel.ModalPanelType.YesNo, () => { DoShop(offer); });
+                _messagePanelHandler.ShowMessage("Are you sure you want to acquire this slot at this level for " + offer.PayAmount +" " + offer.PayProd + "(s)?", MessagePanel.PanelType.YesNo, () => { DoShop(offer); });
                 return;
             case "Life":
-                _modalPanel.Warning("Are you sure you want to buy a life now for "+ offer.PayAmount + " " + offer.PayProd + "(s)?", ModalPanel.ModalPanelType.YesNo, () => { DoShop(offer); });
+                _messagePanelHandler.ShowMessage("Are you sure you want to buy a life now for "+ offer.PayAmount + " " + offer.PayProd + "(s)?", MessagePanel.PanelType.YesNo, () => { DoShop(offer); });
                 return;
         }
         switch (offer.PayProd)
         {
             case "Money":
-                _modalPanel.Warning("Are you sure you want to Spend " + offer.PayAmount + " cash?", ModalPanel.ModalPanelType.YesNo, () => { DoShop(offer); });
+                _messagePanelHandler.ShowMessage("Are you sure you want to Spend " + offer.PayAmount + " cash?", MessagePanel.PanelType.YesNo, () => { DoShop(offer); });
                 return;
 
         }
-        _modalPanel.Warning("Are you sure you want to Spend " + offer.PayAmount + " " + offer.PayProd + "(s)?", ModalPanel.ModalPanelType.YesNo, () => { DoShop(offer); });
+        _messagePanelHandler.ShowMessage("Are you sure you want to Spend " + offer.PayAmount + " " + offer.PayProd + "(s)?", MessagePanel.PanelType.YesNo, () => { DoShop(offer); });
     }
 
     private void DoShop(Offer offer)
@@ -135,7 +136,7 @@ public class OfferListHandler : MonoBehaviour {
             //checked for available spot in inv
             if (!_inventoryManager.HaveAvailableSlot())
             {
-                _modalPanel.Choice("Not enough room in inventory! ", ModalPanel.ModalPanelType.Ok);
+                _messagePanelHandler.ShowMessage("Not enough room in inventory! ", MessagePanel.PanelType.Ok);
                 return;
             }
         }
@@ -151,7 +152,7 @@ public class OfferListHandler : MonoBehaviour {
                     //Refund the value 
                     ProcessThePay(offer.PayProd, -offer.PayAmount);
                     if (item.Unique)
-                        _modalPanel.Choice("You Can not Carry more than one of this item!", ModalPanel.ModalPanelType.YesNo);
+                        _messagePanelHandler.ShowMessage("You Can not Carry more than one of this item!", MessagePanel.PanelType.Ok);
                 }
             }
             else
@@ -193,7 +194,7 @@ public class OfferListHandler : MonoBehaviour {
                     _characterManager.AddCharacterSetting(payProd, -payAmount);
                     return true;
                 }
-                _modalPanel.Choice("You don't have enough Coin ! ", ModalPanel.ModalPanelType.Ok);
+                _messagePanelHandler.ShowMessage("You don't have enough Coin ! ", MessagePanel.PanelType.Ok);
                 return false;
             case "Gem":
                 print("process GEM" + _characterManager.UserPlayer.Gem + " " + payAmount);
@@ -202,16 +203,16 @@ public class OfferListHandler : MonoBehaviour {
                     _characterManager.AddCharacterSetting(payProd, -payAmount);
                     return true;
                 }
-                _modalPanel.Choice("You don't have enough Gem ! ", ModalPanel.ModalPanelType.Ok);
+                _messagePanelHandler.ShowMessage("You don't have enough Gem ! ", MessagePanel.PanelType.Ok);
                 return false;
             case "Money":
                 if (ProcessThePayment(payAmount))
                     return true;
                 print("Your Purchase didn't process ");
-                _modalPanel.Choice("Your Purchase didn't process ", ModalPanel.ModalPanelType.Ok);
+                _messagePanelHandler.ShowMessage("Your Purchase didn't process ", MessagePanel.PanelType.Ok);
                 return false;
         }
-        _modalPanel.Choice("Something went wrong", ModalPanel.ModalPanelType.Ok);
+        _messagePanelHandler.ShowMessage("Something went wrong", MessagePanel.PanelType.Ok);
         return false;
     }
     private bool ProcessThePayment(int payAmount)

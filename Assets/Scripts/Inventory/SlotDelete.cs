@@ -7,13 +7,13 @@ using UnityEngine.UI;
 
 public class SlotDelete : MonoBehaviour, IDropHandler
 {
-    private ModalPanel _modalPanel;
+    private MessagePanelHandler _messagePanelHandler;
     private CharacterManager _characterManager;
     private InventoryHandler _inv;
 
     void Start()
     {
-        _modalPanel = ModalPanel.Instance();
+        _messagePanelHandler = MessagePanelHandler.Instance();
         _characterManager =CharacterManager.Instance();
         _inv = InventoryHandler.Instance();
     }
@@ -26,7 +26,7 @@ public class SlotDelete : MonoBehaviour, IDropHandler
             return;
         if (draggedItem.ItemIns == null)
             return;
-        _modalPanel.Choice("Are you sure you want to Recycle this Item for %50 of Cost ?", ModalPanel.ModalPanelType.YesCancel,() => { DeleteItem(draggedItem.ItemIns); });
+        _messagePanelHandler.ShowMessage("Are you sure you want to Recycle this Item for %50 of Cost ?", MessagePanel.PanelType.YesCancel,() => { DeleteItem(draggedItem.ItemIns); });
     }
 
     private void DeleteItem(ItemIns itemIns)

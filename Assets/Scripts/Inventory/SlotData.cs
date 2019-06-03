@@ -11,13 +11,13 @@ public class SlotData : MonoBehaviour,IDropHandler{
     // Use this for initialization
     private InventoryHandler _inv;
     private ItemMixture _itemMixture;
-    private ModalPanel _modalPanel;
+    private MessagePanelHandler _messagePanelHandler;
 
     void Start()
     {
         _inv = InventoryHandler.Instance();
         _itemMixture = ItemMixture.Instance();
-        _modalPanel = ModalPanel.Instance();
+        _messagePanelHandler = MessagePanelHandler.Instance();
     }
 
     // Update is called once per frame
@@ -146,7 +146,7 @@ public class SlotData : MonoBehaviour,IDropHandler{
                                     _inv.PrintMessage("You are already making an Item", Color.yellow);
                                 else
                                     //Mixing items Logic (Lambda) can also be 2 func in it :  () => { InstantiateObject(thingToSpawn); InstantiateObject(thingToSpawn, thingToSpawn); }
-                                    _modalPanel.Choice(newRecipe.GetDescription(), ModalPanel.ModalPanelType.YesCancel, () => { MixItemData(ref existingItem, ref draggedItem, newRecipe);});
+                                    _messagePanelHandler.ShowMessage(newRecipe.GetDescription(), MessagePanel.PanelType.YesCancel, () => { MixItemData(ref existingItem, ref draggedItem, newRecipe);});
                             }
                             else //Not enough materials 
                                 _inv.PrintMessage("Not enough " + draggedItem.ItemIns.Item.Name +

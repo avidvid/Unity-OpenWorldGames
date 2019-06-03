@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class CharacterListHandler : MonoBehaviour
 {
     private CharacterManager _characterManager;
-    private ModalPanel _modalPanel;
 
 
     //Character Prefab
@@ -21,7 +20,6 @@ public class CharacterListHandler : MonoBehaviour
     void Awake()
     {
         _characterManager = CharacterManager.Instance();
-        _modalPanel = ModalPanel.Instance();
         _addCharacterPanel = GameObject.Find("AddCharacterPanel");
     }
     void Start()
