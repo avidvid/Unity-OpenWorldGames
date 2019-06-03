@@ -4,7 +4,6 @@
 [Serializable]
 public class ApiRequest
 {
-    public string Action= "UpdateUserPlayer";
     public UserPlayer UserPlayer;
     public CharacterSetting CharacterSetting;
     public CharacterMixture CharacterMixture;
@@ -14,6 +13,7 @@ public class ApiRequest
     public UserRecipe UserRecipe;
     public UserItem UserInventory;
 
+    public string Action;
     public int Time;
     public string Code;
     public int HealthCheck;
