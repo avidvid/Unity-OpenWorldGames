@@ -29,15 +29,19 @@ public class ModalPanel : MonoBehaviour
 
     //Todo: add icon to the dialog  https://unity3d.com/learn/tutorials/modules/intermediate/live-training-archive/modal-windowhttps://unity3d.com/learn/tutorials/modules/intermediate/live-training-archive/modal-window-pt3?playlist=17111
 
-    void Awake()
+    void Start()
     {
         _modalPanel = ModalPanel.Instance();
-        _modalPanelObject = GameObject.Find("ModalPanel");
+        _modalPanelObject = GameObject.Find("MessageBoard");
         _messagePanel = _modalPanelObject.transform.Find("MessagePanel").gameObject;
         _messagePanel.transform.localPosition = Vector3.zero;
 
+        if (!_messagePanel)
+            Debug.LogError("There needs to be one active messagePanel in your scene.");
         _warningPanel = _modalPanelObject.transform.Find("WarningPanel").gameObject;
         _warningPanel.transform.localPosition = Vector3.zero;
+        if (!_warningPanel)
+            Debug.LogError("There needs to be one active warningPanel in your scene.");
     }
 
     // Yes/No/Cancel: A string, a Yes event, a No event and Cancel event

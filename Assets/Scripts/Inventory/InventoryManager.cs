@@ -10,10 +10,7 @@ public class InventoryManager : MonoBehaviour
     private CharacterManager _characterManager;
     private UserDatabase _userDatabase;
 
-    internal List<ItemIns> UserInvItems = new List<ItemIns>();
-    //internal List<ItemIns> InvCarry = new List<ItemIns>();
-    //internal List<ItemIns> InvEquipment = new List<ItemIns>();
-    //internal List<ItemIns> InvBank = new List<ItemIns>();
+    internal List<ItemIns> UserInvItems;
 
     internal bool UpdateInventory;
 
@@ -95,7 +92,9 @@ public class InventoryManager : MonoBehaviour
     }
     internal void AddItemToInventory(ItemIns itemIns)
     {
+        Debug.Log("IM-Item " + itemIns.MyInfo() + " Will be added to order " + itemIns.UserItem.Order);
         _characterManager.CharacterInventory.Add(itemIns);
         _userDatabase.UpdateUserInventory(itemIns.UserItem);
+        RefreshInventory();
     }
 }

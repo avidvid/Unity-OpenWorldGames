@@ -13,11 +13,15 @@ public class ItemIns
     }
     internal void Print()
     {
-        Debug.Log("ItemIns = " + MyInfo());
+        Debug.Log("ItemIns =" + MyInfo());
     }
     internal string MyInfo()
     {
-        return "User= " + UserItem.UserId + "Item = " + Item.Name + "(" + UserItem.StackCnt + ")";
+        return UserItem.Id + " (uid=" + UserItem.UserId + ") " 
+               + Item.Name + "(" + UserItem.StackCnt + ") " +
+               (UserItem.Stored ? " S " : "") +
+               (UserItem.Equipped ? " E " : "")
+               +"Order:" + UserItem.Order;
     }
     internal string GetTooltip()
     {

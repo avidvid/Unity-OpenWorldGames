@@ -31,7 +31,6 @@ public class SlotData : MonoBehaviour,IDropHandler{
         ItemMixture mixedItem = eventData.pointerDrag.GetComponent<ItemMixture>();
         ItemEquipment equipedItem = eventData.pointerDrag.GetComponent<ItemEquipment>();
 
-
         if (mixedItem == null && draggedItem == null && equipedItem == null)
             return;
         if (mixedItem != null)

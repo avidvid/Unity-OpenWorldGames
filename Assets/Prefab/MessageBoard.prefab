@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 114137467224742592}
   - component: {fileID: 114517961292570490}
   m_Layer: 5
-  m_Name: ModalPanel
+  m_Name: MessageBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

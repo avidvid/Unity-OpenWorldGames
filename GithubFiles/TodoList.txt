@@ -7,6 +7,13 @@ Users Want to do what they want, not what you want them to do
 
 
 ###############
+#### Iran #####
+###############
+De active face rec 
+	
+
+
+###############
 ####comite#####
 ###############
 	
@@ -22,12 +29,24 @@ https://chicagophotos.shutterbooth.com/May-2019
 http://leatherbonding.com/
 
 -----
-User inventory is next 
+internal void PutUserInventory(List<UserItem> userInventory)
+logic has flaw
+
+
+User inventory API
+ public void UpdateInventory() calls couple times 
+Fix Choices option in ostore page 
 
 
 ReadUserInventoryJson should accept zero and nor error => warning 
 
-
+{
+  "Id": 307688315,
+  "ItemId": 3001,
+  "MixTime": "05/31/2019 09:20:28",
+  "StackCnt": 2,
+  "UserId": 22
+}
 
 
 	RSVP: https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019

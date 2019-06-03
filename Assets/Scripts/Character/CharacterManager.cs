@@ -198,7 +198,7 @@ public class CharacterManager : MonoBehaviour
         var existingItem = ItemInInventory(item.Id);
         if (existingItem!=null)
         {
-            if (item.MaxStackCnt == 1)
+            if (item.Unique)
                 return false;
             if (existingItem.UserItem.StackCnt + stcCnt <= item.MaxStackCnt)
             {
@@ -207,13 +207,33 @@ public class CharacterManager : MonoBehaviour
                 return true;
             }
         }
-        var userItem = new UserItem(item,UserPlayer.Id);
+        int order = FindAvailableSlot();
+        if (order ==-1)
+            return false;
+        var userItem = new UserItem(item,UserPlayer.Id, stcCnt, order);
         var newItem = new ItemIns(item, userItem);
-        newItem.UserItem.StackCnt = stcCnt;
-        newItem.Print();
-        CharacterInventory.Add(newItem);
-        _userDatabase.UpdateUserInventory(userItem);
+        var inventoryManager = InventoryManager.Instance();
+        inventoryManager.AddItemToInventory(newItem);
         return true;
+    }
+    internal int FindAvailableSlot()
+    {
+        for (int i = 0; i < CharacterSetting.CarryCnt; i++)
+        {
+            var used = false;
+            foreach (var itemIns in CharacterInventory)
+            {
+                if (itemIns.UserItem.Equipped || itemIns.UserItem.Stored)
+                    continue;
+                if (itemIns.UserItem.Order == i)
+                {
+                    used = true;
+                }
+            }
+            if (!used)
+                return i;
+        }
+        return -1;
     }
     #endregion
     #region ItemUse

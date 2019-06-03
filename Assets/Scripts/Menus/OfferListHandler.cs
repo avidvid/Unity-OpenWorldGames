@@ -150,8 +150,8 @@ public class OfferListHandler : MonoBehaviour {
                 {
                     //Refund the value 
                     ProcessThePay(offer.PayProd, -offer.PayAmount);
-                    if (item.MaxStackCnt == 1)
-                        _modalPanel.Choice("You Can not Carry more than one of this item!", ModalPanel.ModalPanelType.Ok);
+                    if (item.Unique)
+                        _modalPanel.Choice("You Can not Carry more than one of this item!", ModalPanel.ModalPanelType.YesNo);
                 }
             }
             else

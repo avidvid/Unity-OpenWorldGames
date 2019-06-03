@@ -88,7 +88,6 @@ public class UserDatabase : MonoBehaviour
             Debug.Log("UDB-Add item = " + userItem.MyInfo());
             _userInventory.Add(userItem);
         }
-        _userInventory = _userInventory.OrderBy(x => !x.Equipped).ThenBy(x => !x.Stored).ThenBy(x => x.Order).ToList();
         SaveUserInventory();
     }
     internal List<UserItem> GetUserInventory()

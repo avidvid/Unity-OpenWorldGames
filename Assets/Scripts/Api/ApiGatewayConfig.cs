@@ -380,20 +380,23 @@ public class ApiGatewayConfig : MonoBehaviour
                         UpdateUserInventory(item, "Update");
                     break;
                 }
-                bool newItem = true;
-                foreach (var exItem in _oldUserInventory)
-                {
-                    if (exItem.Id == item.Id)
-                    {
-                        newItem = false;
-                        break;
-                    }
-                }
-                if (newItem)
-                    UpdateUserInventory(item, "Insert");
             }
             if (delete)
                 UpdateUserInventory(dbItem, "Delete");
+        }
+        foreach (var item in userInventory)
+        {
+            bool newItem = true;
+            foreach (var exItem in _oldUserInventory)
+            {
+                if (exItem.Id == item.Id)
+                {
+                    newItem = false;
+                    break;
+                }
+            }
+            if (newItem)
+                UpdateUserInventory(item, "Insert");
         }
         SavedUserInventory(userInventory);
     }

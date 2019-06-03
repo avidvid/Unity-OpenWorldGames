@@ -23,7 +23,7 @@ public class UserItem
         Equipped = false;
         Stored = false;
         Order = order;
-        TimeToUse = 1;
+        TimeToUse = item.MaxTimeToUse;
     }
     public UserItem(UserItem item)
     {
@@ -58,8 +58,8 @@ public class UserItem
                    " UserId:" + UserId +
                    " Item:" + item.Name +
                    " StackCnt:" + StackCnt +
-                   (Stored ? " Stored " : " ") +
-                   (Equipped ? " Equipped " : " ") +
+                   (Stored ? " S " : "") +
+                   (Equipped ? " E " : "") +
                    " Order" + Order +
                    " TimeToUse:" + TimeToUse
                 ;

@@ -74,6 +74,8 @@ public class InventoryHandler : MonoBehaviour
         }
         _playerSlots = _characterManager.CharacterSetting.CarryCnt;
         _userInventory = _inventoryManager.UserInvItems;
+        //Debug.Log("IH-UserInventory.Count = " + _userInventory.Count);
+        //foreach (var item in _userInventory) item.Print();
         //Equipment
         EquiSlots = _inventoryPanel.GetComponentsInChildren<SlotEquipment>();
         for (int i = 0; i < EquiSlots.Length; i++)
@@ -270,7 +272,6 @@ public class InventoryHandler : MonoBehaviour
         var itemData = InvSlots[order].transform.GetComponentInChildren<ItemData>();
         itemData.ItemIns = new ItemIns(item, new UserItem(item,_characterManager.UserPlayer.Id, stackCnt, order));
         itemData.LoadItem();
-        Debug.Log("IH-Item " + itemData.ItemIns.MyInfo() + " Will be added to order " + order);
         _inventoryManager.AddItemToInventory(itemData.ItemIns);
         return true;
     }
@@ -377,14 +378,14 @@ public class InventoryHandler : MonoBehaviour
     public void GoToStoreScene()
     {
         //OfferListHandler
-        BuildTrainStarter("InventoryHandler", "Terrain");        
+        BuildTrainStarter("InventoryHandlerStarter", "Terrain");        
         //switch the scene
         SceneManager.LoadScene(SceneSettings.SceneIdForStore);
     }
     public void GoToSlotShop()
     {
         //OfferListHandler
-        BuildTrainStarter("InventoryHandler", "Inventory");
+        BuildTrainStarter("InventoryHandlerStarter", "Inventory");
         //switch the scene
         SceneManager.LoadScene(SceneSettings.SceneIdForStore);
     }
