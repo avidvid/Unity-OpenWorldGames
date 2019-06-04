@@ -20,9 +20,9 @@ public class ApiGatewayConfig : MonoBehaviour
     private const string ApiPath = "https://h28ve9pjh5.execute-api.us-west-2.amazonaws.com/";
     private const string ApiStage = "prod/";
     private int _userId=22;
-    private int _firstWaveTarget;
 
     private List<UserItem> _oldUserInventory =new List<UserItem>();
+    private int _firstWaveTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -33,97 +33,107 @@ public class ApiGatewayConfig : MonoBehaviour
         _characterDatabase=CharacterDatabase.Instance();
         _terrainDatabase=TerrainDatabase.Instance();
         _gameLoadHelper = GameObject.Find("GameStarter").GetComponent<GameLoadHelper>();
-
-        //todo: delete ##############################
-        //Call UserPlayer
-        var apiGate = "GetUserPlayer";
-        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        //StartCoroutine(GetRequest(uri, TestUserPlayer));
-        //###########################################
-
-        FirstWave();
-        StartCoroutine(SecondWave());
+        //Call Random
+        string apiGate = "GetRandom";
+        string uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
+        StartCoroutine(GetRequest(uri, GetUserIdForThisDevice));
+        
     }
-
-    //todo: delete ##############################
-    private void TestUserPlayer(string result)
-    {
-        var response = TranslateResponse(result);
-        if (response.Body.UserPlayer.Id == 0)
-            throw new Exception("API-UserPlayer Failed!!!");
-        UserPlayer up = response.Body.UserPlayer;
-        up.Print();
-        up.Gem += 70;
-        up.Description +=  up.Gem;
-        up.FBLoggedIn = !up.FBLoggedIn;
-        up.SoundVolume *= 2;
-        up.Print();
-        int days = 10;
-        SaveUserPlayer(up, days);
-    }
-    //###########################################
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-    #region FirstWave
+    #region ReadDB
     private void FirstWave()
     {
         string apiGate;
         string uri;
-        //Call Random *
-        apiGate = "GetRandom";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
-        StartCoroutine(GetRequest(uri, ReadRandomJson));
-        //Call Items *
+        //###Item Database
+        //Call Items
         apiGate = "GetItems";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?uid={0}", _userId.ToString());
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadItemsJson));
-        //Call Recipe *
+        //Call Recipe
         apiGate = "GetRecipes";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?uid={0}", _userId.ToString());
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadRecipesJson));
-        //Call Offer *
+        //Call Offer
         apiGate = "GetOffers";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?uid={0}", _userId.ToString());
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadOffersJson));
-
-        //Call Characters *
+        //###Character Database
+        //Call Characters
         apiGate = "GetCharacters";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?uid={0}", _userId.ToString());
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadCharactersJson));
-        //Call Researches *
+        //Call Researches
         apiGate = "GetResearches";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?uid={0}", _userId.ToString());
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadResearchesJson));
-
+        //###Terrain Database
         //Call Regions
         apiGate = "GetRegions";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?uid={0}", _userId.ToString());
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadRegionsJson));
-        //Call Terrains *
+        //Call Terrains
         apiGate = "GetTerrains";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?uid={0}", _userId.ToString());
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadTerrainsJson));
-        //Call Elements *
+        //Call Elements
         apiGate = "GetElements";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?uid={0}", _userId.ToString());
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadElementsJson));
-        //Call InsideStories *
+        //Call InsideStories
         apiGate = "GetInsideStories";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?uid={0}", _userId.ToString());
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(uri, ReadInsideStoriesJson));
+
     }
-    private void ReadRandomJson(string result)
+    IEnumerator SecondWave()
+    {
+        yield return new WaitUntil(() => _firstWaveTarget >= 9);        
+        string apiGate;
+        string uri;
+        //###User Database
+        //Call CharacterMixture
+        apiGate = "GetCharacterMixture";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(uri, ReadCharacterMixtureJson));
+        //Call CharacterResearching
+        apiGate = "GetCharacterResearching";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(uri, ReadCharacterResearchingJson));
+        //Call UserInventory
+        apiGate = "GetUserInventory";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(uri, ReadUserInventoryJson));
+        //Call CharacterResearches
+        apiGate = "GetCharacterResearches";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(uri, ReadCharacterResearchesJson));
+        //Call UserRecipes
+        apiGate = "GetUserRecipes";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(uri, ReadUserRecipesJson));
+        //Call UserCharacters
+        apiGate = "GetUserCharacters";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(uri, ReadUserCharactersJson));
+        //Call CharacterSetting
+        apiGate = "GetCharacterSetting";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(uri, ReadCharacterSettingJson));
+        //Call UserPlayer
+        apiGate = "GetUserPlayer";
+        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(uri, ReadUserPlayerJson));
+    }
+    private void GetUserIdForThisDevice(string result)
     {
         var response = TranslateResponse(result);
         if (response.Body.RandomNum == 0)
             return;
         //Todo: get the userid
-        _userId = 22;
+        _userId = 33;
         _gameLoadHelper.LoadingThumbsUp();
-        _firstWaveTarget++;
+        FirstWave();
+        StartCoroutine(SecondWave());
     }
     //ItemDatabase
     private void ReadItemsJson(string result)
@@ -209,68 +219,11 @@ public class ApiGatewayConfig : MonoBehaviour
         _gameLoadHelper.LoadingThumbsUp();
         _firstWaveTarget++;
     }
-    #endregion
-    #region SecondWave    
-    IEnumerator SecondWave()
-    {
-        yield return new WaitUntil(() => _firstWaveTarget >= 10);
-        //Call UserPlayer
-        var apiGate = "GetUserPlayer";
-        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadUserPlayerJson));
-    }
-    private void ReadUserPlayerJson(string result)
-    {
-        var response = TranslateResponse(result);
-        if (response.Body.UserPlayer.Id == 0)
-            throw new Exception("API-UserPlayer Failed!!!");
-        if (_userDatabase.UpdateUserPlayer(response.Body.UserPlayer))
-        {
-            _gameLoadHelper.LoadingThumbsUp();
-            ThirdWave();
-        }
-    }
-    #endregion
-    #region ThirdWave
-    private void ThirdWave()
-    {
-        //Call CharacterMixture
-        string apiGate = "GetCharacterMixture";
-        string uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadCharacterMixtureJson));
-        //Call CharacterResearching
-        apiGate = "GetCharacterResearching";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadCharacterResearchingJson));
-        //Call UserInventory
-        apiGate = "GetUserInventory";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadUserInventoryJson));
-        //Call CharacterResearches
-        apiGate = "GetCharacterResearches";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadCharacterResearchesJson));
-        //Call UserRecipes
-        apiGate = "GetUserRecipes";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadUserRecipesJson));
-        //Call UserCharacters
-        apiGate = "GetUserCharacters";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadUserCharactersJson));
-    }
-    private void ReadCharacterSettingJson(string result)
-    {
-        var response = TranslateResponse(result);
-        if (response.Body.CharacterSetting.Id == -1)
-            throw new Exception("API-CharacterSetting Failed!!!");
-        _userDatabase.UpdateCharacterSetting(response.Body.CharacterSetting);
-        _gameLoadHelper.LoadingThumbsUp();
-    }
+    //UserDatabase
     private void ReadCharacterMixtureJson(string result)
     {
         var response = TranslateResponse(result);
-        if (response.Body.CharacterMixture.Id == 0)
+        if (response.Body.CharacterMixture==null)
             Debug.LogWarning("####API-CharacterMixture Is Empty!!!");
         _userDatabase.UpdateCharacterMixture(response.Body.CharacterMixture);
         _gameLoadHelper.LoadingThumbsUp();
@@ -278,7 +231,7 @@ public class ApiGatewayConfig : MonoBehaviour
     private void ReadCharacterResearchingJson(string result)
     {
         var response = TranslateResponse(result);
-        if (response.Body.CharacterResearching.Id == 0)
+        if (response.Body.CharacterResearching == null)
             Debug.LogWarning("####API-CharacterResearching Is Empty!!!");
         _userDatabase.UpdateCharacterResearching(response.Body.CharacterResearching);
         _gameLoadHelper.LoadingThumbsUp();
@@ -287,18 +240,10 @@ public class ApiGatewayConfig : MonoBehaviour
     {
         var response = TranslateResponse(result);
         if (response.Body.UserInventory.Count == 0)
-            throw new Exception("API-UserInventory Failed!!!");
+            Debug.LogWarning("####API-UserInventory Is Empty!!!");
         SavedUserInventory(response.Body.UserInventory);
-        _userDatabase.APIUpdateUserInventory(response.Body.UserInventory);
+        _userDatabase.UpdateUserInventory(response.Body.UserInventory);
         _gameLoadHelper.LoadingThumbsUp();
-    }
-    private void SavedUserInventory(List<UserItem> userInventory)
-    {
-        _oldUserInventory.Clear();
-        userInventory.ForEach((item) =>
-        {
-            _oldUserInventory.Add(new UserItem(item));
-        });
     }
     private void ReadUserCharactersJson(string result)
     {
@@ -307,13 +252,12 @@ public class ApiGatewayConfig : MonoBehaviour
             Debug.LogWarning("####API--UserCharacters Is Empty!!!");
         _userDatabase.UpdateUserCharacters(response.Body.UserCharacters);
         _gameLoadHelper.LoadingThumbsUp();
-        ForthWave();
     }
     private void ReadCharacterResearchesJson(string result)
     {
         var response = TranslateResponse(result);
         if (response.Body.CharacterResearches.Count == 0)
-            throw new Exception("API-CharacterResearches Failed!!!");
+            Debug.LogWarning("####API--CharacterResearches Is Empty!!!");
         _userDatabase.UpdateCharacterResearches(response.Body.CharacterResearches);
         _gameLoadHelper.LoadingThumbsUp();
     }
@@ -325,27 +269,52 @@ public class ApiGatewayConfig : MonoBehaviour
         _userDatabase.UpdateUserRecipes(response.Body.UserRecipes);
         _gameLoadHelper.LoadingThumbsUp();
     }
-    #endregion
-    #region ForthWave
-    private void ForthWave()
+    private void ReadCharacterSettingJson(string result)
     {
-        //Call CharacterSetting
-        string apiGate = "GetCharacterSetting";
-        string uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", "11");
-        StartCoroutine(GetRequest(uri, ReadCharacterSettingJson));
+        var response = TranslateResponse(result);
+        if (response.Body.CharacterSetting.Id == 0)
+            Debug.LogWarning("####API-CharacterSetting Is Empty!!!");
+        _userDatabase.UpdateCharacterSetting(response.Body.CharacterSetting);
+        _gameLoadHelper.LoadingThumbsUp();
+    }
+    private void ReadUserPlayerJson(string result)
+    {
+        var response = TranslateResponse(result);
+        if (response.Body.UserPlayer == null)
+            Debug.LogWarning("####API-UserPlayer Is Empty!!!");
+        if (_userDatabase.UpdateUserPlayer(response.Body.UserPlayer))
+            _gameLoadHelper.LoadingThumbsUp();
+        var characterManager = Resources.Load<GameObject>("Prefabs/CharacterManager");
+        Instantiate(characterManager);
+        var musicBox = Resources.Load<GameObject>("Prefabs/MusicBox");
+        Instantiate(musicBox);
+        var cache = Resources.Load<GameObject>("Prefabs/Cache");
+        Instantiate(cache);
     }
     #endregion
     #region Updates
-    internal void SaveUserPlayer(UserPlayer userPlayer, int days)
+    private void SavedUserInventory(List<UserItem> userInventory)
     {
-        var healthCheck =userPlayer.CalculateHealthCheck();
+        _oldUserInventory.Clear();
+        userInventory.ForEach((item) =>
+        {
+            _oldUserInventory.Add(new UserItem(item));
+        });
+    }
+    internal void SaveUserPlayer(UserPlayer userPlayer)
+    {
+        //mins is the minutes that the user should stay locked 
         var apiGate = "GetUserPlayer";
         var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", userPlayer.Id.ToString());
+        var action = "Update";
+        if (userPlayer.Latitude == 0 && userPlayer.Longitude == 0)
+        {
+            action = "Insert";
+            _terrainDatabase.SetRegion(userPlayer.Latitude, userPlayer.Longitude);
+        }
         ApiRequest ap = new ApiRequest
         {
-            Action = "UpdateUserPlayer",
-            HealthCheck = healthCheck,
-            Time = days,
+            Action = action,
             UserPlayer = userPlayer
         };
         StartCoroutine(PutRequest(uri, ap));
@@ -512,10 +481,10 @@ public class ApiGatewayConfig : MonoBehaviour
     private ApiResponse TranslateResponse(string result)
     {
         ApiResponse response = JsonUtility.FromJson<ApiResponse>(result);
-        if (response == null) throw new ArgumentNullException("Api Response is null");
+        if (response == null) throw new ArgumentNullException("API Response is null");
         return response;
     }
-    private IEnumerator GetRequest(string uri,System.Action<string> callback)
+    private IEnumerator GetRequest(string uri,Action<string> callback)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(uri))
         {
@@ -526,6 +495,7 @@ public class ApiGatewayConfig : MonoBehaviour
                 result = request.error;
             else
                 result = request.downloadHandler.text;
+            print(result);
             callback(result);
         }
     }

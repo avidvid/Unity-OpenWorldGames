@@ -49,7 +49,7 @@ public class UserPlayer  {
     public float Longitude;
     public int Gem;
     public string LastLogin;
-    public string LockUntil;
+    public int LockUntil;
     public UserPlayer.PlayerRanks Rank;
     public int PRank;
     public int ClanId;
@@ -59,57 +59,25 @@ public class UserPlayer  {
     public bool GLoggedIn;
     public bool IsEnable;
 
-    public UserPlayer(int id = -1, 
-                string userName = null, string description = null, float soundVolume =0,
-                float latitude = 0, float longitude = 0,
-                float baseLatitude = 0, float baseLongitude = 0, 
-                int gem = 0,
-                string lastLogin = "",
-                string lockUntil = "",
-                UserPlayer.PlayerRanks rank = 0, int pRank = 0, int clanId = 0, UserPlayer.ClanRanks clanRank = 0,
-                bool fb = false, string fbId = null,
-                bool g = false, bool isEnable = true)
+    public UserPlayer(string userName, string description)
     {
-        Id = id;
+        Id = UnityEngine.Random.Range(0, 1999999999);
         UserName = userName;
         Description = description;
-        SoundVolume = soundVolume;
-        Latitude = latitude;
-        Longitude = longitude;
-        Gem = gem;
-        LastLogin = lastLogin;
-        LockUntil = lockUntil;
-        Rank = rank;
-        PRank = pRank;
-        ClanId = clanId;
-        ClanRank = clanRank;
-        FBLoggedIn = fb;
-        FBid = fbId;
-        GLoggedIn = g;
-        IsEnable = isEnable;
-    }
-    public UserPlayer(UserPlayer userPlayer)
-    {
-        Id = userPlayer.Id;
-        UserName = userPlayer.UserName;
-        Description = userPlayer.Description;
-        SoundVolume = userPlayer.SoundVolume;
-        Latitude = userPlayer.Latitude;
-        Longitude = userPlayer.Longitude;
-        Gem = userPlayer.Gem;
-        LastLogin = userPlayer.LastLogin;
-        LockUntil = userPlayer.LockUntil;
-        Rank = userPlayer.Rank;
-        PRank = userPlayer.PRank;
-        ClanId = userPlayer.ClanId;
-        ClanRank = userPlayer.ClanRank;
-        FBLoggedIn = userPlayer.FBLoggedIn;
-        FBid = userPlayer.FBid;
-        GLoggedIn = userPlayer.GLoggedIn;
-        IsEnable = userPlayer.IsEnable;
-    }
-    public UserPlayer()
-    {
+        SoundVolume = 0.5f;
+        Latitude = 0;
+        Longitude = 0;
+        Gem = 5;
+        LastLogin = "";
+        LockUntil = 0;
+        Rank = 0;
+        PRank = 0;
+        ClanId = 0;
+        ClanRank = 0;
+        FBLoggedIn = false;
+        FBid = "Facebook";
+        GLoggedIn = false;
+        IsEnable = true;
     }
     #region Print
     internal void Print()
@@ -118,16 +86,23 @@ public class UserPlayer  {
     }
     internal string MyInfo()
     {
-        return Id + "-" + UserName + 
-               " Rank =" + Rank + 
-               "(" + Latitude + "," + Longitude + ")"+
-               " Gem=" + Gem +
-               " FBLoggedIn=" + FBLoggedIn +
-               " FBid=" + FBid +
-               " Description=" + Description +
-               " SoundVolume=" + SoundVolume +
-               " LastLogin=" + LastLogin +
-               " LockUntil=" + LockUntil; 
+        try
+        {
+            return Id + "-" + UserName +
+                   " Rank =" + Rank +
+                   "(" + Latitude + "," + Longitude + ")" +
+                   " Gem=" + Gem +
+                   " FBLoggedIn=" + FBLoggedIn +
+                   " FBid=" + FBid +
+                   " Description=" + Description +
+                   " SoundVolume=" + SoundVolume +
+                   " LastLogin=" + LastLogin +
+                   " LockUntil=" + LockUntil;
+        }
+        catch (Exception e)
+        {
+            return "Empty UserPlayer";
+        }
     }
     #endregion
     #region HealthCheck

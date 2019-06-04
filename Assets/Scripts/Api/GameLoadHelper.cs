@@ -17,12 +17,6 @@ public class GameLoadHelper : MonoBehaviour
     {
         if (_slider.value >= _slider.maxValue)
         {
-            var characterManager = Resources.Load<GameObject>("Prefabs/CharacterManager");
-            Instantiate(characterManager);
-            var musicBox = Resources.Load<GameObject>("Prefabs/MusicBox");
-            Instantiate(musicBox);
-            var cache = Resources.Load<GameObject>("Prefabs/Cache");
-            Instantiate(cache);
             SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
             print("***###*** Welcome ***###***");
         }

@@ -49,34 +49,43 @@ public class UserDatabase : MonoBehaviour
     {
         return _userPlayer;
     }
-    public void SaveUserPlayer(UserPlayer userPlayer, int days)
+    public void SaveUserPlayer(UserPlayer userPlayer)
     {
-        _apiGatewayConfig.SaveUserPlayer(userPlayer, days);
+        _apiGatewayConfig.SaveUserPlayer(userPlayer);
     }
     public bool UpdateUserPlayer(UserPlayer userPlayer)
     {
         _userPlayer = userPlayer;
+        //Todo: new user work starts here 
         if (_userPlayer == null)
         {
-            //todo: Unknown path
-            print("UserPlayer is empty");
+            //throw new Exception("UDB-User Player doesn't Exists!!!");
             GoToStartScene();
             return false;
             //throw new Exception("UDB-User Player doesn't Exists!!!");
         }
-        _userPlayer.Print();
+        if (_characterSetting == null)
+        {
+            //Unknown path
+            throw new Exception("UDB-Character Setting doesn't Exists!!!");
+            print("CharacterSetting is empty");
+            GoToStartScene();
+            return false;
+            //throw new Exception("UDB-Character Setting doesn't Exists!!!");
+        }
         _terrainDatabase.SetRegion(_userPlayer.Latitude, _userPlayer.Longitude);
-        if (Convert.ToDateTime(_userPlayer.LastLogin) < Convert.ToDateTime(_userPlayer.LockUntil))
+        if (Convert.ToDateTime(_userPlayer.LastLogin) < DateTime.Now.AddMinutes(_userPlayer.LockUntil))
         {
             //todo: Unknown path
-            print("UserPlayer is Locked now = " + Convert.ToDateTime(_userPlayer.LastLogin) + "now = " + Convert.ToDateTime(_userPlayer.LockUntil)  );
+            print("UserPlayer is Locked now = " + Convert.ToDateTime(_userPlayer.LastLogin) + "LockUntil = " + DateTime.Now.AddMinutes(_userPlayer.LockUntil));
             GoToWaitScene();
         }
+        _userPlayer.Print();
         return true;
     }
     #endregion
     #region UserInventory
-    public void APIUpdateUserInventory(List<UserItem> userInventory)
+    public void UpdateUserInventory(List<UserItem> userInventory)
     {
         _userInventory = userInventory;
         Debug.Log("UDB-UserInventory.Count = " + _userInventory.Count);
@@ -314,14 +323,6 @@ public class UserDatabase : MonoBehaviour
     public void UpdateCharacterSetting(CharacterSetting characterSetting)
     {
         _characterSetting = characterSetting;
-        if (_characterSetting == null)
-        {
-            //Unknown path
-            print("CharacterSetting is empty");
-            GoToStartScene();
-            return;
-            //throw new Exception("UDB-Character Setting doesn't Exists!!!");
-        }
         _characterSetting.Print();
     }
     #endregion

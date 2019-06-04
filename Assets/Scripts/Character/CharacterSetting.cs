@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using JetBrains.Annotations;
 using UnityEngine;
 
 
@@ -52,106 +49,31 @@ public class CharacterSetting {
     public float Bravery;
     public float Charming;
 
-    public CharacterSetting(int id = -1, int userId = -1, int characterId = -1, string name = null,
-        int level = 0,  bool updated = true,  bool isEnable = true, 
-        bool fightMode = false, bool alive = true,
-        int life = 0, int coin = 100,
-        int experience = 0, int maxExperience = 0, int handsCnt = 2, 
-        int maxHealth = 0,  int health = 0, int maxMana = 0, int mana = 0, int maxEnergy = 0,int energy = 0, 
-        float attackSpeed = 0, float defenseSpeed = 0, float abilityAttack = 0, float abilityDefense = 0,
-        float magicAttack = 0, float magicDefense = 0, float poisonAttack = 0, float poisonDefense = 0, 
-        Character.Elements element = 0,float carry = 0, int carryCnt = 0,
-        float speed = 0, float intellect = 0, float agility = 0, float strength = 0, float stamina = 0,
-        float crafting = 0, float researching = 0, float bravery = 0, float charming = 0)
+    public CharacterSetting(int userId, int characterId, string name)
     {
-        Id = id;
+        Id = UnityEngine.Random.Range(0, 1999999999);
         UserId = userId;
         CharacterId = characterId;
         Name = name;
-        Level = level;
-        Life = life;
-        Updated = updated;
+        Level = 0;
+        Life = 0;
+        Updated = true;
         LastUpdated = DateTime.Now.ToString(CultureInfo.InvariantCulture);
-        IsEnable = isEnable;
-        FightMode = fightMode;
-        Alive = alive;
-        Coin = coin;
-        Experience = experience;
-        MaxExperience = maxExperience;
-        HandsCnt = handsCnt;
-        MaxHealth = maxHealth;
-        Health = health;
-        MaxMana = maxMana;
-        Mana = mana;
-        MaxEnergy = maxEnergy;
-        Energy = energy;
-        SpeedAttack = attackSpeed;
-        SpeedDefense = defenseSpeed;
-        AbilityAttack = abilityAttack;
-        AbilityDefense = abilityDefense;
-        MagicAttack = magicAttack;
-        MagicDefense = magicDefense;
-        PoisonAttack = poisonAttack;
-        PoisonDefense = poisonDefense;
-        Element = element;
-        Carry = carry;
-        CarryCnt = carryCnt;
-        Agility = agility;
-        Bravery = bravery;
-        Charming = charming;
-        Intellect = intellect;
-        Crafting = crafting;
-        Researching = researching;
-        Speed = speed;
-        Stamina = stamina;
-        Strength = strength;
-    }
-    public CharacterSetting()
-    {
-        Id = -1;
-    }
-    public CharacterSetting(CharacterSetting characterSetting)
-    {
-        Id = characterSetting.Id;
-        UserId = characterSetting.UserId;
-        CharacterId = characterSetting.CharacterId;
-        Name = characterSetting.Name;
-        Level = characterSetting.Level;
-        Life = characterSetting.Life;
-        Updated = characterSetting.Updated;
-        LastUpdated = characterSetting.LastUpdated;
-        IsEnable = characterSetting.IsEnable;
-        FightMode = characterSetting.FightMode;
-        Alive = characterSetting.Alive;
-        Coin = characterSetting.Coin;
-        Experience = characterSetting.Experience;
-        MaxExperience = characterSetting.MaxExperience;
-        HandsCnt = characterSetting.HandsCnt;
-        MaxHealth = characterSetting.MaxHealth;
-        Health = characterSetting.Health;
-        MaxMana = characterSetting.MaxMana;
-        Mana = characterSetting.Mana;
-        MaxEnergy = characterSetting.MaxEnergy;
-        Energy = characterSetting.Energy;
-        SpeedAttack = characterSetting.SpeedAttack;
-        SpeedDefense = characterSetting.SpeedDefense;
-        AbilityAttack = characterSetting.AbilityAttack;
-        AbilityDefense = characterSetting.AbilityDefense;
-        MagicAttack = characterSetting.MagicAttack;
-        MagicDefense = characterSetting.MagicDefense;
-        PoisonAttack = characterSetting.PoisonAttack;
-        PoisonDefense = characterSetting.PoisonDefense;
-        Agility = characterSetting.Agility;
-        Bravery = characterSetting.Bravery;
-        Carry = characterSetting.Carry;
-        CarryCnt = characterSetting.CarryCnt;
-        Charming = characterSetting.Charming;
-        Intellect = characterSetting.Intellect;
-        Crafting = characterSetting.Crafting;
-        Researching = characterSetting.Researching;
-        Speed = characterSetting.Speed;
-        Stamina = characterSetting.Stamina;
-        Strength = characterSetting.Strength;
+        IsEnable = true;
+        FightMode = false;
+        Alive = true;
+        Coin = 100;
+        Experience = MaxExperience = 0;
+        HandsCnt = 2;
+        MaxHealth =Health = 0;
+        MaxMana = Mana = 0;
+        MaxEnergy = Energy = 0;
+        SpeedAttack = SpeedDefense = 0;
+        AbilityAttack = AbilityDefense = MagicAttack = 0;
+        MagicDefense = PoisonAttack = PoisonDefense = 0;
+        Element = 0;
+        Carry = CarryCnt = 0;
+        Agility = Bravery = Charming = Intellect = Crafting = Researching = Speed = Stamina = Strength = 0;
     }
     internal void Print()
     {
@@ -159,13 +81,20 @@ public class CharacterSetting {
     }
     internal string MyInfo()
     {
-        return Id + "-" + Name + " (" + Level + ")"
-               + " Energy:" + Energy
-               + " Health:" + Health
-               + " Coin:" + Coin
-               + " Mana:" + Mana
-               + " Intellect:" + Intellect
-            ;
+        try
+        {
+            return Id + "-" + Name + " (" + Level + ")"
+                   + " Energy:" + Energy
+                   + " Health:" + Health
+                   + " Coin:" + Coin
+                   + " Mana:" + Mana
+                   + " Intellect:" + Intellect
+                ;
+        }
+        catch (Exception e)
+        {
+            return "Empty CharacterSetting";
+        }
     }
     internal Sprite GetSpellSprite()
     {

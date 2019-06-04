@@ -22,51 +22,52 @@ De active face rec
 #### Home #####
 ###############
 
+Fix the character setting save API 
+
+Check path lock until 
+
+Clan up the names of lambda and api
+
+change back up file for OUP to not go to drive one 
+http://zikmund.me/blog/changing-default-project-directory-visual-studio-2017/
+
+
+APi Weather: https://www.red-gate.com/simple-talk/dotnet/c-programming/calling-restful-apis-unity3d/
+device id or email to be saved in userplayer
+
+inside monster on walk not passing the walls
+	
+	
+
+
 ###############
 ####Office#####
 ###############	
+change color of message from white to black 
+
+New User start check 
+
+Story writing phase
+
+Gift phase : 	Gift recepie and characters 
+
 https://chicagophotos.shutterbooth.com/May-2019
 http://leatherbonding.com/
-
------
-internal void PutUserInventory(List<UserItem> userInventory)
-logic has flaw
-
-
-User inventory API
- public void UpdateInventory() calls couple times 
-Fix Choices option in ostore page 
-
-
-ReadUserInventoryJson should accept zero and nor error => warning 
-
-{
-  "Id": 307688315,
-  "ItemId": 3001,
-  "MixTime": "05/31/2019 09:20:28",
-  "StackCnt": 2,
-  "UserId": 22
-}
-
-
-	RSVP: https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019
+https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019
 	https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019/registry
-	
-	
-Start Save Part in nodejs projects
+-----
 
-	device id or email to be saved in userplayer
+
 	
-	
-	
-	
-	change back up file for OUP to not go to drive one 
-	http://zikmund.me/blog/changing-default-project-directory-visual-studio-2017/
 	
 	
 ###############
 #### Data #####
 ###############	
+
+Req Test: 
+{"Action":"Update","UserPlayer":{"Id":0,"UserName":"","Description":"","SoundVolume":0.0,"Latitude":0.0,"Longitude":0.0,"Gem":0,"LastLogin":"","LockUntil":"","Rank":0,"PRank":0,"ClanId":0,"ClanRank":0,"FBLoggedIn":false,"FBid":"","GLoggedIn":false,"IsEnable":false},"CharacterSetting":{"Id":-1,"UserId":0,"CharacterId":0,"Name":"","Level":0,"Updated":false,"LastUpdated":"","IsEnable":false,"FightMode":false,"Alive":false,"Life":0,"Coin":0,"Experience":0,"MaxExperience":0,"HandsCnt":0,"MaxHealth":0,"Health":0,"MaxMana":0,"Mana":0,"MaxEnergy":0,"Energy":0,"SpeedAttack":0.0,"SpeedDefense":0.0,"AbilityAttack":0.0,"AbilityDefense":0.0,"MagicAttack":0.0,"MagicDefense":0.0,"PoisonAttack":0.0,"PoisonDefense":0.0,"Element":0,"Carry":0.0,"CarryCnt":0,"Speed":0.0,"Intellect":0.0,"Agility":0.0,"Strength":0.0,"Stamina":0.0,"Crafting":0.0,"Researching":0.0,"Bravery":0.0,"Charming":0.0},"CharacterMixture":{"Id":0,"UserId":0,"ItemId":0,"StackCnt":0,"MixTime":""},"CharacterResearching":{"Id":0,"UserId":0,"ResearchId":0,"Level":0,"ResearchTime":""},"CharacterResearch":{"Id":0,"UserId":0,"ResearchId":0,"Level":0},"UserCharacter":{"Id":0,"CharacterId":0,"UserId":0,"CharacterCode":""},"UserRecipe":{"Id":0,"RecipeId":0,"UserId":0,"RecipeCode":""},"UserInventory":{"Id":5,"UserId":22,"ItemId":2001,"StackCnt":3,"Equipped":false,"Stored":false,"Order":1,"TimeToUse":1},"Time":0,"Code":"","HealthCheck":0}
+
 
 {"Action":"Insert",
 "UserRecipe":{"Id":22,"UserId":22,"RecipeId":104,"RecipeCode": "1111"},"HealthCheck":0}
@@ -105,8 +106,6 @@ CharacterResearching
 Req body :
 {"header":"OUP","UserPlayer":{"Id":22,"UserName":"Avid30","Description":"Developer Tested","SoundVolume":0.01216695737093687,"Latitude":30.267200469970704,"Longitude":-97.84310150146485,"Gem":1530,"HealthCheck":6172,"Rank":0,"PRank":0,"ClanId":-1,"ClanRank":0,"FBLoggedIn":true,"FBid":"10213815927848642","GLoggedIn":false,"IsEnable":true}}
 
-
-
 {
     "id" : "$input.params('id')",
     "all-params": "$input.params()",
@@ -128,43 +127,9 @@ Items:
 
 
 	
-	
-	
-	
-
-
-	APi Weather: https://www.red-gate.com/simple-talk/dotnet/c-programming/calling-restful-apis-unity3d/
-
-
-
-
-	
-
-
-	
-	
-
-
-
-null value:	
-	<?xml version="1.0" encoding="Windows-1252"?>
-<CharacterResearching xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:nil="true" />
-	
-
-	
-	
-	
-For jobScheduler : Crown generator	http://www.cronmaker.com/
-	 
-	
-	
-
-	inside monster on walk not passing the walls
-	ScriptTextHandler ????
-	
-	
-	Gift phase : 	Gift recepie and characters 
-	Story writing phase
+###############
+#### Plan #####
+###############	
 	
 Before lunch part:
 	Fb phase
@@ -184,10 +149,7 @@ Before lunch part:
 		Logic of moving in the ranks
 		Rank calculation 	for each 10 in a row kill equal or higher rank get an ubgrade for each 5 in a row lose decend a rank 
 	
-	
-	second messages inthe shop scene get lost (make it like message board in the main terrain )
-	
-	
+		
 	Character ellemnt phase
 	
 

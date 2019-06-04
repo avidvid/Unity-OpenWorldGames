@@ -251,7 +251,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 3
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -281,7 +281,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 243160231}
-  - component: {fileID: 243160232}
   m_Layer: 5
   m_Name: MenuCharacter
   m_TagString: Untagged
@@ -312,18 +311,6 @@ RectTransform:
   m_AnchoredPosition: {x: -7.8, y: 8}
   m_SizeDelta: {x: 505.7, y: 370.8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &243160232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243160230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4562c091d66bf0445bd873ad2f94125a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &255182165
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,10 +448,10 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Character name
+  m_text: character Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: f4e195ac1e204eff960149d1cb34e18c, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: aff57a1bd367f7941b006a08967e8e5f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -624,7 +611,7 @@ MonoBehaviour:
   m_text: About you
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: f4e195ac1e204eff960149d1cb34e18c, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: aff57a1bd367f7941b006a08967e8e5f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -733,7 +720,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 591269072}
-  - component: {fileID: 591269073}
   m_Layer: 5
   m_Name: MenuUser
   m_TagString: Untagged
@@ -764,18 +750,6 @@ RectTransform:
   m_AnchoredPosition: {x: -7.8000183, y: 7.9999695}
   m_SizeDelta: {x: 505.7, y: 370.8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &591269073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 591269071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4562c091d66bf0445bd873ad2f94125a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &685424908
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,8 +786,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: -136.3}
-  m_SizeDelta: {x: 132, y: 72.4}
+  m_AnchoredPosition: {x: 0.0000081062, y: -141.6}
+  m_SizeDelta: {x: 142.6, y: 61.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &685424910
 MonoBehaviour:
@@ -855,7 +829,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 243160232}
+      - m_Target: {fileID: 1987202270}
         m_MethodName: StartTheGame
         m_Mode: 1
         m_Arguments:
@@ -1024,7 +998,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 243160232}
+      - m_Target: {fileID: 1987202270}
         m_MethodName: NavigateRight
         m_Mode: 1
         m_Arguments:
@@ -1213,7 +1187,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 3
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -1486,8 +1460,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.5000372, y: 17.899996}
-  m_SizeDelta: {x: 7.0999985, y: 9.900002}
+  m_AnchoredPosition: {x: -0.000034332275, y: -0.000005722046}
+  m_SizeDelta: {x: -0.000022888, y: -0.0000038147}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1070484318
 MonoBehaviour:
@@ -1537,7 +1511,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 68.05
+  m_fontSize: 58.75
   m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1575,7 +1549,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0.00000036266874, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 0}
     characterCount: 4
@@ -1697,7 +1671,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 64.95
+  m_fontSize: 58.1
   m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1911,7 +1885,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 3
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -2330,7 +2304,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 243160232}
+      - m_Target: {fileID: 1987202270}
         m_MethodName: NavigateLeft
         m_Mode: 1
         m_Arguments:
@@ -2927,7 +2901,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 3
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -3147,7 +3121,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.5, y: -154.2}
+  m_AnchoredPosition: {x: 0.0000021458, y: -141}
   m_SizeDelta: {x: 124.9, y: 62.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1925248034
@@ -3190,7 +3164,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 591269073}
+      - m_Target: {fileID: 1987202270}
         m_MethodName: CreateUser
         m_Mode: 1
         m_Arguments:
@@ -3253,6 +3227,7 @@ GameObject:
   - component: {fileID: 1987202267}
   - component: {fileID: 1987202266}
   - component: {fileID: 1987202269}
+  - component: {fileID: 1987202270}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -3361,6 +3336,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &1987202270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987202264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4562c091d66bf0445bd873ad2f94125a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6641774566781875121
 PrefabInstance:
   m_ObjectHideFlags: 0

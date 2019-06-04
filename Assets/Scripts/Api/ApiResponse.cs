@@ -34,12 +34,12 @@ public class BodyResponse
     public List<InsideStory> InsideStories;
 
     public UserPlayer UserPlayer;
+    public CharacterSetting CharacterSetting;
     public List<UserItem> UserInventory;
     public List<UserCharacter> UserCharacters;
     public CharacterMixture CharacterMixture;
     public List<CharacterResearch> CharacterResearches;
     public CharacterResearching CharacterResearching;
-    public CharacterSetting CharacterSetting;
     public List<UserRecipe> UserRecipes;
     public UserRecipe UserRecipe;
     public UserCharacter UserCharacter;
@@ -61,13 +61,13 @@ public class BodyResponse
         if (Elements.Count != 0) info += " Elements=" + Elements.Count;
         if (InsideStories.Count != 0) info += " InsideStories=" + InsideStories.Count;
         
-        if (UserPlayer.Id != 0) info += " UserPlayer=" + UserPlayer.MyInfo();
+        if (UserPlayer!=null) info += " UserPlayer=" + UserPlayer.MyInfo();
         if (UserInventory.Count != 0) info += " UserInventory=" + UserInventory.Count;
         if (UserCharacters.Count != 0) info += " UserCharacters=" + UserCharacters.Count;
-        if (CharacterMixture.Id != 0 ) info += " CharacterMixture=" + CharacterMixture.MyInfo();
+        if (CharacterMixture.Id != 0) info += " CharacterMixture=" + CharacterMixture.MyInfo();
         if (CharacterResearches.Count != 0) info += " CharacterResearches=" + CharacterResearches.Count;
         if (CharacterResearching.Id != 0) info += " CharacterResearching=" + CharacterResearching.MyInfo();
-        if (CharacterSetting.Id != -1) info += " CharacterSetting=" + CharacterSetting.MyInfo();
+        if (CharacterSetting.Id != 0) info += " CharacterSetting=" + CharacterSetting.MyInfo();
         if (UserRecipes.Count != 0) info += " UserRecipes=" + UserRecipes.Count;
         return info;
     }

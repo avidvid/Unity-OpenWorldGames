@@ -63,6 +63,7 @@ public class TerrainDatabase : MonoBehaviour {
     }
     internal void SetRegion(float latitude, float longitude)
     {
+        _region = _regions[0];
         for (int i = 0; i < _regions.Count; i++)
             if (Mathf.Abs(_regions[i].Latitude - latitude) < 10 && Mathf.Abs(_regions[i].Longitude - longitude) < 10)
             {

@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class StartGameHandler : MonoBehaviour {
 
     private CharacterManager _characterManager;
+    private MessagePanelHandler _messagePanelHandler;
     private UserPlayer _userPlayer;
     private int _selection;
     private Character _selectedCharacter;
@@ -29,12 +30,13 @@ public class StartGameHandler : MonoBehaviour {
     void Awake()
     {
         _characterManager = CharacterManager.Instance();
+        _messagePanelHandler = MessagePanelHandler.Instance();
         _menuCharacter = GameObject.Find("MenuCharacter");
         _menuUser = GameObject.Find("MenuUser");
     }
 
     void Start () {
-        if (_characterManager.UserPlayer.Id == -1)
+        if (_characterManager.UserPlayer==null)
         {
             _menuCharacter.SetActive(false);
             _menuUser.SetActive(true);
@@ -44,7 +46,7 @@ public class StartGameHandler : MonoBehaviour {
             _name = GameObject.Find("InputField").GetComponent<TMP_InputField>();
             if (_name == null)
                 throw new Exception("_name is null");
-        } else if (_characterManager.CharacterSetting.Id == -1 || !_characterManager.CharacterSetting.Alive )
+        } else if (_characterManager.CharacterSetting.Id == 0 || !_characterManager.CharacterSetting.Alive )
             ActivateCharacterMenu();
         else
             SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
@@ -97,15 +99,13 @@ public class StartGameHandler : MonoBehaviour {
     {
         if (!ValidateText(_name.text))
             return;
-        Debug.Log("Creating New CharacterSetting");
-
+        Debug.Log("Creating a New CharacterSetting");
         _characterManager.CharacterSetting = 
-                new CharacterSetting(11, 
-                    _characterManager.UserPlayer.Id,
+                new CharacterSetting(_characterManager.UserPlayer.Id,
                     _selectedCharacter.Id, 
                     _name.text);
+        _characterManager.SetMyCharacter(_characterManager.CharacterSetting.CharacterId);
         _characterManager.LevelCalculations();
-        //_characterManager.InitInventory();
         SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
     }
 
@@ -113,23 +113,26 @@ public class StartGameHandler : MonoBehaviour {
     {
         if (!ValidateText(_name.text))
             return;
-        if (!ValidateText(_desc.text))
+        if (!ValidateText(_desc.text,100))
             return;
         Debug.Log("Create New UserPlayer");
-        _characterManager.UserPlayer = new UserPlayer(22, _name.text, _desc.text);
-        //Save
-        //_characterManager.SaveUserPlayer();
-
+        _characterManager.UserPlayer = new UserPlayer(_name.text, _desc.text);
+        _characterManager.SaveUserPlayer();
         SceneManager.LoadScene(SceneSettings.SceneIdForStart );
     }
 
-    private bool ValidateText(string str)
+    private bool ValidateText(string str,int maxLength = 12)
     {
         if (str.Length < 3)
+        {
+            _messagePanelHandler.ShowMessage(str + " is a bit too short !!!  ", MessagePanel.PanelType.Ok);
             return false;
-        if (str.Length > 12)
+        }
+        if (str.Length > maxLength)
+        {
+            _messagePanelHandler.ShowMessage(str + " is a bit too Long (less than "+ maxLength + ") !!!  ", MessagePanel.PanelType.Ok);
             return false;
+        }
         return true;
     }
-
 }

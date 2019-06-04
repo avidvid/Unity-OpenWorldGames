@@ -45,7 +45,7 @@ public class CharacterManager : MonoBehaviour
         {
             _characterManager = FindObjectOfType(typeof(CharacterManager)) as CharacterManager;
             if (!_characterManager)
-                Debug.LogError("There needs to be one active ItemDatabase script on a GameObject in your scene.");
+                Debug.LogError("There needs to be one active CharacterManager script on a GameObject in your scene.");
         }
         return _characterManager;
     }
@@ -65,13 +65,16 @@ public class CharacterManager : MonoBehaviour
         Debug.Log("***CM*** Start!");
         //UserPlayer
         UserPlayer = _userDatabase.GetUserPlayer();
-        Debug.Log("CM-UserPlayer = " + UserPlayer.MyInfo());
+        if (UserPlayer!=null)
+            Debug.Log("CM-UserPlayer = " + UserPlayer.MyInfo());
         //CharacterSetting
         CharacterSetting = _userDatabase.GetCharacterSetting();
-        Debug.Log("CM-CharacterSetting = " + CharacterSetting.MyInfo());
+        if (CharacterSetting.Id !=0)
+        {
+            Debug.Log("CM-CharacterSetting = " + CharacterSetting.MyInfo());
+            SetMyCharacter(CharacterSetting.CharacterId);
+        }
         //Character
-        MyCharacter = _characterDatabase.GetCharacterById(CharacterSetting.CharacterId);
-        Debug.Log("CM-MyCharacter = " + MyCharacter.MyInfo());
         MyCharacters = _userDatabase.GetMyCharacters();
         MyUserCharacters = _userDatabase.GetMyUserCharacters();
         Debug.Log("CM-UserCharacters.Count = " + MyCharacters.Count);
@@ -89,18 +92,28 @@ public class CharacterManager : MonoBehaviour
         InitUserInventory();
         Debug.Log("CharacterInventory.Count = " + CharacterInventory.Count);
         CharacterMixture = _userDatabase.GetCharacterMixture();
-        LoginCalculations();
+        if (CharacterSetting.Id != 0)
+            LoginCalculations();
     }
+
+    internal void SetMyCharacter(int characterId)
+    {
+        MyCharacter = _characterDatabase.GetCharacterById(characterId);
+        Debug.Log("CM-MyCharacter = " + MyCharacter.MyInfo());
+    }
+
     void Update()
     {
         //Refresh User stats Health Mana Energy Level
         if (Time.time > _nextActionTime)
         {
-            if (CharacterSettingHealthCheck())
-                throw new Exception("CM-Character Setting Health Check Failed!!!");
+            print("Executed Increase Health Mana Energy next time =" + _nextActionTime);
             float period = 100 - CharacterSetting.Level;
             _nextActionTime += period;
-            print("Executed Increase Health Mana Energy next time =" + _nextActionTime);
+            if (CharacterSetting.Id == 0)
+                return;
+            if (CharacterSettingHealthCheck())
+                throw new Exception("CM-Character Setting Health Check Failed!!!");
             if (CharacterSetting.Energy < CharacterSetting.MaxEnergy)
                 CharacterSetting.Energy += 100;
             if (CharacterSetting.Health < CharacterSetting.MaxHealth)
@@ -111,7 +124,7 @@ public class CharacterManager : MonoBehaviour
             SaveCharacterSetting();
         }
         //Level Up
-        if (CharacterSetting.Experience >= CharacterSetting.MaxExperience)
+        if (CharacterSetting.Experience >= CharacterSetting.MaxExperience && CharacterSetting.MaxExperience>0)
         {
             StartCoroutine(LevelUpFadeInOut());
             CharacterSetting.Experience -= CharacterSetting.MaxExperience;
@@ -513,7 +526,7 @@ public class CharacterManager : MonoBehaviour
     }
     internal void LevelCalculations()
     {
-        if (MyCharacter.Id == -1)
+        if (MyCharacter==null)
             MyCharacter = _characterDatabase.GetCharacterById(CharacterSetting.CharacterId);
         //Logic Should be align with MonsterIns: MonsterIns()
         var level = CharacterSetting.Level;
@@ -660,7 +673,8 @@ public class CharacterManager : MonoBehaviour
     //Middle man to CharacterDatabase
     internal void SetLockTill(int minutes=0)
     {
-        SaveUserPlayer(minutes);
+        UserPlayer.LockUntil = minutes;
+        SaveUserPlayer();
     }
     internal void SetFacebookLoggedIn(bool status,string id=null)
     {
@@ -684,9 +698,9 @@ public class CharacterManager : MonoBehaviour
     {
         _userDatabase.SaveCharacterSetting();
     }
-    public void SaveUserPlayer(int days = 0)
+    public void SaveUserPlayer()
     {
-        _userDatabase.SaveUserPlayer(UserPlayer,days);
+        _userDatabase.SaveUserPlayer(UserPlayer);
     }
     public void SaveCharacterResearching(int researchId, int level, DateTime durationMinutes)
     {
