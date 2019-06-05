@@ -21,8 +21,9 @@ De active face rec
 ###############
 #### Home #####
 ###############
+Bug: 
+Old path to get the user goes to start page !! 
 
-Fix the character setting save API 
 
 Check path lock until 
 

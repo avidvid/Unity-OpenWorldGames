@@ -121,7 +121,7 @@ public class CharacterManager : MonoBehaviour
             if (CharacterSetting.Mana < CharacterSetting.MaxMana)
                 CharacterSetting.Mana += 1;
             CharacterSetting.Updated = true;
-            SaveCharacterSetting();
+            SaveCharacterSetting(CharacterSetting);
         }
         //Level Up
         if (CharacterSetting.Experience >= CharacterSetting.MaxExperience && CharacterSetting.MaxExperience>0)
@@ -287,7 +287,7 @@ public class CharacterManager : MonoBehaviour
         }
         CharacterSetting.Updated = true;
         if (save)
-            SaveCharacterSetting();
+            SaveCharacterSetting(CharacterSetting);
     }
     public string CharacterSettingUseItem(ItemIns itemIns, bool save)
     {
@@ -369,7 +369,7 @@ public class CharacterManager : MonoBehaviour
                 return message;
         }
         if (save)
-            SaveCharacterSetting();
+            SaveCharacterSetting(CharacterSetting);
         return message;
     }
     #endregion
@@ -504,7 +504,7 @@ public class CharacterManager : MonoBehaviour
                 throw new Exception("No field for AddCharacterSetting ");
         }
         if (save)
-            SaveCharacterSetting();
+            SaveCharacterSetting(CharacterSetting);
     }
     //Calculations
     private void LoginCalculations()
@@ -586,7 +586,7 @@ public class CharacterManager : MonoBehaviour
             CharacterSettingApplyFullResearch(research, chResearch.Level);
         }
         CharacterSetting.Updated = true;
-        SaveCharacterSetting();
+        SaveCharacterSetting(CharacterSetting);
     }
     //Start Ups
     internal void ReviveCharacter()
@@ -596,7 +596,7 @@ public class CharacterManager : MonoBehaviour
         CharacterSetting.Health = CharacterSetting.MaxHealth;
         CharacterSetting.Updated = true;
         SetLockTill((int) Mathf.Pow(CharacterSetting.Level, 3) + 3);
-        SaveCharacterSetting();
+        SaveCharacterSetting(CharacterSetting);
     }
     private void GameOverCalculations()
     {
@@ -676,14 +676,12 @@ public class CharacterManager : MonoBehaviour
         UserPlayer.LockUntil = minutes;
         SaveUserPlayer();
     }
-    internal void SetFacebookLoggedIn(bool status,string id=null)
+    internal void SetFacebookLoggedIn(bool status,string id="Facebook")
     {
         UserPlayer.FBLoggedIn = status;
-        if (id != null)
-        {
+        if (id != "Facebook")
             UserPlayer.FBid = id;
-            SaveUserPlayer();
-        }
+        SaveUserPlayer();
     }
     public void SaveCharacterMixture(int itemId, int stackCnt, DateTime time)
     {
@@ -694,9 +692,9 @@ public class CharacterManager : MonoBehaviour
         CharacterMixture.MixTime = "Now";
         _userDatabase.SaveCharacterMixture();
     }
-    public void SaveCharacterSetting()
+    public void SaveCharacterSetting(CharacterSetting characterSetting)
     {
-        _userDatabase.SaveCharacterSetting();
+        _userDatabase.SaveCharacterSetting(characterSetting);
     }
     public void SaveUserPlayer()
     {

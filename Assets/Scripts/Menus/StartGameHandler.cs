@@ -104,6 +104,7 @@ public class StartGameHandler : MonoBehaviour {
                 new CharacterSetting(_characterManager.UserPlayer.Id,
                     _selectedCharacter.Id, 
                     _name.text);
+        _characterManager.CharacterSetting.Life = 100;
         _characterManager.SetMyCharacter(_characterManager.CharacterSetting.CharacterId);
         _characterManager.LevelCalculations();
         SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);

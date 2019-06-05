@@ -407,7 +407,9 @@ public class InventoryHandler : MonoBehaviour
     }
     private void InitResearching(CharacterResearching researching)
     {
-        if (researching.Id==0)
+        if (researching == null)
+            _researchingSlot.LoadEmpty();
+        else if (researching.Id==0)
             _researchingSlot.LoadEmpty();
         else 
             _researchingSlot.LoadResearch(researching);

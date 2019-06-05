@@ -59,10 +59,8 @@ public class UserDatabase : MonoBehaviour
         //Todo: new user work starts here 
         if (_userPlayer == null)
         {
-            //throw new Exception("UDB-User Player doesn't Exists!!!");
             GoToStartScene();
             return false;
-            //throw new Exception("UDB-User Player doesn't Exists!!!");
         }
         if (_characterSetting == null)
         {
@@ -73,6 +71,11 @@ public class UserDatabase : MonoBehaviour
             return false;
             //throw new Exception("UDB-Character Setting doesn't Exists!!!");
         }
+        //Set Location Values
+        var locationHelper = LocationHelper.Instance();
+        var loc = locationHelper.GetLocation();
+        _userPlayer.Latitude = loc.x;
+        _userPlayer.Longitude = loc.y;
         _terrainDatabase.SetRegion(_userPlayer.Latitude, _userPlayer.Longitude);
         if (Convert.ToDateTime(_userPlayer.LastLogin) < DateTime.Now.AddMinutes(_userPlayer.LockUntil))
         {
@@ -316,9 +319,9 @@ public class UserDatabase : MonoBehaviour
     {
         return _characterSetting;
     }
-    public void SaveCharacterSetting()
+    public void SaveCharacterSetting(CharacterSetting characterSetting)
     {
-        _apiGatewayConfig.SaveCharacterSetting(_characterSetting);
+        _apiGatewayConfig.SaveCharacterSetting(characterSetting);
     }
     public void UpdateCharacterSetting(CharacterSetting characterSetting)
     {

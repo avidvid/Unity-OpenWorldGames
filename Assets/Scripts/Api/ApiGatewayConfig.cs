@@ -2,12 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class ApiGatewayConfig : MonoBehaviour
 {
-    private static ApiGatewayConfig _apiGatewayConfig;
+    private static ApiGatewayConfig __apiGatewayConfig;
     //Database
     private ItemDatabase _itemDatabase;
     private UserDatabase _userDatabase;
@@ -19,6 +20,9 @@ public class ApiGatewayConfig : MonoBehaviour
     private const string ApiKey = "AOlOnm2C4394k8QZHqkLl8xYcCEWRSND5WtAclWq";
     private const string ApiPath = "https://h28ve9pjh5.execute-api.us-west-2.amazonaws.com/";
     private const string ApiStage = "prod/";
+    private string _apiGate = "";
+    private string _uri =  "";
+
     private int _userId=22;
 
     private List<UserItem> _oldUserInventory =new List<UserItem>();
@@ -34,103 +38,102 @@ public class ApiGatewayConfig : MonoBehaviour
         _terrainDatabase=TerrainDatabase.Instance();
         _gameLoadHelper = GameObject.Find("GameStarter").GetComponent<GameLoadHelper>();
         //Call Random
-        string apiGate = "GetRandom";
-        string uri = String.Format(ApiPath + ApiStage + apiGate + "?min={0}&max={1}", "999", "10000");
-        StartCoroutine(GetRequest(uri, GetUserIdForThisDevice));
-        
+        _apiGate = "GetRandom";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?min={0}&max={1}", "999", "10000");
+        StartCoroutine(GetRequest(_uri, GetUserIdForThisDevice));
+
+        //_apiGate = "GetDeviceInfo";
+        //var deviceId = FetchMacId();
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", deviceId);
+        //StartCoroutine(GetRequest(_uri, GetUserIdForThisDevice));
+
     }
     #region ReadDB
     private void FirstWave()
     {
-        string apiGate;
-        string uri;
         //###Item Database
         //Call Items
-        apiGate = "GetItems";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadItemsJson));
+        _apiGate = "GetItems";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadItemsJson));
         //Call Recipe
-        apiGate = "GetRecipes";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadRecipesJson));
+        _apiGate = "GetRecipes";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadRecipesJson));
         //Call Offer
-        apiGate = "GetOffers";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadOffersJson));
+        _apiGate = "GetOffers";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadOffersJson));
         //###Character Database
         //Call Characters
-        apiGate = "GetCharacters";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadCharactersJson));
+        _apiGate = "GetCharacters";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadCharactersJson));
         //Call Researches
-        apiGate = "GetResearches";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadResearchesJson));
+        _apiGate = "GetResearches";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadResearchesJson));
         //###Terrain Database
         //Call Regions
-        apiGate = "GetRegions";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadRegionsJson));
+        _apiGate = "GetRegions";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadRegionsJson));
         //Call Terrains
-        apiGate = "GetTerrains";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadTerrainsJson));
+        _apiGate = "GetTerrains";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadTerrainsJson));
         //Call Elements
-        apiGate = "GetElements";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadElementsJson));
+        _apiGate = "GetElements";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadElementsJson));
         //Call InsideStories
-        apiGate = "GetInsideStories";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadInsideStoriesJson));
+        _apiGate = "GetInsideStories";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadInsideStoriesJson));
 
     }
     IEnumerator SecondWave()
     {
         yield return new WaitUntil(() => _firstWaveTarget >= 9);        
-        string apiGate;
-        string uri;
         //###User Database
         //Call CharacterMixture
-        apiGate = "GetCharacterMixture";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadCharacterMixtureJson));
+        _apiGate = "GetCharacterMixture";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadCharacterMixtureJson));
         //Call CharacterResearching
-        apiGate = "GetCharacterResearching";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadCharacterResearchingJson));
+        _apiGate = "GetCharacterResearching";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadCharacterResearchingJson));
         //Call UserInventory
-        apiGate = "GetUserInventory";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadUserInventoryJson));
+        _apiGate = "GetUserInventory";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadUserInventoryJson));
         //Call CharacterResearches
-        apiGate = "GetCharacterResearches";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadCharacterResearchesJson));
+        _apiGate = "GetCharacterResearches";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadCharacterResearchesJson));
         //Call UserRecipes
-        apiGate = "GetUserRecipes";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadUserRecipesJson));
+        _apiGate = "GetUserRecipes";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadUserRecipesJson));
         //Call UserCharacters
-        apiGate = "GetUserCharacters";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadUserCharactersJson));
+        _apiGate = "GetUserCharacters";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadUserCharactersJson));
         //Call CharacterSetting
-        apiGate = "GetCharacterSetting";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadCharacterSettingJson));
+        _apiGate = "GetCharacterSetting";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadCharacterSettingJson));
         //Call UserPlayer
-        apiGate = "GetUserPlayer";
-        uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(uri, ReadUserPlayerJson));
+        _apiGate = "GetUserPlayer";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadUserPlayerJson));
     }
     private void GetUserIdForThisDevice(string result)
     {
         var response = TranslateResponse(result);
-        if (response.Body.RandomNum == 0)
-            return;
-        //Todo: get the userid
-        _userId = 33;
+        //if (response.Body.UserId == 0) return;
+        //_userId = response.Body.UserId;
         _gameLoadHelper.LoadingThumbsUp();
         FirstWave();
         StartCoroutine(SecondWave());
@@ -304,11 +307,15 @@ public class ApiGatewayConfig : MonoBehaviour
     internal void SaveUserPlayer(UserPlayer userPlayer)
     {
         //mins is the minutes that the user should stay locked 
-        var apiGate = "GetUserPlayer";
-        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", userPlayer.Id.ToString());
+        var _apiGate = "GetUserPlayer";
+        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userPlayer.Id.ToString());
         var action = "Update";
         if (userPlayer.Latitude == 0 && userPlayer.Longitude == 0)
         {
+            var locationHelper = LocationHelper.Instance();
+            var loc =locationHelper.GetLocation();
+            userPlayer.Latitude = loc.x;
+            userPlayer.Longitude = loc.y;
             action = "Insert";
             _terrainDatabase.SetRegion(userPlayer.Latitude, userPlayer.Longitude);
         }
@@ -317,25 +324,29 @@ public class ApiGatewayConfig : MonoBehaviour
             Action = action,
             UserPlayer = userPlayer
         };
-        StartCoroutine(PutRequest(uri, ap));
+        StartCoroutine(PutRequest(_uri, ap));
     }
     internal void SaveCharacterSetting(CharacterSetting characterSetting)
     {
-        var healthCheck = characterSetting.CalculateHealthCheck();
-        var apiGate = "GetCharacterSetting";
-        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", characterSetting.Id.ToString());
+        var _apiGate = "GetCharacterSetting";
+        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterSetting.Id.ToString());
+        var action = "Update";
+        if (characterSetting.Life == 100)
+        {
+            action = "Insert";
+            characterSetting.Life = 0;
+        }
         ApiRequest ap = new ApiRequest
         {
-            Action = "UpdateCharacterSetting",
-            HealthCheck = healthCheck,
+            Action = action,
             CharacterSetting = characterSetting
         };
-        StartCoroutine(PutRequest(uri, ap));
+        StartCoroutine(PutRequest(_uri, ap));
     }
     internal void PutUserInventory(List<UserItem> userInventory)
     {
-        Debug.Log("PutUserInventory   _oldUserInventory=" + _oldUserInventory.Count + " userInventory = "+ userInventory.Count);
         //Todo: delete
+        Debug.Log("PutUserInventory   _oldUserInventory=" + _oldUserInventory.Count + " userInventory = "+ userInventory.Count);
         //foreach (var item in _oldUserInventory) item.Print();
         //foreach (var item in userInventory) item.Print();
         foreach (var dbItem in _oldUserInventory)
@@ -372,20 +383,20 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     private void PutUserInventory(UserItem item, string action)
     {
-        var apiGate = "GetUserInventory";
-        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", item.UserId.ToString());
+        var _apiGate = "GetUserInventory";
+        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", item.UserId.ToString());
         ApiRequest ap = new ApiRequest
         {
             Action = action,
             UserInventory = item
         };
         Debug.Log(ap.Action + " UserInventory : " + ap.UserInventory.MyInfo());
-        StartCoroutine(PutRequest(uri, ap, true));
+        StartCoroutine(PutRequest(_uri, ap, true));
     }
     internal void PutCharacterMixture(CharacterMixture characterMixture)
     {
-        var apiGate = "GetCharacterMixture";
-        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", characterMixture.Id.ToString());
+        var _apiGate = "GetCharacterMixture";
+        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterMixture.Id.ToString());
         int time = -1;
         string action;
         if (characterMixture.StackCnt == 0)
@@ -403,12 +414,12 @@ public class ApiGatewayConfig : MonoBehaviour
             Time = time,
             CharacterMixture = characterMixture 
         };
-        StartCoroutine(PutRequest(uri, ap));
+        StartCoroutine(PutRequest(_uri, ap));
     }
     internal void PutUserRecipe(UserRecipe userRecipe,string code=null)
     {
-        var apiGate = "GetUserRecipes";
-        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", userRecipe.Id.ToString());
+        var _apiGate = "GetUserRecipes";
+        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userRecipe.Id.ToString());
         ApiRequest ap = new ApiRequest
         {
             Action = "Insert",
@@ -420,12 +431,12 @@ public class ApiGatewayConfig : MonoBehaviour
             ap.Code = code;
         }
         Debug.Log(ap.Action + " UserRecipe : " + userRecipe.MyInfo());
-        StartCoroutine(PutRequest(uri, ap, true));
+        StartCoroutine(PutRequest(_uri, ap, true));
     }
     internal void PutUserCharacter(UserCharacter userCharacter, string code = null)
     {
-        var apiGate = "GetUserCharacters";
-        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", userCharacter.Id.ToString());
+        var _apiGate = "GetUserCharacters";
+        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userCharacter.Id.ToString());
         ApiRequest ap = new ApiRequest
         {
             Action = "Insert",
@@ -437,12 +448,12 @@ public class ApiGatewayConfig : MonoBehaviour
             ap.Code = code;
         }
         Debug.Log(ap.Action + " UserCharacter : " + userCharacter.MyInfo());
-        StartCoroutine(PutRequest(uri, ap, true));
+        StartCoroutine(PutRequest(_uri, ap, true));
     }
     internal void PutCharacterResearching(CharacterResearching characterResearching)
     {
-        var apiGate = "GetCharacterResearching";
-        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", characterResearching.Id.ToString());
+        var _apiGate = "GetCharacterResearching";
+        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterResearching.Id.ToString());
         int time = -1;
         string action;
         if (characterResearching.Level == 0)
@@ -460,12 +471,12 @@ public class ApiGatewayConfig : MonoBehaviour
             Time = time,
             CharacterResearching = characterResearching
         };
-        StartCoroutine(PutRequest(uri, ap));
+        StartCoroutine(PutRequest(_uri, ap));
     }
     internal void PutCharacterResearch(CharacterResearch characterResearch)
     {
-        var apiGate = "GetCharacterResearches";
-        var uri = String.Format(ApiPath + ApiStage + apiGate + "?id={0}", characterResearch.Id.ToString());
+        var _apiGate = "GetCharacterResearches";
+        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterResearch.Id.ToString());
         string action = "Insert";
         if (characterResearch.Level != 1)
             action = "Update";
@@ -474,7 +485,7 @@ public class ApiGatewayConfig : MonoBehaviour
             Action = action,
             CharacterResearch = characterResearch
         };
-        StartCoroutine(PutRequest(uri, ap));
+        StartCoroutine(PutRequest(_uri, ap));
     }
     #endregion
     #region ApiRequest
@@ -484,9 +495,9 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response == null) throw new ArgumentNullException("API Response is null");
         return response;
     }
-    private IEnumerator GetRequest(string uri,Action<string> callback)
+    private IEnumerator GetRequest(string _uri,Action<string> callback)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(uri))
+        using (UnityWebRequest request = UnityWebRequest.Get(_uri))
         {
             request.SetRequestHeader("x-api-key", ApiKey);
             yield return request.SendWebRequest();
@@ -499,11 +510,11 @@ public class ApiGatewayConfig : MonoBehaviour
             callback(result);
         }
     }
-    private IEnumerator PutRequest(string uri, ApiRequest apiRequest, bool refresh=false)
+    private IEnumerator PutRequest(string _uri, ApiRequest apiRequest, bool refresh=false)
     {
         string json = JsonUtility.ToJson(apiRequest);
         Debug.Log("json: " + json);
-        using (UnityWebRequest request = UnityWebRequest.Put(uri, json))
+        using (UnityWebRequest request = UnityWebRequest.Put(_uri, json))
         {
             request.SetRequestHeader("Content-Type", "application/json");
             request.SetRequestHeader("x-api-key", ApiKey);
@@ -568,16 +579,30 @@ public class ApiGatewayConfig : MonoBehaviour
         }
     }
     #endregion
-    #region ApiGatewayConfig Instance
+    public string FetchMacId()
+    {
+        string macAddresses = "";
+
+        foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+        {
+            if (nic.OperationalStatus == OperationalStatus.Up)
+            {
+                macAddresses += nic.GetPhysicalAddress().ToString();
+                break;
+            }
+        }
+        return macAddresses;
+    }
+    #region _apiGatewayConfig Instance
     public static ApiGatewayConfig Instance()
     {
-        if (!_apiGatewayConfig)
+        if (!__apiGatewayConfig)
         {
-            _apiGatewayConfig = FindObjectOfType(typeof(ApiGatewayConfig)) as ApiGatewayConfig;
-            if (!_apiGatewayConfig)
-                Debug.LogError("There needs to be one active ApiGatewayConfig script on a GameObject in your scene.");
+            __apiGatewayConfig = FindObjectOfType(typeof(ApiGatewayConfig)) as ApiGatewayConfig;
+            if (!__apiGatewayConfig)
+                Debug.LogError("There needs to be one active _apiGatewayConfig script on a GameObject in your scene.");
         }
-        return _apiGatewayConfig;
+        return __apiGatewayConfig;
     }
     #endregion
 }

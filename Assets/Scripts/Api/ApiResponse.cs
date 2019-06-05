@@ -19,7 +19,7 @@ public class Headers
 public class BodyResponse
 {
     public string Message;
-    public int RandomNum=0;
+    public int UserId = 0;
     public int HealthCheck;
     public List<ItemContainer> Items;
     public List<Recipe> Recipes;
@@ -47,7 +47,7 @@ public class BodyResponse
     internal string MyInfo()
     {
         string info = " Message=" +  Message;
-        if (RandomNum!=0) info += " RandomNum=" + RandomNum;
+        if (UserId!=0) info += " UserId=" + UserId;
 
         if (Items.Count!=0) info += " Items=" + Items.Count;
         if (Recipes.Count != 0) info += " Recipes=" + Recipes.Count;

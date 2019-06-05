@@ -55,8 +55,10 @@ public class UserPlayer  {
     public int ClanId;
     public UserPlayer.ClanRanks ClanRank;
     public bool FBLoggedIn;
-    public string FBid;
     public bool GLoggedIn;
+    public string FBid;
+    public string Gid;
+    public string MacId;
     public bool IsEnable;
 
     public UserPlayer(string userName, string description)
@@ -64,7 +66,7 @@ public class UserPlayer  {
         Id = UnityEngine.Random.Range(0, 1999999999);
         UserName = userName;
         Description = description;
-        SoundVolume = 0.5f;
+        SoundVolume = 0.1f;
         Latitude = 0;
         Longitude = 0;
         Gem = 5;
@@ -76,6 +78,8 @@ public class UserPlayer  {
         ClanRank = 0;
         FBLoggedIn = false;
         FBid = "Facebook";
+        Gid = "Google";
+        MacId = "Mac";
         GLoggedIn = false;
         IsEnable = true;
     }
@@ -94,6 +98,8 @@ public class UserPlayer  {
                    " Gem=" + Gem +
                    " FBLoggedIn=" + FBLoggedIn +
                    " FBid=" + FBid +
+                   " Gid=" + Gid +
+                   " MacId=" + MacId +
                    " Description=" + Description +
                    " SoundVolume=" + SoundVolume +
                    " LastLogin=" + LastLogin +
