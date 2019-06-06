@@ -49,7 +49,8 @@ public class UserPlayer  {
     public float Longitude;
     public int Gem;
     public string LastLogin;
-    public int LockUntil;
+    public string LockUntil;
+    public int LockMins;
     public UserPlayer.PlayerRanks Rank;
     public int PRank;
     public int ClanId;
@@ -71,7 +72,8 @@ public class UserPlayer  {
         Longitude = 0;
         Gem = 5;
         LastLogin = "";
-        LockUntil = 0;
+        LockUntil = "";
+        LockMins = 0;
         Rank = 0;
         PRank = 0;
         ClanId = 0;
@@ -103,7 +105,8 @@ public class UserPlayer  {
                    " Description=" + Description +
                    " SoundVolume=" + SoundVolume +
                    " LastLogin=" + LastLogin +
-                   " LockUntil=" + LockUntil;
+                   " LockUntil=" + LockUntil +
+                   " LockMins=" + LockMins;
         }
         catch (Exception e)
         {

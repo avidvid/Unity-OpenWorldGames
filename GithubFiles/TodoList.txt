@@ -22,7 +22,11 @@ De active face rec
 #### Home #####
 ###############
 Bug: 
-Old path to get the user goes to start page !! 
+
+
+Check new user path 
+User create 
+Charcter created 
 
 
 Check path lock until 

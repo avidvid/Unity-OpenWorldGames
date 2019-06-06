@@ -53,9 +53,13 @@ public class UserDatabase : MonoBehaviour
     {
         _apiGatewayConfig.SaveUserPlayer(userPlayer);
     }
-    public bool UpdateUserPlayer(UserPlayer userPlayer)
+    public void UpdateUserPlayer(UserPlayer userPlayer)
     {
         _userPlayer = userPlayer;
+        _userPlayer.Print();
+    }
+    public bool StartGameValidation()
+    {
         //Todo: new user work starts here 
         if (_userPlayer == null)
         {
@@ -77,12 +81,17 @@ public class UserDatabase : MonoBehaviour
         _userPlayer.Latitude = loc.x;
         _userPlayer.Longitude = loc.y;
         _terrainDatabase.SetRegion(_userPlayer.Latitude, _userPlayer.Longitude);
-        if (Convert.ToDateTime(_userPlayer.LastLogin) < DateTime.Now.AddMinutes(_userPlayer.LockUntil))
+        if (Convert.ToDateTime(_userPlayer.LastLogin) < Convert.ToDateTime(_userPlayer.LockUntil))
         {
             //todo: Unknown path
-            print("UserPlayer is Locked now = " + Convert.ToDateTime(_userPlayer.LastLogin) + "LockUntil = " + DateTime.Now.AddMinutes(_userPlayer.LockUntil));
+            print("UserPlayer is Locked now = " + Convert.ToDateTime(_userPlayer.LastLogin)
+                                                + "AddMinutes = " + _userPlayer.LockMins
+                                                + "LockUntil = " + Convert.ToDateTime(_userPlayer.LockUntil));
             GoToWaitScene();
+            return false;
         }
+        _userPlayer.LockMins = 0;
+        SaveUserPlayer(_userPlayer);
         _userPlayer.Print();
         return true;
     }

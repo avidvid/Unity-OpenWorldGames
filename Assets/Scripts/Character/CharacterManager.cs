@@ -65,7 +65,7 @@ public class CharacterManager : MonoBehaviour
         Debug.Log("***CM*** Start!");
         //UserPlayer
         UserPlayer = _userDatabase.GetUserPlayer();
-        if (UserPlayer!=null)
+        if (UserPlayer.Id != 0)
             Debug.Log("CM-UserPlayer = " + UserPlayer.MyInfo());
         //CharacterSetting
         CharacterSetting = _userDatabase.GetCharacterSetting();
@@ -673,7 +673,7 @@ public class CharacterManager : MonoBehaviour
     //Middle man to CharacterDatabase
     internal void SetLockTill(int minutes=0)
     {
-        UserPlayer.LockUntil = minutes;
+        UserPlayer.LockMins = minutes;
         SaveUserPlayer();
     }
     internal void SetFacebookLoggedIn(bool status,string id="Facebook")

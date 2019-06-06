@@ -35,9 +35,9 @@ public class WaitHandler : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-	    if (Convert.ToDateTime(_characterManager.UserPlayer.LockUntil) > DateTime.Now )
+	    if (Convert.ToDateTime(_characterManager.UserPlayer.LockUntil) > Convert.ToDateTime(_characterManager.UserPlayer.LastLogin))
 	    {
-	        var timer = Convert.ToDateTime(_characterManager.UserPlayer.LockUntil) - DateTime.Now;
+	        var timer = Convert.ToDateTime(_characterManager.UserPlayer.LockUntil) - Convert.ToDateTime(_characterManager.UserPlayer.LastLogin);
 
             _startText.text = TimeHandler.PrintTime(timer); 
 	        _buyText.text = "Use " + TimeHandler.GemTimeValue(timer)+" Gem(s)";
@@ -60,7 +60,7 @@ public class WaitHandler : MonoBehaviour {
 
     private void SpendGem()
     {
-        var timer = Convert.ToDateTime(_characterManager.UserPlayer.LockUntil) - DateTime.Now;
+        var timer = Convert.ToDateTime(_characterManager.UserPlayer.LockUntil) - Convert.ToDateTime(_characterManager.UserPlayer.LastLogin);
         var gem = TimeHandler.GemTimeValue(timer);
         print("Process GEM " + gem   + " of  " + _characterManager.UserPlayer.Gem);
         if (_characterManager.UserPlayer.Gem > gem)

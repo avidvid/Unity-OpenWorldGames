@@ -37,15 +37,10 @@ public class ApiGatewayConfig : MonoBehaviour
         _characterDatabase=CharacterDatabase.Instance();
         _terrainDatabase=TerrainDatabase.Instance();
         _gameLoadHelper = GameObject.Find("GameStarter").GetComponent<GameLoadHelper>();
-        //Call Random
-        _apiGate = "GetRandom";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?min={0}&max={1}", "999", "10000");
-        StartCoroutine(GetRequest(_uri, GetUserIdForThisDevice));
-
-        //_apiGate = "GetDeviceInfo";
-        //var deviceId = FetchMacId();
-        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", deviceId);
-        //StartCoroutine(GetRequest(_uri, GetUserIdForThisDevice));
+        //Call UserPlayer
+        _apiGate = "GetUserPlayer";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", FetchMacId());
+        StartCoroutine(GetRequest(_uri, ReadUserPlayerJson));
 
     }
     #region ReadDB
@@ -90,7 +85,6 @@ public class ApiGatewayConfig : MonoBehaviour
         _apiGate = "GetInsideStories";
         _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(_uri, ReadInsideStoriesJson));
-
     }
     IEnumerator SecondWave()
     {
@@ -124,19 +118,6 @@ public class ApiGatewayConfig : MonoBehaviour
         _apiGate = "GetCharacterSetting";
         _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(_uri, ReadCharacterSettingJson));
-        //Call UserPlayer
-        _apiGate = "GetUserPlayer";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadUserPlayerJson));
-    }
-    private void GetUserIdForThisDevice(string result)
-    {
-        var response = TranslateResponse(result);
-        //if (response.Body.UserId == 0) return;
-        //_userId = response.Body.UserId;
-        _gameLoadHelper.LoadingThumbsUp();
-        FirstWave();
-        StartCoroutine(SecondWave());
     }
     //ItemDatabase
     private void ReadItemsJson(string result)
@@ -278,21 +259,27 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.CharacterSetting.Id == 0)
             Debug.LogWarning("####API-CharacterSetting Is Empty!!!");
         _userDatabase.UpdateCharacterSetting(response.Body.CharacterSetting);
-        _gameLoadHelper.LoadingThumbsUp();
-    }
-    private void ReadUserPlayerJson(string result)
-    {
-        var response = TranslateResponse(result);
-        if (response.Body.UserPlayer == null)
-            Debug.LogWarning("####API-UserPlayer Is Empty!!!");
-        if (_userDatabase.UpdateUserPlayer(response.Body.UserPlayer))
+        if (_userDatabase.StartGameValidation())
             _gameLoadHelper.LoadingThumbsUp();
+        //Instantiate Important Game Objects
+        print("***###*** Instantiate Important Game Objects ***###***");
         var characterManager = Resources.Load<GameObject>("Prefabs/CharacterManager");
         Instantiate(characterManager);
         var musicBox = Resources.Load<GameObject>("Prefabs/MusicBox");
         Instantiate(musicBox);
         var cache = Resources.Load<GameObject>("Prefabs/Cache");
         Instantiate(cache);
+    }
+    private void ReadUserPlayerJson(string result)
+    {
+        var response = TranslateResponse(result);
+        if (response.Body.UserPlayer.Id == 0)
+            Debug.LogWarning("####API-UserPlayer Is Empty!!!");
+        _userId = response.Body.UserPlayer.Id;
+        _userDatabase.UpdateUserPlayer(response.Body.UserPlayer);
+        _gameLoadHelper.LoadingThumbsUp();
+        FirstWave();
+        StartCoroutine(SecondWave());
     }
     #endregion
     #region Updates
