@@ -62,8 +62,11 @@ public class BuildingInterior : MonoBehaviour {
         //print("Building Interior _floor: "  +"  " + _floor.name);
         _story  = _terrainDatabase.GetStoryBasedOnRarity(_mapPosition, _key);
         GenerateInterior();
-        if (_audioManager!=null)
+        if (_audioManager != null)
+        {
+            _audioManager.UpdateSoundVolume(_characterManager.UserPlayer.SoundVolume);
             _audioManager.PlayInsideMusic(_previousPosition, _key);
+        }
     }
     private void GenerateInterior()
     {

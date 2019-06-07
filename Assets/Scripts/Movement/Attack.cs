@@ -16,11 +16,17 @@ public class Attack : MonoBehaviour { 
         var insideBuilding = GameObject.Find("Building Interior");
         if (insideBuilding != null)
             _building = insideBuilding.GetComponent<BuildingInterior>();     }     internal void AttackDealing(ActiveMonsterType monster, float dealAtt, string environmentType)
-    {
+    {            
+        //Make monster Aware of player when being hit
+        if (environmentType == "Inside")
+            monster.SawTarget = true;
+        else //Terrain & Combat
+            monster.AttackMode = true;
         if (dealAtt <= 0)
         {
             _GUIManager.PrintMessage("No damage dealt!!!", Color.yellow);
-            print("No damage dealt!!! Att (" +
+            print("No damage dealt!!! Env:"+environmentType + " " + monster.SawTarget+
+                    " Att (" +
                   _characterManager.CharacterSetting.AbilityAttack + ","
                   + _characterManager.CharacterSetting.MagicAttack + ","
                   + _characterManager.CharacterSetting.PoisonAttack + ") Def ("
@@ -53,12 +59,5 @@ public class Attack : MonoBehaviour { 
             healthBar.localScale =
                 new Vector3((float)monster.MonsterType.Health / monster.MonsterType.MaxHealth / 3,
                     healthBar.localScale.y, healthBar.localScale.z);
-            //Make monster Aware of player when being hit
-            if (environmentType == "Inside")
-            {
-                monster.SawTarget = true;
-            }
-            else
-                monster.AttackMode = true;
         }
     } }

@@ -27,6 +27,7 @@ public class ApiGatewayConfig : MonoBehaviour
 
     private List<UserItem> _oldUserInventory =new List<UserItem>();
     private int _firstWaveTarget;
+    private int _secondWaveTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,7 @@ public class ApiGatewayConfig : MonoBehaviour
         _gameLoadHelper = GameObject.Find("GameStarter").GetComponent<GameLoadHelper>();
         //Call UserPlayer
         _apiGate = "GetUserPlayer";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", FetchMacId());
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", DeviceHandler.FetchMacId());
         StartCoroutine(GetRequest(_uri, ReadUserPlayerJson));
 
     }
@@ -114,6 +115,10 @@ public class ApiGatewayConfig : MonoBehaviour
         _apiGate = "GetUserCharacters";
         _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(_uri, ReadUserCharactersJson));
+    }
+    IEnumerator ThirdWave()
+    {
+        yield return new WaitUntil(() => _secondWaveTarget >= 6);
         //Call CharacterSetting
         _apiGate = "GetCharacterSetting";
         _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
@@ -211,6 +216,7 @@ public class ApiGatewayConfig : MonoBehaviour
             Debug.LogWarning("####API-CharacterMixture Is Empty!!!");
         _userDatabase.UpdateCharacterMixture(response.Body.CharacterMixture);
         _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
     }
     private void ReadCharacterResearchingJson(string result)
     {
@@ -219,6 +225,7 @@ public class ApiGatewayConfig : MonoBehaviour
             Debug.LogWarning("####API-CharacterResearching Is Empty!!!");
         _userDatabase.UpdateCharacterResearching(response.Body.CharacterResearching);
         _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
     }
     private void ReadUserInventoryJson(string result)
     {
@@ -228,6 +235,7 @@ public class ApiGatewayConfig : MonoBehaviour
         SavedUserInventory(response.Body.UserInventory);
         _userDatabase.UpdateUserInventory(response.Body.UserInventory);
         _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
     }
     private void ReadUserCharactersJson(string result)
     {
@@ -236,6 +244,7 @@ public class ApiGatewayConfig : MonoBehaviour
             Debug.LogWarning("####API--UserCharacters Is Empty!!!");
         _userDatabase.UpdateUserCharacters(response.Body.UserCharacters);
         _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
     }
     private void ReadCharacterResearchesJson(string result)
     {
@@ -244,6 +253,7 @@ public class ApiGatewayConfig : MonoBehaviour
             Debug.LogWarning("####API--CharacterResearches Is Empty!!!");
         _userDatabase.UpdateCharacterResearches(response.Body.CharacterResearches);
         _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
     }
     private void ReadUserRecipesJson(string result)
     {
@@ -252,6 +262,7 @@ public class ApiGatewayConfig : MonoBehaviour
             Debug.LogWarning("####API--UserRecipes Is Empty!!!");
         _userDatabase.UpdateUserRecipes(response.Body.UserRecipes);
         _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
     }
     private void ReadCharacterSettingJson(string result)
     {
@@ -273,13 +284,18 @@ public class ApiGatewayConfig : MonoBehaviour
     private void ReadUserPlayerJson(string result)
     {
         var response = TranslateResponse(result);
-        if (response.Body.UserPlayer.Id == 0)
+        if (response.Body.UserPlayer == null)
+        {
             Debug.LogWarning("####API-UserPlayer Is Empty!!!");
-        _userId = response.Body.UserPlayer.Id;
+            _userId = 0;
+        }
+        else
+            _userId = response.Body.UserPlayer.Id;
         _userDatabase.UpdateUserPlayer(response.Body.UserPlayer);
         _gameLoadHelper.LoadingThumbsUp();
         FirstWave();
         StartCoroutine(SecondWave());
+        StartCoroutine(ThirdWave());
     }
     #endregion
     #region Updates
@@ -295,20 +311,18 @@ public class ApiGatewayConfig : MonoBehaviour
     {
         //mins is the minutes that the user should stay locked 
         var _apiGate = "GetUserPlayer";
+        print("Saving" + userPlayer.MyInfo());
         var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userPlayer.Id.ToString());
-        var action = "Update";
         if (userPlayer.Latitude == 0 && userPlayer.Longitude == 0)
         {
             var locationHelper = LocationHelper.Instance();
             var loc =locationHelper.GetLocation();
             userPlayer.Latitude = loc.x;
             userPlayer.Longitude = loc.y;
-            action = "Insert";
             _terrainDatabase.SetRegion(userPlayer.Latitude, userPlayer.Longitude);
         }
         ApiRequest ap = new ApiRequest
         {
-            Action = action,
             UserPlayer = userPlayer
         };
         StartCoroutine(PutRequest(_uri, ap));
@@ -566,20 +580,6 @@ public class ApiGatewayConfig : MonoBehaviour
         }
     }
     #endregion
-    public string FetchMacId()
-    {
-        string macAddresses = "";
-
-        foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
-        {
-            if (nic.OperationalStatus == OperationalStatus.Up)
-            {
-                macAddresses += nic.GetPhysicalAddress().ToString();
-                break;
-            }
-        }
-        return macAddresses;
-    }
     #region _apiGatewayConfig Instance
     public static ApiGatewayConfig Instance()
     {

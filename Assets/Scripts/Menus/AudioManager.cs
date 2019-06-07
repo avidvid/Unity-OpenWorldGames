@@ -5,7 +5,6 @@ public class AudioManager : MonoBehaviour
     private AudioClip[] _insideAudioClips;
     private AudioClip[] _fightAudioClips;
     private AudioSource _audioSource;
-    private bool _playingBg;
     private static AudioManager _audioManager;
 
     void Awake()
@@ -18,11 +17,10 @@ public class AudioManager : MonoBehaviour
         _insideAudioClips = Resources.LoadAll<AudioClip>("Audio/Inside");
         _fightAudioClips = Resources.LoadAll<AudioClip>("Audio/Inside");
         _audioSource = gameObject.GetComponent<AudioSource>();
-        //print("Music : Main=" + _bgAudioClips.Length + " Inside=" + _insideAudioClips.Length);
     }
     public void UpdateSoundVolume(float value)
     {
-        if (value == 0)
+        if (value <= 0)
             _audioSource.mute = true;
         else
             _audioSource.mute = false;
@@ -30,14 +28,11 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayBgMusic(Vector3 pos, int key)
     {
-        if (_playingBg)
-            return;
         if (_bgAudioClips.Length == 0)
             return;
         var ac = _bgAudioClips[RandomHelper.Range(pos, key, _bgAudioClips.Length)];
         _audioSource.clip = ac;
         _audioSource.Play();
-        _playingBg = true;
     }
     public void PlayInsideMusic(Vector3 pos, int key)
     {

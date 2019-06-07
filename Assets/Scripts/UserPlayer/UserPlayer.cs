@@ -49,7 +49,9 @@ public class UserPlayer  {
     public float Longitude;
     public int Gem;
     public string LastLogin;
+    private DateTime _localLastLogin;
     public string LockUntil;
+    private DateTime _localLockUntil;
     public int LockMins;
     public UserPlayer.PlayerRanks Rank;
     public int PRank;
@@ -81,10 +83,30 @@ public class UserPlayer  {
         FBLoggedIn = false;
         FBid = "Facebook";
         Gid = "Google";
-        MacId = "Mac";
+        MacId = DeviceHandler.FetchMacId();
         GLoggedIn = false;
         IsEnable = true;
     }
+    #region LocalTime
+    internal void SetLocalTimes()
+    {
+        _localLastLogin=DateTime.Now;
+        var timer = Convert.ToDateTime(LockUntil) - Convert.ToDateTime(LastLogin);
+        _localLockUntil = DateTime.Now+ timer;
+    }
+    internal DateTime GetLastLogin()
+    {
+        return _localLastLogin;
+    }
+    internal DateTime GetLockUntil()
+    {
+        return _localLockUntil;
+    }
+    internal void SetLockUntil(int minutes)
+    {
+        _localLockUntil= DateTime.Now.AddMinutes(minutes);
+    }
+    #endregion
     #region Print
     internal void Print()
     {
@@ -104,8 +126,8 @@ public class UserPlayer  {
                    " MacId=" + MacId +
                    " Description=" + Description +
                    " SoundVolume=" + SoundVolume +
-                   " LastLogin=" + LastLogin +
-                   " LockUntil=" + LockUntil +
+                   " LastLogin=" + LastLogin + "(" + GetLastLogin() + ")" +
+                   " LockUntil=" + LockUntil + "(" + GetLockUntil() + ")" +
                    " LockMins=" + LockMins;
         }
         catch (Exception e)

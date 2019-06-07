@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,8 +35,7 @@ public class CharacterManager : MonoBehaviour
 
     private float _nextActionTime = 100;
     private Sprite _spellSprite;
-    private GameObject _levelUp;
-    private GameObject _gameOver;
+    private static GameObject _canvas;
 
 
     #region CharacterManager Instance
@@ -57,15 +57,14 @@ public class CharacterManager : MonoBehaviour
         _characterDatabase = CharacterDatabase.Instance();
         _itemDatabase = ItemDatabase.Instance();
         _userDatabase = UserDatabase.Instance();
-        _levelUp = GameObject.Find("LevelUp");
-        _gameOver = GameObject.Find("GameOver");
     }
     void Start()
     {
         Debug.Log("***CM*** Start!");
+        _canvas = GameObject.Find("Canvas");
         //UserPlayer
         UserPlayer = _userDatabase.GetUserPlayer();
-        if (UserPlayer.Id != 0)
+        if (UserPlayer != null)
             Debug.Log("CM-UserPlayer = " + UserPlayer.MyInfo());
         //CharacterSetting
         CharacterSetting = _userDatabase.GetCharacterSetting();
@@ -124,13 +123,13 @@ public class CharacterManager : MonoBehaviour
             SaveCharacterSetting(CharacterSetting);
         }
         //Level Up
-        if (CharacterSetting.Experience >= CharacterSetting.MaxExperience && CharacterSetting.MaxExperience>0)
+        if (CharacterSetting.Experience >= CharacterSetting.MaxExperience && CharacterSetting.MaxExperience>0 && CharacterSetting.Id != 0)
         {
-            StartCoroutine(LevelUpFadeInOut());
             CharacterSetting.Experience -= CharacterSetting.MaxExperience;
             CharacterSetting.Level += 1;
             //Calculate all the values based on the new level
             LevelCalculations();
+            StartCoroutine(LevelUpFadeInOut(CharacterSetting.Level));
         }
     }
     private bool CharacterSettingHealthCheck()
@@ -647,17 +646,29 @@ public class CharacterManager : MonoBehaviour
             return 1000;
         return CalculateXp(level - 1) + CalculateXp(level - 2);
     }
-    IEnumerator LevelUpFadeInOut()
+    IEnumerator LevelUpFadeInOut(int level)
     {
-        _levelUp.SetActive(true);
+        var announcement = Resources.Load<GameObject>("Prefabs/Announcement");
+        var annObj = Instantiate(announcement);
+        var canvas = GameObject.Find("Canvas");
+        annObj.transform.SetParent(canvas.transform, false);
+        annObj.transform.localPosition = Vector3.zero;
+        var title = annObj.GetComponentInChildren<TextMeshProUGUI>();
+        title.text = "Level UP ("+ level+")";
         yield return new WaitForSeconds(1);
-        _levelUp.SetActive(false);
+        Destroy(annObj);
     }
     IEnumerator GameOverFadeInOut()
     {
-        _gameOver.SetActive(true);
+        var announcement = Resources.Load<GameObject>("Prefabs/Announcement");
+        var annObj = Instantiate(announcement);
+        var canvas = GameObject.Find("Canvas");
+        annObj.transform.SetParent(canvas.transform, false);
+        annObj.transform.localPosition = Vector3.zero;
+        var title = annObj.GetComponentInChildren<TextMeshProUGUI>();
+        title.text = "GameOver";
         yield return new WaitForSeconds(2.8f);
-        _gameOver.SetActive(false);
+        Destroy(annObj);
     }
     internal Sprite GetSpellSprite()
     {
@@ -674,6 +685,8 @@ public class CharacterManager : MonoBehaviour
     internal void SetLockTill(int minutes=0)
     {
         UserPlayer.LockMins = minutes;
+        UserPlayer.SetLockUntil(minutes);
+        UserPlayer.Print();
         SaveUserPlayer();
     }
     internal void SetFacebookLoggedIn(bool status,string id="Facebook")

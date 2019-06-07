@@ -22,14 +22,19 @@ De active face rec
 #### Home #####
 ###############
 Bug: 
+when alive of player is false still game plays 
+
+Dead user path 
+Test have life 
+Review the process of gameover page 
+If click on make new character isenable = false old 
+change text to revive this chracter  ( you still have to wait 30 mins to go bach to the game)
 
 
-Check new user path 
-User create 
-Charcter created 
 
 
-Check path lock until 
+
+
 
 Clan up the names of lambda and api
 
@@ -48,7 +53,6 @@ inside monster on walk not passing the walls
 ###############
 ####Office#####
 ###############	
-change color of message from white to black 
 
 New User start check 
 
@@ -100,6 +104,14 @@ Mixure
   "StackCnt": 1,
   "UserId": 22
 }
+
+UserCharacter
+{
+  "Id": 1,
+  "CharacterId": 1,
+  "UserId": 1077749210
+}
+
 CharacterResearching
 {
   "Id": 1,

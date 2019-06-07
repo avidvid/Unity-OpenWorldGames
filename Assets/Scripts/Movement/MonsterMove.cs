@@ -65,6 +65,7 @@ public class MonsterMove : MonoBehaviour {
         float dist = Vector2.Distance(targetPos, monsterPos);
         if (_active.SawTarget)
         {
+            print("I saw you");
             if (dist > (int)_character.AttackR)
             {
                 if (_character.IsAnimated && _character.HasFightMode && _character.Speed == 0)
@@ -84,9 +85,6 @@ public class MonsterMove : MonoBehaviour {
                 HandleFightMode(true);
             else
                 _active.AttackMode = true;
-            //Don't let the hurt monster to stop chasing the player
-            //if (_active.MonsterType.Health == _active.MonsterType.MaxHealth)
-            //    _active.SawTarget = false;
         }
         else if (_character.IsAnimated && _character.HasFightMode)
             HandleFightMode(false);

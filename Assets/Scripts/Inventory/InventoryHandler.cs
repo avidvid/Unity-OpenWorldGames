@@ -416,7 +416,9 @@ public class InventoryHandler : MonoBehaviour
     }
     private void InitMixture(CharacterMixture playerMixture)
     {
-        if (playerMixture.Id == 0)
+        if (playerMixture == null)
+            _itemMixture.LoadEmpty();
+        else if (playerMixture.Id == 0)
             _itemMixture.LoadEmpty();
         else
             _itemMixture.LoadItem(playerMixture);

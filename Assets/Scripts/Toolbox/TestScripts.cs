@@ -8,7 +8,8 @@ public class TestScripts : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        print(FetchMacId());
+        DeviceHandler.DisplayTypeAndAddress();
+        print(DeviceHandler.FetchMacId());
     }
 
     // Update is called once per frame
@@ -17,20 +18,5 @@ public class TestScripts : MonoBehaviour
         
     }
 
-
-    public string FetchMacId()
-    {
-        string macAddresses = "";
-
-        foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
-        {
-            if (nic.OperationalStatus == OperationalStatus.Up)
-            {
-                macAddresses += nic.GetPhysicalAddress().ToString();
-                break;
-            }
-        }
-        return macAddresses;
-    }
 
 }
