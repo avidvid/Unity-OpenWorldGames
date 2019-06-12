@@ -10,30 +10,42 @@ Users Want to do what they want, not what you want them to do
 #### Iran #####
 ###############
 De active face rec 
-	
 
+###############
+#### Tokyo ####
+###############
+-- maybe not :
+Buy ic card for traveling 
+smartEX app Install the app 
+-----
+Try Ekiben food in the station 
 
+Food: 
+Try Japanese pancake 
+Try Uni
+crepes like roll  
+Oden
+Ramen
+yakiniko (Japanese bbq)
+
+Shop: 
+100 yen shop 
 ###############
 ####comite#####
 ###############
-	
-	
+		
 ###############
 #### Home #####
 ###############
+
+
+###############
+####Office#####
+###############	
+
 Bug: 
-when alive of player is false still game plays 
-
-Dead user path 
-Test have life 
-Review the process of gameover page 
-If click on make new character isenable = false old 
-change text to revive this chracter  ( you still have to wait 30 mins to go bach to the game)
-
-
-
-
-
+//Todo: this should not be click able if inside  
+Story writing phase
 
 
 Clan up the names of lambda and api
@@ -46,18 +58,6 @@ APi Weather: https://www.red-gate.com/simple-talk/dotnet/c-programming/calling-r
 device id or email to be saved in userplayer
 
 inside monster on walk not passing the walls
-	
-	
-
-
-###############
-####Office#####
-###############	
-
-New User start check 
-
-Story writing phase
-
 Gift phase : 	Gift recepie and characters 
 
 https://chicagophotos.shutterbooth.com/May-2019
@@ -66,8 +66,6 @@ https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019
 	https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019/registry
 -----
 
-
-	
 	
 	
 ###############
@@ -102,6 +100,14 @@ Mixure
   "ItemId": 1001,
   "MixTime": "2019-03-04T12:10:51.227442-06:00",
   "StackCnt": 1,
+  "UserId": 22
+}
+Researching
+{
+  "Id": 1771722600,
+  "Level": 1,
+  "ResearchId": 2,
+  "ResearchTime": "2019-06-12T22:07:07.615Z",
   "UserId": 22
 }
 
@@ -147,7 +153,7 @@ Items:
 ###############
 #### Plan #####
 ###############	
-	
+
 Before lunch part:
 	Fb phase
 		https://developers.facebook.com/apps/2768586640032497/settings/basic/

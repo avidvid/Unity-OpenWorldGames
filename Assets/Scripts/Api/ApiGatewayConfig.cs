@@ -22,8 +22,7 @@ public class ApiGatewayConfig : MonoBehaviour
     private const string ApiStage = "prod/";
     private string _apiGate = "";
     private string _uri =  "";
-
-    private int _userId=22;
+    private int _userId;
 
     private List<UserItem> _oldUserInventory =new List<UserItem>();
     private int _firstWaveTarget;
@@ -310,9 +309,9 @@ public class ApiGatewayConfig : MonoBehaviour
     internal void SaveUserPlayer(UserPlayer userPlayer)
     {
         //mins is the minutes that the user should stay locked 
-        var _apiGate = "GetUserPlayer";
+         _apiGate = "GetUserPlayer";
         print("Saving" + userPlayer.MyInfo());
-        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userPlayer.Id.ToString());
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userPlayer.Id.ToString());
         if (userPlayer.Latitude == 0 && userPlayer.Longitude == 0)
         {
             var locationHelper = LocationHelper.Instance();
@@ -329,17 +328,10 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     internal void SaveCharacterSetting(CharacterSetting characterSetting)
     {
-        var _apiGate = "GetCharacterSetting";
-        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterSetting.Id.ToString());
-        var action = "Update";
-        if (characterSetting.Life == 100)
-        {
-            action = "Insert";
-            characterSetting.Life = 0;
-        }
+        _apiGate = "GetCharacterSetting";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterSetting.Id.ToString());
         ApiRequest ap = new ApiRequest
         {
-            Action = action,
             CharacterSetting = characterSetting
         };
         StartCoroutine(PutRequest(_uri, ap));

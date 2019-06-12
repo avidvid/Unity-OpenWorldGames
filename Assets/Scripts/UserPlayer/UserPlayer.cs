@@ -128,7 +128,8 @@ public class UserPlayer  {
                    " SoundVolume=" + SoundVolume +
                    " LastLogin=" + LastLogin + "(" + GetLastLogin() + ")" +
                    " LockUntil=" + LockUntil + "(" + GetLockUntil() + ")" +
-                   " LockMins=" + LockMins;
+                   " LockMins=" + LockMins +
+                   " IsEnable=" + IsEnable;
         }
         catch (Exception e)
         {

@@ -216,7 +216,7 @@ PrefabInstance:
     - target: {fileID: 114887367651763714, guid: 8e85a375406e1034cb93a224e9e89c6b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114887367651763714, guid: 8e85a375406e1034cb93a224e9e89c6b,
         type: 3}
@@ -380,7 +380,7 @@ PrefabInstance:
     - target: {fileID: 114887367651763714, guid: 8e85a375406e1034cb93a224e9e89c6b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114887367651763714, guid: 8e85a375406e1034cb93a224e9e89c6b,
         type: 3}
@@ -809,7 +809,7 @@ PrefabInstance:
     - target: {fileID: 114887367651763714, guid: 8e85a375406e1034cb93a224e9e89c6b,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114887367651763714, guid: 8e85a375406e1034cb93a224e9e89c6b,
         type: 3}
@@ -1722,10 +1722,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36f372a9ad4653441a65556df89b8363, type: 3}
---- !u!224 &448417125 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2126458344575316381, guid: 36f372a9ad4653441a65556df89b8363,
-    type: 3}
+--- !u!4 &448417125 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 448417124}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &467024719
@@ -3703,6 +3702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultSprite: {fileID: 21300004, guid: 7b30c24227171894ea7f7a1bfe1186e0, type: 3}
   ItemLocked: 0
+  Deactive: 1
   TargetResearch:
     Id: 0
     Name: 
@@ -3814,7 +3814,7 @@ PrefabInstance:
     - target: {fileID: 224785683726118060, guid: ab5700b20359d514d96e532474319f7a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 224785683726118060, guid: ab5700b20359d514d96e532474319f7a,
         type: 3}
@@ -3881,6 +3881,12 @@ PrefabInstance:
 --- !u!224 &1016384894 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224785683726118060, guid: ab5700b20359d514d96e532474319f7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1016384893}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1016384895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1877868462633754, guid: ab5700b20359d514d96e532474319f7a,
     type: 3}
   m_PrefabInstance: {fileID: 1016384893}
   m_PrefabAsset: {fileID: 0}
@@ -4329,7 +4335,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LockSprite: {fileID: 21300010, guid: 7e9d88b801724754d98182f02f7808e2, type: 3}
-  ShowInventory: 0
 --- !u!1 &1179196868
 GameObject:
   m_ObjectHideFlags: 0
@@ -4590,6 +4595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultSprite: {fileID: 21300014, guid: 7b30c24227171894ea7f7a1bfe1186e0, type: 3}
   ItemLocked: 0
+  Deactive: 1
 --- !u!1 &1208083056
 GameObject:
   m_ObjectHideFlags: 0
@@ -6021,10 +6027,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36f372a9ad4653441a65556df89b8363, type: 3}
---- !u!224 &1656862563 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2126458344575316381, guid: 36f372a9ad4653441a65556df89b8363,
-    type: 3}
+--- !u!4 &1656862563 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 1656862562}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1665850571
@@ -7931,6 +7936,17 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1016384895}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null

@@ -40,7 +40,7 @@ public class TerrainDatabase : MonoBehaviour {
     void Start()
     {
         _terrainDatabase = TerrainDatabase.Instance(); 
-         _characterDatabase = CharacterDatabase.Instance();
+        _characterDatabase = CharacterDatabase.Instance();
         Debug.Log("***TDB*** Start!");
     }
     #region Regions    

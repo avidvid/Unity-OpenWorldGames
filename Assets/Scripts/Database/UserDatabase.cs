@@ -64,20 +64,11 @@ public class UserDatabase : MonoBehaviour
     }
     public bool StartGameValidation()
     {
-        //Todo: new user work starts here 
         if (_userPlayer == null)
         {
+            //New User
             GoToStartScene();
             return false;
-        }
-        if (_characterSetting == null)
-        {
-            //Unknown path
-            throw new Exception("UDB-Character Setting doesn't Exists!!!");
-            print("CharacterSetting is empty");
-            GoToStartScene();
-            return false;
-            //throw new Exception("UDB-Character Setting doesn't Exists!!!");
         }
         //Set Location Values
         var locationHelper = LocationHelper.Instance();
@@ -87,15 +78,31 @@ public class UserDatabase : MonoBehaviour
         _terrainDatabase.SetRegion(_userPlayer.Latitude, _userPlayer.Longitude);
         if (DateTime.Now < _userPlayer.GetLockUntil())
         {
+            //Lock User
             print("UserPlayer is Locked now = " + Convert.ToDateTime(_userPlayer.LastLogin) + "(" + DateTime.Now + ") (" + _userPlayer.GetLastLogin() + ")"
-                                                + "AddMinutes = " + _userPlayer.LockMins
-                                                + "LockUntil = " + Convert.ToDateTime(_userPlayer.LockUntil) + "(" + _userPlayer.GetLockUntil() + ")");
+                  + "AddMinutes = " + _userPlayer.LockMins
+                  + "LockUntil = " + Convert.ToDateTime(_userPlayer.LockUntil) + "(" + _userPlayer.GetLockUntil() + ")");
             GoToWaitScene();
             return false;
         }
         _userPlayer.LockMins = 0;
         SaveUserPlayer(_userPlayer);
-        _userPlayer.Print();
+        Debug.Log("UD-UserPlayer Verified  = " + _userPlayer.MyInfo());
+
+        if (_characterSetting == null)
+            throw new Exception("UDB-Character Setting doesn't Exists!!!");
+        if (_characterSetting.Id == 0)
+        {
+            //No active character
+            GoToStartScene();
+            return false;
+        }
+        if (!_characterSetting.Alive)
+        {
+            //Dead active character
+            SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
+            return false;
+        }
         return true;
     }
     #endregion

@@ -89,6 +89,7 @@ public class CharacterSetting {
                    + " Coin:" + Coin
                    + " Mana:" + Mana
                    + " Intellect:" + Intellect
+                   + " IsEnable=" + IsEnable
                 ;
         }
         catch (Exception e)

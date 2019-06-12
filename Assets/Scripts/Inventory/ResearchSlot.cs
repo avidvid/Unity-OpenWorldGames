@@ -18,6 +18,7 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     private Transform _parent;
     public bool ItemLocked;
     private bool _setEmpty;
+    private bool _dragOn;
 
     public Research TargetResearch;
     public int Level;
@@ -119,25 +120,25 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         _characterManager.SetCharacterResearchingTime();
         _time = DateTime.Now;
     }
-
-
     public void OnDrag(PointerEventData eventData)
     {
         if (ItemLocked)
             return;
         if (TargetResearch == null)
             return;
+        _dragOn = true;
         this.transform.position = eventData.position - _offset;
     }
-
     public void OnEndDrag(PointerEventData eventData)
     {
         if (ItemLocked)
             return;
+        if (!_dragOn)
+            return;
+        _dragOn = false;
         this.transform.position = _parent.position;
         this.transform.SetParent(_parent);
         this.transform.SetSiblingIndex(0);
-
         if (TargetResearch == null)
         {
             TextMeshProUGUI[] texts = this.transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
@@ -145,21 +146,19 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         }
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
-
     internal bool IsEmpty()
     {
         if (TargetResearch == null)
             return true;
         return false;
     }
-
     internal void LoadResearch(CharacterResearching researching)
     {
         LoadResearch(researching.ResearchId, researching.Level, researching.ResearchTime);
     }
     internal void LoadResearch(int researchId, int level, string time)
     {
-        LoadResearch(researchId, level, Convert.ToDateTime(time));
+        LoadResearch(researchId, level, time == "Now" ? DateTime.Now : Convert.ToDateTime(time));
     }
     internal void LoadResearch(int researchId,int level, DateTime time)
     {
@@ -170,7 +169,6 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         _time = time;
         ItemLocked = true;
     }
-
     public void LoadEmpty()
     {
         ItemLocked = false;
@@ -189,7 +187,4 @@ public class ResearchSlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         }
         return _researchingSlot;
     }
-
-
 }
-

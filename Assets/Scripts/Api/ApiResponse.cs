@@ -20,7 +20,6 @@ public class BodyResponse
 {
     public string Message;
     public int UserId = 0;
-    public int HealthCheck;
     public List<ItemContainer> Items;
     public List<Recipe> Recipes;
     public List<Offer> Offers;

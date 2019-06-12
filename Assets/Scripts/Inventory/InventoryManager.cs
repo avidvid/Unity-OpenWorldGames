@@ -79,7 +79,6 @@ public class InventoryManager : MonoBehaviour
         var carryItems = UserInvItems.FindAll(l => !l.UserItem.Equipped && !l.UserItem.Stored).Count;
         return _characterManager.CharacterSetting.CarryCnt > carryItems;
     }
-
     internal void PrintInventory()
     {
         var userInv = "";

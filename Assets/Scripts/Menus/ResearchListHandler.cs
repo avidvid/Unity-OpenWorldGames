@@ -21,6 +21,7 @@ public class ResearchListHandler : MonoBehaviour {
 
     void Awake()
     {
+        //For each research in db we need an object in the game and line correctly named by id
         _messagePanelHandler = MessagePanelHandler.Instance();
         _characterManager =CharacterManager.Instance();
         _contentPanel = GameObject.Find("ContentPanel");
@@ -63,7 +64,7 @@ public class ResearchListHandler : MonoBehaviour {
                 var button = uiResearch.GetComponentInChildren<Button>();
                 button.name = _researches[i].Id.ToString();
                 //There is another active research progressing 
-                if (_characterManager.CharacterResearching!= null)
+                if (_characterManager.CharacterResearching.Id!= 0)
                 {
                     //blink the active building Research 
                     if (_characterManager.CharacterResearching.ResearchId == _researches[i].Id)
@@ -83,10 +84,6 @@ public class ResearchListHandler : MonoBehaviour {
                 }
             }
         }
-    }
-    void Update()
-    {
-
     }
     private void DoResearch()
     {
@@ -131,7 +128,6 @@ public class ResearchListHandler : MonoBehaviour {
         NewResearchInProgress(researchId);
         _messagePanelHandler.ShowMessage(research.Name + " is in progress ! ", MessagePanel.PanelType.Ok);
     }
-
     private void NewResearchInProgress(int researchId)
     {
         List<ResearchData> uiResearches = _contentPanel.GetComponentsInChildren<ResearchData>().ToList();
@@ -146,7 +142,6 @@ public class ResearchListHandler : MonoBehaviour {
                 images[1].gameObject.AddComponent<BlinkMe>();
         }
     }
-    
     internal void MakeResearching(Research  research, int nextLevel)
     {
         float speed = _characterManager.GetCharacterAttribute("Researching");
@@ -171,11 +166,11 @@ public class ResearchListHandler : MonoBehaviour {
         //Research Requirement 
         foreach (var chResearch in _characterResearches)
         {
-            if (research.RequiredResearchId1 == chResearch.ResearchId && research.RequiredResearchLevel1 >= chResearch.Level)
+            if (research.RequiredResearchId1 == chResearch.ResearchId && research.RequiredResearchLevel1 <= chResearch.Level)
                 research1 = true;
-            if (research.RequiredResearchId2 == chResearch.ResearchId && research.RequiredResearchLevel2 >= chResearch.Level)
+            if (research.RequiredResearchId2 == chResearch.ResearchId && research.RequiredResearchLevel2 <= chResearch.Level)
                 research2 = true;
-            if (research.RequiredResearchId3 == chResearch.ResearchId && research.RequiredResearchLevel3 >= chResearch.Level)
+            if (research.RequiredResearchId3 == chResearch.ResearchId && research.RequiredResearchLevel3 <= chResearch.Level)
                 research3 = true;
         }
         //Item Requirement 

@@ -25,7 +25,7 @@ public class DeviceHandler : MonoBehaviour
             {
                 var macAddresses = nic.GetPhysicalAddress().ToString();
                 if (macAddresses != "")
-                    return macAddresses+"1";
+                    return macAddresses;
             }
         }
         throw new Exception("No Device Id!!!");

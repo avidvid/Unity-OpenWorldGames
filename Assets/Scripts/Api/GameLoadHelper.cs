@@ -17,12 +17,13 @@ public class GameLoadHelper : MonoBehaviour
     {
         if (_slider.value >= _slider.maxValue)
         {
-            SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
             print("***###*** Welcome ***###***");
+            SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
         }
     }
     internal void LoadingThumbsUp()
     {
         _slider.value += _slider.maxValue / Targets;
     }
+    //Middle man to
 }

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameOverHandler : MonoBehaviour {
 
     private CharacterManager _characterManager;
+    private MessagePanelHandler _messagePanelHandler;
 
     GameObject _buttonUseLife;
     GameObject _buttonBuyLife;
@@ -15,6 +16,7 @@ public class GameOverHandler : MonoBehaviour {
     void Awake()
     {
         _characterManager = CharacterManager.Instance();
+        _messagePanelHandler = MessagePanelHandler.Instance();
     }
 
     // Use this for initialization
@@ -24,12 +26,21 @@ public class GameOverHandler : MonoBehaviour {
         _buttonUseLife = GameObject.Find("ButtonUseLife");
         _buttonBuyLife =GameObject.Find("ButtonBuyLife");
         if (_settings.Life > 0)
+        {
             _buttonBuyLife.SetActive(false);
+            var title = _buttonUseLife.GetComponentInChildren<TextMeshProUGUI>();
+            title.text += _settings.Name;
+        }
         else
             _buttonUseLife.SetActive(false);
     }
     public void GoToStartScene()
     {
+        _messagePanelHandler.ShowMessage("Are you sure you want to lose all your progress with "+_settings.Name+"?", MessagePanel.PanelType.YesNo, StartNewCharacter);
+    }
+    private void StartNewCharacter()
+    {
+        _characterManager.KillCharacter();
         SceneManager.LoadScene(SceneSettings.SceneIdForStart);
     }
     public void GoToStoreScene()
@@ -47,7 +58,6 @@ public class GameOverHandler : MonoBehaviour {
     public void UseLife()
     {
         _characterManager.ReviveCharacter();
-        //todo: go to base 
-        SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
+        SceneManager.LoadScene(SceneSettings.SceneIdForWait);
     }
 }

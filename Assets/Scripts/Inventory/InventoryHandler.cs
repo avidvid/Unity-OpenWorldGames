@@ -21,7 +21,6 @@ public class InventoryHandler : MonoBehaviour
     private ItemMixture _itemMixture;
     private ResearchSlot _researchingSlot;
     private GameObject _inventoryPanel;
-    private GameObject _popupAction; 
     private GameObject _slotPanel;
     
     private GameObject _inventorySlot;
@@ -35,7 +34,6 @@ public class InventoryHandler : MonoBehaviour
     internal SlotEquipment[] EquiSlots = new SlotEquipment[14];
 
     private int _slotAmount =30;
-    public bool ShowInventory;
 
     // Use this for initialization
     void Start()
@@ -50,7 +48,6 @@ public class InventoryHandler : MonoBehaviour
         _researchingSlot = ResearchSlot.Instance();
         _GUIManager = GUIManager.Instance();
 
-        _popupAction = GameObject.Find("Popup Action");
         _inventoryPanel = GameObject.Find("Inventory Panel");
         _slotPanel = _inventoryPanel.transform.Find("Slot Panel").gameObject;
 
@@ -158,11 +155,6 @@ public class InventoryHandler : MonoBehaviour
     }
     void Update()
     {
-        if (ShowInventory )
-        {
-            _inventoryPanel.SetActive(true);
-            ShowInventory = false;
-        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (_inventoryPanel.activeSelf)
@@ -171,7 +163,6 @@ public class InventoryHandler : MonoBehaviour
                 _inventoryPanel.SetActive(true);
         }
     }
-
     public bool UseItem(ItemIns item)
     {
         if (item == null)
@@ -187,15 +178,12 @@ public class InventoryHandler : MonoBehaviour
         PrintMessage("Not enough energy to use this item", Color.yellow);
         return false;
     }
-
     public void UnUseItem(ItemIns item)
     {
         if (item == null)
             return;
         _characterManager.CharacterSettingUnuseItem(item, true);
     }
-
-
     internal bool HaveAvailableSlot()
     {
         var carryItems = _userInventory.FindAll(l => !l.UserItem.Equipped && !l.UserItem.Stored).Count;
@@ -228,12 +216,10 @@ public class InventoryHandler : MonoBehaviour
         }
         return availableSlot;
     }
-
     internal bool UseEnergy(int amount)
     {
         return _characterManager.UseEnergy(amount);
     }
-
     public void UpdateInventory()
     {
         Debug.Log("IH-Lets Save Inv at" + DateTime.Now);
@@ -243,7 +229,6 @@ public class InventoryHandler : MonoBehaviour
     {
         _inventoryManager.DeleteItemFromInventory(itemIns);
     }
-
     //Should match with the AddItemToInventory in CharacterManager
     public bool AddItemToInventory(ItemContainer item, int stackCnt =1,int order=-1)
     {
@@ -317,14 +302,6 @@ public class InventoryHandler : MonoBehaviour
         }
         return null;
     }
-    public void OpenInventoryPanel()
-    {
-        _popupAction.SetActive(false);
-        if (_inventoryPanel.activeSelf)
-            _inventoryPanel.SetActive(false);
-        else
-            _inventoryPanel.SetActive(true);
-    }
     public bool InventoryPanelStat()
     {
         return _inventoryPanel.activeSelf;
@@ -340,6 +317,10 @@ public class InventoryHandler : MonoBehaviour
                 SceneManager.LoadScene(SceneSettings.SceneIdForRecipes);
             }
         }
+    }
+    internal void SetInventoryPanel(bool value)
+    {
+        _inventoryPanel.SetActive(value);
     }
     public void GoToResearchScene()
     {

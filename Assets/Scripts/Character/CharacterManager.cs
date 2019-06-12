@@ -111,8 +111,6 @@ public class CharacterManager : MonoBehaviour
             _nextActionTime += period;
             if (CharacterSetting.Id == 0)
                 return;
-            if (CharacterSettingHealthCheck())
-                throw new Exception("CM-Character Setting Health Check Failed!!!");
             if (CharacterSetting.Energy < CharacterSetting.MaxEnergy)
                 CharacterSetting.Energy += 100;
             if (CharacterSetting.Health < CharacterSetting.MaxHealth)
@@ -131,23 +129,6 @@ public class CharacterManager : MonoBehaviour
             LevelCalculations();
             StartCoroutine(LevelUpFadeInOut(CharacterSetting.Level));
         }
-    }
-    private bool CharacterSettingHealthCheck()
-    {
-        if (CharacterSetting.Id == -1)
-            return true;
-        if (CharacterSetting.Health < 0 && CharacterSetting.Alive)
-            AddCharacterSetting("Alive", 0);
-        if (!CharacterSetting.Alive)
-        {
-            Scene scene = SceneManager.GetActiveScene();
-            if (scene.buildIndex == SceneSettings.SceneIdForStore ||
-                scene.buildIndex == SceneSettings.SceneIdForGameOver)
-                return true;
-            OpenGameOver();
-            return true;
-        }
-        return false;
     }
     public Recipe FindUserRecipes(int first, int second)
     {
@@ -393,7 +374,7 @@ public class CharacterManager : MonoBehaviour
         {
             case "Health":
                 CharacterSetting.Health += (int)value;
-                if (CharacterSetting.Health < 0)
+                if (CharacterSetting.Health <= 0)
                     GameOverCalculations();
                 if (CharacterSetting.Health > CharacterSetting.MaxHealth)
                     CharacterSetting.Health = CharacterSetting.MaxHealth;
@@ -508,6 +489,17 @@ public class CharacterManager : MonoBehaviour
     //Calculations
     private void LoginCalculations()
     {
+        if (CharacterSetting.Health < 0 && CharacterSetting.Alive)
+            AddCharacterSetting("Alive", 0);
+        if (!CharacterSetting.Alive)
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            print("scene = " + scene.buildIndex);
+            if (scene.buildIndex == SceneSettings.SceneIdForStore || scene.buildIndex == SceneSettings.SceneIdForGameOver)
+                return;
+            SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
+            return;
+        }
         var diffInSeconds = (Convert.ToDateTime(UserPlayer.LastLogin) - DateTime.Now).TotalSeconds;
         if (diffInSeconds > 200)
         {
@@ -531,7 +523,11 @@ public class CharacterManager : MonoBehaviour
         var level = CharacterSetting.Level;
         CharacterSetting.MaxExperience = CalculateXp(level);
         //#Health/Mana/Energy
-        float lastPercentage = (float)CharacterSetting.Health / CharacterSetting.MaxHealth;
+        float lastPercentage;
+        if (level == 0)
+            lastPercentage = 1;
+        else
+            lastPercentage = (float)CharacterSetting.Health / CharacterSetting.MaxHealth;
         CharacterSetting.MaxHealth = ((int)MyCharacter.Body + level) * 100;
         CharacterSetting.Health = (int)lastPercentage * CharacterSetting.MaxHealth;
         lastPercentage = (float)CharacterSetting.Mana / CharacterSetting.MaxMana;
@@ -540,12 +536,6 @@ public class CharacterManager : MonoBehaviour
         lastPercentage = (float)CharacterSetting.Energy / CharacterSetting.MaxEnergy;
         CharacterSetting.MaxEnergy = CharacterSetting.MaxHealth * 2;
         CharacterSetting.Energy = (int)lastPercentage * CharacterSetting.MaxEnergy;
-        if (level == 0)
-        {
-            CharacterSetting.Health = CharacterSetting.MaxHealth;
-            CharacterSetting.Mana = CharacterSetting.MaxMana;
-            CharacterSetting.Energy = CharacterSetting.MaxEnergy;
-        }
         //#Speed
         CharacterSetting.Speed = (int)MyCharacter.Speed + level / 10;
         CharacterSetting.SpeedAttack = CharacterSetting.Speed;
@@ -591,10 +581,17 @@ public class CharacterManager : MonoBehaviour
     internal void ReviveCharacter()
     {
         CharacterSetting.Alive = true;
-        CharacterSetting.Life = 0;
+        CharacterSetting.Life--;
         CharacterSetting.Health = CharacterSetting.MaxHealth;
+        CharacterSetting.Mana = CharacterSetting.MaxMana;
+        CharacterSetting.Energy = CharacterSetting.MaxEnergy;
         CharacterSetting.Updated = true;
         SetLockTill((int) Mathf.Pow(CharacterSetting.Level, 3) + 3);
+        SaveCharacterSetting(CharacterSetting);
+    }
+    internal void KillCharacter()
+    {
+        CharacterSetting.IsEnable= false;
         SaveCharacterSetting(CharacterSetting);
     }
     private void GameOverCalculations()
@@ -675,13 +672,13 @@ public class CharacterManager : MonoBehaviour
         if (_spellSprite == null)
             _spellSprite = CharacterSetting.GetSpellSprite();
         return _spellSprite;
-    }
+    }    
     //Scene manager
     public void OpenGameOver()
     {
         SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
     }
-    //Middle man to CharacterDatabase
+    //Scene manager CharacterDatabase
     internal void SetLockTill(int minutes=0)
     {
         UserPlayer.LockMins = minutes;

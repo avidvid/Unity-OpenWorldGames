@@ -255,16 +255,16 @@ public class OfferListHandler : MonoBehaviour {
         {
             case "Wait":
                 SceneManager.LoadScene(SceneSettings.SceneIdForWait);
-                return;
+                break;
             case "GameOver":
                 SceneManager.LoadScene(SceneSettings.SceneIdForGameOver);
-                return;
-            case "Terrain":
-                SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
-                return;
+                break;
             case "Inside":
                 SceneManager.LoadScene(SceneSettings.SceneIdForInsideBuilding);
-                return;
+                break;
+            default:
+                SceneManager.LoadScene(SceneSettings.SceneIdForTerrainView);
+                break;
         }
     }
 }

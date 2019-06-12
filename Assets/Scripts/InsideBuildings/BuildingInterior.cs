@@ -38,7 +38,6 @@ public class BuildingInterior : MonoBehaviour {
     private List<ActiveItemType> _items = new List<ActiveItemType>();
     List<Vector3> _floors = new List<Vector3>();
 
-
     private GameObject _monsterObj;
 
     void Start()
@@ -47,17 +46,14 @@ public class BuildingInterior : MonoBehaviour {
         _terrainDatabase = TerrainDatabase.Instance();
         _characterManager = CharacterManager.Instance();
         _itemDatabase = ItemDatabase.Instance();
-
         _key = _terrainDatabase.GetRegionKey();
         _monsterObj = Resources.Load<GameObject>("Prefabs/Monster");
-
         var starter = GameObject.FindObjectOfType<SceneStarter>();
         if (starter != null)
         {
             _mapPosition = starter.MapPosition;
             _previousPosition = starter.PreviousPosition;
         }
-
         _floor = FloorTiles[RandomHelper.Range(new Vector2(_mapPosition.x + 0.01f, _mapPosition.y + 0.01f), _key, FloorTiles.Length)];
         //print("Building Interior _floor: "  +"  " + _floor.name);
         _story  = _terrainDatabase.GetStoryBasedOnRarity(_mapPosition, _key);
