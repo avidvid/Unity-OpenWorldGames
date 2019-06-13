@@ -16,7 +16,6 @@ public class ItemContainer
         Quest,
         Empty
     }
-
     public enum PlaceType
     {
         Head,   // Hat, Crown
@@ -42,7 +41,6 @@ public class ItemContainer
         ThreeHands,
         FourHands
     }
-
     public int Id;
     public string Name ;
     public string Description ;
@@ -159,7 +157,6 @@ public class ItemContainer
                 (Unique?" Unique":"")
             ;
     }
-
     private string TypeInfo()
     {
         switch (Type)

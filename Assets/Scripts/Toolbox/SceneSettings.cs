@@ -18,6 +18,8 @@ public class SceneSettings {
     public const int SceneIdForResearch = 11;
     public const int SceneIdForCharacterScene = 12;
     public const int SceneIdForFightMonster = 13;
+    //public const int SceneIdForLoading = 14;
+    public const int SceneIdForMailMessage = 15;
 
     public static void BuildStarter(string domain = null, string content = null)
     {

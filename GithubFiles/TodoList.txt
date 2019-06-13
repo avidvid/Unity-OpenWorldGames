@@ -1,11 +1,6 @@
 ﻿Remember 
 Users Want to do what they want, not what you want them to do 
 
-#3.4 Change attack ellemnt 
-	https://www.youtube.com/watch?v=wntKVHVwXnc
-#3.5 Unity RPG Tutorial - Spell effect
-
-
 ###############
 #### Iran #####
 ###############
@@ -43,22 +38,44 @@ Shop:
 ####Office#####
 ###############	
 
-Bug: 
-//Todo: this should not be click able if inside  
+Clan up the names of lambda and api
+
+Mailing/Messaging/Chat phase
+	mail box	
+	messaging system 
+	https://www.youtube.com/watch?v=IRAeJgGkjHk
+	https://www.youtube.com/watch?v=7_BCbzRMi2w
+	
+
+
+user agreement phase
+	https://termsfeed.com/blog/sample-eula-template/	
+	https://termsfeed.com/blog/terms-conditions-games/
+
 Story writing phase
 
-
-Clan up the names of lambda and api
+Gift phase : 	Gift recepie and characters 
 
 change back up file for OUP to not go to drive one 
 http://zikmund.me/blog/changing-default-project-directory-visual-studio-2017/
 
+Clan phase	
 
-APi Weather: https://www.red-gate.com/simple-talk/dotnet/c-programming/calling-restful-apis-unity3d/
-device id or email to be saved in userplayer
+	Clan page
+	Create Clan
 
-inside monster on walk not passing the walls
-Gift phase : 	Gift recepie and characters 
+Rank phase
+	scene Player rank chart and pictures !!
+	Logic of moving in the ranks
+	Rank calculation 	for each 10 in a row kill equal or higher rank get an ubgrade for each 5 in a row lose decend a rank 
+
+	
+Character ellemnt phase
+
+
+###############
+####Others#####
+###############	
 
 https://chicagophotos.shutterbooth.com/May-2019
 http://leatherbonding.com/
@@ -66,8 +83,6 @@ https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019
 	https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019/registry
 -----
 
-	
-	
 ###############
 #### Data #####
 ###############	
@@ -118,41 +133,20 @@ UserCharacter
   "UserId": 1077749210
 }
 
-CharacterResearching
-{
-  "Id": 1,
-  "Level": 3,
-  "ResearchId": 1,
-  "ResearchTime": "2019-03-04T12:10:51.227442-06:00",
-  "UserId": 22
-}
-Req body :
-{"header":"OUP","UserPlayer":{"Id":22,"UserName":"Avid30","Description":"Developer Tested","SoundVolume":0.01216695737093687,"Latitude":30.267200469970704,"Longitude":-97.84310150146485,"Gem":1530,"HealthCheck":6172,"Rank":0,"PRank":0,"ClanId":-1,"ClanRank":0,"FBLoggedIn":true,"FBid":"10213815927848642","GLoggedIn":false,"IsEnable":true}}
-
-{
-    "id" : "$input.params('id')",
-    "all-params": "$input.params()",
-    "body": $input.json('$')
-}
-
-Items: 
-      <Id>1</Id> 2001
-      <Id>2</Id> 1001
-      <Id>3</Id> 5001
-      <Id>4</Id> 3001
-      <Id>5</Id> 3002
-      <Id>6</Id> 4001
-      <Id>7</Id> 4002
-      <Id>8</Id> 1
-      <Id>9</Id> 2
-      <Id>10</Id> 3
-      <Id>11</Id> 4
-
 
 	
 ###############
 #### Plan #####
 ###############	
+
+
+Use APi Weather
+
+Bug- Inside monster on walk not passing the walls
+Smart Path 
+
+
+
 
 Before lunch part:
 	Fb phase
@@ -162,38 +156,6 @@ Before lunch part:
 		Terms of Service URL
 		Wiki page 
 			
-	Clan phase	
-	
-		Clan page
-		Create Clan
-	
-	Rank phase
-		scene Player rank chart and pictures !!
-		Logic of moving in the ranks
-		Rank calculation 	for each 10 in a row kill equal or higher rank get an ubgrade for each 5 in a row lose decend a rank 
-	
-		
-	Character ellemnt phase
-	
-
-	Monster phase
-		monster in the map have diffrent style of attack 
-	
-
-	Mailing/Messaging/Chat phase
-		mail box	
-		messaging system 
-		https://www.youtube.com/watch?v=IRAeJgGkjHk
-		https://www.youtube.com/watch?v=7_BCbzRMi2w
-		
-	
-
-	user agreement phase
-		https://termsfeed.com/blog/sample-eula-template/	
-		https://termsfeed.com/blog/terms-conditions-games/
-	
-	
-
 UI Phase
 Add ellements 
 Make more the animations  for movings

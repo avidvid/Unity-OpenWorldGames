@@ -16,10 +16,8 @@ public class LocationHelper : MonoBehaviour
         {
             print("isEnabledByUser Not");
         }
-
         // Start service before querying location
         Input.location.Start();
-
         // Wait until service initializes
         int maxWait = 20;
         while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
@@ -28,14 +26,12 @@ public class LocationHelper : MonoBehaviour
             yield return new WaitForSeconds(1);
             maxWait--;
         }
-
         // Service didn't initialize in 20 seconds
         if (maxWait < 1)
         {
             print("Timed out");
             yield break;
         }
-
         // Connection has failed
         if (Input.location.status == LocationServiceStatus.Failed)
         {
@@ -46,9 +42,9 @@ public class LocationHelper : MonoBehaviour
         {
             // Access granted and location value could be retrieved
             print("Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude + " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy + " " + Input.location.lastData.timestamp);
+            //TODO Latitude and Longitude need to be salted for security protection 
             _latitude = Input.location.lastData.latitude;
             _longitude = Input.location.lastData.longitude;
-
             if (_latitude == 0 && _longitude == 0)
             {
                 _latitude = 30.2672f;
@@ -58,12 +54,10 @@ public class LocationHelper : MonoBehaviour
         // Stop service if there is no need to query location updates continuously
         Input.location.Stop();
     }
-
     public Vector2 GetLocation()
     {
         return new Vector2(_latitude,_longitude);
     }
-
     #region LocationHelper Instance
     public static LocationHelper Instance()
     {
@@ -76,5 +70,4 @@ public class LocationHelper : MonoBehaviour
         return _locationHelper;
     }
     #endregion
-
 }

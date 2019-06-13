@@ -11,12 +11,14 @@ public class UserDatabase : MonoBehaviour
     private TerrainDatabase _terrainDatabase;
 
     private UserPlayer _userPlayer;
+    private List<UserPlayer> _allUsers;
     private List<UserItem> _userInventory = new List<UserItem>();
     private List<UserCharacter> _userCharacters = new List<UserCharacter>();
     private List<Character> _myCharacters = new List<Character>();
     private CharacterMixture _characterMixture;
     private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
     private CharacterResearching _characterResearching;
+
     private CharacterSetting _characterSetting;
     private List<UserRecipe> _userRecipes = new List<UserRecipe>();
     private List<Recipe> _myRecipes;
@@ -39,10 +41,6 @@ public class UserDatabase : MonoBehaviour
         _terrainDatabase = TerrainDatabase.Instance();
         _apiGatewayConfig =ApiGatewayConfig.Instance();
         Debug.Log("***UDB*** Start!");
-    }
-    // Update is called once per frame
-    void Update()
-    {
     }
     #region UserPlayer
     public UserPlayer GetUserPlayer()
@@ -104,6 +102,19 @@ public class UserDatabase : MonoBehaviour
             return false;
         }
         return true;
+    }
+    internal UserPlayer GetUserById(int id)
+    {
+        //todo: get all the users 
+        if (_allUsers.Count<0)
+        {
+            _allUsers.Add(_userPlayer);
+        }
+
+        for (int i = 0; i < _allUsers.Count; i++)
+            if (_allUsers[i].Id == id)
+                return _allUsers[i];
+        return null;
     }
     #endregion
     #region UserInventory

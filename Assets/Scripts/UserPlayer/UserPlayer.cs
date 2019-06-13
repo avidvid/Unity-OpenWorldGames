@@ -53,8 +53,7 @@ public class UserPlayer  {
     public string LockUntil;
     private DateTime _localLockUntil;
     public int LockMins;
-    public UserPlayer.PlayerRanks Rank;
-    public int PRank;
+    public UserPlayer.PlayerRanks PRank;
     public int ClanId;
     public UserPlayer.ClanRanks ClanRank;
     public bool FBLoggedIn;
@@ -76,7 +75,6 @@ public class UserPlayer  {
         LastLogin = "";
         LockUntil = "";
         LockMins = 0;
-        Rank = 0;
         PRank = 0;
         ClanId = 0;
         ClanRank = 0;
@@ -117,7 +115,7 @@ public class UserPlayer  {
         try
         {
             return Id + "-" + UserName +
-                   " Rank =" + Rank +
+                   " Rank =" + PRank +
                    "(" + Latitude + "," + Longitude + ")" +
                    " Gem=" + Gem +
                    " FBLoggedIn=" + FBLoggedIn +

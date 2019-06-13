@@ -91,12 +91,16 @@ public class ItemMixture : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         if (ItemIns == null)
             return;
-        if (_time < DateTime.Now)
+        Button btn = this.transform.parent.GetComponentInChildren<Button>();
+        if (!btn.interactable)
             return;
-        _messagePanelHandler.ShowMessage("Are you sure you want to buy out your wait time for " + TimeHandler.GemTimeValue(_time - DateTime.Now) + " gem(s)?",
-            MessagePanel.PanelType.YesNo,
-            SpendGem,
-            SceneSettings.GoToRecipeScene);
+        if (_time < DateTime.Now)
+            SceneSettings.GoToRecipeScene();
+        else
+            _messagePanelHandler.ShowMessage("Are you sure you want to buy out your wait time for " + TimeHandler.GemTimeValue(_time - DateTime.Now) + " gem(s)?",
+                MessagePanel.PanelType.YesNo,
+                SpendGem,
+                SceneSettings.GoToRecipeScene);
     }
     private void SpendGem()
     {
