@@ -18,6 +18,7 @@ public class UserDatabase : MonoBehaviour
     private CharacterMixture _characterMixture;
     private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
     private CharacterResearching _characterResearching;
+    private List<MailMessage> _mailMessages = new List<MailMessage>();
 
     private CharacterSetting _characterSetting;
     private List<UserRecipe> _userRecipes = new List<UserRecipe>();
@@ -115,6 +116,15 @@ public class UserDatabase : MonoBehaviour
             if (_allUsers[i].Id == id)
                 return _allUsers[i];
         return null;
+    }
+    internal void UpdateAllUserPlayers(List<UserPlayer> userPlayers)
+    {
+        _allUsers = userPlayers;
+        Debug.Log("UDB-AllUsers.Count = " + _allUsers.Count);
+    }
+    internal List<UserPlayer> GetAllUserPlayers()
+    {
+        return _allUsers;
     }
     #endregion
     #region UserInventory
@@ -457,6 +467,18 @@ public class UserDatabase : MonoBehaviour
         var itemDatabase = ItemDatabase.Instance();
         Recipe recipe = itemDatabase.GetRecipeById(userRecipe.RecipeId);
         _myRecipes.Add(recipe);
+    }
+    #endregion
+    #region MailMessages    
+    public List<MailMessage> GetMailMessages()
+    {
+        return _mailMessages;
+    }
+    internal void UpdateMailMessages(List<MailMessage> mailMessages)
+    {
+        _mailMessages = mailMessages;
+        Debug.Log("UDB-MailMessages.Count = " + _mailMessages.Count);
+        foreach (var msg in _mailMessages) msg.Print();
     }
     #endregion
     private void GoToStartScene()

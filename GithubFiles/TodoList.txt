@@ -38,7 +38,10 @@ Shop:
 ####Office#####
 ###############	
 
-Clan up the names of lambda and api
+todo: Add the mail to the list and db 
+
+
+
 
 Mailing/Messaging/Chat phase
 	mail box	

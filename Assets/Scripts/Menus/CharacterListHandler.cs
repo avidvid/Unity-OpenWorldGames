@@ -13,7 +13,6 @@ public class CharacterListHandler : MonoBehaviour
     //Character Prefab
     public GameObject CharacterContent;
 
-    private List<Character> _characters = new List<Character>();
     private GameObject _addCharacterPanel;
     internal bool SceneRefresh;
 
@@ -27,22 +26,22 @@ public class CharacterListHandler : MonoBehaviour
         var contentPanel = GameObject.Find("ContentPanel");
         var characterInfo = GameObject.Find("CharacterInfo").GetComponent<TextMeshProUGUI>();
         _addCharacterPanel.SetActive(false);
-        _characters = _characterManager.MyCharacters;
-        characterInfo.text = "Your Characters: " + _characters.Count(p => p.IsEnable);
-        for (int i = 0; i < _characters.Count; i++)
+        var characters = _characterManager.MyCharacters;
+        characterInfo.text = "Your Characters: " + characters.Count(p => p.IsEnable);
+        for (int i = 0; i < characters.Count; i++)
         {
-            if (!_characters[i].IsEnable)
+            if (!characters[i].IsEnable)
             {
                 _addCharacterPanel.SetActive(true);
                 continue;
             }
             GameObject characterObject = Instantiate(CharacterContent);
             characterObject.transform.SetParent(contentPanel.transform);
-            characterObject.transform.name = "Character " + _characters[i].Name + _characters[i].Id;
+            characterObject.transform.name = "Character " + characters[i].Name + characters[i].Id;
             characterObject.transform.localScale = Vector3.one;
-            characterObject.GetComponentInChildren<CharacterData>().SlotCharacter = _characters[i];
-            characterObject.GetComponentsInChildren<Image>()[1].sprite = _characters[i].GetSprite();
-            characterObject.GetComponentInChildren<TextMeshProUGUI>().text = _characters[i].Name;
+            characterObject.GetComponentInChildren<CharacterData>().SlotCharacter = characters[i];
+            characterObject.GetComponentsInChildren<Image>()[1].sprite = characters[i].GetSprite();
+            characterObject.GetComponentInChildren<TextMeshProUGUI>().text = characters[i].Name;
         }
     }
     void Update()

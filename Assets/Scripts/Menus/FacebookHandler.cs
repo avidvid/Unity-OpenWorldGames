@@ -11,14 +11,14 @@ public class FacebookHandler : MonoBehaviour
 {
     private CharacterManager _characterManager;
     private static FacebookHandler _facebook;
-    private int _counter =0 ; 
+    private int _counter =0 ;
 
-    internal string FirstName;
-    internal string LastName;
-    internal string FBid;
-    internal string Email;
-    internal Sprite ProfilePicture;
-    internal List<string> FriendList = new List<string>();
+    private string _firstName;
+    private string _lastName;
+    private string _fBid;
+    private string _email;
+    private Sprite _profilePicture;
+    private List<string> _friendList = new List<string>();
 
     internal bool LoggedIn ;
 
@@ -48,7 +48,6 @@ public class FacebookHandler : MonoBehaviour
         else
             Time.timeScale = 1;
     }
-
     private void CheckLoginStatus()
     {
         if (_counter >3)
@@ -60,7 +59,7 @@ public class FacebookHandler : MonoBehaviour
         {
             Debug.Log("Fb is Logged in");
             LoggedIn = true;
-            FetchFBProfile();
+            FetchFbProfile();
             //FacebookGetFriends();
             //Debug.Log("FriendList.count = "+ FriendList.Count);
             //PrintFriends();
@@ -103,8 +102,6 @@ public class FacebookHandler : MonoBehaviour
             CheckLoginStatus();
     }
     #endregion
-
-
     #region Friends/Sharing
     public void FacebookShare()
     {
@@ -132,17 +129,15 @@ public class FacebookHandler : MonoBehaviour
                 var friendList = (List<object>) dictionary["data"];
                 Debug.Log("friendList. count = "+ friendList.Count);
                 foreach (var friend in friendList)
-                    FriendList.Add(((Dictionary<string, object>) friend) ["name"].ToString());
+                    _friendList.Add(((Dictionary<string, object>) friend) ["name"].ToString());
             });
     }
     #endregion
-
-    private void FetchFBProfile()
+    private void FetchFbProfile()
     {
         FB.API("/me?fields=first_name,last_name,email", HttpMethod.GET, FetchProfileCallback, new Dictionary<string, string>() { });
         FB.API("/me/picture?type=square&height=128&width=128", HttpMethod.GET, SetProfilePic);
     }
-
     private void FetchProfileCallback(IGraphResult result)
     {
         if (result.Error != null)
@@ -151,8 +146,7 @@ public class FacebookHandler : MonoBehaviour
             return;
         }
         //Debug.Log(result.RawResult);
-
-        var FBDictionary = (Dictionary<string, object>)result.ResultDictionary;
+        var fBDictionary = (Dictionary<string, object>)result.ResultDictionary;
         //Shows Acquired Permission
         foreach (string perm in AccessToken.CurrentAccessToken.Permissions)
         {
@@ -161,50 +155,46 @@ public class FacebookHandler : MonoBehaviour
             {
                 case "public_profile":
                     //Debug.Log("Profile: first name: " + FBUserDetails["first_name"]);
-                    FirstName = FBDictionary["first_name"].ToString();
+                    _firstName = fBDictionary["first_name"].ToString();
                     //Debug.Log("Profile: last name: " + FBUserDetails["last_name"]);
-                    LastName = FBDictionary["first_name"].ToString();
+                    _lastName = fBDictionary["first_name"].ToString();
                     //Debug.Log("Profile: id: " + FBUserDetails["id"]);
-                    FBid = FBDictionary["id"].ToString();
-                    _characterManager.SetFacebookLoggedIn(true, FBid);
+                    _fBid = fBDictionary["id"].ToString();
+                    _characterManager.SetFacebookLoggedIn(true, _fBid);
                     break;
                 case "user_friends":
                     break;
                 case "email":
                     //Debug.Log("Profile: email: " + FBUserDetails["email"]);
-                    Email = FBDictionary["email"].ToString();
+                    _email = fBDictionary["email"].ToString();
                     break;
-
             }
         }
     }
-
     private void SetProfilePic(IGraphResult result)
     {
         if (result.Error != null)
             Debug.Log(result.Error);
         else
-            ProfilePicture = Sprite.Create(result.Texture, new Rect(0, 0, 128, 128), new Vector2());
+            _profilePicture = Sprite.Create(result.Texture, new Rect(0, 0, 128, 128), new Vector2());
     }
-
     public string GetFirstName()
     {
-        return FirstName;
+        return _firstName;
     }
     public Sprite GetProfilePic()
     {
-        return ProfilePicture;
+        return _profilePicture;
     }
     public List<string> GetFriends()
     {
-        return FriendList;
+        return _friendList;
     }
     public void PrintFriends()
     {
-        foreach (var friend in FriendList)
+        foreach (var friend in _friendList)
             Debug.Log(friend);
     }
-
     public static FacebookHandler Instance()
     {
         if (!_facebook)
@@ -215,6 +205,4 @@ public class FacebookHandler : MonoBehaviour
         }
         return _facebook;
     }
-
-
 }

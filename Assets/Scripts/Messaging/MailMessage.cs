@@ -12,9 +12,23 @@ public class MailMessage
     private DateTime _sendTime;
     public string Title;
     public string Body;
-    public bool Delivered;
     public bool Read;
+    public bool IsPublic;
     public bool Deleted;
+
+    public MailMessage(string title, string body,int senderId, int receiverId, int receiverClanId=0 )
+    {
+        Id = UnityEngine.Random.Range(0, 1999999999);
+        SenderId = senderId;
+        ReceiverId = receiverId;
+        ReceiverClanId = receiverClanId;
+        SendTime = "Now";
+        Title = title;
+        Body = body;
+        Read = false;
+        IsPublic = false;
+        Deleted = false;
+    }
 
     #region Print
     internal void Print()
@@ -28,15 +42,32 @@ public class MailMessage
         {
             return Id + "-" + Title +
                    " From "+ userDatabase.GetUserById(SenderId).UserName  +
-                   " To " + (ReceiverClanId !=0 ? userDatabase.GetUserById(ReceiverId).UserName : "All Clan XXX ") +
+                   " To " + (ReceiverClanId ==0 ? userDatabase.GetUserById(ReceiverId).UserName : "All Clan XXX ") +
                    " at " + SendTime +
-                   (Delivered ? " Delivered" : "") +
                    (Read ? " Read" : "") +
                    (Deleted ? " Deleted" : "");
         }
         catch (Exception e)
         {
             return "Empty";
+        }
+    }
+    internal string GetTooltip()
+    {
+        var tooltip = "<color=green>  " + Body  + "</color>";
+        return tooltip;
+    }
+    internal string GetInfo()
+    {
+        UserDatabase userDatabase = UserDatabase.Instance();
+        try
+        {
+            return "From " + userDatabase.GetUserById(SenderId).UserName +
+                   " at " + SendTime;
+        }
+        catch (Exception e)
+        {
+            return "la la la";
         }
     }
     #endregion

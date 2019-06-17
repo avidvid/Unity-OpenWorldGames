@@ -16,6 +16,7 @@ public class CharacterManager : MonoBehaviour
     private CharacterDatabase _characterDatabase;
     //UserPlayer
     internal UserPlayer UserPlayer;
+    internal List<UserPlayer> AllUserPlayer;
     //CharacterSetting
     internal CharacterSetting CharacterSetting;
     //Character
@@ -32,6 +33,8 @@ public class CharacterManager : MonoBehaviour
     //Inventory
     internal List<ItemIns> CharacterInventory = new List<ItemIns>();
     internal CharacterMixture CharacterMixture;
+    //MailMessages
+    internal List<MailMessage> MailMessages;
 
     private float _nextActionTime = 100;
     private Sprite _spellSprite;
@@ -66,6 +69,8 @@ public class CharacterManager : MonoBehaviour
         UserPlayer = _userDatabase.GetUserPlayer();
         if (UserPlayer != null)
             Debug.Log("CM-UserPlayer = " + UserPlayer.MyInfo());
+        AllUserPlayer = _userDatabase.GetAllUserPlayers();
+        Debug.Log("CM-AllUserPlayer.Count = " + AllUserPlayer.Count);
         //CharacterSetting
         CharacterSetting = _userDatabase.GetCharacterSetting();
         if (CharacterSetting.Id !=0)
@@ -89,8 +94,12 @@ public class CharacterManager : MonoBehaviour
         Debug.Log("CM-MyUserRecipes.Count = " + MyUserRecipes.Count);
         //Inventory
         InitUserInventory();
-        Debug.Log("CharacterInventory.Count = " + CharacterInventory.Count);
+        Debug.Log("CM-CharacterInventory.Count = " + CharacterInventory.Count);
         CharacterMixture = _userDatabase.GetCharacterMixture();
+        //MailMessages
+        MailMessages = _userDatabase.GetMailMessages();
+        Debug.Log("CM-MailMessages.Count = " + MailMessages.Count);
+
         if (CharacterSetting.Id != 0)
             LoginCalculations();
     }

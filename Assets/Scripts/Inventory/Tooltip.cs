@@ -44,7 +44,12 @@ public class Tooltip : MonoBehaviour
         TooltipObject.SetActive(true);
         TooltipObject.transform.position = Input.mousePosition;
     }
-
+    public void Activate(MailMessage messageIns)
+    {
+        _tooltip.transform.GetComponentInChildren<TextMeshProUGUI>().text = messageIns.GetTooltip();
+        TooltipObject.SetActive(true);
+        TooltipObject.transform.position = Input.mousePosition;
+    }
     public void Deactivate()
     {
         TooltipObject.SetActive(false);
@@ -59,6 +64,4 @@ public class Tooltip : MonoBehaviour
         }
         return _tooltip;
     }
-
-
 }

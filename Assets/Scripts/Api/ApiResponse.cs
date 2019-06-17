@@ -33,6 +33,7 @@ public class BodyResponse
     public List<InsideStory> InsideStories;
 
     public UserPlayer UserPlayer;
+    public List<UserPlayer> UserPlayers;
     public CharacterSetting CharacterSetting;
     public List<UserItem> UserInventory;
     public List<UserCharacter> UserCharacters;
@@ -42,6 +43,8 @@ public class BodyResponse
     public List<UserRecipe> UserRecipes;
     public UserRecipe UserRecipe;
     public UserCharacter UserCharacter;
+    public List<MailMessage> MailMessages;
+
 
     internal string MyInfo()
     {
@@ -61,6 +64,7 @@ public class BodyResponse
         if (InsideStories.Count != 0) info += " InsideStories=" + InsideStories.Count;
         
         if (UserPlayer!=null) info += " UserPlayer=" + UserPlayer.MyInfo();
+        if (UserPlayers.Count != 0) info += " UserPlayers=" + UserPlayers.Count;
         if (UserInventory.Count != 0) info += " UserInventory=" + UserInventory.Count;
         if (UserCharacters.Count != 0) info += " UserCharacters=" + UserCharacters.Count;
         if (CharacterMixture.Id != 0) info += " CharacterMixture=" + CharacterMixture.MyInfo();
@@ -68,6 +72,7 @@ public class BodyResponse
         if (CharacterResearching.Id != 0) info += " CharacterResearching=" + CharacterResearching.MyInfo();
         if (CharacterSetting.Id != 0) info += " CharacterSetting=" + CharacterSetting.MyInfo();
         if (UserRecipes.Count != 0) info += " UserRecipes=" + UserRecipes.Count;
+        if (MailMessages.Count != 0) info += " MailMessages=" + MailMessages.Count;
         return info;
     }
 }

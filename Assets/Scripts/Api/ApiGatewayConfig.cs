@@ -85,10 +85,14 @@ public class ApiGatewayConfig : MonoBehaviour
         _apiGate = "GetInsideStories";
         _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(_uri, ReadInsideStoriesJson));
+        //Call UserPlayerSecure
+        _apiGate = "GetUserPlayerSecure";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadUserPlayerSecureJson));
     }
     IEnumerator SecondWave()
     {
-        yield return new WaitUntil(() => _firstWaveTarget >= 9);        
+        yield return new WaitUntil(() => _firstWaveTarget >= 10);        
         //###User Database
         //Call CharacterMixture
         _apiGate = "GetCharacterMixture";
@@ -114,10 +118,14 @@ public class ApiGatewayConfig : MonoBehaviour
         _apiGate = "GetUserCharacters";
         _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(_uri, ReadUserCharactersJson));
+        //Call MailMessages
+        _apiGate = "GetMailMessage";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        StartCoroutine(GetRequest(_uri, ReadMailMessagesJson));
     }
     IEnumerator ThirdWave()
     {
-        yield return new WaitUntil(() => _secondWaveTarget >= 6);
+        yield return new WaitUntil(() => _secondWaveTarget >= 7);
         //Call CharacterSetting
         _apiGate = "GetCharacterSetting";
         _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
@@ -208,6 +216,15 @@ public class ApiGatewayConfig : MonoBehaviour
         _firstWaveTarget++;
     }
     //UserDatabase
+    private void ReadUserPlayerSecureJson(string result)
+    {
+        var response = TranslateResponse(result);
+        if (response.Body.UserPlayers.Count == 0)
+            throw new Exception("API-UserPlayerSecure Failed!!!");
+        _userDatabase.UpdateAllUserPlayers(response.Body.UserPlayers);
+        _gameLoadHelper.LoadingThumbsUp();
+        _firstWaveTarget++;
+    }
     private void ReadCharacterMixtureJson(string result)
     {
         var response = TranslateResponse(result);
@@ -295,6 +312,15 @@ public class ApiGatewayConfig : MonoBehaviour
         FirstWave();
         StartCoroutine(SecondWave());
         StartCoroutine(ThirdWave());
+    }
+    private void ReadMailMessagesJson(string result)
+    {
+        var response = TranslateResponse(result);
+        if (response.Body.MailMessages.Count == 0)
+            Debug.LogWarning("####API--MailMessages Is Empty!!!");
+        _userDatabase.UpdateMailMessages(response.Body.MailMessages);
+        _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
     }
     #endregion
     #region Updates
