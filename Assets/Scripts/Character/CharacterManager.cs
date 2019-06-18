@@ -362,8 +362,6 @@ public class CharacterManager : MonoBehaviour
         return message;
     }
     #endregion
-    #region ItemUse
-    #endregion
     #region UpdateSetting
     internal bool UseEnergy(int amount)
     {

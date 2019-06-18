@@ -104,6 +104,9 @@ public class UserDatabase : MonoBehaviour
         }
         return true;
     }
+
+
+
     internal UserPlayer GetUserById(int id)
     {
         //todo: get all the users 
@@ -479,6 +482,16 @@ public class UserDatabase : MonoBehaviour
         _mailMessages = mailMessages;
         Debug.Log("UDB-MailMessages.Count = " + _mailMessages.Count);
         foreach (var msg in _mailMessages) msg.Print();
+    }
+    internal void AddMailMessage(MailMessage mailMessage)
+    {
+        _mailMessages.Add(mailMessage);
+        SaveMailMessage(mailMessage);
+    }
+    private void SaveMailMessage(MailMessage mailMessage)
+    {
+        Debug.Log("UDB-MailMessage = " + mailMessage.MyInfo());
+        _apiGatewayConfig.PutMailMessage(mailMessage);
     }
     #endregion
     private void GoToStartScene()

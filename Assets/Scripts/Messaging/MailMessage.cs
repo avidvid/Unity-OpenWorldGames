@@ -9,7 +9,6 @@ public class MailMessage
     public int ReceiverId;
     public int ReceiverClanId;
     public string SendTime;
-    private DateTime _sendTime;
     public string Title;
     public string Body;
     public bool Read;
@@ -44,8 +43,9 @@ public class MailMessage
                    " From "+ userDatabase.GetUserById(SenderId).UserName  +
                    " To " + (ReceiverClanId ==0 ? userDatabase.GetUserById(ReceiverId).UserName : "All Clan XXX ") +
                    " at " + SendTime +
-                   (Read ? " Read" : "") +
-                   (Deleted ? " Deleted" : "");
+                   (Read ? " (Read)" : "") +
+                   (IsPublic ? " (IsPublic)" : "") +
+                   (Deleted ? " (Deleted)" : "");
         }
         catch (Exception e)
         {
@@ -67,7 +67,7 @@ public class MailMessage
         }
         catch (Exception e)
         {
-            return "la la la";
+            return "Unknown";
         }
     }
     #endregion

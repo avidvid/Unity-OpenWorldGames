@@ -12,6 +12,7 @@ public class ApiRequest
     public UserCharacter UserCharacter;
     public UserRecipe UserRecipe;
     public UserItem UserInventory;
+    public MailMessage MailMessage;
 
     public string Action;
     public int Time;
@@ -28,6 +29,7 @@ public class ApiRequest
         if (CharacterResearch.Id != 0) info += " CharacterResearch=" + CharacterResearch.MyInfo();
         if (UserRecipe.Id != 0) info += " UserRecipe=" + UserRecipe.MyInfo();
         if (UserInventory.Id != 0) info += " UserInventory=" + UserInventory.MyInfo();
+        if (MailMessage.Id != 0) info += " MailMessage=" + MailMessage.MyInfo();
         return info;
     }
 }

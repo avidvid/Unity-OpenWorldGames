@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 public class ApiGatewayConfig : MonoBehaviour
 {
-    private static ApiGatewayConfig __apiGatewayConfig;
+    private static ApiGatewayConfig _apiGatewayConfig;
     //Database
     private ItemDatabase _itemDatabase;
     private UserDatabase _userDatabase;
@@ -402,8 +402,8 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     private void PutUserInventory(UserItem item, string action)
     {
-        var _apiGate = "GetUserInventory";
-        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", item.UserId.ToString());
+        _apiGate = "GetUserInventory";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", item.UserId.ToString());
         ApiRequest ap = new ApiRequest
         {
             Action = action,
@@ -414,8 +414,8 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     internal void PutCharacterMixture(CharacterMixture characterMixture)
     {
-        var _apiGate = "GetCharacterMixture";
-        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterMixture.Id.ToString());
+        _apiGate = "GetCharacterMixture";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterMixture.Id.ToString());
         int time = -1;
         string action;
         if (characterMixture.StackCnt == 0)
@@ -437,8 +437,8 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     internal void PutUserRecipe(UserRecipe userRecipe,string code=null)
     {
-        var _apiGate = "GetUserRecipes";
-        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userRecipe.Id.ToString());
+        _apiGate = "GetUserRecipes";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userRecipe.Id.ToString());
         ApiRequest ap = new ApiRequest
         {
             Action = "Insert",
@@ -454,8 +454,8 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     internal void PutUserCharacter(UserCharacter userCharacter, string code = null)
     {
-        var _apiGate = "GetUserCharacters";
-        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userCharacter.Id.ToString());
+        _apiGate = "GetUserCharacters";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userCharacter.Id.ToString());
         ApiRequest ap = new ApiRequest
         {
             Action = "Insert",
@@ -471,8 +471,8 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     internal void PutCharacterResearching(CharacterResearching characterResearching)
     {
-        var _apiGate = "GetCharacterResearching";
-        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterResearching.Id.ToString());
+        _apiGate = "GetCharacterResearching";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterResearching.Id.ToString());
         int time = -1;
         string action;
         if (characterResearching.Level == 0)
@@ -494,8 +494,8 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     internal void PutCharacterResearch(CharacterResearch characterResearch)
     {
-        var _apiGate = "GetCharacterResearches";
-        var _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterResearch.Id.ToString());
+        _apiGate = "GetCharacterResearches";
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterResearch.Id.ToString());
         string action = "Insert";
         if (characterResearch.Level != 1)
             action = "Update";
@@ -503,6 +503,19 @@ public class ApiGatewayConfig : MonoBehaviour
         {
             Action = action,
             CharacterResearch = characterResearch
+        };
+        StartCoroutine(PutRequest(_uri, ap));
+    }
+    internal void PutMailMessage(MailMessage mailMessage)
+    {
+        //mins is the minutes that the user should stay locked 
+        _apiGate = "GetMailMessage";
+        print("Saving" + mailMessage.MyInfo());
+        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", mailMessage.Id.ToString());
+        ApiRequest ap = new ApiRequest
+        {
+            Action = "Insert",
+            MailMessage = mailMessage
         };
         StartCoroutine(PutRequest(_uri, ap));
     }
@@ -598,16 +611,16 @@ public class ApiGatewayConfig : MonoBehaviour
         }
     }
     #endregion
-    #region _apiGatewayConfig Instance
+    #region ApiGatewayConfig Instance
     public static ApiGatewayConfig Instance()
     {
-        if (!__apiGatewayConfig)
+        if (!_apiGatewayConfig)
         {
-            __apiGatewayConfig = FindObjectOfType(typeof(ApiGatewayConfig)) as ApiGatewayConfig;
-            if (!__apiGatewayConfig)
+            _apiGatewayConfig = FindObjectOfType(typeof(ApiGatewayConfig)) as ApiGatewayConfig;
+            if (!_apiGatewayConfig)
                 Debug.LogError("There needs to be one active _apiGatewayConfig script on a GameObject in your scene.");
         }
-        return __apiGatewayConfig;
+        return _apiGatewayConfig;
     }
     #endregion
 }

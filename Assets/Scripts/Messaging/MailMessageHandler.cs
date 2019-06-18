@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -16,8 +17,8 @@ public class MailMessageHandler : MonoBehaviour
 
     public GameObject MailContentPrefab;
 
-    private MailMessage _activeMessage;
-    private bool _loadNew =true;
+    public MailMessage ActiveMessage;
+    public bool LoadNew = true;
 
     public TextMeshProUGUI Title;
     public TextMeshProUGUI Body;
@@ -36,9 +37,8 @@ public class MailMessageHandler : MonoBehaviour
     void Start()
     {
         var contentPanel = GameObject.Find("ContentPanel");
-
-        var messages = _characterManager.MailMessages;
-        _activeMessage = messages[0];
+        var messages = _characterManager.MailMessages.OrderByDescending(x => Convert.ToDateTime(x.SendTime)).ToList();
+        ActiveMessage = messages[0];
         for (int i = 0; i < messages.Count; i++)
         {
             GameObject messageObject = Instantiate(MailContentPrefab);
@@ -57,14 +57,30 @@ public class MailMessageHandler : MonoBehaviour
     }
     void Update()
     {
-        if (_loadNew)
+        if (LoadNew)
         {
-            Title.text = _activeMessage.Title;
-            Body.text = _activeMessage.Body;
-            Info.text = _activeMessage.GetInfo();
-            ReTitle.text = "Re: " + _activeMessage.Title;
-            _loadNew = false;
+            //Todo: when loading new mail save it as read and delivered in api
+            Title.text = ActiveMessage.Title;
+            Body.text = ActiveMessage.Body;
+            Info.text = ActiveMessage.GetInfo();
+            if (ActiveMessage.IsPublic || ActiveMessage.SenderId == _characterManager.UserPlayer.Id)
+            {
+                SetReplyActive(false);
+            }
+            else
+            {
+                SetReplyActive(true);
+                ReTitle.text = "Re: " + ActiveMessage.Title;
+            }
+            LoadNew = false;
         }
+    }
+    protected void SetReplyActive(bool value)
+    {
+        Reply.interactable = value;
+        Reply.gameObject.SetActive(value);
+        InputFieldBody.gameObject.SetActive(value);
+        ReTitle.gameObject.SetActive(value);
     }
     public void RefreshTheScene()
     {
@@ -81,12 +97,14 @@ public class MailMessageHandler : MonoBehaviour
         Debug.Log("Send The respond!!!");
         MailMessage newMail = new MailMessage(Title.text, 
                                                 InputFieldBody.text,
-                                                _characterManager.UserPlayer.Id, 
-                                                _activeMessage.SenderId);
+                                                _characterManager.UserPlayer.Id,
+                                                ActiveMessage.SenderId);
         newMail.Print();
+        _userDatabase.AddMailMessage(newMail);
+        RefreshTheScene();
     }
 
-    private bool ValidateText(string str, int maxLength = 40)
+    private bool ValidateText(string str, int maxLength = 100)
     {
         if (str.Length < 3)
         {
@@ -95,7 +113,7 @@ public class MailMessageHandler : MonoBehaviour
         }
         if (str.Length > maxLength)
         {
-            _messagePanelHandler.ShowMessage(str + " is a bit too Long (less than " + maxLength + ") !!!  ", MessagePanel.PanelType.Ok);
+            _messagePanelHandler.ShowMessage("Your reply is a bit too Long remove" + (str.Length-maxLength) + " characters) !!!  ", MessagePanel.PanelType.Ok);
             return false;
         }
         return true;

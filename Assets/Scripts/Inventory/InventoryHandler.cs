@@ -334,6 +334,12 @@ public class InventoryHandler : MonoBehaviour
             }
         }
     }
+    public void GoToMailScene()
+    {
+        BuildTrainStarter();
+        //switch the scene
+        SceneManager.LoadScene(SceneSettings.SceneIdForMailMessage);
+    }
     public void GoToProfileScene()
     {
         BuildTrainStarter();

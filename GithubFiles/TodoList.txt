@@ -38,24 +38,16 @@ Shop:
 ####Office#####
 ###############	
 
-todo: Add the mail to the list and db 
 
-
-
-
-Mailing/Messaging/Chat phase
-	mail box	
-	messaging system 
-	https://www.youtube.com/watch?v=IRAeJgGkjHk
-	https://www.youtube.com/watch?v=7_BCbzRMi2w
+//Todo: when loading new mail save it as read and delivered in api
 	
 
+Story writing phase
 
 user agreement phase
 	https://termsfeed.com/blog/sample-eula-template/	
 	https://termsfeed.com/blog/terms-conditions-games/
 
-Story writing phase
 
 Gift phase : 	Gift recepie and characters 
 
@@ -80,7 +72,6 @@ Character ellemnt phase
 ####Others#####
 ###############	
 
-https://chicagophotos.shutterbooth.com/May-2019
 http://leatherbonding.com/
 https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019
 	https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019/registry
@@ -91,7 +82,9 @@ https://www.theknot.com/us/jessica-archebelle-and-missy-howard-nov-2019
 ###############	
 
 Req Test: 
-{"Action":"Update","UserPlayer":{"Id":0,"UserName":"","Description":"","SoundVolume":0.0,"Latitude":0.0,"Longitude":0.0,"Gem":0,"LastLogin":"","LockUntil":"","Rank":0,"PRank":0,"ClanId":0,"ClanRank":0,"FBLoggedIn":false,"FBid":"","GLoggedIn":false,"IsEnable":false},"CharacterSetting":{"Id":-1,"UserId":0,"CharacterId":0,"Name":"","Level":0,"Updated":false,"LastUpdated":"","IsEnable":false,"FightMode":false,"Alive":false,"Life":0,"Coin":0,"Experience":0,"MaxExperience":0,"HandsCnt":0,"MaxHealth":0,"Health":0,"MaxMana":0,"Mana":0,"MaxEnergy":0,"Energy":0,"SpeedAttack":0.0,"SpeedDefense":0.0,"AbilityAttack":0.0,"AbilityDefense":0.0,"MagicAttack":0.0,"MagicDefense":0.0,"PoisonAttack":0.0,"PoisonDefense":0.0,"Element":0,"Carry":0.0,"CarryCnt":0,"Speed":0.0,"Intellect":0.0,"Agility":0.0,"Strength":0.0,"Stamina":0.0,"Crafting":0.0,"Researching":0.0,"Bravery":0.0,"Charming":0.0},"CharacterMixture":{"Id":0,"UserId":0,"ItemId":0,"StackCnt":0,"MixTime":""},"CharacterResearching":{"Id":0,"UserId":0,"ResearchId":0,"Level":0,"ResearchTime":""},"CharacterResearch":{"Id":0,"UserId":0,"ResearchId":0,"Level":0},"UserCharacter":{"Id":0,"CharacterId":0,"UserId":0,"CharacterCode":""},"UserRecipe":{"Id":0,"RecipeId":0,"UserId":0,"RecipeCode":""},"UserInventory":{"Id":5,"UserId":22,"ItemId":2001,"StackCnt":3,"Equipped":false,"Stored":false,"Order":1,"TimeToUse":1},"Time":0,"Code":"","HealthCheck":0}
+{"Action":"Update","UserPlayer":{"Id":0,"UserName":"","Description":"","SoundVolume":0.0,"Latitude":0.0,"Longitude":0.0,"Gem":0,"LastLogin":"","LockUntil":"","Rank":0,"PRank":0,"ClanId":0,"ClanRank":0,"FBLoggedIn":false,"FBid":"","GLoggedIn":false,"IsEnable":false},
+"MailMessage":{"Id":0,"SenderId":1,"ReceiverId":2,"ReceiverClanId":0,"SendTime":"Now","Title":"Test API","Body":"Body API test","Read":false,"IsPublic":false,"Deleted":false},
+"CharacterSetting":{"Id":-1,"UserId":0,"CharacterId":0,"Name":"","Level":0,"Updated":false,"LastUpdated":"","IsEnable":false,"FightMode":false,"Alive":false,"Life":0,"Coin":0,"Experience":0,"MaxExperience":0,"HandsCnt":0,"MaxHealth":0,"Health":0,"MaxMana":0,"Mana":0,"MaxEnergy":0,"Energy":0,"SpeedAttack":0.0,"SpeedDefense":0.0,"AbilityAttack":0.0,"AbilityDefense":0.0,"MagicAttack":0.0,"MagicDefense":0.0,"PoisonAttack":0.0,"PoisonDefense":0.0,"Element":0,"Carry":0.0,"CarryCnt":0,"Speed":0.0,"Intellect":0.0,"Agility":0.0,"Strength":0.0,"Stamina":0.0,"Crafting":0.0,"Researching":0.0,"Bravery":0.0,"Charming":0.0},"CharacterMixture":{"Id":0,"UserId":0,"ItemId":0,"StackCnt":0,"MixTime":""},"CharacterResearching":{"Id":0,"UserId":0,"ResearchId":0,"Level":0,"ResearchTime":""},"CharacterResearch":{"Id":0,"UserId":0,"ResearchId":0,"Level":0},"UserCharacter":{"Id":0,"CharacterId":0,"UserId":0,"CharacterCode":""},"UserRecipe":{"Id":0,"RecipeId":0,"UserId":0,"RecipeCode":""},"UserInventory":{"Id":5,"UserId":22,"ItemId":2001,"StackCnt":3,"Equipped":false,"Stored":false,"Order":1,"TimeToUse":1},"Time":0,"Code":"","HealthCheck":0}
 
 
 {"Action":"Insert",

@@ -1,25 +1,24 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MessageData : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class MessageData : MonoBehaviour, IPointerClickHandler
 {
     public MailMessage MessageIns;
     public bool InComing; 
     public UserPlayer TheOtherPlayer;
-    private Tooltip _tooltip;
-
     void Start()
     {
-        _tooltip = Tooltip.Instance();
         if (MessageIns == null)
             return;
     }
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        _tooltip.Activate(MessageIns);
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        _tooltip.Deactivate();
+        if (MessageIns == null)
+            return;
+        var mailMessageHandler = FindObjectOfType(typeof(MailMessageHandler)) as MailMessageHandler;
+        if (!mailMessageHandler)
+            return;
+        mailMessageHandler.ActiveMessage = MessageIns;
+        mailMessageHandler.LoadNew = true;
     }
 }
