@@ -27,7 +27,6 @@ public class OfferListHandler : MonoBehaviour {
     private List<Offer> _offers = new List<Offer>();
 
     private string _backScene;
-
     void Awake()
     {
         _itemDatabase = ItemDatabase.Instance();
@@ -147,7 +146,7 @@ public class OfferListHandler : MonoBehaviour {
             {
                 var item = _itemDatabase.GetItemById(Int32.Parse(offer.SellProd));
                 item.Print();
-                if (!_characterManager.AddItemToInventory(item))
+                if (!_characterManager.AddItemToInventory(item, offer.SellAmount))
                 {
                     //Refund the value 
                     ProcessThePay(offer.PayProd, -offer.PayAmount);
@@ -165,7 +164,6 @@ public class OfferListHandler : MonoBehaviour {
             }
         }
     }
-
     private void ProcessTheSell(string sellProd, int sellAmount)
     {
         switch (sellProd)

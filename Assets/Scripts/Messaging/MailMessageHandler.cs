@@ -21,12 +21,11 @@ public class MailMessageHandler : MonoBehaviour
     public bool LoadNew = true;
 
     public TextMeshProUGUI Title;
-    public TextMeshProUGUI Body;
+    public TMP_InputField Body;
     public TextMeshProUGUI Info;
     public TextMeshProUGUI ReTitle;
     public TMP_InputField InputFieldBody;
     public Button Reply;
-
 
     void Awake()
     {
@@ -95,7 +94,7 @@ public class MailMessageHandler : MonoBehaviour
         if (!ValidateText(InputFieldBody.text))
             return;
         Debug.Log("Send The respond!!!");
-        MailMessage newMail = new MailMessage(Title.text, 
+        MailMessage newMail = new MailMessage("Re: "+Title.text, 
                                                 InputFieldBody.text,
                                                 _characterManager.UserPlayer.Id,
                                                 ActiveMessage.SenderId);
@@ -103,8 +102,7 @@ public class MailMessageHandler : MonoBehaviour
         _userDatabase.AddMailMessage(newMail);
         RefreshTheScene();
     }
-
-    private bool ValidateText(string str, int maxLength = 100)
+    private bool ValidateText(string str, int maxLength = 250)
     {
         if (str.Length < 3)
         {

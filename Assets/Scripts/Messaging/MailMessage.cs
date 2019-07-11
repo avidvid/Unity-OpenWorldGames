@@ -62,8 +62,7 @@ public class MailMessage
         UserDatabase userDatabase = UserDatabase.Instance();
         try
         {
-            return "From " + userDatabase.GetUserById(SenderId).UserName +
-                   " at " + SendTime;
+            return "From " + userDatabase.GetUserById(SenderId).UserName ;
         }
         catch (Exception e)
         {
