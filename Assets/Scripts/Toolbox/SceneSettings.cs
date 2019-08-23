@@ -35,19 +35,16 @@ public class SceneSettings {
         go.name = domain ?? "Unknown";
         starter.Content = content ?? "Unknown";
     }
-
     internal static void GoToResearchScene()
     {
         BuildStarter();
         SceneManager.LoadScene(SceneSettings.SceneIdForResearch);
     }
-
     internal static void GoToShopScene(string reason = null)
     {
         BuildStarter(reason, reason);
         SceneManager.LoadScene(SceneSettings.SceneIdForStore);
     }
-
     internal static void GoToRecipeScene()
     {
         BuildStarter();
