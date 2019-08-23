@@ -1,0 +1,79 @@
+/* CSS Document */
+body {
+    background-color: #EAAE87 ;
+    font-family:  Verdana, Arial ;
+    font-size: 8pt ;
+    color: #000000 } 
+.table2 {
+	font-family:  Verdana, Arial ;
+    background-color:  #DDCA88 ;
+    font-size: 8pt ;
+    color: #EAAE87 }
+td {
+	font-family: Verdana, Arial ;
+	font-size: 8pt ;
+      background-color: #DDCA88 ;
+	color: #000000 ;
+	padding: 2px ;
+	border: 1px black solid }
+.td5 {
+	border: 1px #DDCA88 }
+.menu {
+	background-color: #DDCA88 }
+.imgborder {
+      border: 1px black solid ; }
+.td2 {
+	border: 1px black solid }
+.td3 {
+	font-family: Verdana, Arial ;
+	font-size: 8pt ;
+      background-color: #DDCA88 ;
+	color: #000000 ;
+	padding: 2px ;
+	border: 0 }
+.maintable {
+	background-color: #DDCA88  }
+.td4 {
+	padding: 2px }
+.heading {
+	font-weight: bold ;
+      font-variant: small-caps ;
+	font-size: 12pt;
+      border-bottom-width: 1px ;
+      border-bottom-style: dashed ; }
+.heading2 {
+	font-weight: bold ;
+      font-variant: small-caps ;
+	font-size: 10pt;
+      text-decoration: underline ; }
+.alignright {
+	text-align: right }
+.bodies {
+	position: relative;
+	left: 5px }
+.indented {
+    position: relative ;
+    left: 20px }
+.puzzlebox {
+	width: 700 ;
+	height: 500 ;
+	border: 1px black solid}
+.form {
+	font-family: Verdana, Arial ; 
+	font-size: 8pt;
+	background-color: #68AC09 ; 
+	color: #FFFFFF ; 
+	border: 1px solid black }
+
+A:link {  color: #C55815; text-decoration: underline }
+A:visited { color: #C55815; text-decoration: underline }
+A:hover { color: #EAAE87; text-decoration: underline }
+
+A.hidden { COLOR: #000000; font-weight: normal; text-decoration: none;}
+A.hidden:active { COLOR: #000000; font-weight: normal; text-decoration: none;}
+A.hidden:hover { COLOR: #000000; font-weight: normal; text-decoration: none;}
+A.hidden:visited { COLOR: #000000; font-weight: normal; text-decoration: none;}
+
+
+
+area.hidden {cursor: pointer;}

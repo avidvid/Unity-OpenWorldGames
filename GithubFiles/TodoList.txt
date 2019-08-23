@@ -34,29 +34,47 @@ Bunkyo Civic Center observation
 
 Shop: 
 100 yen shop 
+
+Odywa: 
+Gundam 
+aqua city 
+free shuttle the area 
+dec 
+joypolic
+ramen kugokican
+hibiki wiski resturant 
 ###############
 ####comite#####
 ###############
-		
+
 ###############
 #### Home #####
 ###############
-
 
 ###############
 ####Office#####
 ###############	
 
+Open chest decision 
+message type enum 
+draw gizmo remove
 
-//Todo: when loading new mail save it as read and delivered in api
+
+
+
+Amazon ElastiCache to save money on dynamodb calls 
+
+Cache database calls 
+have the story local on xml 
+and even private logs 
+
 	
+https://learn.unity.com/tutorial/building-for-mobile#5c7f8528edbc2a002053b4a1
 
-Story writing phase
 
 user agreement phase
 	https://termsfeed.com/blog/sample-eula-template/	
 	https://termsfeed.com/blog/terms-conditions-games/
-
 
 Gift phase : 	Gift recepie and characters 
 
@@ -67,6 +85,7 @@ Clan phase
 
 	Clan page
 	Create Clan
+
 
 Rank phase
 	scene Player rank chart and pictures !!

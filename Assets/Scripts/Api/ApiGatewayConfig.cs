@@ -9,6 +9,7 @@ using UnityEngine.Networking;
 public class ApiGatewayConfig : MonoBehaviour
 {
     private static ApiGatewayConfig _apiGatewayConfig;
+    private XmlHelper _xmlHelper;
     //Database
     private ItemDatabase _itemDatabase;
     private UserDatabase _userDatabase;
@@ -32,6 +33,7 @@ public class ApiGatewayConfig : MonoBehaviour
     void Start()
     {
         Debug.Log("***API*** Start!");
+        _xmlHelper = XmlHelper.Instance();
         _itemDatabase = ItemDatabase.Instance();
         _userDatabase =UserDatabase.Instance();
         _characterDatabase=CharacterDatabase.Instance();
@@ -48,9 +50,10 @@ public class ApiGatewayConfig : MonoBehaviour
     {
         //###Item Database
         //Call Items
-        _apiGate = "GetItems";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadItemsJson));
+        //_apiGate = "GetItems";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadItemsJson));
+        ReadItemsXml();
         //Call Recipe
         _apiGate = "GetRecipes";
         _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
@@ -90,6 +93,9 @@ public class ApiGatewayConfig : MonoBehaviour
         _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         StartCoroutine(GetRequest(_uri, ReadUserPlayerSecureJson));
     }
+
+
+
     IEnumerator SecondWave()
     {
         yield return new WaitUntil(() => _firstWaveTarget >= 10);        
@@ -138,6 +144,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.Items.Count == 0)
             throw new Exception("API-Items Failed!!!");
         _itemDatabase.UpdateItems(response.Body.Items);
+        _xmlHelper.SaveItems(response.Body.Items.OrderBy(o => o.Id).ToList());
+        _gameLoadHelper.LoadingThumbsUp();
+        _firstWaveTarget++;
+    }
+    private void ReadItemsXml()
+    {
+        _itemDatabase.UpdateItems(_xmlHelper.GetItems());
         _gameLoadHelper.LoadingThumbsUp();
         _firstWaveTarget++;
     }

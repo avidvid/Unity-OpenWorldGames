@@ -6,6 +6,7 @@ public class DataTypes
 {
     public enum Rarity
     {
+        XXX = 0,
         Sacred = 1,
         Artifact = 3,
         Legendary = 5,
