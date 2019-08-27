@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-[Serializable]
-public class JsonOfferList
-{
-    public List<Offer> List;
-    public JsonOfferList() {}
-    public JsonOfferList(List<Offer> list)
-    {
-        List = list;
-    }
-}
+//[Serializable]
+//public class JsonOfferList
+//{
+//    public List<Offer> List;
+//    public JsonOfferList() {}
+//    public JsonOfferList(List<Offer> list)
+//    {
+//        List = list;
+//    }
+//}
 
 [Serializable]
 public class Offer
 {
-    public int id;
+    public int Id;
     public string SellProd;
     public int SellAmount;
     public string PayProd;

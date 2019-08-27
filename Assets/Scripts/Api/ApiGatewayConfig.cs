@@ -55,55 +55,64 @@ public class ApiGatewayConfig : MonoBehaviour
         //StartCoroutine(GetRequest(_uri, ReadItemsJson));
         ReadItemsXml();
         //Call Recipe
-        _apiGate = "GetRecipes";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadRecipesJson));
+        //_apiGate = "GetRecipes";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadRecipesJson));
+        ReadRecipesXml();
         //Call Offer
-        _apiGate = "GetOffers";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadOffersJson));
+        //_apiGate = "GetOffers";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadOffersJson));
+        ReadOffersXml();
         //###Character Database
         //Call Characters
-        _apiGate = "GetCharacters";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadCharactersJson));
+        //_apiGate = "GetCharacters";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadCharactersJson));
+        ReadCharactersXml();
         //Call Researches
-        _apiGate = "GetResearches";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadResearchesJson));
+        //_apiGate = "GetResearches";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadResearchesJson));
+        ReadResearchesXml();
         //###Terrain Database
         //Call Regions
-        _apiGate = "GetRegions";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadRegionsJson));
+        //_apiGate = "GetRegions";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadRegionsJson));
+        ReadRegionsXml();
         //Call Terrains
-        _apiGate = "GetTerrains";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadTerrainsJson));
+        //_apiGate = "GetTerrains";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadTerrainsJson));
+        ReadTerrainsXml();
         //Call Elements
-        _apiGate = "GetElements";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadElementsJson));
+        //_apiGate = "GetElements";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadElementsJson));
+        ReadElementsXml();
         //Call InsideStories
-        _apiGate = "GetInsideStories";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadInsideStoriesJson));
-        //Call UserPlayerSecure
-        _apiGate = "GetUserPlayerSecure";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadUserPlayerSecureJson));
+        //_apiGate = "GetInsideStories";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadInsideStoriesJson));
+        ReadInsideStoriesXml();
+        //Call UserPlayerSecure: get All users in the system 
+        //TODO: Skip UserPlayerSecure
+        //_apiGate = "GetUserPlayerSecure";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadUserPlayerSecureJson));
+        ReadUserPlayerSecure();
     }
-
-
 
     IEnumerator SecondWave()
     {
         yield return new WaitUntil(() => _firstWaveTarget >= 10);        
         //###User Database
         //Call CharacterMixture
-        _apiGate = "GetCharacterMixture";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadCharacterMixtureJson));
+        //_apiGate = "GetCharacterMixture";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadCharacterMixtureJson));
+        ReadCharacterMixtureXml();
         //Call CharacterResearching
         _apiGate = "GetCharacterResearching";
         _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
@@ -160,6 +169,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.Recipes.Count == 0)
              throw new Exception("API-Recipes Failed!!!");
         _itemDatabase.UpdateRecipes(response.Body.Recipes);
+        _xmlHelper.SaveRecipes(response.Body.Recipes.OrderBy(o => o.Id).ToList());
+        _gameLoadHelper.LoadingThumbsUp();
+        _firstWaveTarget++;
+    }
+    private void ReadRecipesXml()
+    {
+        _itemDatabase.UpdateRecipes(_xmlHelper.GetRecipes());
         _gameLoadHelper.LoadingThumbsUp();
         _firstWaveTarget++;
     }
@@ -169,6 +185,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.Offers.Count == 0)
           throw new Exception("API-Offers Failed!!!");
         _itemDatabase.UpdateOffers(response.Body.Offers);
+        _xmlHelper.SaveOffers(response.Body.Offers.OrderBy(o => o.Id).ToList());
+        _gameLoadHelper.LoadingThumbsUp();
+        _firstWaveTarget++;
+    }
+    private void ReadOffersXml()
+    {
+        _itemDatabase.UpdateOffers(_xmlHelper.GetOffers());
         _gameLoadHelper.LoadingThumbsUp();
         _firstWaveTarget++;
     }
@@ -179,6 +202,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.Characters.Count == 0)
             throw new Exception("API-Characters Failed!!!");
         _characterDatabase.UpdateCharacters(response.Body.Characters);
+        _xmlHelper.SaveCharacters(response.Body.Characters.OrderBy(o => o.Id).ToList());
+        _gameLoadHelper.LoadingThumbsUp();
+        _firstWaveTarget++;
+    }
+    private void ReadCharactersXml()
+    {
+        _characterDatabase.UpdateCharacters(_xmlHelper.GetCharacters());
         _gameLoadHelper.LoadingThumbsUp();
         _firstWaveTarget++;
     }
@@ -188,6 +218,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.Researches.Count == 0)
             throw new Exception("API-Researches Failed!!!");
         _characterDatabase.UpdateResearches(response.Body.Researches);
+        _xmlHelper.SaveResearches(response.Body.Researches.OrderBy(o => o.Id).ToList());
+        _gameLoadHelper.LoadingThumbsUp();
+        _firstWaveTarget++;
+    }
+    private void ReadResearchesXml()
+    {
+        _characterDatabase.UpdateResearches(_xmlHelper.GetResearches());
         _gameLoadHelper.LoadingThumbsUp();
         _firstWaveTarget++;
     }
@@ -198,6 +235,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.Regions.Count == 0)
              throw new Exception("API-Regions Failed!!!");
         _terrainDatabase.UpdateRegions(response.Body.Regions);
+        _xmlHelper.SaveRegions(response.Body.Regions.OrderBy(o => o.Id).ToList());
+        _gameLoadHelper.LoadingThumbsUp();
+        _firstWaveTarget++;
+    }
+    private void ReadRegionsXml()
+    {
+        _terrainDatabase.UpdateRegions(_xmlHelper.GetRegions());
         _gameLoadHelper.LoadingThumbsUp();
         _firstWaveTarget++;
     }
@@ -207,6 +251,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.Terrains.Count == 0)
             throw new Exception("API-Terrains Failed!!!");
         _terrainDatabase.UpdateTerrains(response.Body.Terrains);
+        _xmlHelper.SaveTerrains(response.Body.Terrains.OrderBy(o => o.Id).ToList());
+        _gameLoadHelper.LoadingThumbsUp();
+        _firstWaveTarget++;
+    }
+    private void ReadTerrainsXml()
+    {
+        _terrainDatabase.UpdateTerrains(_xmlHelper.GetTerrains());
         _gameLoadHelper.LoadingThumbsUp();
         _firstWaveTarget++;
     }
@@ -216,6 +267,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.Elements.Count == 0)
             throw new Exception("API-Elements Failed!!!");
         _terrainDatabase.UpdateElements(response.Body.Elements);
+        _xmlHelper.SaveElements(response.Body.Elements.OrderBy(o => o.Id).ToList());
+        _gameLoadHelper.LoadingThumbsUp();
+        _firstWaveTarget++;
+    }
+    private void ReadElementsXml()
+    {
+        _terrainDatabase.UpdateElements(_xmlHelper.GetElements());
         _gameLoadHelper.LoadingThumbsUp();
         _firstWaveTarget++;
     }
@@ -225,6 +283,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.InsideStories.Count == 0)
             throw new Exception("API-InsideStories Failed!!!");
         _terrainDatabase.UpdateInsideStories(response.Body.InsideStories);
+        _xmlHelper.SaveInsideStories(response.Body.InsideStories.OrderBy(o => o.Id).ToList());
+        _gameLoadHelper.LoadingThumbsUp();
+        _firstWaveTarget++;
+    }
+    private void ReadInsideStoriesXml()
+    {
+        _terrainDatabase.UpdateInsideStories(_xmlHelper.GetInsideStories());
         _gameLoadHelper.LoadingThumbsUp();
         _firstWaveTarget++;
     }
@@ -238,12 +303,25 @@ public class ApiGatewayConfig : MonoBehaviour
         _gameLoadHelper.LoadingThumbsUp();
         _firstWaveTarget++;
     }
+    private void ReadUserPlayerSecure()
+    {
+        _gameLoadHelper.LoadingThumbsUp();
+        _firstWaveTarget++;
+    }
+    
     private void ReadCharacterMixtureJson(string result)
     {
         var response = TranslateResponse(result);
         if (response.Body.CharacterMixture==null)
             Debug.LogWarning("####API-CharacterMixture Is Empty!!!");
         _userDatabase.UpdateCharacterMixture(response.Body.CharacterMixture);
+        _xmlHelper.SaveCharacterMixture(response.Body.CharacterMixture);
+        _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
+    }
+    private void ReadCharacterMixtureXml()
+    {
+        _xmlHelper.SaveCharacterMixture(_xmlHelper.GetCharacterMixture());
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }

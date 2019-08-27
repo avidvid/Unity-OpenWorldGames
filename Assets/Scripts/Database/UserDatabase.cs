@@ -8,6 +8,7 @@ public class UserDatabase : MonoBehaviour
 {
     private static UserDatabase _userDatabase;
     private ApiGatewayConfig _apiGatewayConfig;
+    private XmlHelper _xmlHelper;
     private TerrainDatabase _terrainDatabase;
 
     private UserPlayer _userPlayer;
@@ -41,6 +42,7 @@ public class UserDatabase : MonoBehaviour
         _userDatabase = Instance();
         _terrainDatabase = TerrainDatabase.Instance();
         _apiGatewayConfig =ApiGatewayConfig.Instance();
+        _xmlHelper = XmlHelper.Instance();
         Debug.Log("***UDB*** Start!");
     }
     #region UserPlayer
@@ -104,9 +106,6 @@ public class UserDatabase : MonoBehaviour
         }
         return true;
     }
-
-
-
     internal UserPlayer GetUserById(int id)
     {
         //todo: get all the users 
@@ -127,6 +126,8 @@ public class UserDatabase : MonoBehaviour
     }
     internal List<UserPlayer> GetAllUserPlayers()
     {
+        if (_allUsers==null )
+            _allUsers= new List<UserPlayer>();
         return _allUsers;
     }
     #endregion
@@ -288,7 +289,7 @@ public class UserDatabase : MonoBehaviour
     }
     internal void SaveCharacterMixture()
     {
-        _apiGatewayConfig.PutCharacterMixture(_characterMixture);
+        _xmlHelper.SaveCharacterMixture(_characterMixture);
         if (_characterMixture.StackCnt==0)
             _characterMixture.SetEmpty();
     }

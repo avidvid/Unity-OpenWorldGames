@@ -119,10 +119,10 @@ public class Character {
     //    FavoriteTerrainTypes = favoriteTerrainTypes;
     //    IsEnable = true;
     //}
-    //public Character()
-    //{
-    //    Id = -1;
-    //}
+    public Character()
+    {
+        Id = -1;
+    }
     public Character(Character character,bool enable = true)
     {
         Id = character.Id;

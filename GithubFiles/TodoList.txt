@@ -58,6 +58,7 @@ hibiki wiski resturant
 Open chest decision 
 message type enum 
 draw gizmo remove
+Do the build for PC 
 
 
 
