@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ArrayOfCharacterResearch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CharacterResearch>
+    <Id>2</Id>
+    <UserId>22</UserId>
+    <ResearchId>10</ResearchId>
+    <Level>6</Level>
+  </CharacterResearch>
+  <CharacterResearch>
+    <Id>467955394</Id>
+    <UserId>22</UserId>
+    <ResearchId>2</ResearchId>
+    <Level>1</Level>
+  </CharacterResearch>
+  <CharacterResearch>
+    <Id>1</Id>
+    <UserId>22</UserId>
+    <ResearchId>1</ResearchId>
+    <Level>3</Level>
+  </CharacterResearch>
+</ArrayOfCharacterResearch>

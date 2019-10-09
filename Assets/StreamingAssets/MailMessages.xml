@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ArrayOfMailMessage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MailMessage>
+    <Id>3</Id>
+    <SenderId>22</SenderId>
+    <ReceiverId>1077749210</ReceiverId>
+    <ReceiverClanId>0</ReceiverClanId>
+    <SendTime>2019-06-12T21:17:01.701Z</SendTime>
+    <Title>Second Message</Title>
+    <Body>safds dsgf gl li flidslhfj dsjg;jfs;jorw'pk'pl 'll'; l';f 'gf ppgf </Body>
+    <Read>false</Read>
+    <IsPublic>false</IsPublic>
+    <Deleted>false</Deleted>
+  </MailMessage>
+  <MailMessage>
+    <Id>2</Id>
+    <SenderId>905505296</SenderId>
+    <ReceiverId>22</ReceiverId>
+    <ReceiverClanId>0</ReceiverClanId>
+    <SendTime>2019-06-12T21:17:01.701Z</SendTime>
+    <Title>Second Message</Title>
+    <Body>safds dsgf gl li flidslhfj dsjg;jfs;jorw'pk'pl 'll'; l';f 'gf ppgf </Body>
+    <Read>false</Read>
+    <IsPublic>false</IsPublic>
+    <Deleted>false</Deleted>
+  </MailMessage>
+  <MailMessage>
+    <Id>446596176</Id>
+    <SenderId>22</SenderId>
+    <ReceiverId>905505296</ReceiverId>
+    <ReceiverClanId>0</ReceiverClanId>
+    <SendTime>2019-06-18T20:22:05.329Z</SendTime>
+    <Title>Second Message</Title>
+    <Body>testing this to seee how it goes </Body>
+    <Read>false</Read>
+    <IsPublic>false</IsPublic>
+    <Deleted>false</Deleted>
+  </MailMessage>
+  <MailMessage>
+    <Id>225931278</Id>
+    <SenderId>22</SenderId>
+    <ReceiverId>905505296</ReceiverId>
+    <ReceiverClanId>0</ReceiverClanId>
+    <SendTime>2019-06-18T20:24:37.506Z</SendTime>
+    <Title>First Message</Title>
+    <Body>Hi,  Im testing this to see how it works</Body>
+    <Read>false</Read>
+    <IsPublic>false</IsPublic>
+    <Deleted>false</Deleted>
+  </MailMessage>
+  <MailMessage>
+    <Id>1</Id>
+    <SenderId>905505296</SenderId>
+    <ReceiverId>22</ReceiverId>
+    <ReceiverClanId>0</ReceiverClanId>
+    <SendTime>2019-06-12T21:17:01.701Z</SendTime>
+    <Title>First Message</Title>
+    <Body>First Message First MessageFirst MessageFirst MessageFirst MessageFirst MessageFirst MessageFirst MessageFirst MessageFirst MessageFirst MessageFirst MessageFirst MessageFirst MessageFirst Message</Body>
+    <Read>false</Read>
+    <IsPublic>false</IsPublic>
+    <Deleted>false</Deleted>
+  </MailMessage>
+  <MailMessage>
+    <Id>0</Id>
+    <SenderId>0</SenderId>
+    <ReceiverId>0</ReceiverId>
+    <ReceiverClanId>0</ReceiverClanId>
+    <SendTime>2019-01-01T00:00:01.000Z</SendTime>
+    <Title>Welcom To OUP</Title>
+    <Body>Hello there,
+ Hope you enjoy this game and exploring the hidden worlds around you</Body>
+    <Read>true</Read>
+    <IsPublic>true</IsPublic>
+    <Deleted>false</Deleted>
+  </MailMessage>
+</ArrayOfMailMessage>

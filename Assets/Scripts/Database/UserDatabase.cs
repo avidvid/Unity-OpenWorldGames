@@ -16,7 +16,7 @@ public class UserDatabase : MonoBehaviour
     private List<UserItem> _userInventory = new List<UserItem>();
     private List<UserCharacter> _userCharacters = new List<UserCharacter>();
     private List<Character> _myCharacters = new List<Character>();
-    private CharacterMixture _characterMixture;
+    private CharacterMixture _characterMixture = new CharacterMixture();
     private List<CharacterResearch> _characterResearches = new List<CharacterResearch>();
     private CharacterResearching _characterResearching;
     private List<MailMessage> _mailMessages = new List<MailMessage>();

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ArrayOfUserRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UserRecipe>
+    <Id>982906240</Id>
+    <RecipeId>104</RecipeId>
+    <UserId>22</UserId>
+  </UserRecipe>
+  <UserRecipe>
+    <Id>993191732</Id>
+    <RecipeId>103</RecipeId>
+    <UserId>22</UserId>
+  </UserRecipe>
+</ArrayOfUserRecipe>

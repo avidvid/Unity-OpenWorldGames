@@ -28,6 +28,9 @@ public class MailMessage
         IsPublic = false;
         Deleted = false;
     }
+    public MailMessage()
+    {
+    }
 
     #region Print
     internal void Print()

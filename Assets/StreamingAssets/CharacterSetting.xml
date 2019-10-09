@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<CharacterSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>11</Id>
+  <UserId>22</UserId>
+  <CharacterId>1</CharacterId>
+  <Name>Sailor daddy</Name>
+  <Level>6</Level>
+  <Updated>true</Updated>
+  <LastUpdated>2019-07-11T18:37:04.493Z</LastUpdated>
+  <IsEnable>true</IsEnable>
+  <FightMode>false</FightMode>
+  <Alive>true</Alive>
+  <Life>1</Life>
+  <Coin>261210</Coin>
+  <Experience>5339</Experience>
+  <MaxExperience>10500</MaxExperience>
+  <HandsCnt>2</HandsCnt>
+  <MaxHealth>1900</MaxHealth>
+  <Health>503</Health>
+  <MaxMana>400</MaxMana>
+  <Mana>400</Mana>
+  <MaxEnergy>1600</MaxEnergy>
+  <Energy>1597</Energy>
+  <SpeedAttack>5</SpeedAttack>
+  <SpeedDefense>5</SpeedDefense>
+  <AbilityAttack>0</AbilityAttack>
+  <AbilityDefense>0</AbilityDefense>
+  <MagicAttack>2.2</MagicAttack>
+  <MagicDefense>4.2</MagicDefense>
+  <PoisonAttack>0</PoisonAttack>
+  <PoisonDefense>0</PoisonDefense>
+  <Element>None</Element>
+  <Carry>28</Carry>
+  <CarryCnt>7</CarryCnt>
+  <Speed>3</Speed>
+  <Intellect>0</Intellect>
+  <Agility>0</Agility>
+  <Strength>0</Strength>
+  <Stamina>0</Stamina>
+  <Crafting>2502</Crafting>
+  <Researching>0</Researching>
+  <Bravery>0</Bravery>
+  <Charming>0</Charming>
+</CharacterSetting>

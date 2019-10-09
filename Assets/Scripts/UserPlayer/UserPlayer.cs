@@ -62,7 +62,9 @@ public class UserPlayer  {
     public string Gid;
     public string MacId;
     public bool IsEnable;
-
+    public UserPlayer()
+    {
+    }
     public UserPlayer(string userName, string description)
     {
         Id = UnityEngine.Random.Range(0, 1999999999);

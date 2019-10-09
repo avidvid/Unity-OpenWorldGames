@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<UserPlayer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>22</Id>
+  <UserName>Win10</UserName>
+  <Description>Win10</Description>
+  <SoundVolume>0.0243339147</SoundVolume>
+  <Latitude>30.2672</Latitude>
+  <Longitude>-97.8431</Longitude>
+  <Gem>3654</Gem>
+  <LastLogin>2019-10-09T21:45:11.165Z</LastLogin>
+  <LockUntil>2019-10-09T21:01:16.432Z</LockUntil>
+  <LockMins>0</LockMins>
+  <PRank>UnRanked</PRank>
+  <ClanId>0</ClanId>
+  <ClanRank>UnRanked</ClanRank>
+  <FBLoggedIn>true</FBLoggedIn>
+  <GLoggedIn>false</GLoggedIn>
+  <FBid>10213815927848642</FBid>
+  <Gid>Google</Gid>
+  <MacId>E4B97A6D1470</MacId>
+  <IsEnable>true</IsEnable>
+</UserPlayer>

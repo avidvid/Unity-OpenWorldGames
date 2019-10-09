@@ -32,6 +32,40 @@ public class XmlHelper : MonoBehaviour
         Debug.Log("***XML*** Start!");
         _xmlHelper = XmlHelper.Instance();
     }
+    internal UserPlayer GetUserPlayer()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "UserPlayer.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(UserPlayer));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        var userPlayer = (UserPlayer)serializer.Deserialize(fs);
+        fs.Close();
+        return userPlayer;
+    }
+    internal void SaveUserPlayer(UserPlayer userPlayer)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "UserPlayer.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(UserPlayer));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, userPlayer);
+        fs.Close();
+    }
+    internal CharacterSetting GetCharacterSetting()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "CharacterSetting.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(CharacterSetting));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        var characterSetting = (CharacterSetting)serializer.Deserialize(fs);
+        fs.Close();
+        return characterSetting;
+    }
+    internal void SaveCharacterSetting(CharacterSetting characterSetting)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "CharacterSetting.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(CharacterSetting));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, characterSetting);
+        fs.Close();
+    }
     internal void SaveItems(List<ItemContainer> list)
     {
         string path = Path.Combine(Application.streamingAssetsPath, "ItemContainer.xml");
@@ -202,5 +236,108 @@ public class XmlHelper : MonoBehaviour
         var characterMixture = (CharacterMixture)serializer.Deserialize(fs);
         fs.Close();
         return characterMixture;
+    }
+    internal void SaveCharacterResearching(CharacterResearching characterResearching)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearching.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(CharacterResearching));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, characterResearching);
+        fs.Close();
+    }
+    internal CharacterResearching GetCharacterResearching()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearching.xml");
+        //Read the CharacterResearching from CharacterResearching.xml file in the streamingAssets folder
+        XmlSerializer serializer = new XmlSerializer(typeof(CharacterResearching));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        var characterResearching = (CharacterResearching)serializer.Deserialize(fs);
+        fs.Close();
+        return characterResearching;
+    }
+    internal void SaveUserInventory(List<UserItem> list)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "UserInventory.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<UserItem>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, list);
+        fs.Close();
+    }
+    internal List<UserItem> GetUserInventory()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "UserInventory.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<UserItem>));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        var items = (List<UserItem>)serializer.Deserialize(fs);
+        fs.Close();
+        return items;
+    }
+    internal void SaveUserCharacters(List<UserCharacter> list)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "UserCharacters.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<UserCharacter>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, list);
+        fs.Close();
+    }
+    internal List<UserCharacter> GetUserCharacters()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "UserCharacters.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<UserCharacter>));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        var list = (List<UserCharacter>)serializer.Deserialize(fs);
+        fs.Close();
+        return list;
+    }
+    internal void SaveCharacterResearches(List<CharacterResearch> list)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearches.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<CharacterResearch>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, list);
+        fs.Close();
+    }
+    internal List<CharacterResearch> GetCharacterResearches()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearches.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<CharacterResearch>));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        var list = (List<CharacterResearch>)serializer.Deserialize(fs);
+        fs.Close();
+        return list;
+    }
+    internal void SaveUserRecipes(List<UserRecipe> list)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "UserRecipes.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<UserRecipe>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, list);
+        fs.Close();
+    }
+    internal List<UserRecipe> GetUserRecipes()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "UserRecipes.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<UserRecipe>));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        var list = (List<UserRecipe>)serializer.Deserialize(fs);
+        fs.Close();
+        return list;
+    }
+    internal void SaveMailMessages(List<MailMessage> list)
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "MailMessages.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<MailMessage>));
+        FileStream fs = new FileStream(path, FileMode.Create);
+        serializer.Serialize(fs, list);
+        fs.Close();
+    }
+    internal List<MailMessage> GetMailMessages()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "MailMessages.xml");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<MailMessage>));
+        FileStream fs = new FileStream(path, FileMode.Open);
+        var list = (List<MailMessage>)serializer.Deserialize(fs);
+        fs.Close();
+        return list;
     }
 }

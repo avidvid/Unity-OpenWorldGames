@@ -40,10 +40,10 @@ public class ApiGatewayConfig : MonoBehaviour
         _terrainDatabase=TerrainDatabase.Instance();
         _gameLoadHelper = GameObject.Find("GameStarter").GetComponent<GameLoadHelper>();
         //Call UserPlayer
-        _apiGate = "GetUserPlayer";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", DeviceHandler.FetchMacId());
-        StartCoroutine(GetRequest(_uri, ReadUserPlayerJson));
-
+        //_apiGate = "GetUserPlayer";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", DeviceHandler.FetchMacId());
+        //StartCoroutine(GetRequest(_uri, ReadUserPlayerJson));
+        ReadUserPlayerXml();
     }
     #region ReadDB
     private void FirstWave()
@@ -114,37 +114,44 @@ public class ApiGatewayConfig : MonoBehaviour
         //StartCoroutine(GetRequest(_uri, ReadCharacterMixtureJson));
         ReadCharacterMixtureXml();
         //Call CharacterResearching
-        _apiGate = "GetCharacterResearching";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadCharacterResearchingJson));
+        //_apiGate = "GetCharacterResearching";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadCharacterResearchingJson));
+        ReadCharacterResearchingXml();
         //Call UserInventory
-        _apiGate = "GetUserInventory";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadUserInventoryJson));
+        //_apiGate = "GetUserInventory";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadUserInventoryJson));
+        ReadUserInventoryXml();
         //Call CharacterResearches
-        _apiGate = "GetCharacterResearches";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadCharacterResearchesJson));
+        //_apiGate = "GetCharacterResearches";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadCharacterResearchesJson));
+        ReadCharacterResearchesXml();
         //Call UserRecipes
-        _apiGate = "GetUserRecipes";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadUserRecipesJson));
+        //_apiGate = "GetUserRecipes";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadUserRecipesJson));
+        ReadUserRecipesXml();
         //Call UserCharacters
-        _apiGate = "GetUserCharacters";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadUserCharactersJson));
+        //_apiGate = "GetUserCharacters";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadUserCharactersJson));
+        ReadUserCharactersXml();
         //Call MailMessages
-        _apiGate = "GetMailMessage";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadMailMessagesJson));
+        //_apiGate = "GetMailMessage";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadMailMessagesJson));
+        ReadMailMessagesXml();
     }
     IEnumerator ThirdWave()
     {
         yield return new WaitUntil(() => _secondWaveTarget >= 7);
         //Call CharacterSetting
-        _apiGate = "GetCharacterSetting";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
-        StartCoroutine(GetRequest(_uri, ReadCharacterSettingJson));
+        //_apiGate = "GetCharacterSetting";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
+        //StartCoroutine(GetRequest(_uri, ReadCharacterSettingJson));
+        ReadCharacterSettingXml();
     }
     //ItemDatabase
     private void ReadItemsJson(string result)
@@ -331,6 +338,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.CharacterResearching == null)
             Debug.LogWarning("####API-CharacterResearching Is Empty!!!");
         _userDatabase.UpdateCharacterResearching(response.Body.CharacterResearching);
+        _xmlHelper.SaveCharacterResearching(response.Body.CharacterResearching);
+        _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
+    }
+    private void ReadCharacterResearchingXml()
+    {
+        _xmlHelper.SaveCharacterResearching(_xmlHelper.GetCharacterResearching());
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -341,6 +355,13 @@ public class ApiGatewayConfig : MonoBehaviour
             Debug.LogWarning("####API-UserInventory Is Empty!!!");
         SavedUserInventory(response.Body.UserInventory);
         _userDatabase.UpdateUserInventory(response.Body.UserInventory);
+        _xmlHelper.SaveUserInventory(response.Body.UserInventory);
+        _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
+    }
+    private void ReadUserInventoryXml()
+    {
+        _userDatabase.UpdateUserInventory(_xmlHelper.GetUserInventory());
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -350,6 +371,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.UserCharacters.Count == 0)
             Debug.LogWarning("####API--UserCharacters Is Empty!!!");
         _userDatabase.UpdateUserCharacters(response.Body.UserCharacters);
+        _xmlHelper.SaveUserCharacters(response.Body.UserCharacters);
+        _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
+    }
+    private void ReadUserCharactersXml()
+    {
+        _userDatabase.UpdateUserCharacters(_xmlHelper.GetUserCharacters());
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -359,6 +387,13 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.CharacterResearches.Count == 0)
             Debug.LogWarning("####API--CharacterResearches Is Empty!!!");
         _userDatabase.UpdateCharacterResearches(response.Body.CharacterResearches);
+        _xmlHelper.SaveCharacterResearches(response.Body.CharacterResearches);
+        _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
+    }
+    private void ReadCharacterResearchesXml()
+    {
+        _userDatabase.UpdateCharacterResearches(_xmlHelper.GetCharacterResearches());
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -368,6 +403,29 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.UserRecipes.Count == 0)
             Debug.LogWarning("####API--UserRecipes Is Empty!!!");
         _userDatabase.UpdateUserRecipes(response.Body.UserRecipes);
+        _xmlHelper.SaveUserRecipes(response.Body.UserRecipes);
+        _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
+    }
+    private void ReadUserRecipesXml()
+    {
+        _userDatabase.UpdateUserRecipes(_xmlHelper.GetUserRecipes());
+        _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
+    }
+    private void ReadMailMessagesJson(string result)
+    {
+        var response = TranslateResponse(result);
+        if (response.Body.MailMessages.Count == 0)
+            Debug.LogWarning("####API--MailMessages Is Empty!!!");
+        _userDatabase.UpdateMailMessages(response.Body.MailMessages);
+        _xmlHelper.SaveMailMessages(response.Body.MailMessages);
+        _gameLoadHelper.LoadingThumbsUp();
+        _secondWaveTarget++;
+    }
+    private void ReadMailMessagesXml()
+    {
+        _userDatabase.UpdateMailMessages(_xmlHelper.GetMailMessages());
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -377,6 +435,24 @@ public class ApiGatewayConfig : MonoBehaviour
         if (response.Body.CharacterSetting.Id == 0)
             Debug.LogWarning("####API-CharacterSetting Is Empty!!!");
         _userDatabase.UpdateCharacterSetting(response.Body.CharacterSetting);
+        _xmlHelper.SaveCharacterSetting(response.Body.CharacterSetting);
+        if (_userDatabase.StartGameValidation())
+            _gameLoadHelper.LoadingThumbsUp();
+        //Instantiate Important Game Objects
+        print("***###*** Instantiate Important Game Objects ***###***");
+        var characterManager = Resources.Load<GameObject>("Prefabs/CharacterManager");
+        Instantiate(characterManager);
+        var musicBox = Resources.Load<GameObject>("Prefabs/MusicBox");
+        Instantiate(musicBox);
+        var cache = Resources.Load<GameObject>("Prefabs/Cache");
+        Instantiate(cache);
+    }
+    private void ReadCharacterSettingXml()
+    {
+        var characterSetting = _xmlHelper.GetCharacterSetting();
+        if (characterSetting == null)
+            Debug.LogWarning("####API-CharacterSetting Is Empty!!!");
+        _userDatabase.UpdateCharacterSetting(characterSetting);
         if (_userDatabase.StartGameValidation())
             _gameLoadHelper.LoadingThumbsUp();
         //Instantiate Important Game Objects
@@ -399,19 +475,27 @@ public class ApiGatewayConfig : MonoBehaviour
         else
             _userId = response.Body.UserPlayer.Id;
         _userDatabase.UpdateUserPlayer(response.Body.UserPlayer);
+        _xmlHelper.SaveUserPlayer(response.Body.UserPlayer);
         _gameLoadHelper.LoadingThumbsUp();
         FirstWave();
         StartCoroutine(SecondWave());
         StartCoroutine(ThirdWave());
     }
-    private void ReadMailMessagesJson(string result)
+    private void ReadUserPlayerXml()
     {
-        var response = TranslateResponse(result);
-        if (response.Body.MailMessages.Count == 0)
-            Debug.LogWarning("####API--MailMessages Is Empty!!!");
-        _userDatabase.UpdateMailMessages(response.Body.MailMessages);
+        var userPlayer = _xmlHelper.GetUserPlayer();
+        if (userPlayer == null)
+        {
+            Debug.LogWarning("####API-UserPlayer Is Empty!!!");
+            _userId = 0;
+        }
+        else
+            _userId = userPlayer.Id;
+        _userDatabase.UpdateUserPlayer(userPlayer);
         _gameLoadHelper.LoadingThumbsUp();
-        _secondWaveTarget++;
+        FirstWave();
+        StartCoroutine(SecondWave());
+        StartCoroutine(ThirdWave());
     }
     #endregion
     #region Updates

@@ -17,6 +17,9 @@ public class UserRecipe
         if (recipeCode != null)
             RecipeCode = recipeCode;
     }
+    public UserRecipe()
+    {
+    }
     internal void Print()
     {
         Debug.Log("UserRecipe: " + MyInfo());

@@ -49,6 +49,9 @@ public class CharacterSetting {
     public float Bravery;
     public float Charming;
 
+    public CharacterSetting()
+    {
+    }
     public CharacterSetting(int userId, int characterId, string name)
     {
         Id = UnityEngine.Random.Range(0, 1999999999);
