@@ -510,9 +510,9 @@ public class ApiGatewayConfig : MonoBehaviour
     internal void SaveUserPlayer(UserPlayer userPlayer)
     {
         //mins is the minutes that the user should stay locked 
-         _apiGate = "GetUserPlayer";
-        print("Saving" + userPlayer.MyInfo());
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userPlayer.Id.ToString());
+        // _apiGate = "GetUserPlayer";
+        //print("Saving" + userPlayer.MyInfo());
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", userPlayer.Id.ToString());
         if (userPlayer.Latitude == 0 && userPlayer.Longitude == 0)
         {
             var locationHelper = LocationHelper.Instance();
@@ -521,24 +521,28 @@ public class ApiGatewayConfig : MonoBehaviour
             userPlayer.Longitude = loc.y;
             _terrainDatabase.SetRegion(userPlayer.Latitude, userPlayer.Longitude);
         }
-        ApiRequest ap = new ApiRequest
-        {
-            UserPlayer = userPlayer
-        };
-        StartCoroutine(PutRequest(_uri, ap));
+        //ApiRequest ap = new ApiRequest
+        //{
+        //    UserPlayer = userPlayer
+        //};
+        //StartCoroutine(PutRequest(_uri, ap));
+        _xmlHelper.SaveUserPlayer(userPlayer);
     }
     internal void SaveCharacterSetting(CharacterSetting characterSetting)
     {
-        _apiGate = "GetCharacterSetting";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterSetting.Id.ToString());
-        ApiRequest ap = new ApiRequest
-        {
-            CharacterSetting = characterSetting
-        };
-        StartCoroutine(PutRequest(_uri, ap));
+        //_apiGate = "GetCharacterSetting";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterSetting.Id.ToString());
+        //ApiRequest ap = new ApiRequest
+        //{
+        //    CharacterSetting = characterSetting
+        //};
+        //StartCoroutine(PutRequest(_uri, ap));
+        _xmlHelper.SaveCharacterSetting(characterSetting);
     }
     internal void PutUserInventory(List<UserItem> userInventory)
     {
+        _xmlHelper.SaveUserInventory(userInventory);
+        return;
         //Todo: delete
         Debug.Log("PutUserInventory   _oldUserInventory=" + _oldUserInventory.Count + " userInventory = "+ userInventory.Count);
         //foreach (var item in _oldUserInventory) item.Print();
@@ -589,26 +593,27 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     internal void PutCharacterMixture(CharacterMixture characterMixture)
     {
-        _apiGate = "GetCharacterMixture";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterMixture.Id.ToString());
-        int time = -1;
-        string action;
-        if (characterMixture.StackCnt == 0)
-            action = "Delete";
-        else if (characterMixture.MixTime == "Now")
-        {
-            action = "Update";
-            time = 0;
-        }
-        else
-            action = "Insert";
-        ApiRequest ap = new ApiRequest
-        {
-            Action = action,
-            Time = time,
-            CharacterMixture = characterMixture 
-        };
-        StartCoroutine(PutRequest(_uri, ap));
+        _xmlHelper.SaveCharacterMixture(characterMixture);
+        //_apiGate = "GetCharacterMixture";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterMixture.Id.ToString());
+        //int time = -1;
+        //string action;
+        //if (characterMixture.StackCnt == 0)
+        //    action = "Delete";
+        //else if (characterMixture.MixTime == "Now")
+        //{
+        //    action = "Update";
+        //    time = 0;
+        //}
+        //else
+        //    action = "Insert";
+        //ApiRequest ap = new ApiRequest
+        //{
+        //    Action = action,
+        //    Time = time,
+        //    CharacterMixture = characterMixture 
+        //};
+        //StartCoroutine(PutRequest(_uri, ap));
     }
     internal void PutUserRecipe(UserRecipe userRecipe,string code=null)
     {
@@ -646,26 +651,27 @@ public class ApiGatewayConfig : MonoBehaviour
     }
     internal void PutCharacterResearching(CharacterResearching characterResearching)
     {
-        _apiGate = "GetCharacterResearching";
-        _uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterResearching.Id.ToString());
-        int time = -1;
-        string action;
-        if (characterResearching.Level == 0)
-            action = "Delete";
-        else if (characterResearching.ResearchTime == "Now")
-        {
-            action = "Update";
-            time = 0;
-        }
-        else
-            action = "Insert";
-        ApiRequest ap = new ApiRequest
-        {
-            Action = action,
-            Time = time,
-            CharacterResearching = characterResearching
-        };
-        StartCoroutine(PutRequest(_uri, ap));
+        _xmlHelper.SaveCharacterResearching(characterResearching);
+        //_apiGate = "GetCharacterResearching";
+        //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", characterResearching.Id.ToString());
+        //int time = -1;
+        //string action;
+        //if (characterResearching.Level == 0)
+        //    action = "Delete";
+        //else if (characterResearching.ResearchTime == "Now")
+        //{
+        //    action = "Update";
+        //    time = 0;
+        //}
+        //else
+        //    action = "Insert";
+        //ApiRequest ap = new ApiRequest
+        //{
+        //    Action = action,
+        //    Time = time,
+        //    CharacterResearching = characterResearching
+        //};
+        //StartCoroutine(PutRequest(_uri, ap));
     }
     internal void PutCharacterResearch(CharacterResearch characterResearch)
     {

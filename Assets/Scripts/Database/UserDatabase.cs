@@ -236,8 +236,12 @@ public class UserDatabase : MonoBehaviour
         {
             var uc = _userCharacters.Find(c => c.CharacterId == characterId && !string.IsNullOrEmpty(c.CharacterCode));
             if (uc == null)
+            {
                 uc = new UserCharacter(characterId, _userPlayer.Id);
-            _apiGatewayConfig.PutUserCharacter(uc);
+                _userCharacters.Add(uc);
+                _xmlHelper.SaveUserCharacters(_userCharacters);
+            }
+            //_apiGatewayConfig.PutUserCharacter(uc);
             return true;
         }
         catch (Exception e)
@@ -345,17 +349,19 @@ public class UserDatabase : MonoBehaviour
                 if (chResearch.Level + 1 != level)
                     throw new Exception("CharacterResearch Invalid != ");
                 chResearch.Level += 1;
-                SaveCharacterResearch(chResearch);
+                _xmlHelper.SaveCharacterResearches(_characterResearches);
+                //SaveCharacterResearch(chResearch);
                 return;
             }
         var newResearch = new CharacterResearch(research.Id, _userPlayer.Id);
         _characterResearches.Add(newResearch);
-        SaveCharacterResearch(newResearch);
+        _xmlHelper.SaveCharacterResearches(_characterResearches);
+        //SaveCharacterResearch(newResearch);
     }
     private void SaveCharacterResearch(CharacterResearch characterResearch)
     {
         Debug.Log("UDB-characterResearch = " + characterResearch.MyInfo());
-        _apiGatewayConfig.PutCharacterResearch(characterResearch);
+        //_apiGatewayConfig.PutCharacterResearch(characterResearch);
     }
     #endregion
     #region CharacterSetting
@@ -437,10 +443,10 @@ public class UserDatabase : MonoBehaviour
         if (availableRecipe.Count > 0)
         {
             var recipeId = availableRecipe[RandomHelper.Range(key, availableRecipe.Count)];
-            var ur = _userRecipes.Find(c => c.RecipeId == recipeId && !string.IsNullOrEmpty(c.RecipeCode));
-            if (ur == null)
-                ur = new UserRecipe(recipeId, _userPlayer.Id);
-            _apiGatewayConfig.PutUserRecipe(ur);
+            var ur = new UserRecipe(recipeId, _userPlayer.Id);
+            _userRecipes.Add(ur);
+            _xmlHelper.SaveUserRecipes(_userRecipes);
+            //_apiGatewayConfig.PutUserRecipe(ur);
             return true;
         }
         return false;
@@ -487,12 +493,13 @@ public class UserDatabase : MonoBehaviour
     internal void AddMailMessage(MailMessage mailMessage)
     {
         _mailMessages.Add(mailMessage);
-        SaveMailMessage(mailMessage);
+        _xmlHelper.SaveMailMessages(_mailMessages);
+        //SaveMailMessage(mailMessage);
     }
     private void SaveMailMessage(MailMessage mailMessage)
     {
         Debug.Log("UDB-MailMessage = " + mailMessage.MyInfo());
-        _apiGatewayConfig.PutMailMessage(mailMessage);
+        //_apiGatewayConfig.PutMailMessage(mailMessage);
     }
     #endregion
     private void GoToStartScene()

@@ -57,14 +57,25 @@ public class CharacterListHandler : MonoBehaviour
     }
     internal void ValidateCharacterCode(string characterCode)
     {
-        var apiGatewayConfig = ApiGatewayConfig.Instance();
-        if (apiGatewayConfig != null)
+        var userCharacters = _characterManager.MyUserCharacters;
+        for (int i = 0; i < userCharacters.Count; i++)
+            if (userCharacters[i].CharacterCode == characterCode)
+            {
+                userCharacters[i].CharacterCode = "";
+            }
+        var xmlHelper = XmlHelper.Instance();
+        if (xmlHelper != null)
         {
-            var userCharacters = _characterManager.MyUserCharacters;
-            for (int i = 0; i < userCharacters.Count; i++)
-                if (userCharacters[i].CharacterCode == "0000")
-                    apiGatewayConfig.PutUserCharacter(userCharacters[i], characterCode);
+            xmlHelper.SaveUserCharacters(userCharacters);
         }
+        //var apiGatewayConfig = ApiGatewayConfig.Instance();
+        //if (apiGatewayConfig != null)
+        //{
+        //    var userCharacters = _characterManager.MyUserCharacters;
+        //    for (int i = 0; i < userCharacters.Count; i++)
+        //        if (userCharacters[i].CharacterCode == "0000")
+        //            apiGatewayConfig.PutUserCharacter(userCharacters[i], characterCode);
+        //}
     }
 
     public void RefreshTheScene()

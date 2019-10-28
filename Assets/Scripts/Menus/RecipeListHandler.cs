@@ -78,14 +78,25 @@ public class RecipeListHandler : MonoBehaviour {
 
     internal void ValidateRecipeCode(string recipeCode)
     {
-        var apiGatewayConfig = ApiGatewayConfig.Instance();
-        if (apiGatewayConfig!= null)
+        var userRecipes = _characterManager.MyUserRecipes;
+        for (int i = 0; i < userRecipes.Count; i++)
+            if (userRecipes[i].RecipeCode == recipeCode)
+            {
+                userRecipes[i].RecipeCode = "";
+            }
+        var xmlHelper = XmlHelper.Instance();
+        if (xmlHelper != null)
         {
-            var userRecipes = _characterManager.MyUserRecipes;
-            for (int i = 0; i < userRecipes.Count; i++)
-                if (userRecipes[i].RecipeCode == "0000")
-                    apiGatewayConfig.PutUserRecipe(userRecipes[i], recipeCode);
+            xmlHelper.SaveUserRecipes(userRecipes);
         }
+        //var apiGatewayConfig = ApiGatewayConfig.Instance();
+        //if (apiGatewayConfig!= null)
+        //{
+        //    var userRecipes = _characterManager.MyUserRecipes;
+        //    for (int i = 0; i < userRecipes.Count; i++)
+        //        if (userRecipes[i].RecipeCode == "0000")
+        //            apiGatewayConfig.PutUserRecipe(userRecipes[i], recipeCode);
+        //}
     }
 
     public void RefreshTheScene()
