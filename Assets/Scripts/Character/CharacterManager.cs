@@ -73,7 +73,7 @@ public class CharacterManager : MonoBehaviour
         Debug.Log("CM-AllUserPlayer.Count = " + AllUserPlayer.Count);
         //CharacterSetting
         CharacterSetting = _userDatabase.GetCharacterSetting();
-        if (CharacterSetting.Id !=0)
+        if (CharacterSetting != null)
         {
             Debug.Log("CM-CharacterSetting = " + CharacterSetting.MyInfo());
             SetMyCharacter(CharacterSetting.CharacterId);
@@ -100,7 +100,7 @@ public class CharacterManager : MonoBehaviour
         MailMessages = _userDatabase.GetMailMessages();
         Debug.Log("CM-MailMessages.Count = " + MailMessages.Count);
 
-        if (CharacterSetting.Id != 0)
+        if (CharacterSetting != null)
             LoginCalculations();
     }
 
@@ -112,6 +112,8 @@ public class CharacterManager : MonoBehaviour
 
     void Update()
     {
+        if (CharacterSetting == null)
+            return;
         //Refresh User stats Health Mana Energy Level
         if (Time.time > _nextActionTime)
         {

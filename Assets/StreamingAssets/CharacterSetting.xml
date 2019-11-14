@@ -16,11 +16,11 @@
   <MaxExperience>10500</MaxExperience>
   <HandsCnt>2</HandsCnt>
   <MaxHealth>1900</MaxHealth>
-  <Health>503</Health>
+  <Health>399</Health>
   <MaxMana>400</MaxMana>
   <Mana>400</Mana>
   <MaxEnergy>1600</MaxEnergy>
-  <Energy>1597</Energy>
+  <Energy>1681</Energy>
   <SpeedAttack>5</SpeedAttack>
   <SpeedDefense>5</SpeedDefense>
   <AbilityAttack>0</AbilityAttack>

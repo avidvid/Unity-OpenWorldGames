@@ -43,7 +43,7 @@ public class ApiGatewayConfig : MonoBehaviour
         //_apiGate = "GetUserPlayer";
         //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", DeviceHandler.FetchMacId());
         //StartCoroutine(GetRequest(_uri, ReadUserPlayerJson));
-        ReadUserPlayerXml();
+        ReadUserPlayerXml(DeviceHandler.FetchMacId());
     }
     #region ReadDB
     private void FirstWave()
@@ -112,37 +112,37 @@ public class ApiGatewayConfig : MonoBehaviour
         //_apiGate = "GetCharacterMixture";
         //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         //StartCoroutine(GetRequest(_uri, ReadCharacterMixtureJson));
-        ReadCharacterMixtureXml();
+        ReadCharacterMixtureXml(_userId);
         //Call CharacterResearching
         //_apiGate = "GetCharacterResearching";
         //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         //StartCoroutine(GetRequest(_uri, ReadCharacterResearchingJson));
-        ReadCharacterResearchingXml();
+        ReadCharacterResearchingXml(_userId);
         //Call UserInventory
         //_apiGate = "GetUserInventory";
         //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         //StartCoroutine(GetRequest(_uri, ReadUserInventoryJson));
-        ReadUserInventoryXml();
+        ReadUserInventoryXml(_userId);
         //Call CharacterResearches
         //_apiGate = "GetCharacterResearches";
         //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         //StartCoroutine(GetRequest(_uri, ReadCharacterResearchesJson));
-        ReadCharacterResearchesXml();
+        ReadCharacterResearchesXml(_userId);
         //Call UserRecipes
         //_apiGate = "GetUserRecipes";
         //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         //StartCoroutine(GetRequest(_uri, ReadUserRecipesJson));
-        ReadUserRecipesXml();
+        ReadUserRecipesXml(_userId);
         //Call UserCharacters
         //_apiGate = "GetUserCharacters";
         //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         //StartCoroutine(GetRequest(_uri, ReadUserCharactersJson));
-        ReadUserCharactersXml();
+        ReadUserCharactersXml(_userId);
         //Call MailMessages
         //_apiGate = "GetMailMessage";
         //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         //StartCoroutine(GetRequest(_uri, ReadMailMessagesJson));
-        ReadMailMessagesXml();
+        ReadMailMessagesXml(_userId);
     }
     IEnumerator ThirdWave()
     {
@@ -151,7 +151,7 @@ public class ApiGatewayConfig : MonoBehaviour
         //_apiGate = "GetCharacterSetting";
         //_uri = String.Format(ApiPath + ApiStage + _apiGate + "?id={0}", _userId.ToString());
         //StartCoroutine(GetRequest(_uri, ReadCharacterSettingJson));
-        ReadCharacterSettingXml();
+        ReadCharacterSettingXml(_userId);
     }
     //ItemDatabase
     private void ReadItemsJson(string result)
@@ -326,9 +326,9 @@ public class ApiGatewayConfig : MonoBehaviour
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
-    private void ReadCharacterMixtureXml()
+    private void ReadCharacterMixtureXml(int userId)
     {
-        _xmlHelper.SaveCharacterMixture(_xmlHelper.GetCharacterMixture());
+        _userDatabase.UpdateCharacterMixture(_xmlHelper.GetCharacterMixture(userId));
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -342,9 +342,9 @@ public class ApiGatewayConfig : MonoBehaviour
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
-    private void ReadCharacterResearchingXml()
+    private void ReadCharacterResearchingXml(int userId)
     {
-        _xmlHelper.SaveCharacterResearching(_xmlHelper.GetCharacterResearching());
+        _userDatabase.UpdateCharacterResearching(_xmlHelper.GetCharacterResearching(userId));
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -359,9 +359,9 @@ public class ApiGatewayConfig : MonoBehaviour
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
-    private void ReadUserInventoryXml()
+    private void ReadUserInventoryXml(int userId)
     {
-        _userDatabase.UpdateUserInventory(_xmlHelper.GetUserInventory());
+        _userDatabase.UpdateUserInventory(_xmlHelper.GetUserInventory(userId));
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -375,9 +375,9 @@ public class ApiGatewayConfig : MonoBehaviour
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
-    private void ReadUserCharactersXml()
+    private void ReadUserCharactersXml(int userId)
     {
-        _userDatabase.UpdateUserCharacters(_xmlHelper.GetUserCharacters());
+        _userDatabase.UpdateUserCharacters(_xmlHelper.GetUserCharacters(userId));
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -391,9 +391,9 @@ public class ApiGatewayConfig : MonoBehaviour
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
-    private void ReadCharacterResearchesXml()
+    private void ReadCharacterResearchesXml(int userId)
     {
-        _userDatabase.UpdateCharacterResearches(_xmlHelper.GetCharacterResearches());
+        _userDatabase.UpdateCharacterResearches(_xmlHelper.GetCharacterResearches(userId));
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -407,9 +407,9 @@ public class ApiGatewayConfig : MonoBehaviour
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
-    private void ReadUserRecipesXml()
+    private void ReadUserRecipesXml(int userId)
     {
-        _userDatabase.UpdateUserRecipes(_xmlHelper.GetUserRecipes());
+        _userDatabase.UpdateUserRecipes(_xmlHelper.GetUserRecipes(userId));
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -423,9 +423,9 @@ public class ApiGatewayConfig : MonoBehaviour
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
-    private void ReadMailMessagesXml()
+    private void ReadMailMessagesXml(int userId)
     {
-        _userDatabase.UpdateMailMessages(_xmlHelper.GetMailMessages());
+        _userDatabase.UpdateMailMessages(_xmlHelper.GetMailMessages(userId));
         _gameLoadHelper.LoadingThumbsUp();
         _secondWaveTarget++;
     }
@@ -447,11 +447,9 @@ public class ApiGatewayConfig : MonoBehaviour
         var cache = Resources.Load<GameObject>("Prefabs/Cache");
         Instantiate(cache);
     }
-    private void ReadCharacterSettingXml()
+    private void ReadCharacterSettingXml(int userId)
     {
-        var characterSetting = _xmlHelper.GetCharacterSetting();
-        if (characterSetting == null)
-            Debug.LogWarning("####API-CharacterSetting Is Empty!!!");
+        var characterSetting = _xmlHelper.GetCharacterSetting(userId);
         _userDatabase.UpdateCharacterSetting(characterSetting);
         if (_userDatabase.StartGameValidation())
             _gameLoadHelper.LoadingThumbsUp();
@@ -481,9 +479,9 @@ public class ApiGatewayConfig : MonoBehaviour
         StartCoroutine(SecondWave());
         StartCoroutine(ThirdWave());
     }
-    private void ReadUserPlayerXml()
+    private void ReadUserPlayerXml(string MacId)
     {
-        var userPlayer = _xmlHelper.GetUserPlayer();
+        var userPlayer = _xmlHelper.GetUserPlayer(MacId);
         if (userPlayer == null)
         {
             Debug.LogWarning("####API-UserPlayer Is Empty!!!");

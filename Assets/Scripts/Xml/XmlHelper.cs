@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
 
@@ -32,14 +33,25 @@ public class XmlHelper : MonoBehaviour
         Debug.Log("***XML*** Start!");
         _xmlHelper = XmlHelper.Instance();
     }
-    internal UserPlayer GetUserPlayer()
+    internal UserPlayer GetUserPlayer(string macId)
     {
+        Debug.Log("Mac Id = "+ macId);
         string path = Path.Combine(Application.streamingAssetsPath, "UserPlayer.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(UserPlayer));
         FileStream fs = new FileStream(path, FileMode.Open);
         var userPlayer = (UserPlayer)serializer.Deserialize(fs);
         fs.Close();
-        return userPlayer;
+        try
+        {
+            if (userPlayer.MacId == macId)
+                return userPlayer;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        return null;
+
     }
     internal void SaveUserPlayer(UserPlayer userPlayer)
     {
@@ -49,8 +61,10 @@ public class XmlHelper : MonoBehaviour
         serializer.Serialize(fs, userPlayer);
         fs.Close();
     }
-    internal CharacterSetting GetCharacterSetting()
+    internal CharacterSetting GetCharacterSetting(int userId)
     {
+        if (userId == 0)
+            return null;
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterSetting.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(CharacterSetting));
         FileStream fs = new FileStream(path, FileMode.Open);
@@ -227,7 +241,7 @@ public class XmlHelper : MonoBehaviour
         serializer.Serialize(fs, characterMixture);
         fs.Close();
     }
-    internal CharacterMixture GetCharacterMixture()
+    internal CharacterMixture GetCharacterMixture(int userId)
     {
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterMixture.xml");
         //Read the CharacterMixture from CharacterMixture.xml file in the streamingAssets folder
@@ -235,7 +249,7 @@ public class XmlHelper : MonoBehaviour
         FileStream fs = new FileStream(path, FileMode.Open);
         var characterMixture = (CharacterMixture)serializer.Deserialize(fs);
         fs.Close();
-        return characterMixture;
+        return userId==0 ? new CharacterMixture() : characterMixture;
     }
     internal void SaveCharacterResearching(CharacterResearching characterResearching)
     {
@@ -245,7 +259,7 @@ public class XmlHelper : MonoBehaviour
         serializer.Serialize(fs, characterResearching);
         fs.Close();
     }
-    internal CharacterResearching GetCharacterResearching()
+    internal CharacterResearching GetCharacterResearching(int userId)
     {
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearching.xml");
         //Read the CharacterResearching from CharacterResearching.xml file in the streamingAssets folder
@@ -253,7 +267,7 @@ public class XmlHelper : MonoBehaviour
         FileStream fs = new FileStream(path, FileMode.Open);
         var characterResearching = (CharacterResearching)serializer.Deserialize(fs);
         fs.Close();
-        return characterResearching;
+        return userId == 0 ? new CharacterResearching() : characterResearching;
     }
     internal void SaveUserInventory(List<UserItem> list)
     {
@@ -263,14 +277,14 @@ public class XmlHelper : MonoBehaviour
         serializer.Serialize(fs, list);
         fs.Close();
     }
-    internal List<UserItem> GetUserInventory()
+    internal List<UserItem> GetUserInventory(int userId)
     {
         string path = Path.Combine(Application.streamingAssetsPath, "UserInventory.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<UserItem>));
         FileStream fs = new FileStream(path, FileMode.Open);
-        var items = (List<UserItem>)serializer.Deserialize(fs);
+        var list = (List<UserItem>)serializer.Deserialize(fs);
         fs.Close();
-        return items;
+        return list.Where(item => item.UserId == userId).ToList();
     }
     internal void SaveUserCharacters(List<UserCharacter> list)
     {
@@ -280,14 +294,14 @@ public class XmlHelper : MonoBehaviour
         serializer.Serialize(fs, list);
         fs.Close();
     }
-    internal List<UserCharacter> GetUserCharacters()
+    internal List<UserCharacter> GetUserCharacters(int userId)
     {
         string path = Path.Combine(Application.streamingAssetsPath, "UserCharacters.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<UserCharacter>));
         FileStream fs = new FileStream(path, FileMode.Open);
         var list = (List<UserCharacter>)serializer.Deserialize(fs);
         fs.Close();
-        return list;
+        return list.Where(item => item.UserId == userId).ToList();
     }
     internal void SaveCharacterResearches(List<CharacterResearch> list)
     {
@@ -297,14 +311,14 @@ public class XmlHelper : MonoBehaviour
         serializer.Serialize(fs, list);
         fs.Close();
     }
-    internal List<CharacterResearch> GetCharacterResearches()
+    internal List<CharacterResearch> GetCharacterResearches(int userId)
     {
         string path = Path.Combine(Application.streamingAssetsPath, "CharacterResearches.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<CharacterResearch>));
         FileStream fs = new FileStream(path, FileMode.Open);
         var list = (List<CharacterResearch>)serializer.Deserialize(fs);
         fs.Close();
-        return list;
+        return list.Where(item => item.UserId == userId).ToList();
     }
     internal void SaveUserRecipes(List<UserRecipe> list)
     {
@@ -314,14 +328,14 @@ public class XmlHelper : MonoBehaviour
         serializer.Serialize(fs, list);
         fs.Close();
     }
-    internal List<UserRecipe> GetUserRecipes()
+    internal List<UserRecipe> GetUserRecipes(int userId)
     {
         string path = Path.Combine(Application.streamingAssetsPath, "UserRecipes.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<UserRecipe>));
         FileStream fs = new FileStream(path, FileMode.Open);
         var list = (List<UserRecipe>)serializer.Deserialize(fs);
         fs.Close();
-        return list;
+        return list.Where(item => item.UserId == userId).ToList();
     }
     internal void SaveMailMessages(List<MailMessage> list)
     {
@@ -331,13 +345,13 @@ public class XmlHelper : MonoBehaviour
         serializer.Serialize(fs, list);
         fs.Close();
     }
-    internal List<MailMessage> GetMailMessages()
+    internal List<MailMessage> GetMailMessages(int userId)
     {
         string path = Path.Combine(Application.streamingAssetsPath, "MailMessages.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(List<MailMessage>));
         FileStream fs = new FileStream(path, FileMode.Open);
         var list = (List<MailMessage>)serializer.Deserialize(fs);
         fs.Close();
-        return list;
+        return list.Where(item => item.SenderId == userId || item.ReceiverId == userId).ToList();
     }
 }

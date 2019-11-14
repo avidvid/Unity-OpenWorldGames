@@ -376,7 +376,10 @@ public class UserDatabase : MonoBehaviour
     public void UpdateCharacterSetting(CharacterSetting characterSetting)
     {
         _characterSetting = characterSetting;
-        _characterSetting.Print();
+        if (characterSetting == null)
+            Debug.LogWarning("####API-CharacterSetting Is Empty!!!");
+        else
+            _characterSetting.Print();
     }
     #endregion
     #region UserRecipe
