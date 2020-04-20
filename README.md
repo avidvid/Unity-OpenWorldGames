@@ -2,32 +2,34 @@
  
 This was my first game designed in Unity between 2018-2019
 
-##Technologies
+## Technologies
 
 * Unity 
 * C# scripting 
 * AWS Lambda function (JS)
 * DynamoDB
 
-##The Game
+## The Game
  
 <br>![Gameplay](GithubFiles/Images/Gameplay.png)
 * Infinite Map (Based on GPS location) 
-	<br>![Terrain](GithubFiles/Images/Finalized/Terrain.jpg)
+	<br>![Terrain](GithubFiles/Images/Finalized/Terrain.JPG)
 	* Structures (Rooms, Consumables)
 	* Terrains (Walkable, Flyable , ...) 
 	* Monsters
 	* Mini Map 
-	<br>![MiniMap](GithubFiles/Images/Finalized/MiniMap.jpg)
+	<br>![MiniMap](GithubFiles/Images/Finalized/MiniMap.JPG)
 
-<br>![Inside](GithubFiles/Images/Finalized/Inside.jpg)
+<br>![Inside](GithubFiles/Images/Finalized/Inside.JPG)
 * Rooms Generator  (Based on GPS location) 
 	* Tiles
 	* Walls
 	* Monsters 
 	* Consumables
-	
+
+<br>![Gameplay](GithubFiles/Images/character.png)	
 * Monsters
+	* Character
 	* Movement
 	* Attack
 	* Interactions
@@ -35,7 +37,7 @@ This was my first game designed in Unity between 2018-2019
 
 * Player	
 	* Stats 
-	<br>![MiniMap](GithubFiles/Images/Finalized/MiniMap.jpg)
+	<br>![MiniMap](GithubFiles/Images/Finalized/MiniMap.JPG)
 	* Profile
 	* Movement
 	* Character 
@@ -43,10 +45,10 @@ This was my first game designed in Unity between 2018-2019
 	* Inventory
 	* Research
 	* Messaging 
-	<br>![Messaging](GithubFiles/Images/Finalized/Messaging.jpg)
+	<br>![Messaging](GithubFiles/Images/Finalized/Messaging.JPG)
 	* Capture Monsters
 	
-<br>![Menu](GithubFiles/Images/Finalized/Menu.jpg)
+<br>![Menu](GithubFiles/Images/Finalized/Menu.JPG)
 * Menus
 	* Sound
 	* Social Media ( FB, G)
@@ -54,20 +56,18 @@ This was my first game designed in Unity between 2018-2019
 <br>![Inventory](GithubFiles/Images/Inevntory.png)
 * Inventory Management 
 	* Mixing (based on found Recipes) 
-	<br>![Recipe](GithubFiles/Images/Finalized/Recipe.jpg)
+	<br>![Recipe](GithubFiles/Images/Finalized/Recipe.JPG)
 	* Researches 
-	<br>![Researches](GithubFiles/Images/Finalized/Researches.jpg)
+	<br>![Researches](GithubFiles/Images/Finalized/Researches.JPG)
 	* Stacking
 	* Consuming 
-	<br>![Inventory](GithubFiles/Images/Finalized/Inventory.jpg)
+	<br>![Inventory](GithubFiles/Images/Finalized/Inventory.JPG)
 	* Equipments 
 	* Stats
-	<br>![Stats](GithubFiles/Images/Finalized/Stats.jpg)
+	<br>![Stats](GithubFiles/Images/Finalized/Stats.JPG)
 
 
-##GamePlay
+## GamePlay
 
-<br>![Movement1](GithubFiles/GamePlay/Movement1.mp4)
-<br>![Movement2](GithubFiles/GamePlay/Movement2.avi)
-<br>![OUP_1](GithubFiles/GamePlay/OUP_1.mp4)
-<br>![OUP_2](GithubFiles/GamePlay/OUP_2.mp4)
+You can access the videos Here 
+<br>![GamePlay](GithubFiles/GamePlay/)
