@@ -1,4 +1,12 @@
 # Once Upon a Player (OUP)
+ 
+This was my first game designed in Unity
+at some point it was uing the following technologies : 
+
+.Unity 
+.C# scripting 
+.AWS Lambda function (JS)
+.DynamoDB
 
 ##Terrain 
 
