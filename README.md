@@ -1,16 +1,16 @@
-# My Top Personal Project in unity in with c# 
 # Once Upon a Player (OUP)
  
 This was my first game designed in Unity between 2018-2019
 
-## Technologies
+
+## Technologies/Languages
 
 * Unity 
 * C# scripting 
 * AWS Lambda function (JS)
 * DynamoDB
 
-## The Game
+## Highlights
  
 <br>![Gameplay](GithubFiles/Images/Gameplay.png)
 * Infinite Map (Based on GPS location) 
