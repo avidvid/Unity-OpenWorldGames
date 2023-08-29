@@ -2,4 +2,3 @@
 * text=auto
 * linguist-vendored
 *.sql linguist-vendored=false
-*.cs linguist-vendored=true
