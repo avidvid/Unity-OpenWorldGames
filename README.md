@@ -1,6 +1,9 @@
 # Once Upon a Player (OUP)
-This is my favorite project that I have designed and developed while learning Unity 
-The game design and interactions with lots of features  between 2018-2019
+This is my favorite project that I have designed and developed while learning Unity.
+This has been a solo project and game has been designed by me inspired by numerous different games and ideas. Coding and interactions and API and database design and architecture by me.
+This is a game with lots of fun features by Avi.
+2018-2019
+
 
 ## Technologies/Languages
 
@@ -83,6 +86,5 @@ Randomly generated based on GPS location with different story and characters
 <br>![Inventory](GithubFiles/Images/Finalized/Inventory.JPG)
 
 ## GamePlay
-You can access the videos of the game play 
+You can access the videos of the game play [here](GithubFiles/GamePlay/)
 Feel free to download and enjoy watching
-<br>![GamePlay](GithubFiles/GamePlay/)
