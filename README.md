@@ -1,7 +1,6 @@
 # Once Upon a Player (OUP)
- 
-This was my first game designed in Unity between 2018-2019
-
+This is my favorite project that I have designed and developed while learning Unity 
+The game design and interactions with lots of features  between 2018-2019
 
 ## Technologies/Languages
 
@@ -12,63 +11,78 @@ This was my first game designed in Unity between 2018-2019
 
 ## Highlights
  
+### Infinite Map
+Randomly generated based on GPS location and real map 
+* Structures (Rooms, Castle, Halls, ...)
+* Consumables (Randomly drop items)
+* Terrains such as grass desert lake ocean lava snow 
+* Terrain type (Walkable, Flyable, Swimmable) 
+* Monsters (friend & foe) 
+* Mini Map (Bird eye view)
+
 <br>![Gameplay](GithubFiles/Images/Gameplay.png)
-* Infinite Map (Based on GPS location) 
-	<br>![Terrain](GithubFiles/Images/Finalized/Terrain.JPG)
-	* Structures (Rooms, Consumables)
-	* Terrains (Walkable, Flyable , ...) 
-	* Monsters
-	* Mini Map 
-	<br>![MiniMap](GithubFiles/Images/Finalized/MiniMap.JPG)
+<br>![Terrain](GithubFiles/Images/Finalized/Terrain.JPG)
 
-<br>![Inside](GithubFiles/Images/Finalized/Inside.JPG)
-* Rooms Generator  (Based on GPS location) 
-	* Tiles
-	* Walls
-	* Monsters 
-	* Consumables
+### Mini Map
+Bird eye view of the map
+<br>![MiniMap](GithubFiles/Images/Finalized/MiniMap.JPG)
 
-<br>![Gameplay](GithubFiles/Images/character.png)	
-* Monsters
-	* Character
-	* Movement
-	* Attack
-	* Interactions
-	* Capture able
-
-* Player	
-	* Stats 
-	<br>![MiniMap](GithubFiles/Images/Finalized/MiniMap.JPG)
-	* Profile
-	* Movement
-	* Character 
-	* Attack
-	* Inventory
-	* Research
-	* Messaging 
-	<br>![Messaging](GithubFiles/Images/Finalized/Messaging.JPG)
-	* Capture Monsters
-	
-<br>![Menu](GithubFiles/Images/Finalized/Menu.JPG)
-* Menus
-	* Sound
-	* Social Media ( FB, G)
-	
+### Player	
+* Stats and abilities 
+* Profile includes social media such as Facebook
+* Movement (with keyboard and mouse)
+* 10 different characters 
+* Attack (with keyboard and mouse)
+* Actions (with keyboard and mouse)
+* Inventory slots (being unlocked as player level advance)
+* Wearables slots (head, hands, legs, …)
+* Research and advancement abilities 
+* Capture Monsters
 <br>![Inventory](GithubFiles/Images/Inevntory.png)
-* Inventory Management 
-	* Mixing (based on found Recipes) 
-	<br>![Recipe](GithubFiles/Images/Finalized/Recipe.JPG)
-	* Researches 
-	<br>![Researches](GithubFiles/Images/Finalized/Researches.JPG)
-	* Stacking
-	* Consuming 
-	<br>![Inventory](GithubFiles/Images/Finalized/Inventory.JPG)
-	* Equipments 
-	* Stats
-	<br>![Stats](GithubFiles/Images/Finalized/Stats.JPG)
+<br>![Researches](GithubFiles/Images/Finalized/Researches.JPG)
+<br>![Stats](GithubFiles/Images/Finalized/Stats.JPG)
 
+### Rooms Generator  
+Randomly generated based on GPS location with different story and characters
+* Tiles
+* Walls
+* Monsters (friend & foe) 
+* Consumables (Randomly drop items)
+<br>![Inside](GithubFiles/Images/Finalized/Inside.JPG)
+
+### Monsters 
+* Over 50 characters (friend & foe)  
+* Movement
+* Attack
+* Interactions
+* Capture able
+<br>![Gameplay](GithubFiles/Images/character.png)
+
+### Items
+* Items that can be wear or hold
+* Item types (consumable, wearable, Equipment, ...)
+* Recipes use for mixing 
+* Coins
+<br>![Recipe](GithubFiles/Images/Finalized/Recipe.JPG)
+ 
+### Menus
+* Options
+* Messaging 
+* Sound (effects and background all adjustable)
+* Social Media integrations (FB, G)* 
+<br>![Messaging](GithubFiles/Images/Finalized/Messaging.JPG)
+<br>![Menu](GithubFiles/Images/Finalized/Menu.JPG)
+	
+### Inventory Management 
+* Mixing (based on found Recipes) 
+* Research 
+* Stacking
+* Consuming 
+* Equipment’s 
+* Stats and abilities
+<br>![Inventory](GithubFiles/Images/Finalized/Inventory.JPG)
 
 ## GamePlay
-
-You can access the videos Here 
+You can access the videos of the game play 
+Feel free to download and enjoy watching
 <br>![GamePlay](GithubFiles/GamePlay/)
